@@ -100,6 +100,8 @@ import BitgetDetailed from "./pages/BitgetDetailed";
 import RorzeStockDemo from "./pages/RorzeStockDemo";
 // 銘柄スクリーナーページのインポート
 import StockScreener from "./pages/StockScreener";
+// チャート詳細ページのインポート
+import ChartDetail from "./pages/ChartDetail";
 
 const queryClient = new QueryClient();
 
@@ -216,6 +218,8 @@ const App = () => (
           <Route path="/demo/rorze-stock" element={<RorzeStockDemo />} />
           {/* 銘柄スクリーナー */}
           <Route path="/screener" element={<StockScreener />} />
+          {/* チャート詳細ページ */}
+          <Route path="/chart" element={<ChartDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

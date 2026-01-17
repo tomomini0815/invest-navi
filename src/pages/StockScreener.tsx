@@ -14,7 +14,7 @@ interface WidgetConfig {
 }
 
 // 汎用TradingView Iframeウィジェットコンポーネント
-const TradingViewWidgetIframe = memo(({ scriptSrc, config, title, height = "100%" }: { scriptSrc: string, config: any, title: string, height?: string | number }) => {
+const TradingViewWidgetIframe = ({ scriptSrc, config, title, height = "100%" }: { scriptSrc: string, config: any, title: string, height?: string | number }) => {
     const iframeRef = useRef<HTMLIFrameElement>(null);
 
     const handleLoad = () => {
@@ -46,7 +46,7 @@ const TradingViewWidgetIframe = memo(({ scriptSrc, config, title, height = "100%
             onLoad={handleLoad}
         />
     );
-});
+};
 
 const StockScreener = () => {
     const navigate = useNavigate();
@@ -54,9 +54,9 @@ const StockScreener = () => {
 
     const screenerConfigs: Record<ScreenerType, WidgetConfig> = {
         japan: {
-            title: "日本株スクリーナー",
+            title: "総合スクリーナー",
             icon: <TrendingUp className="w-5 h-5" />,
-            description: "東証上場銘柄のリアルタイムランキング"
+            description: "世界の主要指数・先物・債券・為替のリアルタイム情報"
         },
         crypto: {
             title: "暗号資産スクリーナー",
@@ -109,18 +109,15 @@ const StockScreener = () => {
                     scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
                     config={{
                         symbols: [
-                            { proName: "TSE:7203", title: "トヨタ自動車" },
-                            { proName: "TSE:6758", title: "ソニーG" },
-                            { proName: "TSE:9984", title: "ソフトバンクG" },
-                            { proName: "TSE:6861", title: "キーエンス" },
-                            { proName: "TSE:8306", title: "三菱UFJ" },
-                            { proName: "TSE:6501", title: "日立製作所" },
-                            { proName: "TSE:9432", title: "NTT" },
-                            { proName: "TSE:4063", title: "信越化学" },
-                            { proName: "TSE:6902", title: "デンソー" },
-                            { proName: "TSE:7974", title: "任天堂" },
-                            { proName: "FX:USDJPY", title: "ドル円" },
-                            { proName: "BITSTAMP:BTCUSD", title: "ビットコイン" }
+                            { proName: "FOREXCOM:SPXUSD", title: "S&P 500" },
+                            { proName: "FOREXCOM:NSXUSD", title: "NASDAQ" },
+                            { proName: "FOREXCOM:DJI", title: "Dow Jones" },
+                            { proName: "INDEX:NKY", title: "日経225" },
+                            { proName: "FX:USDJPY", title: "USD/JPY" },
+                            { proName: "FX:EURUSD", title: "EUR/USD" },
+                            { proName: "CMCMARKETS:GOLD", title: "Gold" },
+                            { proName: "BITSTAMP:BTCUSD", title: "Bitcoin" },
+                            { proName: "BITSTAMP:ETHUSD", title: "Ethereum" }
                         ],
                         showSymbolLogo: true,
                         colorTheme: "light",
@@ -189,38 +186,98 @@ const StockScreener = () => {
 
                         <div className="w-full" style={{ minHeight: "600px" }}>
                             {activeScreener === "japan" ? (
-                                <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 bg-slate-50">
-                                    {japanStocks.map(stock => (
-                                        <div key={stock.symbol} className="bg-white rounded-lg shadow-sm overflow-hidden h-[220px]">
-                                            <TradingViewWidgetIframe
-                                                title={stock.name}
-                                                scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-mini-chart.js"
-                                                config={{
-                                                    symbol: stock.symbol,
-                                                    width: "100%",
-                                                    height: "100%",
-                                                    locale: "ja",
-                                                    dateRange: "12M",
-                                                    colorTheme: "light",
-                                                    isTransparent: false,
-                                                    autosize: false,
-                                                    largeChartUrl: ""
-                                                }}
-                                            />
+                                <div key="market-quotes">
+                                    <div style={{ height: "500px" }}>
+                                        <TradingViewWidgetIframe
+                                            key="market-quotes-widget"
+                                            title="Market Summary"
+                                            scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js"
+                                            config={{
+                                                colorTheme: "light",
+                                                locale: "ja",
+                                                largeChartUrl: "",
+                                                isTransparent: false,
+                                                showSymbolLogo: true,
+                                                backgroundColor: "#ffffff",
+                                                width: "100%",
+                                                height: "100%",
+                                                symbolsGroups: [
+                                                    {
+                                                        name: "Indices",
+                                                        symbols: [
+                                                            { name: "FOREXCOM:SPXUSD", displayName: "S&P 500 Index" },
+                                                            { name: "FOREXCOM:NSXUSD", displayName: "US 100 Cash CFD" },
+                                                            { name: "FOREXCOM:DJI", displayName: "Dow Jones Industrial Average Index" },
+                                                            { name: "INDEX:NKY", displayName: "Japan 225" },
+                                                            { name: "INDEX:DEU40", displayName: "DAX Index" },
+                                                            { name: "FOREXCOM:UKXGBP", displayName: "FTSE 100 Index" }
+                                                        ]
+                                                    },
+                                                    {
+                                                        name: "Futures",
+                                                        symbols: [
+                                                            { name: "BMFBOVESPA:ISP1!", displayName: "S&P 500" },
+                                                            { name: "BMFBOVESPA:EUR1!", displayName: "Euro" },
+                                                            { name: "CMCMARKETS:GOLD", displayName: "Gold" },
+                                                            { name: "PYTH:WTI3!", displayName: "WTI Crude Oil" },
+                                                            { name: "BMFBOVESPA:CCM1!", displayName: "Corn" }
+                                                        ]
+                                                    },
+                                                    {
+                                                        name: "Bonds",
+                                                        symbols: [
+                                                            { name: "EUREX:FGBL1!", displayName: "Euro Bund" },
+                                                            { name: "EUREX:FBTP1!", displayName: "Euro BTP" },
+                                                            { name: "EUREX:FGBM1!", displayName: "Euro BOBL" }
+                                                        ]
+                                                    },
+                                                    {
+                                                        name: "Forex",
+                                                        symbols: [
+                                                            { name: "FX:EURUSD", displayName: "EUR to USD" },
+                                                            { name: "FX:GBPUSD", displayName: "GBP to USD" },
+                                                            { name: "FX:USDJPY", displayName: "USD to JPY" },
+                                                            { name: "FX:USDCHF", displayName: "USD to CHF" },
+                                                            { name: "FX:AUDUSD", displayName: "AUD to USD" },
+                                                            { name: "FX:USDCAD", displayName: "USD to CAD" }
+                                                        ]
+                                                    }
+                                                ]
+                                            }}
+                                        />
+                                    </div>
+                                    {/* クイックチャートアクセス */}
+                                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 border-t">
+                                        <h4 className="text-sm font-bold text-slate-700 mb-3 flex items-center gap-2">
+                                            <TrendingUp className="w-4 h-4" />
+                                            詳細チャートを見る
+                                        </h4>
+                                        <div className="flex flex-wrap gap-2">
+                                            {[
+                                                { symbol: "FOREXCOM:SPXUSD", name: "S&P 500" },
+                                                { symbol: "INDEX:NKY", name: "日経225" },
+                                                { symbol: "FX:USDJPY", name: "USD/JPY" },
+                                                { symbol: "CMCMARKETS:GOLD", name: "Gold" },
+                                                { symbol: "BITSTAMP:BTCUSD", name: "Bitcoin" },
+                                                { symbol: "BITSTAMP:ETHUSD", name: "Ethereum" }
+                                            ].map(item => (
+                                                <Button
+                                                    key={item.symbol}
+                                                    variant="outline"
+                                                    size="sm"
+                                                    onClick={() => navigate(`/chart?symbol=${encodeURIComponent(item.symbol)}`)}
+                                                    className="bg-white hover:bg-blue-50 border-blue-200 text-blue-700"
+                                                >
+                                                    {item.name}
+                                                </Button>
+                                            ))}
                                         </div>
-                                    ))}
-                                    <div className="col-span-full flex justify-center py-4">
-                                        <Button
-                                            onClick={() => window.open("https://www.tradingview.com/screener/?exchange=TSE", "_blank")}
-                                            className="bg-blue-600 hover:bg-blue-700 text-white rounded-full"
-                                        >
-                                            詳細なスクリーナーを開く
-                                        </Button>
                                     </div>
                                 </div>
                             ) : activeScreener === "us" ? (
-                                <div style={{ height: "800px" }}>
+                                <div key="us-screener" style={{ height: "800px" }}>
                                     <TradingViewWidgetIframe
+                                        key="us-widget"
                                         title="US Screener"
                                         scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-hotlists.js"
                                         config={{
@@ -239,8 +296,9 @@ const StockScreener = () => {
                                     />
                                 </div>
                             ) : activeScreener === "crypto" ? (
-                                <div style={{ height: "800px" }}>
+                                <div key="crypto-screener" style={{ height: "800px" }}>
                                     <TradingViewWidgetIframe
+                                        key="crypto-widget"
                                         title="Crypto Screener"
                                         scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-screener.js"
                                         config={{
@@ -256,8 +314,9 @@ const StockScreener = () => {
                                     />
                                 </div>
                             ) : (
-                                <div style={{ height: "800px" }}>
+                                <div key="forex-screener" style={{ height: "800px" }}>
                                     <TradingViewWidgetIframe
+                                        key="forex-widget"
                                         title="Forex Screener"
                                         scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-screener.js"
                                         config={{

@@ -461,7 +461,7 @@ const Index = () => {
           element.scrollIntoView({ behavior: "smooth" });
         }
       }, 500);
-      
+
       return () => clearTimeout(timer);
     }
     // ハッシュが#診断の場合
@@ -473,7 +473,7 @@ const Index = () => {
           element.scrollIntoView({ behavior: "smooth" });
         }
       }, 500);
-      
+
       return () => clearTimeout(timer);
     }
   }, [location.state, location.hash]);
@@ -485,7 +485,7 @@ const Index = () => {
         <meta name="description" content="投資総合ナビは、株式投資・FX・暗号資産・投資信託など、すべての投資商品を比較・診断する総合投資ガイドです。初心者から中級者まで、最適な投資方法を見つけましょう。2024年最新の投資情報も提供しています。" />
         <meta name="keywords" content="投資,資産運用,株式投資,NISA,つみたてNISA,iDeCo,証券会社,比較,ランキング,初心者,暗号資産,FX,REIT,投資信託,投資総合ナビ,2024年最新情報" />
         <link rel="canonical" href="https://www.toushi-navi.com" />
-        
+
         {/* Open Graph */}
         <meta property="og:title" content="投資総合ナビ | 株式・FX・暗号資産・投資信託の比較と診断" />
         <meta property="og:description" content="投資総合ナビは、株式投資・FX・暗号資産・投資信託など、すべての投資商品を比較・診断する総合投資ガイドです。初心者から中級者まで、最適な投資方法を見つけましょう。2024年最新の投資情報も提供しています。" />
@@ -493,17 +493,17 @@ const Index = () => {
         <meta property="og:url" content="https://www.toushi-navi.com" />
         <meta property="og:site_name" content="投資総合ナビ" />
         <meta property="og:locale" content="ja_JP" />
-        
+
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@toushi_navi" />
       </Helmet>
-      
+
       <Header />
-      
+
       {/* Hero Section */}
       <HeroSection />
-      
+
       <main className="flex-grow">
         {/* 投資適性診断セクション */}
         <section className="py-16 sm:py-20 bg-muted/30">
@@ -586,35 +586,33 @@ const Index = () => {
                 スプレッド・スワップポイント・使いやすさを比較して、最適なFX業者を選びましょう
               </p>
             </div>
-            
+
             {/* 国内外の切替ボタン */}
             <div className="flex justify-center mb-10">
               <div className="inline-flex rounded-md shadow-sm" role="group">
                 <button
                   type="button"
-                  className={`px-6 py-3 text-base font-medium rounded-l-lg border ${
-                    activeTab === 'domestic'
-                      ? 'bg-primary text-white border-primary'
-                      : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100'
-                  }`}
+                  className={`px-6 py-3 text-base font-medium rounded-l-lg border ${activeTab === 'domestic'
+                    ? 'bg-primary text-white border-primary'
+                    : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100'
+                    }`}
                   onClick={() => setActiveTab('domestic')}
                 >
                   国内業者
                 </button>
                 <button
                   type="button"
-                  className={`px-6 py-3 text-base font-medium rounded-r-lg border ${
-                    activeTab === 'international'
-                      ? 'bg-primary text-white border-primary'
-                      : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100'
-                  }`}
+                  className={`px-6 py-3 text-base font-medium rounded-r-lg border ${activeTab === 'international'
+                    ? 'bg-primary text-white border-primary'
+                    : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100'
+                    }`}
                   onClick={() => setActiveTab('international')}
                 >
                   海外業者
                 </button>
               </div>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
               {(activeTab === 'domestic' ? domesticFxBrokers : internationalFxBrokers).map((broker) => (
                 <RankingCard key={broker.rank} {...broker} />
@@ -655,35 +653,33 @@ const Index = () => {
                 海外の人気暗号資産取引所を比較ランキング形式でご紹介
               </p>
             </div>
-            
+
             {/* 海外の切替ボタン */}
             <div className="flex justify-center mb-10">
               <div className="inline-flex rounded-md shadow-sm" role="group">
                 <button
                   type="button"
-                  className={`px-6 py-3 text-base font-medium rounded-l-lg border ${
-                    activeCryptoTab === 'domestic'
-                      ? 'bg-primary text-white border-primary'
-                      : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100'
-                  }`}
+                  className={`px-6 py-3 text-base font-medium rounded-l-lg border ${activeCryptoTab === 'domestic'
+                    ? 'bg-primary text-white border-primary'
+                    : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100'
+                    }`}
                   onClick={() => setActiveCryptoTab('domestic')}
                 >
                   国内取引所
                 </button>
                 <button
                   type="button"
-                  className={`px-6 py-3 text-base font-medium rounded-r-lg border ${
-                    activeCryptoTab === 'international'
-                      ? 'bg-primary text-white border-primary'
-                      : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100'
-                  }`}
+                  className={`px-6 py-3 text-base font-medium rounded-r-lg border ${activeCryptoTab === 'international'
+                    ? 'bg-primary text-white border-primary'
+                    : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100'
+                    }`}
                   onClick={() => setActiveCryptoTab('international')}
                 >
                   海外取引所
                 </button>
               </div>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
               {(activeCryptoTab === 'domestic' ? domesticCryptoExchanges : internationalCryptoExchanges).map((exchange) => (
                 <RankingCard key={exchange.rank} {...exchange} />
@@ -759,7 +755,7 @@ const Index = () => {
                           </div>
                         )}
                       </div>
-                      <button 
+                      <button
                         className="w-full mt-6 px-4 py-2 bg-blue-100 text-primary rounded-md hover:bg-blue-200 transition-colors whitespace-nowrap"
                         onClick={() => navigate(`/articles/${article.id}`)}
                       >

@@ -14,7 +14,7 @@ const HeroSection = () => {
   // 投資診断セクションにスムーズスクロールする関数
   const scrollToDiagnostic = (e: React.MouseEvent) => {
     e.preventDefault();
-    
+
     // 少し遅延させてからスクロール（ページが完全にロードされるのを待つため）
     setTimeout(() => {
       const element = document.getElementById("診断");
@@ -37,13 +37,31 @@ const HeroSection = () => {
     <section className="relative overflow-hidden">
       {/* Background with gradient overlay */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src={heroImage} 
-          alt="投資イメージ" 
+        <img
+          src={heroImage}
+          alt="投資イメージ"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-secondary/70" />
       </div>
+
+      {/* TradingView Ticker Tape - Overlaid on hero background */}
+      <div
+        className="relative z-20 w-full bg-black/30 backdrop-blur-sm"
+        ref={(el) => {
+          if (el && !el.querySelector('script')) {
+            const script = document.createElement('script');
+            script.type = 'module';
+            script.src = 'https://widgets.tradingview-widget.com/w/en/tv-ticker-tape.js';
+            el.appendChild(script);
+
+            const tickerTape = document.createElement('tv-ticker-tape');
+            tickerTape.setAttribute('symbols', 'FOREXCOM:SPXUSD,FOREXCOM:NSXUSD,FOREXCOM:DJI,FX:EURUSD,BITSTAMP:BTCUSD,BITSTAMP:ETHUSD,CMCMARKETS:GOLD');
+            tickerTape.setAttribute('color-theme', 'dark');
+            el.appendChild(tickerTape);
+          }
+        }}
+      />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-12 md:py-20 lg:py-32">
@@ -62,18 +80,18 @@ const HeroSection = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-8 md:mb-12">
-            <Button 
-              size="lg" 
-              className="bg-accent hover:bg-accent-hover text-white text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 shadow-xl w-full sm:w-auto" 
+            <Button
+              size="lg"
+              className="bg-accent hover:bg-accent-hover text-white text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 shadow-xl w-full sm:w-auto"
               onClick={scrollToDiagnostic}
             >
               投資診断を始める
               <ArrowRight className="ml-2 h-4 sm:h-5 w-4 sm:w-5" />
             </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="bg-white/10 text-white border-white/30 hover:bg-white/20 backdrop-blur-sm text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 w-full sm:w-auto" 
+            <Button
+              size="lg"
+              variant="outline"
+              className="bg-white/10 text-white border-white/30 hover:bg-white/20 backdrop-blur-sm text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 w-full sm:w-auto"
               asChild
             >
               <Link to="/comparison">証券会社を比較する</Link>
@@ -99,14 +117,14 @@ const HeroSection = () => {
 
       {/* Decorative wave - 背景画像と連動 */}
       <div className="absolute bottom-0 left-0 right-0" style={{ height: 'auto' }}>
-        <svg 
+        <svg
           className="w-full text-background"
-          viewBox="0 0 1440 74" 
-          fill="none" 
+          viewBox="0 0 1440 74"
+          fill="none"
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="none"
         >
-          <path d="M0 74L60 65.3C120 56.7 240 39.3 360 32.7C480 26 600 30 720 36.7C840 43.3 960 52.7 1080 52.7C1200 52.7 1320 43.3 1380 38.7L1440 34V74H1380C1320 74 1200 74 1080 74C960 74 840 74 720 74C600 74 480 74 360 74C240 74 120 74 60 74H0Z" fill="currentColor"/>
+          <path d="M0 74L60 65.3C120 56.7 240 39.3 360 32.7C480 26 600 30 720 36.7C840 43.3 960 52.7 1080 52.7C1200 52.7 1320 43.3 1380 38.7L1440 34V74H1380C1320 74 1200 74 1080 74C960 74 840 74 720 74C600 74 480 74 360 74C240 74 120 74 60 74H0Z" fill="currentColor" />
         </svg>
       </div>
     </section>
