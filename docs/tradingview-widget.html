@@ -34,24 +34,47 @@
             if (!data || !data.type || data.type !== 'INIT_WIDGET') return;
 
             const container = document.querySelector('.tradingview-widget-container');
-            if (!container) return;
+            const widgetDiv = document.getElementById('widget-container');
+            if (!container || !widgetDiv) return;
 
-            // 既存のスクリプトがあれば削除（再描画時）
-            const existingScript = container.querySelector('script');
-            if (existingScript) existingScript.remove();
+            // 既存のスクリプトとウィジェット内容をクリア（再描画時）
+            const existingScripts = container.querySelectorAll('script');
+            existingScripts.forEach(s => s.remove());
+            widgetDiv.innerHTML = '';
 
-            // 設定JSON用スクリプトの作成
-            // 注意: TradingViewのスクリプトは、自身のタグの中身を読み取るか、
-            // 直前のscriptタグを探すなどの挙動をするが、標準的には「埋め込みコード」自体がscriptタグ。
-            // したがって、scriptタグの中にJSONを書くスタイルで生成する。
+            // TradingViewの公式埋め込み方法:
+            // scriptタグにsrcとtextContent(JSON)を同時に設定
+            // TradingViewスクリプトは自身のtextContentからJSONを読み取る
+            // ただし、動的に作成したscriptでは textContent が読めないため、
+            // document.write を使用して埋め込む必要がある
 
-            const script = document.createElement('script');
-            script.src = data.scriptSrc;
-            script.type = 'text/javascript';
-            script.async = true;
-            script.innerHTML = JSON.stringify(data.config);
+            // iframeなので document.write が使用可能
+            const configJson = JSON.stringify(data.config);
+            const html = `
+                <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript" src="${data.scriptSrc}">
+                    ${configJson}
+                    <\/script>
+                </div>
+            `;
 
-            container.appendChild(script);
+            document.open();
+            document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <style>
+                        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
+                        .tradingview-widget-container { width: 100%; height: 100%; }
+                    </style>
+                </head>
+                <body>
+                    ${html}
+                </body>
+                </html>
+            `);
+            document.close();
         });
     </script>
 </body>
