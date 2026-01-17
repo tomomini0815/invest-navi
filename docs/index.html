@@ -1,34 +1,41 @@
 <!doctype html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="canonical" href="https://www.toushi-navi.com" />
-    <!-- Google翻訳機能に対応するためのCSP設定 -->
-    <meta http-equiv="Content-Security-Policy" content="style-src 'unsafe-inline' https://www.gstatic.com https://fonts.googleapis.com 'self'; script-src 'self' https://translate.googleapis.com 'unsafe-inline'; connect-src 'self' https://translate.googleapis.com https://api-fxpractice.oanda.com;">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>投資総合ガイド | 初心者から始める資産運用・投資の完全ガイド</title>
-    <meta name="description" content="投資初心者から中級者まで、株式投資・NISA・iDeCo・暗号資産など、あらゆる投資商品を徹底解説。証券会社比較ランキングや投資シミュレーターで、あなたに最適な投資方法を見つけましょう。" />
-    <meta name="author" content="投資総合ガイド" />
-    <meta name="keywords" content="投資,資産運用,株式投資,NISA,つみたてNISA,iDeCo,証券会社,比較,ランキング,初心者,暗号資産,FX,REIT" />
-    
-    <meta property="og:title" content="投資総合ガイド | 初心者から始める資産運用・投資の完全ガイド" />
-    <meta property="og:description" content="投資初心者から中級者まで、株式投資・NISA・iDeCo・暗号資産など、あらゆる投資商品を徹底解説。証券会社比較ランキングや投資シミュレーターで、あなたに最適な投資方法を見つけましょう。" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/images/og-image.jpg" />
-    <meta property="og:url" content="https://www.toushi-navi.com" />
-    <meta property="og:site_name" content="投資総合ガイド" />
-    <meta property="og:locale" content="ja_JP" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@toushi_navi" />
-    <meta name="twitter:image" content="/images/og-image.jpg" />
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="canonical" href="https://invest-navi.com/" />
+  <!-- Google翻訳機能とTradingViewウィジェットに対応するためのCSP設定 -->
+  <meta http-equiv="Content-Security-Policy"
+    content="style-src 'unsafe-inline' https://www.gstatic.com https://fonts.googleapis.com https://s3.tradingview.com 'self'; script-src 'self' https://translate.googleapis.com https://s3.tradingview.com https://*.tradingview.com 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://translate.googleapis.com https://api-fxpractice.oanda.com https://*.tradingview.com https://*.tradingview-widget.com; frame-src 'self' blob: https://s3.tradingview.com https://*.tradingview.com https://*.tradingview-widget.com;">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <title>投資総合ガイド | 初心者から始める資産運用・投資の完全ガイド</title>
+  <meta name="description"
+    content="投資初心者から中級者まで、株式投資・NISA・iDeCo・暗号資産など、あらゆる投資商品を徹底解説。証券会社比較ランキングや投資シミュレーターで、あなたに最適な投資方法を見つけましょう。" />
+  <meta name="author" content="投資総合ガイド" />
+  <meta name="keywords" content="投資,資産運用,株式投資,NISA,つみたてNISA,iDeCo,証券会社,比較,ランキング,初心者,暗号資産,FX,REIT" />
+
+  <meta property="og:title" content="投資総合ガイド | 初心者から始める資産運用・投資の完全ガイド" />
+  <meta property="og:description"
+    content="投資初心者から中級者まで、株式投資・NISA・iDeCo・暗号資産など、あらゆる投資商品を徹底解説。証券会社比較ランキングや投資シミュレーターで、あなたに最適な投資方法を見つけましょう。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/images/og-image.jpg" />
+  <meta property="og:url" content="https://www.toushi-navi.com" />
+  <meta property="og:site_name" content="投資総合ガイド" />
+  <meta property="og:locale" content="ja_JP" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@toushi_navi" />
+  <meta name="twitter:image" content="/images/og-image.jpg" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
@@ -45,11 +52,12 @@
       }
     }
     </script>
-    <script type="module" crossorigin src="/assets/index.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index.css">
-  </head>
+  <script type="module" crossorigin src="/assets/index.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index.css">
+</head>
 
-  <body>
-    <div id="root"></div>
-  </body>
+<body>
+  <div id="root"></div>
+</body>
+
 </html>

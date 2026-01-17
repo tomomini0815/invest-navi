@@ -60,11 +60,8 @@ const Footer = () => {
         {/* Brand - 横一列の1カラム */}
         <div className="w-full mb-4">
           <div className="space-y-3 min-w-[140px]">
-            <Link to="/" className="flex items-center gap-2 font-bold text-base no-underline">
-              <div className="gradient-primary p-1.5 rounded-lg">
-                <TrendingUp className="h-4 w-4 text-white" />
-              </div>
-              <span className="text-primary">投資総合ナビ</span>
+            <Link to="/" className="flex items-center transition-opacity hover:opacity-80">
+              <img src="/logo_v2.png" alt="投資総合ナビ" className="h-12 w-auto object-contain" />
             </Link>
             <p className="text-xs text-muted-foreground">
               あなたの投資を成功に導く完全ガイド。初心者から中級者まで、信頼性の高い情報をお届けします。

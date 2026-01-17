@@ -41,6 +41,7 @@ import Articles from "./pages/Articles";
 import ArticleDetail from "./pages/ArticleDetail";
 // Sitemapページのインポート
 import Sitemap from "./pages/Sitemap";
+import FinancialGuide from "./pages/FinancialGuide";
 // DMM FX詳細ページのインポート
 import DmmFxDetail from "./pages/DmmFxDetailed";
 // DMM株詳細ページのインポート
@@ -95,6 +96,10 @@ import RakutenWalletDetailed from "./pages/RakutenWalletDetailed";
 import LineBitmaxDetailed from "./pages/LineBitmaxDetailed";
 // Bitget詳細ページのインポート
 import BitgetDetailed from "./pages/BitgetDetailed";
+// ローツェ株式分析デモページのインポート
+import RorzeStockDemo from "./pages/RorzeStockDemo";
+// 銘柄スクリーナーページのインポート
+import StockScreener from "./pages/StockScreener";
 
 const queryClient = new QueryClient();
 
@@ -179,6 +184,8 @@ const App = () => (
           <Route path="/crypto/line-bitmax" element={<LineBitmaxDetailed />} />
           {/* Bitget詳細ページのルート */}
           <Route path="/crypto/bitget" element={<BitgetDetailed />} />
+          {/* Guide Routes */}
+          <Route path="/guide/financial-analysis" element={<FinancialGuide />} />
           <Route path="/guide/:id" element={<GuideDetail />} />
           <Route path="/tools" element={<Tools />} />
           {/* 新しいツールページのルート */}
@@ -205,6 +212,10 @@ const App = () => (
           <Route path="/company" element={<Company />} />
           <Route path="/sitemap" element={<Sitemap />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          {/* ローツェ株式分析デモ */}
+          <Route path="/demo/rorze-stock" element={<RorzeStockDemo />} />
+          {/* 銘柄スクリーナー */}
+          <Route path="/screener" element={<StockScreener />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

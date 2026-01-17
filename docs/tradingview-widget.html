@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradingView Widget</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: transparent;
+        }
+
+        .tradingview-widget-container {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tradingview-widget-container">
+        <div id="widget-container" class="tradingview-widget-container__widget"></div>
+    </div>
+
+    <script>
+        window.addEventListener('message', (event) => {
+            const data = event.data;
+            if (!data || !data.type || data.type !== 'INIT_WIDGET') return;
+
+            const container = document.querySelector('.tradingview-widget-container');
+            if (!container) return;
+
+            // 既存のスクリプトがあれば削除（再描画時）
+            const existingScript = container.querySelector('script');
+            if (existingScript) existingScript.remove();
+
+            // 設定JSON用スクリプトの作成
+            // 注意: TradingViewのスクリプトは、自身のタグの中身を読み取るか、
+            // 直前のscriptタグを探すなどの挙動をするが、標準的には「埋め込みコード」自体がscriptタグ。
+            // したがって、scriptタグの中にJSONを書くスタイルで生成する。
+
+            const script = document.createElement('script');
+            script.src = data.scriptSrc;
+            script.type = 'text/javascript';
+            script.async = true;
+            script.innerHTML = JSON.stringify(data.config);
+
+            container.appendChild(script);
+        });
+    </script>
+</body>
+
+</html>
