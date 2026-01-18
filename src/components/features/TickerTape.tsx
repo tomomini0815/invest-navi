@@ -39,7 +39,7 @@ const TickerTape = () => {
     };
 
     return (
-        <div className="sticky top-0 z-50 shadow-md bg-white h-[78px] md:h-[46px] overflow-hidden">
+        <div className="sticky top-16 z-40 shadow-md bg-white h-[78px] md:h-[46px] overflow-hidden">
             <iframe
                 ref={iframeRef}
                 src="/tradingview-widget.html"

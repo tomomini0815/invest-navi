@@ -45,24 +45,6 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-secondary/70" />
       </div>
 
-      {/* TradingView Ticker Tape - Overlaid on hero background */}
-      <div
-        className="relative z-20 w-full bg-black/30 backdrop-blur-sm"
-        ref={(el) => {
-          if (el && !el.querySelector('script')) {
-            const script = document.createElement('script');
-            script.type = 'module';
-            script.src = 'https://widgets.tradingview-widget.com/w/en/tv-ticker-tape.js';
-            el.appendChild(script);
-
-            const tickerTape = document.createElement('tv-ticker-tape');
-            tickerTape.setAttribute('symbols', 'FOREXCOM:SPXUSD,FOREXCOM:NSXUSD,FOREXCOM:DJI,FX:EURUSD,BITSTAMP:BTCUSD,BITSTAMP:ETHUSD,CMCMARKETS:GOLD');
-            tickerTape.setAttribute('color-theme', 'dark');
-            el.appendChild(tickerTape);
-          }
-        }}
-      />
-
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-12 md:py-20 lg:py-32">
         <div className="max-w-3xl animate-fade-in-up">
