@@ -8,17 +8,17 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const navigation = [
+  const navigation: { name: string; href: string; children?: { name: string; href: string }[] }[] = [
     { name: "ホーム", href: "/" },
-    { name: "投資ガイド", href: "/guide/investment-basics" },
     {
-      name: "決算書の見方",
-      href: "/guide/financial-analysis",
+      name: "投資ガイド",
+      href: "/guide/investment-basics",
       children: [
-        { name: "決算書の見方トップ", href: "/guide/financial-analysis" },
-        { name: "銘柄スクリーナー", href: "/screener" }
+        { name: "投資ガイドトップ", href: "/guide/investment-basics" },
+        { name: "決算書の見方", href: "/guide/financial-analysis" }
       ]
     },
+    { name: "銘柄スクリーナー", href: "/screener" },
     { name: "証券会社比較", href: "/comparison" },
     { name: "FX業者比較", href: "/fx-comparison" },
     { name: "暗号資産取引所比較", href: "/crypto-comparison" },
