@@ -1,4 +1,5 @@
 import Header from "@/components/layout/Header";
+import TickerTape from "@/components/features/TickerTape";
 import HeroSection from "@/components/features/HeroSection";
 import CategoryCard from "@/components/features/CategoryCard";
 import RankingCard from "@/components/features/RankingCard";
@@ -500,6 +501,9 @@ const Index = () => {
       </Helmet>
 
       <Header />
+
+      {/* ティッカーテープ */}
+      <TickerTape />
 
       {/* Hero Section */}
       <HeroSection />
