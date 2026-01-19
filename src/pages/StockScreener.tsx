@@ -20,9 +20,9 @@ interface WidgetConfig {
 const StockScreener = () => {
     const navigate = useNavigate();
     const [activeScreener, setActiveScreener] = useState<ScreenerType>("japan");
-    const [selectedChart, setSelectedChart] = useState<string | null>("FOREXCOM:SPXUSD");
+    const [selectedChart, setSelectedChart] = useState<string | null>("NASDAQ:NVDA");
     const [showList, setShowList] = useState(false);
-    const [financialTab, setFinancialTab] = useState<"overview" | "chart">("overview");
+    const [financialTab, setFinancialTab] = useState<"overview" | "chart">("chart");
     const chartContainerRef = useRef<HTMLDivElement>(null);
 
     // サンプル財務データ（各銘柄用）- 2023年〜2026年1月最新
@@ -530,6 +530,12 @@ const StockScreener = () => {
                                                 { symbol: "NASDAQ:AMZN", name: "Amazon" },
                                                 { symbol: "NASDAQ:GOOGL", name: "Google" },
                                                 { symbol: "NASDAQ:META", name: "Meta" },
+                                                { symbol: "7203", name: "トヨタ" },
+                                                { symbol: "6758", name: "ソニーG" },
+                                                { symbol: "9984", name: "ソフトバンクG" },
+                                                { symbol: "7974", name: "任天堂" },
+                                                { symbol: "6861", name: "キーエンス" },
+                                                { symbol: "9983", name: "ファストリ" },
                                                 { symbol: "FX:EURUSD", name: "EUR/USD" },
                                                 { symbol: "FX:USDJPY", name: "USD/JPY" },
                                                 { symbol: "FX:GBPUSD", name: "GBP/USD" },

@@ -95,7 +95,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                             </div>
 
                             {/* テクニカル分析 */}
-                            <div className="mb-8 border-t pt-6" style={{ height: "280px" }}>
+                            <div className="mb-8 border-t pt-6" style={{ height: "220px" }}>
                                 <TradingViewWidgetIframe
                                     key={`ta-${symbol}`}
                                     title="Technical Analysis"
