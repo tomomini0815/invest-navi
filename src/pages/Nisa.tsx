@@ -11,27 +11,27 @@ import { useLocation } from "react-router-dom";
 
 const Nisa = () => {
   const location = useLocation();
-  
+
   // シミュレーション用の状態管理
   const [monthlyAmount, setMonthlyAmount] = useState("5000");
   const [years, setYears] = useState("20");
   const [annualReturn, setAnnualReturn] = useState("5");
-  
+
   // シミュレーション結果の計算
   const [totalInvestment, setTotalInvestment] = useState(0);
   const [futureValue, setFutureValue] = useState(0);
   const [profit, setProfit] = useState(0);
-  
+
   // シミュレーション結果を計算するエフェクト
   useEffect(() => {
     const monthly = parseFloat(monthlyAmount) || 0;
     const yearsNum = parseFloat(years) || 0;
     const rate = parseFloat(annualReturn) / 100 || 0;
-    
+
     // 総投資額の計算
     const total = monthly * 12 * yearsNum;
     setTotalInvestment(total);
-    
+
     // 将来価値の計算（複利計算）
     if (rate === 0) {
       setFutureValue(total);
@@ -41,14 +41,22 @@ const Nisa = () => {
       const fv = monthly * (((1 + monthlyRate) ** months - 1) / monthlyRate);
       setFutureValue(Math.round(fv));
     }
-    
+
     // 利益の計算
     setProfit(Math.round(futureValue - total));
   }, [monthlyAmount, years, annualReturn, futureValue]);
 
-  // ページ遷移後に診断セクションまでスクロールする
+  // ページ遷移後に診断セクションやハッシュの場所までスクロールする
   useEffect(() => {
-    if (location.state?.fromNisaLink) {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 300); // 描画待ちのために少し遅延
+    } else if (location.state?.fromNisaLink) {
       // 少し遅延させてからスクロール
       const timer = setTimeout(() => {
         const element = document.getElementById("診断");
@@ -56,10 +64,10 @@ const Nisa = () => {
           element.scrollIntoView({ behavior: "smooth" });
         }
       }, 100);
-      
+
       return () => clearTimeout(timer);
     }
-  }, [location.state]);
+  }, [location]);
 
   // 目次項目
   const tableOfContents = [
@@ -81,7 +89,7 @@ const Nisa = () => {
         <meta name="description" content="NISA・つみたてNISAの基本から投資戦略、おすすめ商品まで徹底解説。非課税制度を活用して効率的な資産運用を始めましょう。" />
         <meta name="keywords" content="NISA,つみたてNISA,投資,資産運用,非課税制度,投資信託,積立投資" />
         <link rel="canonical" href="https://www.toushi-navi.com/nisa" />
-        
+
         {/* Open Graph */}
         <meta property="og:title" content="NISA・つみたてNISA投資ガイド | 非課税制度を活用した資産運用" />
         <meta property="og:description" content="NISA・つみたてNISAの基本から投資戦略、おすすめ商品まで徹底解説。非課税制度を活用して効率的な資産運用を始めましょう。" />
@@ -89,11 +97,11 @@ const Nisa = () => {
         <meta property="og:url" content="https://www.toushi-navi.com/nisa" />
         <meta property="og:site_name" content="投資総合ガイド" />
         <meta property="og:locale" content="ja_JP" />
-        
+
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@toushi_navi" />
-        
+
         {/* 構造化マークアップ */}
         <script type="application/ld+json">
           {JSON.stringify({
@@ -122,15 +130,15 @@ const Nisa = () => {
           })}
         </script>
       </Helmet>
-      
+
       <Header />
-      
+
       <main className="flex-grow">
         {/* Breadcrumb */}
         <div className="bg-gradient-to-r from-muted/50 to-muted/30 py-4 border-b">
           <div className="container mx-auto px-8">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors group"
             >
               <ArrowLeft className="h-4 w-4 mr-1 group-hover:-translate-x-1 transition-transform" />
@@ -154,8 +162,8 @@ const Nisa = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4 mt-8">
               <Button asChild size="lg" className="px-8 py-6 text-lg hover:scale-105 transition-transform">
-                <Link 
-                  to="/" 
+                <Link
+                  to="/"
                   state={{ fromNisaLink: true }}
                 >
                   投資診断を始める
@@ -186,8 +194,8 @@ const Nisa = () => {
                         <span className="bg-primary text-primary-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">
                           {index + 1}
                         </span>
-                        <a 
-                          href={`#${item.id}`} 
+                        <a
+                          href={`#${item.id}`}
                           className="text-base text-primary hover:text-secondary hover:underline transition-colors"
                         >
                           {item.title}
@@ -206,7 +214,7 @@ const Nisa = () => {
           <div className="container mx-auto px-8">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">NISA・つみたてNISAの基本と違い</h2>
-              
+
               <Card className="mb-12 overflow-hidden border-2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-card/50">
                 <CardHeader>
                   <CardTitle className="text-2xl">NISAとは？</CardTitle>
@@ -214,10 +222,10 @@ const Nisa = () => {
                 <CardContent>
                   <div className="prose max-w-none">
                     <p className="mb-4">NISA（少額投資非課税制度）とは、個人が株式や投資信託などの金融商品に投資した際の利益（配当金・分配金・売却益）が非課税となる制度です。2014年に導入され、2024年現在も継続されています。</p>
-                    
+
                     <h3 className="text-xl font-bold mb-3">つみたてNISAとは？</h3>
                     <p className="mb-4">つみたてNISAは、2018年に導入された長期的な資産形成に適した投資信託に特化したNISAです。毎月少額ずつ積み立てながら、インデックス型投資信託などの低コストで分散投資が可能な商品に投資できます。</p>
-                    
+
                     <h3 className="text-xl font-bold mb-3">NISAとつみたてNISAの違い</h3>
                     <div className="overflow-x-auto mb-4">
                       <table className="min-w-full bg-white border border-gray-200 rounded-lg">
@@ -257,7 +265,7 @@ const Nisa = () => {
                         </tbody>
                       </table>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold mb-3">新NISA制度</h3>
                     <p className="mb-4">2024年から新NISA制度が始まりました。年間180万円の非課税枠（うち120万円が分配金・配当金、60万円が譲渡益）が導入され、従来のNISAとつみたてNISAが統合されました。新NISAは、従来の制度のメリットを活かしつつ、より柔軟な運用が可能になっています。</p>
                   </div>
@@ -272,7 +280,7 @@ const Nisa = () => {
           <div className="container mx-auto px-8">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">2024年〜2025年最新のNISA動向</h2>
-              
+
               <Card className="mb-12 overflow-hidden border-2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-card/50">
                 <CardHeader>
                   <CardTitle className="text-2xl">新NISA制度の概要と特徴</CardTitle>
@@ -281,7 +289,7 @@ const Nisa = () => {
                   <div className="prose max-w-none">
                     <h3 className="text-xl font-bold mb-3">新NISA制度の開始</h3>
                     <p className="mb-4">2024年1月から新NISA制度が始まりました。年間180万円の非課税枠（うち120万円が分配金・配当金、60万円が譲渡益）が導入され、従来のNISAとつみたてNISAが統合されました。新NISAは、従来の制度のメリットを活かしつつ、より柔軟な運用が可能になっています。</p>
-                    
+
                     <h3 className="text-xl font-bold mb-3">新NISAの特徴</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                       <div className="border-l-4 border-blue-500 pl-4 hover:bg-blue-50/50 transition-colors duration-300 p-4 rounded-r-lg">
@@ -301,7 +309,7 @@ const Nisa = () => {
                         <p>非課税期間が最長20年間となり、長期的な資産形成が可能になりました。これにより、複利効果を最大限に活用できます。</p>
                       </div>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold mb-3">2025年の展望</h3>
                     <p className="mb-4">2025年には、新NISA制度のさらなる拡充が予定されています。具体的には、対象商品のさらなる拡大や、運用会社の選択肢の増加が期待されています。また、デジタル化の推進により、より使いやすいUI/UXの提供も予定されています。</p>
                   </div>
@@ -316,7 +324,7 @@ const Nisa = () => {
           <div className="container mx-auto px-8">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">NISA口座の開設手順</h2>
-              
+
               <Card className="mb-12 overflow-hidden border-2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-card/50">
                 <CardHeader>
                   <CardTitle className="text-2xl">NISA口座開設の流れ</CardTitle>
@@ -330,7 +338,7 @@ const Nisa = () => {
                       <li>本人確認と印鑑証明書の提出</li>
                       <li>口座開設の完了</li>
                     </ol>
-                    
+
                     <h3 className="text-xl font-bold mb-3">証券会社の選び方</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                       <div className="bg-green-50 p-4 rounded-lg hover:bg-green-100 transition-colors duration-300">
@@ -353,7 +361,7 @@ const Nisa = () => {
                         </ul>
                       </div>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold mb-3">必要な書類</h3>
                     <ul className="list-disc pl-5 mb-4 space-y-1">
                       <li>本人確認書類（運転免許証、パスポートなど）</li>
@@ -361,7 +369,7 @@ const Nisa = () => {
                       <li>印鑑証明書（市区町村で発行、3か月以内）</li>
                       <li>源泉徴収票または確定申告書（一部の証券会社）</li>
                     </ul>
-                    
+
                     <h3 className="text-xl font-bold mb-3">口座開設後の注意点</h3>
                     <ul className="list-disc pl-5 space-y-1">
                       <li>年間非課税枠の管理</li>
@@ -381,7 +389,7 @@ const Nisa = () => {
           <div className="container mx-auto px-8">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">2024年〜2025年最新の開設キャンペーン</h2>
-              
+
               <Card className="mb-12 overflow-hidden border-2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-card/50">
                 <CardHeader>
                   <CardTitle className="text-2xl">主要証券会社のNISA口座開設キャンペーン</CardTitle>
@@ -390,7 +398,7 @@ const Nisa = () => {
                   <div className="prose max-w-none">
                     <h3 className="text-xl font-bold mb-3">2024年上半期のキャンペーン状況</h3>
                     <p className="mb-4">新NISA制度の開始に伴い、各証券会社では新規口座開設者向けのキャンペーンを実施しています。現金プレゼントやポイント還元など、お得なキャンペーンも多数ありますので、比較検討することをおすすめします。</p>
-                    
+
                     <h3 className="text-xl font-bold mb-3">主要証券会社のキャンペーン</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                       <div className="border border-blue-300 rounded-lg p-4 hover:bg-blue-50/50 transition-colors duration-300">
@@ -426,7 +434,7 @@ const Nisa = () => {
                         </ul>
                       </div>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold mb-3">2025年のキャンペーン予測</h3>
                     <p className="mb-4">2025年には、新NISA制度への適応が進むに従って、キャンペーン内容もより洗練されることが予想されます。特に、デジタル資産（暗号資産など）への投資を促進するキャンペーンや、ESG投資を推進するキャンペーンが増える可能性があります。</p>
                   </div>
@@ -441,7 +449,7 @@ const Nisa = () => {
           <div className="container mx-auto px-8">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">NISAでの投資戦略とおすすめ商品</h2>
-              
+
               <Card className="mb-12 overflow-hidden border-2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-card/50">
                 <CardHeader>
                   <CardTitle className="text-2xl">NISA投資の基本戦略</CardTitle>
@@ -449,25 +457,25 @@ const Nisa = () => {
                 <CardContent>
                   <div className="prose max-w-none">
                     <p className="mb-4">NISA口座での投資では、非課税枠を最大限に活用することが重要です。長期的な資産形成を目指す場合は、分散投資とドルコスト平均法による積立投資が効果的です。</p>
-                    
+
                     <h3 className="text-xl font-bold mb-3">おすすめ投資商品</h3>
                     <div className="space-y-4 mb-4">
                       <div className="border-l-4 border-blue-500 pl-4 hover:bg-blue-50/50 transition-colors duration-300 p-4 rounded-r-lg">
                         <h4 className="font-bold text-blue-700 mb-2">インデックス型投資信託</h4>
                         <p>市場全体の動きに連動するため、リスク分散が図れ、信託報酬も比較的安価です。つみたてNISAの対象商品としても推奨されています。</p>
                       </div>
-                      
+
                       <div className="border-l-4 border-green-500 pl-4 hover:bg-green-50/50 transition-colors duration-300 p-4 rounded-r-lg">
                         <h4 className="font-bold text-green-700 mb-2">ETF（上場投資信託）</h4>
                         <p>株式のように取引所で売買できる投資信託で、手数料が安くて流動性が高いのが特徴です。日本株、米国株、先進国株など多様な商品があります。</p>
                       </div>
-                      
+
                       <div className="border-l-4 border-purple-500 pl-4 hover:bg-purple-50/50 transition-colors duration-300 p-4 rounded-r-lg">
                         <h4 className="font-bold text-purple-700 mb-2">個人向け国債（変動金利型）</h4>
                         <p>元本が保証され、金利が変動する国債です。リスクが低く安定した運用を求める方におすすめです。</p>
                       </div>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold mb-3">ポートフォリオの組み方</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                       <div className="bg-blue-50 p-4 rounded-lg text-center hover:bg-blue-100 transition-colors duration-300">
@@ -486,7 +494,7 @@ const Nisa = () => {
                         <p className="text-sm">10-20%</p>
                       </div>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold mb-3">リスク管理とリバランス</h3>
                     <ul className="list-disc pl-5 space-y-1">
                       <li>定期的にポートフォリオを見直す（年1-2回）</li>
@@ -506,7 +514,7 @@ const Nisa = () => {
           <div className="container mx-auto px-8">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">2024年〜2025年おすすめの新商品</h2>
-              
+
               <Card className="mb-12 overflow-hidden border-2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-card/50">
                 <CardHeader>
                   <CardTitle className="text-2xl">新NISA制度に対応した最新投資商品</CardTitle>
@@ -515,7 +523,7 @@ const Nisa = () => {
                   <div className="prose max-w-none">
                     <h3 className="text-xl font-bold mb-3">2024年上半期の新商品トレンド</h3>
                     <p className="mb-4">新NISA制度の開始に伴い、各運用会社から新しい投資信託商品が多数発売されています。特に、ESG投資（環境・社会・ガバナンス）に特化した商品や、AIを活用した運用商品などが注目されています。</p>
-                    
+
                     <h3 className="text-xl font-bold mb-3">2024年おすすめの新商品</h3>
                     <div className="space-y-6 mb-6">
                       <div className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50/50 transition-colors duration-300">
@@ -527,7 +535,7 @@ const Nisa = () => {
                           <Badge variant="secondary">全世界株式</Badge>
                         </div>
                       </div>
-                      
+
                       <div className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50/50 transition-colors duration-300">
                         <h4 className="font-bold text-lg mb-2">ニッセイ・ファンド・マネージャーズ AIグローバル株式ファンド</h4>
                         <p className="text-sm text-muted-foreground mb-2">AI技術を活用して世界の有望株式を自動選定・運用するアクティブ型ファンド。機械学習アルゴリズムにより、市場の動向を分析し、最適なポートフォリオを構築します。</p>
@@ -537,7 +545,7 @@ const Nisa = () => {
                           <Badge variant="secondary">グローバル株式</Badge>
                         </div>
                       </div>
-                      
+
                       <div className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50/50 transition-colors duration-300">
                         <h4 className="font-bold text-lg mb-2">eMAXIS Slim 米国ハイテク株式（NASDAQ100）</h4>
                         <p className="text-sm text-muted-foreground mb-2">NASDAQ100指数に連動するインデックスファンドで、米国のハイテク企業に集中投資できます。信託報酬が0.1145%と非常に低く、コスト効率に優れています。</p>
@@ -547,7 +555,7 @@ const Nisa = () => {
                           <Badge variant="secondary">米国株式</Badge>
                         </div>
                       </div>
-                      
+
                       <div className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50/50 transition-colors duration-300">
                         <h4 className="font-bold text-lg mb-2">三井住友・アセットマネジメント バランスESGファンド</h4>
                         <p className="text-sm text-muted-foreground mb-2">株式と債券のバランス型ファンドで、ESG基準に基づいた運用を行います。リスクとリターンのバランスを重視しつつ、持続可能な投資を実現します。</p>
@@ -558,7 +566,7 @@ const Nisa = () => {
                         </div>
                       </div>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold mb-3">2025年以降の新商品予測</h3>
                     <p className="mb-4">2025年以降には、デジタル資産（暗号資産など）への投資が可能な投資信託や、ブロックチェーン技術を活用した運用商品が登場する可能性があります。また、より細分化されたテーマ投資商品（例えば、AI関連、宇宙関連、医療関連など）も増えると予想されます。</p>
                   </div>
@@ -569,7 +577,7 @@ const Nisa = () => {
         </section>
 
         {/* NISA投資シミュレーションツール */}
-        <section id="nisa-simulation" className="py-16 sm:py-20 bg-gradient-to-b from-muted/30 to-background">
+        <section id="nisa-simulation" className="py-16 sm:py-20 bg-gradient-to-b from-muted/30 to-background scroll-mt-28">
           <div className="container mx-auto px-8">
             <div className="max-w-4xl mx-auto">
               <Card className="overflow-hidden border-2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-card/50">
@@ -659,7 +667,7 @@ const Nisa = () => {
           <div className="container mx-auto px-8">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">NISAの税制優遇と節税効果</h2>
-              
+
               <Card className="mb-12 overflow-hidden border-2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-card/50">
                 <CardHeader>
                   <CardTitle className="text-2xl">NISAの税制優遇内容</CardTitle>
@@ -667,7 +675,7 @@ const Nisa = () => {
                 <CardContent>
                   <div className="prose max-w-none">
                     <p className="mb-4">NISAでは、投資で得た利益（配当金・分配金・売却益）が非課税になります。これは、通常の特定口座では利益に応じて約20%の税金（所得税15%、住民税5%）がかかるのに対し、NISA口座ではその税金がかからないという大きなメリットです。</p>
-                    
+
                     <h3 className="text-xl font-bold mb-3">節税効果の計算例</h3>
                     <div className="bg-yellow-50 p-4 rounded-lg mb-4 hover:bg-yellow-100/50 transition-colors duration-300">
                       <h4 className="font-bold text-yellow-800 mb-2">例：年間120万円の利益を得た場合</h4>
@@ -677,10 +685,10 @@ const Nisa = () => {
                         <li><strong>節税効果：24万円</strong></li>
                       </ul>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold mb-3">新NISAの節税効果</h3>
                     <p className="mb-4">2024年から始まった新NISAでは、年間180万円の非課税枠があります。そのうち120万円が分配金・配当金、60万円が譲渡益の非課税枠です。</p>
-                    
+
                     <div className="bg-green-50 p-4 rounded-lg mb-4 hover:bg-green-100/50 transition-colors duration-300">
                       <h4 className="font-bold text-green-800 mb-2">新NISAの節税効果計算例</h4>
                       <ul className="list-disc pl-5 space-y-1">
@@ -689,7 +697,7 @@ const Nisa = () => {
                         <li><strong>合計節税効果：36万円</strong></li>
                       </ul>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold mb-3">NISAと他の制度の併用</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                       <div className="border border-blue-300 rounded-lg p-4 hover:bg-blue-50/50 transition-colors duration-300">
@@ -701,7 +709,7 @@ const Nisa = () => {
                         <p className="text-sm">NISA口座と一般の特定口座を併用することも可能です。目的に応じて使い分けることで、より効率的な資産運用ができます。</p>
                       </div>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold mb-3">節税効果を最大限に活用するポイント</h3>
                     <ul className="list-disc pl-5 space-y-1">
                       <li>年間非課税枠を最大限に活用する</li>
@@ -721,7 +729,7 @@ const Nisa = () => {
           <div className="container mx-auto px-8">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">2024年〜2025年最新の税制改正動向</h2>
-              
+
               <Card className="mb-12 overflow-hidden border-2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-card/50">
                 <CardHeader>
                   <CardTitle className="text-2xl">NISA関連の税制改正と今後の展望</CardTitle>
@@ -730,28 +738,28 @@ const Nisa = () => {
                   <div className="prose max-w-none">
                     <h3 className="text-xl font-bold mb-3">2024年の税制改正内容</h3>
                     <p className="mb-4">新NISA制度の開始に伴い、関連する税制も見直されています。特に、譲渡益の申告方法や損益通算の取り扱いについて、より分かりやすくするための改正が行われています。</p>
-                    
+
                     <h3 className="text-xl font-bold mb-3">主な税制改正点</h3>
                     <div className="space-y-4 mb-6">
                       <div className="border-l-4 border-blue-500 pl-4 hover:bg-blue-50/50 transition-colors duration-300 p-4 rounded-r-lg">
                         <h4 className="font-bold text-blue-700 mb-2">譲渡益の申告方法の簡素化</h4>
                         <p>新NISA口座での取引は、特定口座の源泉分離課税方式により、確定申告の必要がなくなりました。これにより、手続きが大幅に簡素化されています。</p>
                       </div>
-                      
+
                       <div className="border-l-4 border-green-500 pl-4 hover:bg-green-50/50 transition-colors duration-300 p-4 rounded-r-lg">
                         <h4 className="font-bold text-green-700 mb-2">損益通算の取り扱い</h4>
                         <p>新NISA口座での損失は、他の口座との損益通算はできませんが、同口座内でのみ損益通算が可能です。これにより、口座内のリスク管理が容易になりました。</p>
                       </div>
-                      
+
                       <div className="border-l-4 border-purple-500 pl-4 hover:bg-purple-50/50 transition-colors duration-300 p-4 rounded-r-lg">
                         <h4 className="font-bold text-purple-700 mb-2">非課税期間の延長</h4>
                         <p>非課税期間が最長20年間となり、長期的な資産形成が可能になりました。これにより、複利効果を最大限に活用できます。</p>
                       </div>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold mb-3">2025年の税制改正予測</h3>
                     <p className="mb-4">2025年には、新NISA制度のさらなる拡充に伴って、関連する税制改正が行われる可能性があります。特に、デジタル資産（暗号資産など）への投資に関する税制の整備や、海外投資に関する税制の見直しが予想されます。</p>
-                    
+
                     <h3 className="text-xl font-bold mb-3">国際的な税制動向との連携</h3>
                     <p className="mb-4">日本だけでなく、G7やOECDなどの国際的な枠組みでも税制の harmonization（調和）が進められています。特に、最低税率の導入や、デジタルサービスに対する課税ルールの整備などが注目されています。これらの国際的な動向も、日本のNISA制度に影響を与える可能性があります。</p>
                   </div>

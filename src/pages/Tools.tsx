@@ -8,70 +8,21 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, LineChart, Coins, Lightbulb } from "lucide-react";
 
+import { tools } from "@/data/tools";
+
 const Tools = () => {
-  // 計算ツール
-  const tools = [
-    {
-      id: "compound-interest",
-      title: "複利計算シミュレータ",
-      description: "長期投資の効果を可視化する複利計算ツール",
-      icon: CalcIcon,
-      category: "基礎計算",
-    },
-    {
-      id: "saving-calculator",
-      title: "積立額計算ツール",
-      description: "目標額に応じた最適な積立額と期間を計算",
-      icon: PieChart,
-      category: "基礎計算",
-    },
-    {
-      id: "risk-assessment",
-      title: "リスク許容度診断",
-      description: "自分のリスク許容度を診断し、適切な投資戦略を見つけましょう",
-      icon: LineChart,
-      category: "診断ツール",
-    },
-    {
-      id: "stock-return",
-      title: "株式リターン計算機",
-      description: "株式投資のリターンとリスクを計算するシミュレーションツール",
-      icon: TrendingUp,
-      category: "株式投資",
-    },
-    {
-      id: "fund-return",
-      title: "投資信託リターン計算機",
-      description: "投資信託の期待リターンとリスクをシミュレーション",
-      icon: PieChart,
-      category: "投資信託",
-    },
-    {
-      id: "crypto-return",
-      title: "仮想通貨リターン計算機",
-      description: "仮想通貨投資のリターンとリスクをシミュレーション",
-      icon: Coins,
-      category: "仮想通貨",
-    },
-    {
-      id: "fx-calculator",
-      title: "FX計算シミュレータ",
-      description: "FX取引の必要証拠金、利益/損失などを計算するシミュレーションツール",
-      icon: TrendingUp,
-      category: "FX取引",
-    },
-  ];
+  // tools definitions are now imported from @/data/tools
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main className="flex-1">
         {/* Breadcrumb */}
         <div className="bg-gradient-to-r from-muted/50 to-muted/30 py-4 border-b">
           <div className="container mx-auto px-4">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors group"
             >
               <ArrowLeft className="h-4 w-4 mr-1 group-hover:-translate-x-1 transition-transform" />
@@ -144,7 +95,7 @@ const Tools = () => {
             <Card className="max-w-4xl mx-auto relative overflow-hidden bg-gradient-to-br from-secondary/10 via-primary/5 to-accent/5 border-2 border-primary/20 shadow-2xl">
               <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-secondary/10 to-transparent rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
               <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-accent/10 to-transparent rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
-              
+
               <CardHeader className="relative z-10">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="p-3 bg-secondary/10 rounded-xl">
@@ -164,7 +115,7 @@ const Tools = () => {
                     長期投資において大きな威力を発揮し、時間を味方につけることで資産を飛躍的に増やすことができます。
                   </p>
                 </div>
-                
+
                 <div className="p-6 bg-gradient-to-br from-secondary/5 to-primary/5 rounded-xl border-2 border-secondary/20">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="text-2xl">💰</span>
@@ -201,7 +152,7 @@ const Tools = () => {
                 投資の様々なシーンで役立つ計算ツールとシミュレータをご紹介します。
               </p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {tools.map((tool, index) => (
                 <Card key={tool.id} className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 bg-gradient-to-br from-card to-card/80 hover:border-secondary/30 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
@@ -221,7 +172,7 @@ const Tools = () => {
                   <CardContent>
                     <p className="text-muted-foreground mb-4 leading-relaxed">{tool.description}</p>
                     <Button asChild className="w-full group-hover:scale-105 transition-transform">
-                      <Link to={`/tools/${tool.id}`}>
+                      <Link to={(tool as any).customLink || `/tools/${tool.id}`}>
                         ツールを使う →
                       </Link>
                     </Button>

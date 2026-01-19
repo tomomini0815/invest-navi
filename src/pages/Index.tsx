@@ -10,8 +10,10 @@ import { useLocation } from "react-router-dom";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, ArrowRight, BookOpen, TrendingUp, PieChart, LineChart, Coins, Calculator } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Footer from "@/components/layout/Footer";
+import { Button } from "@/components/ui/button";
+import { tools } from "@/data/tools";
 
 const Index = () => {
   const location = useLocation();
@@ -536,6 +538,38 @@ const Index = () => {
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {categories.map((category, index) => (
                 <CategoryCard key={index} {...category} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 投資便利ツールセクション */}
+        <section className="py-16 sm:py-20 bg-muted/30">
+          <div className="container mx-auto px-8">
+            <div className="text-center mb-12 sm:mb-16">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-4">投資便利ツール</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                投資判断をサポートする便利な計算ツールやシミュレータ
+              </p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
+              {tools.map((tool) => (
+                <Link key={tool.id} to={(tool as any).customLink || `/tools/${tool.id}`} className="block h-full">
+                  <Card className="h-full group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 bg-white/50 backdrop-blur-sm hover:border-orange-200">
+                    <CardHeader className="flex flex-col items-center text-center p-4 pb-2">
+                      <div className="p-3 bg-orange-500 rounded-xl mb-2 group-hover:scale-110 transition-transform duration-300 shadow-md">
+                        <tool.icon className="h-6 w-6 text-white" />
+                      </div>
+                      <CardTitle className="text-base sm:text-lg font-bold leading-tight">{tool.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-center p-4 pt-0">
+                      <p className="text-muted-foreground mb-3 text-xs sm:text-sm leading-relaxed line-clamp-2">{tool.description}</p>
+                      <div className="w-auto inline-flex px-6 bg-orange-100 text-orange-600 group-hover:bg-orange-200 font-bold text-sm h-9 rounded-lg transition-colors items-center justify-center">
+                        ツールを使う
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </div>
           </div>

@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -8,16 +9,29 @@ import { ArrowLeft, LineChart, Lightbulb, Shield, TrendingUp, Calculator, Award 
 import RiskDiagnostic from "@/components/features/RiskDiagnostic";
 
 const RiskAssessment = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.slice(1));
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 300); // 遅延を入れて確実にスクロールさせる（ページ遷移アニメーション等の影響回避）
+      }
+    }
+  }, [location]);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main className="flex-1">
         {/* Breadcrumb */}
         <div className="bg-gradient-to-r from-muted/50 to-muted/30 py-4 border-b">
           <div className="container mx-auto px-4">
-            <Link 
-              to="/tools" 
+            <Link
+              to="/tools"
               className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors group"
             >
               <ArrowLeft className="h-4 w-4 mr-1 group-hover:-translate-x-1 transition-transform" />
@@ -89,7 +103,7 @@ const RiskAssessment = () => {
                     </p>
                   </div>
                 </Card>
-                
+
                 <Card className="overflow-hidden border-2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-card/50">
                   <div className="p-6">
                     <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-4">
@@ -101,7 +115,7 @@ const RiskAssessment = () => {
                     </p>
                   </div>
                 </Card>
-                
+
                 <Card className="overflow-hidden border-2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-card/50">
                   <div className="p-6">
                     <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mb-4">
@@ -121,14 +135,14 @@ const RiskAssessment = () => {
         {/* Diagnostic Tool Section */}
         <section className="py-16 bg-gradient-to-b from-background to-muted/30">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
+            <div className="text-center mb-12 scroll-mt-24" id="diagnostic-tool">
               <h2 className="text-3xl font-bold mb-4">投資総合診断を開始</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
                 簡単な質問に答えて、あなたに最適な投資戦略を見つけましょう。
                 診断には約1〜3分かかります。あなたの投資適性に合った詳細なアドバイスを提供します。
               </p>
             </div>
-            <div className="max-w-6xl mx-auto" id="diagnostic-tool">
+            <div className="max-w-6xl mx-auto">
               <RiskDiagnostic />
             </div>
           </div>
@@ -144,7 +158,7 @@ const RiskAssessment = () => {
                 投資の成功確率を高めることができます。
               </p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
               <Card className="border-2 hover:shadow-2xl transition-all duration-300 bg-gradient-to-br from-card to-card/80">
                 <CardHeader>
@@ -160,7 +174,7 @@ const RiskAssessment = () => {
                   </p>
                 </CardContent>
               </Card>
-              
+
               <Card className="border-2 hover:shadow-2xl transition-all duration-300 bg-gradient-to-br from-card to-card/80">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
@@ -175,7 +189,7 @@ const RiskAssessment = () => {
                   </p>
                 </CardContent>
               </Card>
-              
+
               <Card className="border-2 hover:shadow-2xl transition-all duration-300 bg-gradient-to-br from-card to-card/80">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
@@ -191,7 +205,7 @@ const RiskAssessment = () => {
                 </CardContent>
               </Card>
             </div>
-            
+
             <Card className="border-2 hover:shadow-2xl transition-all duration-300 bg-gradient-to-br from-card to-card/80">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -210,7 +224,7 @@ const RiskAssessment = () => {
                       <li>• 投資経験が浅い</li>
                     </ul>
                   </div>
-                  
+
                   <div className="p-6 bg-secondary/10 rounded-lg border border-secondary/20">
                     <h3 className="font-bold mb-2">中立的（中リスク）</h3>
                     <ul className="text-sm space-y-1">
@@ -220,7 +234,7 @@ const RiskAssessment = () => {
                       <li>• ある程度の投資経験がある</li>
                     </ul>
                   </div>
-                  
+
                   <div className="p-6 bg-primary/10 rounded-lg border border-primary/20">
                     <h3 className="font-bold mb-2">積極的（高リスク）</h3>
                     <ul className="text-sm space-y-1">
