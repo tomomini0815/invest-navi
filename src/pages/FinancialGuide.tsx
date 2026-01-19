@@ -37,7 +37,7 @@ const FinancialGuide = () => {
             icon: <DollarSign className="w-5 h-5" />,
             formula: "商品やサービスの販売で得た収入の合計",
             description: "会社が1年間に商品やサービスを売って得たお金の総額です。ここからすべてがスタートします。",
-            example: "ラーメン屋さんなら、お客さんから受け取った代金の合計",
+            example: "家計簿で言うと「給料」。毎月の手取り収入のことです",
             point: "すべての利益の出発点",
             color: "blue",
             bgGradient: "from-blue-50 to-blue-100",
@@ -51,7 +51,7 @@ const FinancialGuide = () => {
             icon: <PiggyBank className="w-5 h-5" />,
             formula: "売上高 − 売上原価",
             description: "売上から材料費や仕入れ値を引いた利益。商品そのものの収益力を示します。",
-            example: "ラーメン1杯800円 − 麺やスープの原価300円 = 粗利500円",
+            example: "家計簿で言うと「給料 − 通勤費」。仕事をするための最低限の費用を引いた残り",
             point: "商品力・ブランド力の強さ",
             color: "emerald",
             bgGradient: "from-emerald-50 to-emerald-100",
@@ -65,7 +65,7 @@ const FinancialGuide = () => {
             icon: <Building2 className="w-5 h-5" />,
             formula: "売上総利益 − 販管費",
             description: "本業で稼いだ利益。人件費・広告費・家賃などを引いた後に残る、企業の「稼ぐ力」そのもの。",
-            example: "粗利500円 − 人件費・家賃など400円 = 営業利益100円",
+            example: "家計簿で言うと「給料 − 生活費全部」。食費・光熱費・家賃を払った後の残り",
             point: "本業の実力を示す最重要指標",
             color: "orange",
             bgGradient: "from-orange-50 to-orange-100",
@@ -79,7 +79,7 @@ const FinancialGuide = () => {
             icon: <Calculator className="w-5 h-5" />,
             formula: "営業利益 + 営業外収益 − 営業外費用",
             description: "本業以外の活動（利息・配当・為替差益など）も含めた、毎期繰り返される通常活動での利益。",
-            example: "営業利益 + 銀行預金の利息 − 借入金の利息",
+            example: "家計簿で言うと「生活費を引いた残り + 副業収入や投資の利息 − ローン利息」",
             point: "財務活動を含めた総合力",
             color: "violet",
             bgGradient: "from-violet-50 to-violet-100",
@@ -93,7 +93,7 @@ const FinancialGuide = () => {
             icon: <Target className="w-5 h-5" />,
             formula: "税引前利益 − 法人税等",
             description: "すべての費用・税金を差し引いた最終的な利益。株主への配当や将来の投資の原資となります。",
-            example: "経常利益 − 特別損失 − 法人税 = 最終的に残る利益",
+            example: "家計簿で言うと「貯金できる金額」。税金も払い終わって、本当に手元に残るお金",
             point: "株主にとっての最終成果",
             color: "amber",
             bgGradient: "from-amber-50 to-amber-100",
@@ -106,28 +106,32 @@ const FinancialGuide = () => {
         {
             name: "PER（株価収益率）",
             formula: "株価 ÷ 1株あたり純利益",
-            description: "株価が割安か割高かを判断する代表的指標。低いほど割安とされます。",
+            householdAnalogy: "年収300万円の人が900万円で売られていたら「年収の3倍」→PER3倍",
+            description: "例：株価1000円、1株利益100円なら1000÷100=PER10倍。「10年で元が取れる」という意味。数字が小さいほど割安。ただし成長企業（Google、Teslaなど）は将来性を見込んでPER30倍以上でも買われる。",
             benchmark: "15倍以下で割安、30倍以上で割高の目安",
             icon: <BarChart3 className="w-5 h-5" />,
         },
         {
             name: "PBR（株価純資産倍率）",
             formula: "株価 ÷ 1株あたり純資産",
-            description: "株価が会社の持つ資産に対して何倍かを示す指標。1倍未満は割安の可能性。",
+            householdAnalogy: "貯金100万円の人が80万円で売られている→PBR0.8倍「お買い得！」",
+            description: "例：株価500円、1株純資産1000円なら500÷1000=PBR0.5倍。理論上「会社を解散して資産を分けたら2倍になる」計算。ただしPBR1倍未満=業績不振の可能性もあるので、営業利益も必ずチェック。",
             benchmark: "1倍以下で資産価値より安い評価",
             icon: <Calculator className="w-5 h-5" />,
         },
         {
             name: "ROE（自己資本利益率）",
             formula: "純利益 ÷ 自己資本 × 100",
-            description: "株主のお金をどれだけ効率よく使って利益を生み出しているか。高いほど効率的。",
+            householdAnalogy: "貯金100万円→1年後110万円に増えた→ROE10%「運用上手！」",
+            description: "例：純利益100億円、自己資本1000億円なら100÷1000×100=ROE10%。株主が出したお金をどれだけ効率よく増やせたか。ROE15%以上なら超優秀。投資の神様バフェットが最重視する指標の一つ。",
             benchmark: "10%以上で優良企業の目安",
             icon: <Activity className="w-5 h-5" />,
         },
         {
             name: "配当利回り",
             formula: "1株あたり配当金 ÷ 株価 × 100",
-            description: "投資額に対して何%の配当がもらえるか。安定収入を求める投資家に重要。",
+            householdAnalogy: "100万円預けて年3万円もらえる→利回り3%（銀行預金の100倍以上！）",
+            description: "例：株価1000円、配当30円なら30÷1000×100=3%。毎年もらえる「お小遣い」。ただし株価が下がると計算上の利回りは上がるので注意。安定企業（NTT、JTなど）の高配当株は不労所得狙いの投資家に人気。",
             benchmark: "3%以上で高配当の目安",
             icon: <PiggyBank className="w-5 h-5" />,
         },
@@ -260,22 +264,6 @@ const FinancialGuide = () => {
                         />
                     </div>
 
-                    {/* 補足説明 */}
-                    <div className="max-w-4xl mx-auto mt-8 p-6 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl border border-amber-200">
-                        <div className="flex items-start gap-4">
-                            <div className="p-2 bg-amber-400 rounded-lg flex-shrink-0">
-                                <Info className="w-5 h-5 text-white" />
-                            </div>
-                            <div>
-                                <h4 className="font-bold text-amber-800 mb-2">読み方のポイント</h4>
-                                <ul className="text-amber-700 text-sm space-y-1">
-                                    <li>• <span className="font-semibold">青いバー</span>は売上高（スタート地点）、<span className="font-semibold text-emerald-700">緑のバー</span>は各段階の利益</li>
-                                    <li>• <span className="font-semibold text-red-600">赤いバー</span>は費用（コスト）で、これが引かれていくことで利益が減っていきます</li>
-                                    <li>• 最終的に残る<span className="font-semibold text-amber-700">黄色のバー（当期純利益）</span>が株主にとっての成果です</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </section>
 
                 {/* 5つの利益解説 Section */}
@@ -327,6 +315,214 @@ const FinancialGuide = () => {
                     </div>
                 </section>
 
+                {/* Comparative Analysis Section */}
+                <section className="mb-20">
+                    <div className="text-center mb-10">
+                        <Badge className="mb-4 bg-purple-100 text-purple-800 border-purple-300 px-4 py-2">
+                            <Sparkles className="w-4 h-4 mr-2 inline" />
+                            実践編
+                        </Badge>
+                        <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+                            図解でわかる「良い会社・リスクが高い会社」のパターン
+                        </h2>
+                        <p className="text-slate-600 max-w-2xl mx-auto">
+                            同じ「赤字」でも、将来性のある赤字と危険な赤字があります。
+                            <br className="hidden md:block" />
+                            ウォーターフォールチャートの形を見るだけで、会社の状態を直感的に診断できます。
+                        </p>
+                    </div>
+
+                    {/* Global Legend */}
+                    <div className="flex flex-wrap justify-center gap-3 sm:gap-6 mb-8 max-w-4xl mx-auto bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 rounded-sm bg-gradient-to-b from-blue-400 to-blue-600 shadow-sm" />
+                            <span className="text-xs font-bold text-slate-600">売上・利益（残高）</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 rounded-sm bg-gradient-to-b from-red-400 to-red-600 shadow-sm" />
+                            <span className="text-xs font-bold text-slate-600">費用（マイナス）</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 rounded-sm bg-gradient-to-b from-teal-400 to-teal-600 shadow-sm" />
+                            <span className="text-xs font-bold text-slate-600">収益（プラス）</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 rounded-sm bg-gradient-to-b from-amber-400 to-amber-600 shadow-sm ring-2 ring-amber-300" />
+                            <span className="text-xs font-bold text-slate-600">最終利益</span>
+                        </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6 max-w-7xl mx-auto">
+                        {/* 1. 優良企業型 */}
+                        <Card className="flex flex-col h-full border-t-4 border-t-blue-500 hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                            <CardContent className="p-0 flex flex-col h-full">
+                                <div className="p-5 bg-gradient-to-b from-blue-50 to-white">
+                                    <div className="flex items-start justify-between mb-2">
+                                        <Badge className="bg-blue-500 hover:bg-blue-600 text-white border-0 shadow-sm px-3 py-1 text-sm">理想形</Badge>
+                                        <span className="text-xs font-mono text-slate-400">Ideal Case</span>
+                                    </div>
+                                    <h3 className="font-bold text-xl text-slate-800 mb-3 group-hover:text-blue-700 transition-colors">
+                                        高収益な優良企業
+                                    </h3>
+                                    <p className="text-sm text-slate-600 leading-relaxed bg-white/60 p-3 rounded-lg border border-blue-100">
+                                        <span className="block mb-1 font-bold text-blue-800 text-xs">👀 チェックポイント</span>
+                                        階段がきれいに右下がりになりつつ、<span className="border-b-2 border-blue-200">最後のバー（純利益）がしっかり残っている</span>。
+                                    </p>
+                                </div>
+                                <div className="flex-1 p-2 bg-gradient-to-b from-white to-slate-50">
+                                    <VisualIncomeStatement
+                                        data={{
+                                            revenue: 1000,
+                                            costOfGoodsSold: 150,
+                                            grossProfit: 850,
+                                            sellingGeneralAdmin: 500,
+                                            operatingIncome: 350,
+                                            nonOperatingIncome: 20,
+                                            ordinaryIncome: 370,
+                                            specialIncome: 0,
+                                            preTaxIncome: 370,
+                                            incomeTax: 120,
+                                            netIncome: 250
+                                        }}
+                                        symbol="優良企業"
+                                        period="2024"
+                                        currency=""
+                                        unit=""
+                                        isCompact={true}
+                                        className="h-full scale-95 origin-top"
+                                    />
+                                </div>
+                            </CardContent>
+                        </Card>
+
+                        {/* 2. 成熟安定型 */}
+                        <Card className="flex flex-col h-full border-t-4 border-t-emerald-500 hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                            <CardContent className="p-0 flex flex-col h-full">
+                                <div className="p-5 bg-gradient-to-b from-emerald-50 to-white">
+                                    <div className="flex items-start justify-between mb-2">
+                                        <Badge className="bg-emerald-500 hover:bg-emerald-600 text-white border-0 shadow-sm px-3 py-1 text-sm">安定</Badge>
+                                        <span className="text-xs font-mono text-slate-400">Stable Case</span>
+                                    </div>
+                                    <h3 className="font-bold text-xl text-slate-800 mb-3 group-hover:text-emerald-700 transition-colors">
+                                        不況に強い安定企業
+                                    </h3>
+                                    <p className="text-sm text-slate-600 leading-relaxed bg-white/60 p-3 rounded-lg border border-emerald-100">
+                                        <span className="block mb-1 font-bold text-emerald-800 text-xs">👀 チェックポイント</span>
+                                        <span className="border-b-2 border-emerald-200">原価率が高く粗利は小さい</span>が、販管費を抜けて安定的に黒字。製造業・インフラ系に多い。
+                                    </p>
+                                </div>
+                                <div className="flex-1 p-2 bg-gradient-to-b from-white to-slate-50">
+                                    <VisualIncomeStatement
+                                        data={{
+                                            revenue: 1000,
+                                            costOfGoodsSold: 700,
+                                            grossProfit: 300,
+                                            sellingGeneralAdmin: 200,
+                                            operatingIncome: 100,
+                                            nonOperatingIncome: 10,
+                                            ordinaryIncome: 110,
+                                            specialIncome: 0,
+                                            preTaxIncome: 110,
+                                            incomeTax: 30,
+                                            netIncome: 80
+                                        }}
+                                        symbol="安定企業"
+                                        period="2024"
+                                        currency=""
+                                        unit=""
+                                        isCompact={true}
+                                        className="h-full scale-95 origin-top"
+                                    />
+                                </div>
+                            </CardContent>
+                        </Card>
+
+                        {/* 3. 先行投資型（オレンジ） */}
+                        <Card className="flex flex-col h-full border-t-4 border-t-orange-500 hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                            <CardContent className="p-0 flex flex-col h-full">
+                                <div className="p-5 bg-gradient-to-b from-orange-50 to-white">
+                                    <div className="flex items-start justify-between mb-2">
+                                        <Badge className="bg-orange-500 hover:bg-orange-600 text-white border-0 shadow-sm px-3 py-1 text-sm">要注目</Badge>
+                                        <span className="text-xs font-mono text-slate-400">Growth Case</span>
+                                    </div>
+                                    <h3 className="font-bold text-xl text-slate-800 mb-3 group-hover:text-orange-700 transition-colors">
+                                        将来有望な赤字
+                                    </h3>
+                                    <p className="text-sm text-slate-600 leading-relaxed bg-white/60 p-3 rounded-lg border border-orange-100">
+                                        <span className="block mb-1 font-bold text-orange-800 text-xs">👀 チェックポイント</span>
+                                        <span className="border-b-2 border-orange-200">粗利（緑）は非常に高い</span>が、販管費（赤）で一時的に赤字。SaaS等に多い。
+                                    </p>
+                                </div>
+                                <div className="flex-1 p-2 bg-gradient-to-b from-white to-slate-50">
+                                    <VisualIncomeStatement
+                                        data={{
+                                            revenue: 1000,
+                                            costOfGoodsSold: 200,
+                                            grossProfit: 800,
+                                            sellingGeneralAdmin: 850,
+                                            operatingIncome: -50,
+                                            nonOperatingIncome: 0,
+                                            ordinaryIncome: -50,
+                                            specialIncome: 0,
+                                            preTaxIncome: -50,
+                                            incomeTax: 0,
+                                            netIncome: -50
+                                        }}
+                                        symbol="成長企業"
+                                        period="2024"
+                                        currency=""
+                                        unit=""
+                                        isCompact={true}
+                                        className="h-full scale-95 origin-top"
+                                    />
+                                </div>
+                            </CardContent>
+                        </Card>
+
+                        {/* 4. 危険型 */}
+                        <Card className="flex flex-col h-full border-t-4 border-t-red-500 hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                            <CardContent className="p-0 flex flex-col h-full">
+                                <div className="p-5 bg-gradient-to-b from-red-50 to-white">
+                                    <div className="flex items-start justify-between mb-2">
+                                        <Badge variant="destructive" className="shadow-sm px-3 py-1 text-sm">危険</Badge>
+                                        <span className="text-xs font-mono text-slate-400">Danger Case</span>
+                                    </div>
+                                    <h3 className="font-bold text-xl text-slate-800 mb-3 group-hover:text-red-700 transition-colors">
+                                        衰退・倒産予備軍
+                                    </h3>
+                                    <p className="text-sm text-slate-600 leading-relaxed bg-white/60 p-3 rounded-lg border border-red-100">
+                                        <span className="block mb-1 font-bold text-red-800 text-xs">👀 チェックポイント</span>
+                                        そもそも<span className="border-b-2 border-red-200">粗利が小さい</span>。資産売却（特別利益）で黒字に見せかけている場合も注意。
+                                    </p>
+                                </div>
+                                <div className="flex-1 p-2 bg-gradient-to-b from-white to-slate-50">
+                                    <VisualIncomeStatement
+                                        data={{
+                                            revenue: 1000,
+                                            costOfGoodsSold: 850,
+                                            grossProfit: 150,
+                                            sellingGeneralAdmin: 250,
+                                            operatingIncome: -100,
+                                            nonOperatingIncome: -30,
+                                            ordinaryIncome: -130,
+                                            specialIncome: 50,
+                                            preTaxIncome: -80,
+                                            incomeTax: 0,
+                                            netIncome: -80
+                                        }}
+                                        symbol="危険企業"
+                                        period="2024"
+                                        currency=""
+                                        unit=""
+                                        isCompact={true}
+                                        className="h-full scale-95 origin-top"
+                                    />
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </section>
+
                 {/* 財務指標 Section */}
                 <section className="mb-16 max-w-5xl mx-auto">
                     <div className="text-center mb-10">
@@ -345,12 +541,21 @@ const FinancialGuide = () => {
                                         <div className="p-2.5 bg-gradient-to-br from-amber-100 to-orange-100 rounded-xl text-amber-700 flex-shrink-0">
                                             {indicator.icon}
                                         </div>
-                                        <div>
+                                        <div className="flex-1">
                                             <h4 className="font-bold text-slate-800 mb-1">{indicator.name}</h4>
-                                            <div className="inline-block bg-slate-100 px-2 py-0.5 rounded text-xs font-mono text-slate-600 mb-2">
+                                            <div className="inline-block bg-slate-100 px-2 py-0.5 rounded text-xs font-mono text-slate-600 mb-3">
                                                 {indicator.formula}
                                             </div>
-                                            <p className="text-sm text-slate-600 mb-2">{indicator.description}</p>
+
+                                            {/* 家計簿に例えると */}
+                                            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-400 p-3 rounded-r-lg mb-3">
+                                                <div className="flex flex-col sm:flex-row sm:items-start gap-2">
+                                                    <span className="text-blue-600 text-xs font-bold whitespace-nowrap">💡 家計簿で言うと</span>
+                                                    <p className="text-sm text-blue-900 leading-relaxed">{indicator.householdAnalogy}</p>
+                                                </div>
+                                            </div>
+
+                                            <p className="text-sm text-slate-600 mb-2 leading-relaxed">{indicator.description}</p>
                                             <div className="text-xs bg-amber-50 text-amber-700 px-2 py-1 rounded-lg inline-block">
                                                 📊 {indicator.benchmark}
                                             </div>

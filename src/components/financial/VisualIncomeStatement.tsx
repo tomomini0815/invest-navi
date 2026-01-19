@@ -24,6 +24,8 @@ interface VisualIncomeStatementProps {
     currency?: string;
     unit?: string;
     exchangeRate?: number;
+    isCompact?: boolean;
+    className?: string;
 }
 
 // ウォーターフォールチャートのバータイプ
@@ -47,7 +49,9 @@ export const VisualIncomeStatement: React.FC<VisualIncomeStatementProps> = ({
     period,
     currency = "¥",
     unit = "",
-    exchangeRate
+    exchangeRate,
+    isCompact = false,
+    className = ""
 }) => {
     const [animated, setAnimated] = useState(false);
 
@@ -231,8 +235,15 @@ export const VisualIncomeStatement: React.FC<VisualIncomeStatementProps> = ({
                 }
                 cumulative += item.value;
             } else if (item.type === 'subtotal' || item.type === 'final') {
-                startY = 0;
-                height = item.value;
+                // 負の値の場合：startY=value（負）から上に向かってabs(value)の高さ
+                // 正の値の場合：startY=0から上に向かってvalueの高さ
+                if (item.value < 0) {
+                    startY = item.value;
+                    height = Math.abs(item.value);
+                } else {
+                    startY = 0;
+                    height = item.value;
+                }
                 cumulative = item.value;
             }
 
@@ -248,72 +259,91 @@ export const VisualIncomeStatement: React.FC<VisualIncomeStatementProps> = ({
     const positionedData = calculatePositions();
     const maxValue = data.revenue;
 
+    // 全データポイントからminYを計算（負の値を含む）
+    // maxValueは常にrevenueを使用（売上=100%を維持）
+    let minY = 0;
+    positionedData.forEach(item => {
+        // subtotal/finalが負の場合
+        if ((item.type === 'subtotal' || item.type === 'final') && item.value < 0) {
+            minY = Math.min(minY, item.value);
+        }
+        // decrease後の累積値がstartY
+        if (item.startY < 0) {
+            minY = Math.min(minY, item.startY);
+        }
+    });
+    // rangeはmaxValue - minYで計算（売上が100%になるように）
+    const range = maxValue - minY;
+
     // 0を含まない項目をフィルタ
     const filteredData = positionedData.filter(item =>
         !(item.type === 'increase' || item.type === 'decrease') || item.value !== 0
     );
 
     return (
-        <Card className="w-full border border-amber-200 shadow-lg bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 text-slate-800 overflow-hidden">
-            <CardHeader className="pb-3">
-                <CardTitle className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 text-base sm:text-lg font-bold">
-                    <div className="flex items-center gap-3">
-                        <div className="p-2.5 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl text-white shadow-md">
-                            <BookOpen className="w-5 h-5" />
-                        </div>
-                        <div>
-                            <span className="flex items-center gap-2">
-                                損益計算書を図解で見る
-                                <span className="text-xs bg-gradient-to-r from-amber-500 to-orange-500 text-white px-2 py-0.5 rounded-full font-medium">
-                                    ウォーターフォール
+        <Card className={`w-full border border-amber-200 shadow-lg bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 text-slate-800 overflow-hidden ${className} ${isCompact ? 'shadow-none bg-white border-0' : ''}`}>
+            {!isCompact && (
+                <CardHeader className="pb-3">
+                    <CardTitle className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 text-base sm:text-lg font-bold">
+                        <div className="flex items-center gap-3">
+                            <div className="p-2.5 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl text-white shadow-md">
+                                <BookOpen className="w-5 h-5" />
+                            </div>
+                            <div>
+                                <span className="flex items-center gap-2">
+                                    損益計算書を図解で見る
+                                    <span className="text-xs bg-gradient-to-r from-amber-500 to-orange-500 text-white px-2 py-0.5 rounded-full font-medium">
+                                        ウォーターフォール
+                                    </span>
                                 </span>
-                            </span>
+                            </div>
                         </div>
-                    </div>
-                    <span className="text-xs sm:text-sm font-normal text-slate-500 sm:ml-auto flex flex-wrap items-center gap-2">
-                        <span className="bg-white/80 px-2 py-1 rounded-md border border-slate-200">{symbol} - {period}</span>
-                        {exchangeRate && (
-                            <span className="text-xs bg-white/80 border border-amber-200 px-2 py-1 rounded-md text-amber-700">
-                                $1 = {exchangeRate}円
-                            </span>
-                        )}
-                    </span>
-                </CardTitle>
-                <p className="text-xs sm:text-sm text-slate-600 pl-0 sm:pl-14 mt-2 leading-relaxed">
-                    <Sparkles className="w-4 h-4 inline-block text-amber-500 mr-1" />
-                    売上高から各費用が<span className="text-red-500 font-semibold">引かれていく流れ</span>を視覚的に確認！
-                    最終的にどれだけ利益が残るかが一目で分かります。
-                </p>
-            </CardHeader>
+                        <span className="text-xs sm:text-sm font-normal text-slate-500 sm:ml-auto flex flex-wrap items-center gap-2">
+                            <span className="bg-white/80 px-2 py-1 rounded-md border border-slate-200">{symbol} - {period}</span>
+                            {exchangeRate && (
+                                <span className="text-xs bg-white/80 border border-amber-200 px-2 py-1 rounded-md text-amber-700">
+                                    $1 = {exchangeRate}円
+                                </span>
+                            )}
+                        </span>
+                    </CardTitle>
+                    <p className="text-xs sm:text-sm text-slate-600 pl-0 sm:pl-14 mt-2 leading-relaxed">
+                        <Sparkles className="w-4 h-4 inline-block text-amber-500 mr-1" />
+                        売上高から各費用が<span className="text-red-500 font-semibold">引かれていく流れ</span>を視覚的に確認！
+                    </p>
+                </CardHeader>
+            )}
 
-            <CardContent className="px-3 sm:px-6 pb-6 overflow-visible">
-                <div className="bg-white/90 backdrop-blur rounded-2xl p-4 sm:p-6 shadow-inner border border-white/50">
+            <CardContent className={`px-3 sm:px-6 pb-6 overflow-visible ${isCompact ? 'p-2 sm:p-4' : ''}`}>
+                <div className={`rounded-2xl shadow-inner border border-white/50 ${isCompact ? 'bg-white shadow-none border-none p-0' : 'bg-white/90 backdrop-blur p-4 sm:p-6'}`}>
 
                     {/* 凡例 */}
-                    <div className="flex flex-wrap justify-center gap-3 sm:gap-6 border-b border-slate-100 pb-4 mb-4">
-                        <div className="flex items-center gap-2">
-                            <div className="w-4 h-4 rounded bg-gradient-to-b from-blue-400 to-blue-600 shadow-sm" />
-                            <span className="text-[10px] sm:text-xs text-slate-600">売上・利益（残高）</span>
+                    {!isCompact && (
+                        <div className="flex flex-wrap justify-center gap-3 sm:gap-6 border-b border-slate-100 pb-4 mb-4">
+                            <div className="flex items-center gap-2">
+                                <div className="w-4 h-4 rounded bg-gradient-to-b from-blue-400 to-blue-600 shadow-sm" />
+                                <span className="text-[10px] sm:text-xs text-slate-600">売上・利益（残高）</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <div className="w-4 h-4 rounded bg-gradient-to-b from-red-400 to-red-600 shadow-sm" />
+                                <span className="text-[10px] sm:text-xs text-slate-600">費用（マイナス）</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <div className="w-4 h-4 rounded bg-gradient-to-b from-teal-400 to-teal-600 shadow-sm" />
+                                <span className="text-[10px] sm:text-xs text-slate-600">収益（プラス）</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <div className="w-4 h-4 rounded bg-gradient-to-b from-amber-400 to-amber-600 shadow-sm ring-2 ring-amber-300" />
+                                <span className="text-[10px] sm:text-xs text-slate-600">最終利益</span>
+                            </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                            <div className="w-4 h-4 rounded bg-gradient-to-b from-red-400 to-red-600 shadow-sm" />
-                            <span className="text-[10px] sm:text-xs text-slate-600">費用（マイナス）</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <div className="w-4 h-4 rounded bg-gradient-to-b from-teal-400 to-teal-600 shadow-sm" />
-                            <span className="text-[10px] sm:text-xs text-slate-600">収益（プラス）</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <div className="w-4 h-4 rounded bg-gradient-to-b from-amber-400 to-amber-600 shadow-sm ring-2 ring-amber-300" />
-                            <span className="text-[10px] sm:text-xs text-slate-600">最終利益</span>
-                        </div>
-                    </div>
+                    )}
 
-                    {/* ウォーターフォールチャート (スクロール領域) */}
-                    <div className="overflow-x-auto pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
-                        <div className="min-w-[800px] lg:min-w-0">
+                    {/* ウォーターフォールチャート */}
+                    <div className={`${isCompact ? '' : 'overflow-x-auto pb-4 -mx-4 px-4 sm:mx-0 sm:px-0'}`}>
+                        <div className={`${isCompact ? '' : 'min-w-[800px] lg:min-w-0'}`}>
                             {/* チャート本体 */}
-                            <div className="relative h-[320px] sm:h-[380px] flex items-end gap-1 sm:gap-2 px-2">
+                            <div className={`relative flex items-end gap-1 sm:gap-2 px-2 ${isCompact ? 'h-[280px]' : 'h-[320px] sm:h-[380px]'}`}>
                                 {/* Y軸グリッドライン */}
                                 <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
                                     {[0, 25, 50, 75, 100].map((percent) => (
@@ -327,10 +357,16 @@ export const VisualIncomeStatement: React.FC<VisualIncomeStatementProps> = ({
                                 </div>
 
                                 {/* バー */}
-                                <div className="relative flex-1 flex items-end justify-around gap-1 sm:gap-2 pl-10 h-full">
+                                <div className={`relative flex-1 flex items-end gap-1 sm:gap-2 pl-10 h-full ${isCompact ? 'justify-center' : 'justify-around'}`}>
                                     {filteredData.map((item, index) => {
-                                        const barHeight = (item.height / maxValue) * 100;
-                                        const bottomPosition = (item.startY / maxValue) * 100;
+                                        let effectiveStartY = item.startY;
+                                        let effectiveHeight = item.height;
+                                        if ((item.type === 'subtotal' || item.type === 'final') && item.value < 0) {
+                                            effectiveStartY = item.value;
+                                            effectiveHeight = Math.abs(item.value);
+                                        }
+                                        const barHeight = (effectiveHeight / range) * 100;
+                                        const bottomPosition = ((effectiveStartY - minY) / range) * 100;
                                         const isNegative = item.type === 'decrease';
                                         const isPositive = item.type === 'increase';
                                         const isTotal = item.type === 'subtotal' || item.type === 'final' || item.type === 'start';
@@ -340,14 +376,14 @@ export const VisualIncomeStatement: React.FC<VisualIncomeStatementProps> = ({
                                                 <Tooltip>
                                                     <TooltipTrigger asChild>
                                                         <div
-                                                            className="relative flex-1 max-w-[100px] flex flex-col items-center group cursor-pointer"
+                                                            className={`relative flex flex-col items-center group cursor-pointer ${isCompact ? 'flex-none w-[8%]' : 'flex-1 max-w-[100px]'}`}
                                                             style={{ height: '100%' }}
                                                         >
                                                             {/* バー */}
                                                             <div
                                                                 className="absolute w-full flex flex-col items-center"
                                                                 style={{
-                                                                    bottom: `${Math.max(0, bottomPosition)}%`,
+                                                                    bottom: `${bottomPosition}%`,
                                                                     height: `${Math.min(100, Math.max(barHeight, 2))}%`,
                                                                     transition: animated ? 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
                                                                     transitionDelay: animated ? `${index * 80}ms` : '0ms',
@@ -412,14 +448,16 @@ export const VisualIncomeStatement: React.FC<VisualIncomeStatementProps> = ({
                                                             </div>
 
                                                             {/* ラベル（下部） */}
-                                                            <div className="absolute -bottom-16 sm:-bottom-14 left-1/2 -translate-x-1/2 w-full">
+                                                            <div className={`absolute left-1/2 -translate-x-1/2 w-full ${isCompact ? '-bottom-12' : '-bottom-16 sm:-bottom-14'}`}>
                                                                 <div className="text-center">
-                                                                    <div className={`text-[9px] sm:text-xs font-bold leading-tight ${item.color}`}>
+                                                                    <div className={`font-bold leading-tight ${item.color} ${isCompact ? 'text-[10px]' : 'text-[9px] sm:text-xs'}`}>
                                                                         {item.shortLabel}
                                                                     </div>
-                                                                    <div className="text-[8px] sm:text-[10px] text-slate-500 mt-0.5">
-                                                                        {calcPercentage(Math.abs(item.value))}%
-                                                                    </div>
+                                                                    {!isCompact && (
+                                                                        <div className="text-[8px] sm:text-[10px] text-slate-500 mt-0.5">
+                                                                            {calcPercentage(Math.abs(item.value))}%
+                                                                        </div>
+                                                                    )}
                                                                 </div>
                                                             </div>
                                                         </div>
