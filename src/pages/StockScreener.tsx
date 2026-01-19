@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, TrendingUp, BarChart2, Activity, Globe, Zap, RefreshCw, X, ChevronDown, ChevronUp, List, FileText, LineChart, Building } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend, LineChart as RechartsLine, Line } from "recharts";
+import { TradingViewWidgetIframe } from "@/components/common/TradingViewWidgetIframe";
+import { StockAnalysisSection } from "@/components/financial/StockAnalysisSection";
 
 // TradingViewウィジェットのタイプ定義
 type ScreenerType = "japan" | "crypto" | "forex" | "us";
@@ -15,47 +17,12 @@ interface WidgetConfig {
     description: string;
 }
 
-// 汎用TradingView Iframeウィジェットコンポーネント
-const TradingViewWidgetIframe = ({ scriptSrc, config, title, height = "100%" }: { scriptSrc: string, config: any, title: string, height?: string | number }) => {
-    const iframeRef = useRef<HTMLIFrameElement>(null);
-
-    const handleLoad = () => {
-        const sendMessage = () => {
-            if (iframeRef.current?.contentWindow) {
-                iframeRef.current.contentWindow.postMessage({
-                    type: 'INIT_WIDGET',
-                    scriptSrc,
-                    config
-                }, '*');
-            }
-        };
-
-        // 即時送信
-        sendMessage();
-
-        // 遅延送信（Iframeのロード待ち対策）
-        setTimeout(sendMessage, 500);
-        setTimeout(sendMessage, 1500);
-        setTimeout(sendMessage, 3000);
-    };
-
-    return (
-        <iframe
-            ref={iframeRef}
-            src="/tradingview-widget.html"
-            title={title}
-            style={{ width: "100%", height: height, border: "none", display: "block" }}
-            onLoad={handleLoad}
-        />
-    );
-};
-
 const StockScreener = () => {
     const navigate = useNavigate();
     const [activeScreener, setActiveScreener] = useState<ScreenerType>("japan");
     const [selectedChart, setSelectedChart] = useState<string | null>("FOREXCOM:SPXUSD");
     const [showList, setShowList] = useState(false);
-    const [financialTab, setFinancialTab] = useState<"financials" | "chart" | "profile">("profile");
+    const [financialTab, setFinancialTab] = useState<"overview" | "chart">("overview");
     const chartContainerRef = useRef<HTMLDivElement>(null);
 
     // サンプル財務データ（各銘柄用）- 2023年〜2026年1月最新
@@ -497,7 +464,7 @@ const StockScreener = () => {
 
             <div className="container mx-auto px-4 py-8">
                 {/* ヘッダー */}
-                <div className="mb-6">
+                <div className="mb-0">
                     <Button
                         variant="ghost"
                         onClick={() => navigate(-1)}
@@ -508,7 +475,7 @@ const StockScreener = () => {
                     </Button>
                 </div>
 
-                <div className="mb-8 text-center">
+                <div className="mb-4 text-center">
                     <h1 className="text-xl md:text-3xl font-bold text-slate-800 mb-2 flex items-center justify-center gap-2 md:gap-3">
                         <Activity className="w-5 h-5 md:w-8 md:h-8 text-blue-600" />
                         リアルタイム銘柄スクリーナー
@@ -519,13 +486,13 @@ const StockScreener = () => {
                 </div>
 
                 {/* スクリーナー選択タブ */}
-                <div className="flex justify-center gap-1 md:gap-3 mb-8">
+                <div className="flex justify-center gap-1 md:gap-3 mb-4">
                     {(Object.entries(screenerConfigs) as [ScreenerType, WidgetConfig][]).map(([key, config]) => (
                         <Button
                             key={key}
                             variant={activeScreener === key ? "default" : "outline"}
                             onClick={() => setActiveScreener(key)}
-                            className={`flex items-center gap-1 md:gap-2 px-2 md:px-6 py-1 md:py-2 text-xs md:text-sm transition-all ${activeScreener === key
+                            className={`flex items-center gap-1 md:gap-2 px-2 md:px-6 py-4 text-xs md:text-sm transition-all ${activeScreener === key
                                 ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg scale-105"
                                 : "hover:bg-blue-50"
                                 }`}
@@ -595,76 +562,16 @@ const StockScreener = () => {
                                         </div>
                                     </div>
 
-                                    {/* インラインチャート表示 */}
-                                    {selectedChart && (
-                                        <div className="border-t">
-                                            <div className="bg-white p-3 flex items-center justify-between border-b">
-                                                <h4 className="font-bold text-slate-800 flex items-center gap-2">
-                                                    <TrendingUp className="w-5 h-5 text-blue-600" />
-                                                    {selectedChart}
-                                                </h4>
-                                                <Button
-                                                    variant="ghost"
-                                                    size="sm"
-                                                    onClick={() => setSelectedChart(null)}
-                                                    className="text-slate-500 hover:text-slate-700"
-                                                >
-                                                    <X className="w-4 h-4" />
-                                                    閉じる
-                                                </Button>
-                                            </div>
-                                            {/* チャート */}
-                                            <div style={{ height: "800px" }}>
-                                                <TradingViewWidgetIframe
-                                                    key={`chart-${selectedChart}`}
-                                                    title="Advanced Chart"
-                                                    scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"
-                                                    config={{
-                                                        autosize: true,
-                                                        symbol: selectedChart,
-                                                        interval: "D",
-                                                        timezone: "Asia/Tokyo",
-                                                        theme: "light",
-                                                        style: "1",
-                                                        locale: "ja",
-                                                        enable_publishing: false,
-                                                        allow_symbol_change: true,
-                                                        calendar: false,
-                                                        hide_top_toolbar: false,
-                                                        hide_legend: false,
-                                                        hide_side_toolbar: false,
-                                                        save_image: true,
-                                                        save_chart_properties_to_local_storage: true,
-                                                        studies: ["RSI@tv-basicstudies", "MASimple@tv-basicstudies"],
-                                                        withdateranges: true,
-                                                        details: true,
-                                                        hotlist: false,
-                                                        width: "100%",
-                                                        height: "100%"
-                                                    }}
-                                                />
-                                            </div>
-                                            {/* テクニカル分析（買い/売りシグナル） */}
-                                            <div className="border-t" style={{ height: "250px" }}>
-                                                <TradingViewWidgetIframe
-                                                    key={`ta-${selectedChart}`}
-                                                    title="Technical Analysis"
-                                                    scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js"
-                                                    config={{
-                                                        interval: "1D",
-                                                        width: "100%",
-                                                        height: "100%",
-                                                        isTransparent: false,
-                                                        symbol: selectedChart,
-                                                        showIntervalTabs: true,
-                                                        displayMode: "single",
-                                                        locale: "ja",
-                                                        colorTheme: "light"
-                                                    }}
-                                                />
-                                            </div>
-                                        </div>
-                                    )}
+
+
+                                    {/* 銘柄分析・財務データセクション（統合） */}
+                                    <StockAnalysisSection
+                                        symbol={selectedChart}
+                                        activeScreener={activeScreener}
+                                        financialTab={financialTab}
+                                        setFinancialTab={setFinancialTab}
+                                        financialDataMap={financialDataMap}
+                                    />
 
                                     {/* 一覧を見る - アコーディオン */}
                                     <div className="border-t">
@@ -790,75 +697,16 @@ const StockScreener = () => {
                                         </div>
                                     </div>
 
-                                    {/* インラインチャート表示 - 米国株 */}
-                                    {selectedChart && selectedChart.includes("NASDAQ") || selectedChart?.includes("NYSE") ? (
-                                        <div className="border-t">
-                                            <div className="bg-white p-3 flex items-center justify-between border-b">
-                                                <h4 className="font-bold text-slate-800 flex items-center gap-2">
-                                                    <TrendingUp className="w-5 h-5 text-green-600" />
-                                                    {selectedChart}
-                                                </h4>
-                                                <Button
-                                                    variant="ghost"
-                                                    size="sm"
-                                                    onClick={() => setSelectedChart(null)}
-                                                    className="text-slate-500 hover:text-slate-700"
-                                                >
-                                                    <X className="w-4 h-4" />
-                                                    閉じる
-                                                </Button>
-                                            </div>
-                                            {/* チャート */}
-                                            <div style={{ height: "600px" }}>
-                                                <TradingViewWidgetIframe
-                                                    key={`chart-us-${selectedChart}`}
-                                                    title="Advanced Chart"
-                                                    scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"
-                                                    config={{
-                                                        autosize: true,
-                                                        symbol: selectedChart,
-                                                        interval: "D",
-                                                        timezone: "America/New_York",
-                                                        theme: "light",
-                                                        style: "1",
-                                                        locale: "ja",
-                                                        enable_publishing: false,
-                                                        allow_symbol_change: true,
-                                                        calendar: false,
-                                                        hide_top_toolbar: false,
-                                                        hide_legend: false,
-                                                        hide_side_toolbar: false,
-                                                        save_image: true,
-                                                        studies: ["RSI@tv-basicstudies", "MASimple@tv-basicstudies"],
-                                                        withdateranges: true,
-                                                        details: true,
-                                                        hotlist: false,
-                                                        width: "100%",
-                                                        height: "100%"
-                                                    }}
-                                                />
-                                            </div>
-                                            {/* テクニカル分析 */}
-                                            <div className="border-t" style={{ height: "250px" }}>
-                                                <TradingViewWidgetIframe
-                                                    key={`ta-us-${selectedChart}`}
-                                                    title="Technical Analysis"
-                                                    scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js"
-                                                    config={{
-                                                        interval: "1D",
-                                                        width: "100%",
-                                                        height: "100%",
-                                                        isTransparent: false,
-                                                        symbol: selectedChart,
-                                                        showIntervalTabs: true,
-                                                        displayMode: "single",
-                                                        locale: "ja",
-                                                        colorTheme: "light"
-                                                    }}
-                                                />
-                                            </div>
-                                        </div>
-                                    ) : null}
+
+
+                                    {/* 銘柄分析・財務データセクション（統合） */}
+                                    <StockAnalysisSection
+                                        symbol={selectedChart}
+                                        activeScreener={activeScreener}
+                                        financialTab={financialTab}
+                                        setFinancialTab={setFinancialTab}
+                                        financialDataMap={financialDataMap}
+                                    />
 
                                     {/* 一覧 */}
                                     <div className="border-t" style={{ height: "500px" }}>
@@ -1001,441 +849,6 @@ const StockScreener = () => {
                     </CardContent>
                 </Card>
 
-                {/* 決算書セクション */}
-                <Card className="border-2 border-amber-200 shadow-lg">
-                    <CardHeader className="bg-gradient-to-r from-amber-500 to-orange-500 text-white">
-                        <CardTitle className="flex items-center gap-3">
-                            <FileText className="w-5 h-5" />
-                            銘柄分析・財務データ
-                        </CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-0">
-                        {/* 銘柄選択 */}
-                        <div className="bg-slate-100 p-3 border-b">
-                            <div className="flex flex-wrap gap-2">
-                                {[
-                                    { symbol: "NASDAQ:AAPL", name: "Apple" },
-                                    { symbol: "NASDAQ:MSFT", name: "Microsoft" },
-                                    { symbol: "NASDAQ:GOOGL", name: "Google" },
-                                    { symbol: "NASDAQ:AMZN", name: "Amazon" },
-                                    { symbol: "NASDAQ:META", name: "Meta" },
-                                    { symbol: "NASDAQ:NVDA", name: "NVIDIA" },
-                                    { symbol: "NASDAQ:TSLA", name: "Tesla" },
-                                    { symbol: "NASDAQ:AMD", name: "AMD" }
-                                ].map(item => (
-                                    <Button
-                                        key={`fin-${item.symbol}`}
-                                        variant={selectedChart === item.symbol ? "default" : "outline"}
-                                        size="sm"
-                                        onClick={() => setSelectedChart(item.symbol)}
-                                        className={selectedChart === item.symbol
-                                            ? "bg-amber-500 text-white"
-                                            : "bg-white hover:bg-amber-50 border-amber-200 text-amber-700"}
-                                    >
-                                        {item.name}
-                                    </Button>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* タブナビゲーション - 株式のみ表示 */}
-                        {selectedChart && selectedChart.startsWith("NASDAQ:") && (
-                            <div className="border-b bg-white">
-                                <div className="flex">
-                                    <button
-                                        onClick={() => setFinancialTab("profile")}
-                                        className={`flex-1 px-4 py-3 text-sm font-medium flex items-center justify-center gap-2 transition-colors ${financialTab === "profile"
-                                            ? "bg-amber-100 text-amber-700 border-b-2 border-amber-500"
-                                            : "text-slate-600 hover:bg-slate-50"
-                                            }`}
-                                    >
-                                        <Building className="w-4 h-4" />
-                                        会社概要
-                                    </button>
-                                    <button
-                                        onClick={() => setFinancialTab("financials")}
-                                        className={`flex-1 px-4 py-3 text-sm font-medium flex items-center justify-center gap-2 transition-colors ${financialTab === "financials"
-                                            ? "bg-amber-100 text-amber-700 border-b-2 border-amber-500"
-                                            : "text-slate-600 hover:bg-slate-50"
-                                            }`}
-                                    >
-                                        <FileText className="w-4 h-4" />
-                                        決算書・財務データ
-                                    </button>
-                                    <button
-                                        onClick={() => setFinancialTab("chart")}
-                                        className={`flex-1 px-4 py-3 text-sm font-medium flex items-center justify-center gap-2 transition-colors ${financialTab === "chart"
-                                            ? "bg-amber-100 text-amber-700 border-b-2 border-amber-500"
-                                            : "text-slate-600 hover:bg-slate-50"
-                                            }`}
-                                    >
-                                        <LineChart className="w-4 h-4" />
-                                        チャート・グラフ
-                                    </button>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* タブコンテンツ - 株式のみ表示 */}
-                        {selectedChart && selectedChart.startsWith("NASDAQ:") ? (
-                            <div className="p-4">
-                                {/* 決算書・財務データ */}
-                                {financialTab === "financials" && (
-                                    <div className="space-y-8">
-                                        {/* 損益計算書図解 */}
-                                        {financialDataMap[selectedChart]?.incomeStatement && (
-                                            <VisualIncomeStatement
-                                                data={financialDataMap[selectedChart].incomeStatement as IncomeStatementData}
-                                                symbol={selectedChart.replace("NASDAQ:", "")}
-                                                period="直近12ヶ月 (TTM)"
-                                                currency="$"
-                                                unit="百万"
-                                                exchangeRate={155}
-                                            />
-                                        )}
-
-                                        {/* 損益計算書インフォグラフィック - Apple専用 */}
-                                        {selectedChart === "NASDAQ:AAPL" && (
-                                            <div className="mt-6 rounded-xl overflow-hidden shadow-lg">
-                                                <img
-                                                    src="/images/apple-pl-infographic.jpg"
-                                                    alt="Appleの「稼ぐ力」を解剖する：損益計算書(P/L)の仕組み"
-                                                    className="w-full h-auto"
-                                                />
-                                            </div>
-                                        )}
-
-                                        <div style={{ height: "900px" }}>
-                                            <TradingViewWidgetIframe
-                                                key={`fin-${selectedChart}`}
-                                                title="Financials"
-                                                scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-financials.js"
-                                                config={{
-                                                    isTransparent: false,
-                                                    largeChartUrl: "",
-                                                    displayMode: "regular",
-                                                    width: "100%",
-                                                    height: "100%",
-                                                    colorTheme: "light",
-                                                    symbol: selectedChart,
-                                                    locale: "ja"
-                                                }}
-                                            />
-                                        </div>
-                                    </div>
-                                )}
-
-                                {/* チャート・グラフ */}
-                                {financialTab === "chart" && (
-                                    <div>
-                                        {/* TradingView詳細リンク */}
-                                        <div className="mb-4 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
-                                            <div className="flex items-center justify-between flex-wrap gap-4">
-                                                <div>
-                                                    <h4 className="font-bold text-blue-800 flex items-center gap-2">
-                                                        <TrendingUp className="w-5 h-5" />
-                                                        TradingViewで詳細な財務分析を見る
-                                                    </h4>
-                                                    <p className="text-sm text-slate-600 mt-1">
-                                                        評価、成長性、収益性、配当、財務健全性などの詳細グラフ
-                                                    </p>
-                                                </div>
-                                                <a
-                                                    href={`https://jp.tradingview.com/symbols/${selectedChart?.replace(":", "-")}/financials-overview/`}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
-                                                >
-                                                    <Globe className="w-4 h-4" />
-                                                    TradingViewで開く
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        {/* Mini Chart */}
-                                        <div className="mb-4" style={{ height: "400px" }}>
-                                            <TradingViewWidgetIframe
-                                                key={`mini-${selectedChart}`}
-                                                title="Mini Chart"
-                                                scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js"
-                                                config={{
-                                                    symbol: selectedChart,
-                                                    width: "100%",
-                                                    height: "100%",
-                                                    locale: "ja",
-                                                    dateRange: "12M",
-                                                    colorTheme: "light",
-                                                    isTransparent: false,
-                                                    autosize: true,
-                                                    largeChartUrl: ""
-                                                }}
-                                            />
-                                        </div>
-                                        {/* Advanced Chart */}
-                                        <div style={{ height: "500px" }}>
-                                            <TradingViewWidgetIframe
-                                                key={`chart-fin-${selectedChart}`}
-                                                title="Advanced Chart"
-                                                scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"
-                                                config={{
-                                                    autosize: true,
-                                                    symbol: selectedChart,
-                                                    interval: "W",
-                                                    timezone: "America/New_York",
-                                                    theme: "light",
-                                                    style: "1",
-                                                    locale: "ja",
-                                                    enable_publishing: false,
-                                                    allow_symbol_change: false,
-                                                    calendar: false,
-                                                    hide_top_toolbar: false,
-                                                    hide_legend: false,
-                                                    hide_side_toolbar: true,
-                                                    save_image: true,
-                                                    studies: ["Volume@tv-basicstudies", "MASimple@tv-basicstudies"],
-                                                    withdateranges: true,
-                                                    width: "100%",
-                                                    height: "100%"
-                                                }}
-                                            />
-                                        </div>
-
-                                        {/* 財務データチャート（recharts） */}
-                                        {financialDataMap[selectedChart || ""] && (
-                                            <div className="mt-6 space-y-6">
-                                                <h3 className="font-bold text-lg text-slate-800 border-b pb-2">
-                                                    📊 財務データ概要
-                                                </h3>
-
-                                                {/* 売上高推移 */}
-                                                <div className="bg-white p-4 rounded-lg border border-slate-200">
-                                                    <h4 className="font-semibold text-slate-700 mb-3">売上高推移（十億ドル）</h4>
-                                                    <ResponsiveContainer width="100%" height={250}>
-                                                        <BarChart data={getFinancialData().revenue}>
-                                                            <CartesianGrid strokeDasharray="3 3" />
-                                                            <XAxis dataKey="quarter" />
-                                                            <YAxis />
-                                                            <Tooltip formatter={(value) => [`$${value}B`, "売上高"]} />
-                                                            <Bar dataKey="value" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-                                                        </BarChart>
-                                                    </ResponsiveContainer>
-                                                </div>
-
-                                                {/* 利益推移 */}
-                                                <div className="bg-white p-4 rounded-lg border border-slate-200">
-                                                    <h4 className="font-semibold text-slate-700 mb-3">利益推移（十億ドル）</h4>
-                                                    <ResponsiveContainer width="100%" height={250}>
-                                                        <RechartsLine data={getFinancialData().profit}>
-                                                            <CartesianGrid strokeDasharray="3 3" />
-                                                            <XAxis dataKey="quarter" />
-                                                            <YAxis />
-                                                            <Tooltip />
-                                                            <Legend />
-                                                            <Line type="monotone" dataKey="operating" stroke="#10b981" strokeWidth={2} name="営業利益" />
-                                                            <Line type="monotone" dataKey="net" stroke="#3b82f6" strokeWidth={2} name="純利益" />
-                                                        </RechartsLine>
-                                                    </ResponsiveContainer>
-                                                </div>
-
-                                                <div className="grid md:grid-cols-2 gap-6">
-                                                    {/* セグメント別売上 */}
-                                                    <div className="bg-white p-4 rounded-lg border border-slate-200">
-                                                        <h4 className="font-semibold text-slate-700 mb-3">セグメント別売上構成</h4>
-                                                        <ResponsiveContainer width="100%" height={250}>
-                                                            <PieChart>
-                                                                <Pie
-                                                                    data={getFinancialData().segments}
-                                                                    cx="50%"
-                                                                    cy="50%"
-                                                                    outerRadius={80}
-                                                                    dataKey="value"
-                                                                    label={({ name, value }) => `${name}: ${value}%`}
-                                                                >
-                                                                    {getFinancialData().segments.map((entry, index) => (
-                                                                        <Cell key={`cell-${index}`} fill={entry.color} />
-                                                                    ))}
-                                                                </Pie>
-                                                                <Tooltip formatter={(value) => [`${value}%`, "シェア"]} />
-                                                            </PieChart>
-                                                        </ResponsiveContainer>
-                                                    </div>
-
-                                                    {/* 主要指標 */}
-                                                    <div className="bg-white p-4 rounded-lg border border-slate-200">
-                                                        <h4 className="font-semibold text-slate-700 mb-3">主要指標</h4>
-                                                        <div className="grid grid-cols-2 gap-4">
-                                                            {getFinancialData().metrics.map((metric, idx) => (
-                                                                <div key={idx} className="bg-slate-50 p-3 rounded-lg text-center">
-                                                                    <div className="text-sm text-slate-500">{metric.name}</div>
-                                                                    <div className="text-xl font-bold text-slate-800">{metric.value}</div>
-                                                                </div>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-                                )}
-
-                                {/* 会社概要 */}
-                                {financialTab === "profile" && (
-                                    <div>
-                                        {/* Symbol Info */}
-                                        <div className="mb-4" style={{ height: "200px" }}>
-                                            <TradingViewWidgetIframe
-                                                key={`info-${selectedChart}`}
-                                                title="Symbol Info"
-                                                scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js"
-                                                config={{
-                                                    symbol: selectedChart,
-                                                    width: "100%",
-                                                    locale: "ja",
-                                                    colorTheme: "light",
-                                                    isTransparent: false
-                                                }}
-                                            />
-                                        </div>
-                                        {/* Symbol Profile */}
-                                        <div style={{ height: "400px" }}>
-                                            <TradingViewWidgetIframe
-                                                key={`profile-${selectedChart}`}
-                                                title="Symbol Profile"
-                                                scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js"
-                                                config={{
-                                                    symbol: selectedChart,
-                                                    width: "100%",
-                                                    height: "100%",
-                                                    colorTheme: "light",
-                                                    isTransparent: false,
-                                                    locale: "ja"
-                                                }}
-                                            />
-                                        </div>
-                                        {/* Apple分析画像 - Apple専用 */}
-                                        {selectedChart === "NASDAQ:AAPL" && (
-                                            <div className="mt-4">
-                                                <h4 className="font-bold text-slate-800 mb-3 flex items-center gap-2">
-                                                    <BarChart2 className="w-5 h-5 text-blue-600" />
-                                                    Apple (AAPL) 財務ハイライト
-                                                </h4>
-                                                <img
-                                                    src="/apple-analysis.jpg"
-                                                    alt="Apple (AAPL) 財務ハイライト：圧倒的な市場価値と収益効率"
-                                                    className="w-full rounded-lg shadow-lg border border-slate-200"
-                                                />
-                                            </div>
-                                        )}
-                                        {/* Microsoft分析画像 - Microsoft専用 */}
-                                        {selectedChart === "NASDAQ:MSFT" && (
-                                            <div className="mt-4">
-                                                <h4 className="font-bold text-slate-800 mb-3 flex items-center gap-2">
-                                                    <BarChart2 className="w-5 h-5 text-blue-600" />
-                                                    MSFT (マイクロソフト) ファンダメンタル分析
-                                                </h4>
-                                                <img
-                                                    src="/microsoft-analysis.jpg"
-                                                    alt="MSFT (マイクロソフト) ファンダメンタル分析：圧倒的な収益力と強固な財務基盤"
-                                                    className="w-full rounded-lg shadow-lg border border-slate-200"
-                                                />
-                                            </div>
-                                        )}
-                                        {/* Amazon分析画像 - Amazon専用 */}
-                                        {selectedChart === "NASDAQ:AMZN" && (
-                                            <div className="mt-4">
-                                                <h4 className="font-bold text-slate-800 mb-3 flex items-center gap-2">
-                                                    <BarChart2 className="w-5 h-5 text-orange-600" />
-                                                    AMZN (アマゾン) 財務パフォーマンスと市場評価の分析
-                                                </h4>
-                                                <img
-                                                    src="/amazon-analysis.jpg"
-                                                    alt="AMZN (アマゾン) 財務パフォーマンスと市場評価の分析"
-                                                    className="w-full rounded-lg shadow-lg border border-slate-200"
-                                                />
-                                            </div>
-                                        )}
-                                        {/* Meta分析画像 - Meta専用 */}
-                                        {selectedChart === "NASDAQ:META" && (
-                                            <div className="mt-4">
-                                                <h4 className="font-bold text-slate-800 mb-3 flex items-center gap-2">
-                                                    <BarChart2 className="w-5 h-5 text-blue-600" />
-                                                    Meta (META) ファンダメンタルズ分析
-                                                </h4>
-                                                <img
-                                                    src="/meta-analysis.jpg"
-                                                    alt="Meta (META) ファンダメンタルズ分析：圧倒的な収益性と財務健全性"
-                                                    className="w-full rounded-lg shadow-lg border border-slate-200"
-                                                />
-                                            </div>
-                                        )}
-                                        {/* Google分析画像 - Google専用 */}
-                                        {selectedChart === "NASDAQ:GOOGL" && (
-                                            <div className="mt-4">
-                                                <h4 className="font-bold text-slate-800 mb-3 flex items-center gap-2">
-                                                    <BarChart2 className="w-5 h-5 text-blue-600" />
-                                                    アルファベット (GOOGL) ファンダメンタル分析
-                                                </h4>
-                                                <img
-                                                    src="/google-analysis.jpg"
-                                                    alt="Google (GOOGL) ファンダメンタル分析：圧倒的な収益力と財務の健全性"
-                                                    className="w-full rounded-lg shadow-lg border border-slate-200"
-                                                />
-                                            </div>
-                                        )}
-                                        {/* NVIDIA分析画像 - NVIDIA専用 */}
-                                        {selectedChart === "NASDAQ:NVDA" && (
-                                            <div className="mt-4">
-                                                <h4 className="font-bold text-slate-800 mb-3 flex items-center gap-2">
-                                                    <BarChart2 className="w-5 h-5 text-green-600" />
-                                                    NVIDIA (NVDA) ファンダメンタル分析：AI時代の財務的覇権
-                                                </h4>
-                                                <img
-                                                    src="/nvidia-analysis.png"
-                                                    alt="NVIDIA (NVDA) ファンダメンタル分析：AI時代の財務的覇権"
-                                                    className="w-full rounded-lg shadow-lg border border-slate-200"
-                                                />
-                                            </div>
-                                        )}
-                                        {/* Tesla分析画像 - Tesla専用 */}
-                                        {selectedChart === "NASDAQ:TSLA" && (
-                                            <div className="mt-4">
-                                                <h4 className="font-bold text-slate-800 mb-3 flex items-center gap-2">
-                                                    <BarChart2 className="w-5 h-5 text-red-600" />
-                                                    TSLA (テスラ) ファンダメンタル分析
-                                                </h4>
-                                                <img
-                                                    src="/tesla-analysis.png"
-                                                    alt="TSLA (テスラ) ファンダメンタル分析：市場評価と財務健全性の現状"
-                                                    className="w-full rounded-lg shadow-lg border border-slate-200"
-                                                />
-                                            </div>
-                                        )}
-                                        {/* AMD分析画像 - AMD専用 */}
-                                        {selectedChart === "NASDAQ:AMD" && (
-                                            <div className="mt-4">
-                                                <h4 className="font-bold text-slate-800 mb-3 flex items-center gap-2">
-                                                    <BarChart2 className="w-5 h-5 text-red-600" />
-                                                    AMD ファンダメンタル分析
-                                                </h4>
-                                                <img
-                                                    src="/amd-analysis.png"
-                                                    alt="AMD ファンダメンタル分析：2025年最新財務サマリー"
-                                                    className="w-full rounded-lg shadow-lg border border-slate-200"
-                                                />
-                                            </div>
-                                        )}
-                                    </div>
-                                )}
-                            </div>
-                        ) : null}
-                    </CardContent>
-                </Card>
-
-                {/* 注意書き */}
-                <div className="mt-8 text-center text-sm text-slate-500">
-                    <p>※ データはTradingViewより提供されています</p>
-                    <p>※ 投資判断は自己責任でお願いします</p>
-                </div>
             </div>
         </div>
     );

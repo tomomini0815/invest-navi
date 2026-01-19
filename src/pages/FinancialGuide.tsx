@@ -322,8 +322,8 @@ const FinancialGuide = () => {
                             <Sparkles className="w-4 h-4 mr-2 inline" />
                             実践編
                         </Badge>
-                        <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
-                            図解でわかる「良い会社・リスクが高い会社」のパターン
+                        <h2 className="text-lg sm:text-2xl md:text-3xl font-bold text-slate-900 mb-4 whitespace-nowrap">
+                            「良い会社・リスクが高い会社」のパターン
                         </h2>
                         <p className="text-slate-600 max-w-2xl mx-auto">
                             同じ「赤字」でも、将来性のある赤字と危険な赤字があります。
@@ -461,9 +461,9 @@ const FinancialGuide = () => {
                                             grossProfit: 800,
                                             sellingGeneralAdmin: 850,
                                             operatingIncome: -50,
-                                            nonOperatingIncome: 0,
-                                            ordinaryIncome: -50,
-                                            specialIncome: 0,
+                                            nonOperatingIncome: 10,
+                                            ordinaryIncome: -40,
+                                            specialIncome: -10,
                                             preTaxIncome: -50,
                                             incomeTax: 0,
                                             netIncome: -50
