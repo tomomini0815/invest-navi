@@ -13,6 +13,7 @@ interface StockAnalysisSectionProps {
 }
 
 export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, setFinancialTab, financialDataMap }: StockAnalysisSectionProps) => {
+
     if (!symbol) return null;
 
     const getFinancialData = () => {
@@ -38,6 +39,27 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
         }
 
         return `TSE:${s}`;
+    };
+
+    // テクニカル分析用のシンボル変換（TSEデータが表示されないためADR/OTCを使用）
+    const getTechnicalSymbol = (s: string) => {
+        if (!/^[0-9]{4}$/.test(s)) return s;
+
+        const adrMap: Record<string, string> = {
+            "7203": "NYSE:TM",    // トヨタ
+            "6758": "NYSE:SONY",  // ソニーG
+            "9984": "OTC:SFTBY",  // ソフトバンクG
+            "7974": "OTC:NTDOY",  // 任天堂
+            "6861": "OTC:KYCCF",  // キーエンス
+            "9983": "OTC:FRCOY",  // ファストリ
+            "8306": "NYSE:MUFG",  // 三菱UFJ
+            "7267": "NYSE:HMC",   // ホンダ
+            "8035": "OTC:TOELF",  // 東京エレク
+            "9432": "OTC:NTTYY",  // NTT
+            "9433": "OTC:KDDIY",  // KDDI
+        };
+
+        return adrMap[s] || s; // マップになければそのまま（表示されない可能性あり）
     };
 
     return (
@@ -76,7 +98,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                     {financialTab === "chart" && (
                         <div>
                             {/* メインチャート (Daily) */}
-                            <div className="mb-6" style={{ height: "1000px" }}>
+                            <div className="mb-6" style={{ height: "850px" }}>
                                 <TradingViewWidgetIframe
                                     key={`main-chart-${symbol}`}
                                     title="Advanced Chart"
@@ -116,7 +138,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                             </div>
 
                             {/* テクニカル分析 */}
-                            <div className="mb-8 border-t pt-6" style={{ height: "220px" }}>
+                            <div className="mb-8 border-t pt-6" style={{ height: "250px" }}>
                                 <TradingViewWidgetIframe
                                     key={`ta-${symbol}`}
                                     title="Technical Analysis"
@@ -126,7 +148,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                                         width: "100%",
                                         height: "100%",
                                         isTransparent: false,
-                                        symbol: symbol,
+                                        symbol: getTechnicalSymbol(symbol),
                                         showIntervalTabs: true,
                                         displayMode: "single",
                                         locale: "ja",

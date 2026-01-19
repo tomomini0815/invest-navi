@@ -531,7 +531,7 @@ const StockScreener = () => {
                                                 { symbol: "NASDAQ:GOOGL", name: "Google" },
                                                 { symbol: "NASDAQ:META", name: "Meta" },
                                                 { symbol: "7203", name: "トヨタ" },
-                                                { symbol: "6758", name: "ソニーG" },
+                                                { symbol: "NYSE:SONY", name: "ソニーG" },
                                                 { symbol: "9984", name: "ソフトバンクG" },
                                                 { symbol: "7974", name: "任天堂" },
                                                 { symbol: "6861", name: "キーエンス" },
