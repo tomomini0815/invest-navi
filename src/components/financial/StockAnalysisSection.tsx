@@ -19,6 +19,27 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
         return financialDataMap[symbol] || financialDataMap["NASDAQ:AAPL"];
     };
 
+    // 日本株（4桁の数字）の場合はTSE:を付与してプロフィール等を表示
+    const getProfileSymbol = (s: string) => {
+        if (!/^[0-9]{4}$/.test(s)) return s;
+
+        // 特定銘柄の例外処理 (TSEで表示されない場合は米国市場のデータを使用)
+        // ソニーG -> NYSE:SONY
+        // キーエンス -> OTC:KYCCF
+        // ファストリ -> OTC:FRCOY
+        const exceptions: Record<string, string> = {
+            "6758": "NYSE:SONY",
+            "6861": "OTC:KYCCF",
+            "9983": "OTC:FRCOY"
+        };
+
+        if (s in exceptions) {
+            return exceptions[s];
+        }
+
+        return `TSE:${s}`;
+    };
+
     return (
         <Card className="border-2 border-blue-200 shadow-lg">
 
@@ -249,7 +270,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                                         title="Symbol Info"
                                         scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js"
                                         config={{
-                                            symbol: symbol,
+                                            symbol: getProfileSymbol(symbol),
                                             width: "100%",
                                             locale: "ja",
                                             colorTheme: "light",
@@ -264,7 +285,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                                         title="Symbol Profile"
                                         scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js"
                                         config={{
-                                            symbol: symbol,
+                                            symbol: getProfileSymbol(symbol),
                                             width: "100%",
                                             height: "100%",
                                             colorTheme: "light",
@@ -430,7 +451,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                                             width: "100%",
                                             height: "100%",
                                             colorTheme: "light",
-                                            symbol: symbol,
+                                            symbol: getProfileSymbol(symbol),
                                             locale: "ja"
                                         }}
                                     />
