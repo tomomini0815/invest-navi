@@ -54,10 +54,19 @@ export const VisualIncomeStatement: React.FC<VisualIncomeStatementProps> = ({
     className = ""
 }) => {
     const [animated, setAnimated] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         const timer = setTimeout(() => setAnimated(true), 100);
         return () => clearTimeout(timer);
+    }, []);
+
+    // モバイル画面検出（768px未満で縦表示）
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
     // 数値フォーマット関数
@@ -339,166 +348,264 @@ export const VisualIncomeStatement: React.FC<VisualIncomeStatementProps> = ({
                         </div>
                     )}
 
+
                     {/* ウォーターフォールチャート */}
-                    <div className={`${isCompact ? '' : 'overflow-x-auto pb-4 -mx-4 px-4 sm:mx-0 sm:px-0'}`}>
-                        <div className={`${isCompact ? '' : 'min-w-[800px] lg:min-w-0'}`}>
-                            {/* チャート本体 */}
-                            <div className={`relative flex items-end gap-1 sm:gap-2 px-2 ${isCompact ? 'h-[280px]' : 'h-[320px] sm:h-[380px]'}`}>
-                                {/* Y軸グリッドライン */}
-                                <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
-                                    {[0, 25, 50, 75, 100].map((percent) => (
-                                        <div key={percent} className="flex items-center gap-2 w-full">
-                                            <span className="text-[10px] text-slate-400 w-8 text-right">
-                                                {percent}%
-                                            </span>
-                                            <div className="flex-1 border-t border-dashed border-slate-200" />
-                                        </div>
-                                    ))}
-                                </div>
+                    {isMobile && !isCompact ? (
+                        /* モバイル用：縦表示（横棒グラフ） */
+                        <div className="space-y-2 px-2">
+                            {filteredData.map((item, index) => {
+                                const barWidth = (Math.abs(item.value) / maxValue) * 100;
+                                const isNegative = item.type === 'decrease';
+                                const isPositive = item.type === 'increase';
 
-                                {/* バー */}
-                                <div className={`relative flex-1 flex items-end gap-1 sm:gap-2 pl-10 h-full ${isCompact ? 'justify-center' : 'justify-around'}`}>
-                                    {filteredData.map((item, index) => {
-                                        let effectiveStartY = item.startY;
-                                        let effectiveHeight = item.height;
-                                        if ((item.type === 'subtotal' || item.type === 'final') && item.value < 0) {
-                                            effectiveStartY = item.value;
-                                            effectiveHeight = Math.abs(item.value);
-                                        }
-                                        const barHeight = (effectiveHeight / range) * 100;
-                                        const bottomPosition = ((effectiveStartY - minY) / range) * 100;
-                                        const isNegative = item.type === 'decrease';
-                                        const isPositive = item.type === 'increase';
-                                        const isTotal = item.type === 'subtotal' || item.type === 'final' || item.type === 'start';
-
-                                        return (
-                                            <TooltipProvider key={item.id}>
-                                                <Tooltip>
-                                                    <TooltipTrigger asChild>
-                                                        <div
-                                                            className={`relative flex flex-col items-center group cursor-pointer ${isCompact ? 'flex-none w-[8%]' : 'flex-1 max-w-[100px]'}`}
-                                                            style={{ height: '100%' }}
-                                                        >
-                                                            {/* バー */}
-                                                            <div
-                                                                className="absolute w-full flex flex-col items-center"
-                                                                style={{
-                                                                    bottom: `${bottomPosition}%`,
-                                                                    height: `${Math.min(100, Math.max(barHeight, 2))}%`,
-                                                                    transition: animated ? 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
-                                                                    transitionDelay: animated ? `${index * 80}ms` : '0ms',
-                                                                    opacity: animated ? 1 : 0,
-                                                                    transform: animated ? 'translateY(0)' : 'translateY(20px)'
-                                                                }}
-                                                            >
-                                                                {/* 接続線（費用・収益項目のみ） */}
-                                                                {(isNegative || isPositive) && index > 0 && (
-                                                                    <div
-                                                                        className="absolute -top-0 left-1/2 w-px border-l-2 border-dashed border-slate-300 -translate-x-1/2"
-                                                                        style={{
-                                                                            height: '8px'
-                                                                        }}
-                                                                    />
-                                                                )}
-
-                                                                {/* バー本体 */}
-                                                                <div
-                                                                    className={`
-                                                                        w-full rounded-lg shadow-lg
-                                                                        ${item.bgColor}
-                                                                        ${item.type === 'final' ? 'ring-2 ring-amber-300 ring-offset-2' : ''}
-                                                                        transition-all duration-300
-                                                                        group-hover:shadow-xl group-hover:scale-105 group-hover:brightness-110
-                                                                    `}
-                                                                    style={{
-                                                                        height: '100%',
-                                                                        minHeight: '24px'
-                                                                    }}
-                                                                >
-                                                                    {/* バー内の金額表示 */}
-                                                                    {barHeight > 8 && (
-                                                                        <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
-                                                                            <span className="text-white text-[9px] sm:text-xs font-bold drop-shadow-md whitespace-nowrap px-1">
-                                                                                {isNegative ? '−' : ''}{formatValue(Math.abs(item.value))}
-                                                                            </span>
-                                                                            {exchangeRate && (
-                                                                                <span className="text-yellow-200 text-[7px] sm:text-[9px] font-medium drop-shadow-md whitespace-nowrap">
-                                                                                    ({formatJapaneseYen(item.value)})
-                                                                                </span>
-                                                                            )}
-                                                                        </div>
-                                                                    )}
-                                                                </div>
-
-                                                                {/* 増減アイコン */}
-                                                                {isNegative && (
-                                                                    <div className="absolute -top-5 left-1/2 -translate-x-1/2">
-                                                                        <div className="bg-red-100 rounded-full p-0.5">
-                                                                            <ArrowDown className="w-3 h-3 text-red-500" />
-                                                                        </div>
-                                                                    </div>
-                                                                )}
-                                                                {isPositive && item.value > 0 && (
-                                                                    <div className="absolute -top-5 left-1/2 -translate-x-1/2">
-                                                                        <div className="bg-teal-100 rounded-full p-0.5 rotate-180">
-                                                                            <ArrowDown className="w-3 h-3 text-teal-500" />
-                                                                        </div>
-                                                                    </div>
-                                                                )}
-                                                            </div>
-
-                                                            {/* ラベル（下部） */}
-                                                            <div className={`absolute left-1/2 -translate-x-1/2 w-full ${isCompact ? '-bottom-12' : '-bottom-16 sm:-bottom-14'}`}>
-                                                                <div className="text-center">
-                                                                    <div className={`font-bold leading-tight ${item.color} ${isCompact ? 'text-[10px]' : 'text-[9px] sm:text-xs'}`}>
-                                                                        {item.shortLabel}
-                                                                    </div>
-                                                                    {!isCompact && (
-                                                                        <div className="text-[8px] sm:text-[10px] text-slate-500 mt-0.5">
-                                                                            {calcPercentage(Math.abs(item.value))}%
-                                                                        </div>
-                                                                    )}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </TooltipTrigger>
-                                                    <TooltipContent
-                                                        side="bottom"
-                                                        sideOffset={8}
-                                                        className="max-w-xs bg-slate-900 text-white border-0 shadow-xl z-[100]"
-                                                        avoidCollisions={true}
-                                                        collisionPadding={16}
-                                                    >
-                                                        <div className="p-2">
-                                                            <div className="font-bold text-sm mb-1 flex items-center gap-2">
-                                                                {item.type === 'decrease' && <TrendingDown className="w-4 h-4 text-red-400" />}
-                                                                {item.type === 'increase' && <TrendingUp className="w-4 h-4 text-teal-400" />}
-                                                                {item.label}
-                                                            </div>
-                                                            <div className="text-lg font-mono font-bold text-amber-300">
-                                                                {item.value < 0 ? '−' : ''}{formatValue(Math.abs(item.value))}
-                                                            </div>
-                                                            {exchangeRate && (
-                                                                <div className="text-xs text-slate-300 mb-2">
-                                                                    ({formatJapaneseYen(item.value)})
+                                return (
+                                    <TooltipProvider key={item.id}>
+                                        <Tooltip>
+                                            <TooltipTrigger asChild>
+                                                <div
+                                                    className="group cursor-pointer"
+                                                    style={{
+                                                        opacity: animated ? 1 : 0,
+                                                        transform: animated ? 'translateX(0)' : 'translateX(-20px)',
+                                                        transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                                                        transitionDelay: `${index * 60}ms`
+                                                    }}
+                                                >
+                                                    {/* ラベル行 */}
+                                                    <div className="flex items-center justify-between mb-1">
+                                                        <div className="flex items-center gap-2">
+                                                            {isNegative && (
+                                                                <div className="bg-red-100 rounded-full p-0.5">
+                                                                    <ArrowDown className="w-3 h-3 text-red-500" />
                                                                 </div>
                                                             )}
-                                                            <p className="text-xs text-slate-300 leading-relaxed border-t border-slate-700 pt-2 mt-1">
-                                                                {item.description}
-                                                            </p>
+                                                            {isPositive && item.value > 0 && (
+                                                                <div className="bg-teal-100 rounded-full p-0.5 rotate-180">
+                                                                    <ArrowDown className="w-3 h-3 text-teal-500" />
+                                                                </div>
+                                                            )}
+                                                            <span className={`text-xs font-bold ${item.color}`}>
+                                                                {item.shortLabel}
+                                                            </span>
                                                         </div>
-                                                    </TooltipContent>
-                                                </Tooltip>
-                                            </TooltipProvider>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-
-                            {/* ラベル用スペース */}
-                            <div className="h-16 sm:h-14" />
+                                                        <div className="text-right flex items-baseline justify-end gap-1 flex-wrap">
+                                                            <span className={`text-xs font-bold ${item.color}`}>
+                                                                {isNegative ? '−' : ''}{formatValue(Math.abs(item.value))}
+                                                            </span>
+                                                            {exchangeRate && (
+                                                                <span className="text-[10px] text-amber-600 font-medium">
+                                                                    ({formatJapaneseYen(item.value)})
+                                                                </span>
+                                                            )}
+                                                            <span className="text-[10px] text-slate-400">
+                                                                {calcPercentage(Math.abs(item.value))}%
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    {/* バー */}
+                                                    <div className="h-6 bg-slate-100 rounded-lg overflow-hidden">
+                                                        <div
+                                                            className={`h-full rounded-lg shadow-sm ${item.bgColor} ${item.type === 'final' ? 'ring-2 ring-amber-300' : ''} group-hover:brightness-110 transition-all duration-300`}
+                                                            style={{
+                                                                width: `${Math.max(barWidth, 3)}%`,
+                                                                transition: animated ? 'width 0.8s cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
+                                                                transitionDelay: `${index * 60}ms`
+                                                            }}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </TooltipTrigger>
+                                            <TooltipContent
+                                                side="bottom"
+                                                sideOffset={8}
+                                                className="max-w-xs bg-slate-900 text-white border-0 shadow-xl z-[100]"
+                                            >
+                                                <div className="p-2">
+                                                    <div className="font-bold text-sm mb-1 flex items-center gap-2">
+                                                        {item.type === 'decrease' && <TrendingDown className="w-4 h-4 text-red-400" />}
+                                                        {item.type === 'increase' && <TrendingUp className="w-4 h-4 text-teal-400" />}
+                                                        {item.label}
+                                                    </div>
+                                                    <div className="text-lg font-mono font-bold text-amber-300">
+                                                        {item.value < 0 ? '−' : ''}{formatValue(Math.abs(item.value))}
+                                                    </div>
+                                                    {exchangeRate && (
+                                                        <div className="text-xs text-slate-300 mb-2">
+                                                            ({formatJapaneseYen(item.value)})
+                                                        </div>
+                                                    )}
+                                                    <p className="text-xs text-slate-300 leading-relaxed border-t border-slate-700 pt-2 mt-1">
+                                                        {item.description}
+                                                    </p>
+                                                </div>
+                                            </TooltipContent>
+                                        </Tooltip>
+                                    </TooltipProvider>
+                                );
+                            })}
                         </div>
-                    </div>
+                    ) : (
+                        /* デスクトップ用：横表示（縦棒グラフ） - 既存のレイアウト */
+                        <div className={`${isCompact ? '' : 'overflow-x-auto pb-4 -mx-4 px-4 sm:mx-0 sm:px-0'}`}>
+                            <div className={`${isCompact ? '' : 'min-w-[800px] lg:min-w-0'}`}>
+                                {/* チャート本体 */}
+                                <div className={`relative flex items-end gap-1 sm:gap-2 px-2 ${isCompact ? 'h-[280px]' : 'h-[320px] sm:h-[380px]'}`}>
+                                    {/* Y軸グリッドライン */}
+                                    <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
+                                        {[0, 25, 50, 75, 100].map((percent) => (
+                                            <div key={percent} className="flex items-center gap-2 w-full">
+                                                <span className="text-[10px] text-slate-400 w-8 text-right">
+                                                    {percent}%
+                                                </span>
+                                                <div className="flex-1 border-t border-dashed border-slate-200" />
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* バー */}
+                                    <div className={`relative flex-1 flex items-end gap-1 sm:gap-2 pl-10 h-full ${isCompact ? 'justify-center' : 'justify-around'}`}>
+                                        {filteredData.map((item, index) => {
+                                            let effectiveStartY = item.startY;
+                                            let effectiveHeight = item.height;
+                                            if ((item.type === 'subtotal' || item.type === 'final') && item.value < 0) {
+                                                effectiveStartY = item.value;
+                                                effectiveHeight = Math.abs(item.value);
+                                            }
+                                            const barHeight = (effectiveHeight / range) * 100;
+                                            const bottomPosition = ((effectiveStartY - minY) / range) * 100;
+                                            const isNegative = item.type === 'decrease';
+                                            const isPositive = item.type === 'increase';
+                                            const isTotal = item.type === 'subtotal' || item.type === 'final' || item.type === 'start';
+
+                                            return (
+                                                <TooltipProvider key={item.id}>
+                                                    <Tooltip>
+                                                        <TooltipTrigger asChild>
+                                                            <div
+                                                                className={`relative flex flex-col items-center group cursor-pointer ${isCompact ? 'flex-none w-[8%]' : 'flex-1 max-w-[100px]'}`}
+                                                                style={{ height: '100%' }}
+                                                            >
+                                                                {/* バー */}
+                                                                <div
+                                                                    className="absolute w-full flex flex-col items-center"
+                                                                    style={{
+                                                                        bottom: `${bottomPosition}%`,
+                                                                        height: `${Math.min(100, Math.max(barHeight, 2))}%`,
+                                                                        transition: animated ? 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
+                                                                        transitionDelay: animated ? `${index * 80}ms` : '0ms',
+                                                                        opacity: animated ? 1 : 0,
+                                                                        transform: animated ? 'translateY(0)' : 'translateY(20px)'
+                                                                    }}
+                                                                >
+                                                                    {/* 接続線（費用・収益項目のみ） */}
+                                                                    {(isNegative || isPositive) && index > 0 && (
+                                                                        <div
+                                                                            className="absolute -top-0 left-1/2 w-px border-l-2 border-dashed border-slate-300 -translate-x-1/2"
+                                                                            style={{
+                                                                                height: '8px'
+                                                                            }}
+                                                                        />
+                                                                    )}
+
+                                                                    {/* バー本体 */}
+                                                                    <div
+                                                                        className={`
+                                                                            w-full rounded-lg shadow-lg
+                                                                            ${item.bgColor}
+                                                                            ${item.type === 'final' ? 'ring-2 ring-amber-300 ring-offset-2' : ''}
+                                                                            transition-all duration-300
+                                                                            group-hover:shadow-xl group-hover:scale-105 group-hover:brightness-110
+                                                                        `}
+                                                                        style={{
+                                                                            height: '100%',
+                                                                            minHeight: '24px'
+                                                                        }}
+                                                                    >
+                                                                        {/* バー内の金額表示 */}
+                                                                        {barHeight > 8 && (
+                                                                            <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
+                                                                                <span className="text-white text-[9px] sm:text-xs font-bold drop-shadow-md whitespace-nowrap px-1">
+                                                                                    {isNegative ? '−' : ''}{formatValue(Math.abs(item.value))}
+                                                                                </span>
+                                                                                {exchangeRate && (
+                                                                                    <span className="text-yellow-200 text-[7px] sm:text-[9px] font-medium drop-shadow-md whitespace-nowrap">
+                                                                                        ({formatJapaneseYen(item.value)})
+                                                                                    </span>
+                                                                                )}
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
+
+                                                                    {/* 増減アイコン */}
+                                                                    {isNegative && (
+                                                                        <div className="absolute -top-5 left-1/2 -translate-x-1/2">
+                                                                            <div className="bg-red-100 rounded-full p-0.5">
+                                                                                <ArrowDown className="w-3 h-3 text-red-500" />
+                                                                            </div>
+                                                                        </div>
+                                                                    )}
+                                                                    {isPositive && item.value > 0 && (
+                                                                        <div className="absolute -top-5 left-1/2 -translate-x-1/2">
+                                                                            <div className="bg-teal-100 rounded-full p-0.5 rotate-180">
+                                                                                <ArrowDown className="w-3 h-3 text-teal-500" />
+                                                                            </div>
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+
+                                                                {/* ラベル（下部） */}
+                                                                <div className={`absolute left-1/2 -translate-x-1/2 w-full ${isCompact ? '-bottom-12' : '-bottom-16 sm:-bottom-14'}`}>
+                                                                    <div className="text-center">
+                                                                        <div className={`font-bold leading-tight ${item.color} ${isCompact ? 'text-[10px]' : 'text-[9px] sm:text-xs'}`}>
+                                                                            {item.shortLabel}
+                                                                        </div>
+                                                                        {!isCompact && (
+                                                                            <div className="text-[8px] sm:text-[10px] text-slate-500 mt-0.5">
+                                                                                {calcPercentage(Math.abs(item.value))}%
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent
+                                                            side="bottom"
+                                                            sideOffset={8}
+                                                            className="max-w-xs bg-slate-900 text-white border-0 shadow-xl z-[100]"
+                                                            avoidCollisions={true}
+                                                            collisionPadding={16}
+                                                        >
+                                                            <div className="p-2">
+                                                                <div className="font-bold text-sm mb-1 flex items-center gap-2">
+                                                                    {item.type === 'decrease' && <TrendingDown className="w-4 h-4 text-red-400" />}
+                                                                    {item.type === 'increase' && <TrendingUp className="w-4 h-4 text-teal-400" />}
+                                                                    {item.label}
+                                                                </div>
+                                                                <div className="text-lg font-mono font-bold text-amber-300">
+                                                                    {item.value < 0 ? '−' : ''}{formatValue(Math.abs(item.value))}
+                                                                </div>
+                                                                {exchangeRate && (
+                                                                    <div className="text-xs text-slate-300 mb-2">
+                                                                        ({formatJapaneseYen(item.value)})
+                                                                    </div>
+                                                                )}
+                                                                <p className="text-xs text-slate-300 leading-relaxed border-t border-slate-700 pt-2 mt-1">
+                                                                    {item.description}
+                                                                </p>
+                                                            </div>
+                                                        </TooltipContent>
+                                                    </Tooltip>
+                                                </TooltipProvider>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+
+                                {/* ラベル用スペース */}
+                                <div className="h-16 sm:h-14" />
+                            </div>
+                        </div>
+                    )}
 
                     {/* サマリー */}
                     <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">

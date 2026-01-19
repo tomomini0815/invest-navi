@@ -564,7 +564,7 @@ const Index = () => {
                     </CardHeader>
                     <CardContent className="text-center p-4 pt-0">
                       <p className="text-muted-foreground mb-3 text-xs sm:text-sm leading-relaxed line-clamp-2">{tool.description}</p>
-                      <div className="w-auto inline-flex px-6 bg-orange-100 text-orange-600 group-hover:bg-orange-200 font-bold text-sm h-9 rounded-lg transition-colors items-center justify-center">
+                      <div className="w-auto inline-flex px-6 bg-orange-100 text-orange-600 group-hover:bg-orange-200 font-bold text-sm h-9 rounded-lg transition-colors items-center justify-center whitespace-nowrap">
                         ツールを使う
                       </div>
                     </CardContent>

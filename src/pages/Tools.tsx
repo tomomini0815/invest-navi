@@ -153,31 +153,24 @@ const Tools = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {tools.map((tool, index) => (
-                <Card key={tool.id} className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 bg-gradient-to-br from-card to-card/80 hover:border-secondary/30 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                  <CardHeader>
-                    <div className="flex items-center gap-3">
-                      <div className="p-3 bg-gradient-to-br from-secondary/20 to-accent/10 rounded-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                        <tool.icon className="h-7 w-7 text-secondary" />
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
+              {tools.map((tool) => (
+                <Link key={tool.id} to={(tool as any).customLink || `/tools/${tool.id}`} className="block h-full">
+                  <Card className="h-full group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 bg-white/50 backdrop-blur-sm hover:border-orange-200">
+                    <CardHeader className="flex flex-col items-center text-center p-4 pb-2">
+                      <div className="p-3 bg-orange-500 rounded-xl mb-2 group-hover:scale-110 transition-transform duration-300 shadow-md">
+                        <tool.icon className="h-6 w-6 text-white" />
                       </div>
-                      <div className="flex-1">
-                        <CardTitle className="group-hover:text-secondary transition-colors">{tool.title}</CardTitle>
-                        <Badge variant="secondary" className="mt-1 text-xs group-hover:bg-secondary group-hover:text-secondary-foreground transition-colors">
-                          {tool.category}
-                        </Badge>
+                      <CardTitle className="text-base sm:text-lg font-bold leading-tight">{tool.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-center p-4 pt-0">
+                      <p className="text-muted-foreground mb-3 text-xs sm:text-sm leading-relaxed line-clamp-2">{tool.description}</p>
+                      <div className="w-auto inline-flex px-6 bg-orange-100 text-orange-600 group-hover:bg-orange-200 font-bold text-sm h-9 rounded-lg transition-colors items-center justify-center whitespace-nowrap">
+                        ツールを使う
                       </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground mb-4 leading-relaxed">{tool.description}</p>
-                    <Button asChild className="w-full group-hover:scale-105 transition-transform">
-                      <Link to={(tool as any).customLink || `/tools/${tool.id}`}>
-                        ツールを使う →
-                      </Link>
-                    </Button>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </div>
           </div>
