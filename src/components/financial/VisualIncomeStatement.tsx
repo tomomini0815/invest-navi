@@ -397,7 +397,7 @@ export const VisualIncomeStatement: React.FC<VisualIncomeStatementProps> = ({
                                                                     ({formatJapaneseYen(item.value)})
                                                                 </span>
                                                             )}
-                                                            <span className="text-[10px] text-slate-400">
+                                                            <span className="text-[10px] text-slate-600 font-medium">
                                                                 {calcPercentage(Math.abs(item.value))}%
                                                             </span>
                                                         </div>
