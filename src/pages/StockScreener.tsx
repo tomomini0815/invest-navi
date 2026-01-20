@@ -27,6 +27,23 @@ const StockScreener = () => {
     const [heatmapSource, setHeatmapSource] = useState<"SPX500" | "Japan">("SPX500");
     const chartContainerRef = useRef<HTMLDivElement>(null);
 
+    // activeScreenerが変更されたときに選択されたチャートをリセット
+    useEffect(() => {
+        switch (activeScreener) {
+            case "total":
+                setSelectedChart("FOREXCOM:SPXUSD");
+                break;
+            case "japan":
+                setSelectedChart("INDEX:NKY");
+                break;
+            case "us":
+                setSelectedChart("NASDAQ:AAPL");
+                break;
+            default:
+                break;
+        }
+    }, [activeScreener]);
+
     // サンプル財務データ（各銘柄用）- 2023年〜2026年1月最新
     const financialDataMap: Record<string, {
         revenue: { quarter: string; value: number }[];
