@@ -23,7 +23,7 @@ const StockScreener = () => {
     const [activeScreener, setActiveScreener] = useState<ScreenerType>("total");
     const [showList, setShowList] = useState(false);
     const [financialTab, setFinancialTab] = useState<"overview" | "chart">("chart");
-    const [selectedChart, setSelectedChart] = useState<string>("7203"); // Default to Toyota
+    const [selectedChart, setSelectedChart] = useState<string>("FOREXCOM:SPXUSD"); // Default to S&P 500
     const [heatmapSource, setHeatmapSource] = useState<"SPX500" | "Japan">("SPX500");
     const chartContainerRef = useRef<HTMLDivElement>(null);
 
@@ -1741,14 +1741,7 @@ const StockScreener = () => {
                                 >
                                     S&P 500
                                 </Button>
-                                <Button
-                                    variant={heatmapSource === "Japan" ? "default" : "outline"}
-                                    size="sm"
-                                    onClick={() => setHeatmapSource("Japan")}
-                                    className={heatmapSource === "Japan" ? "bg-emerald-600 text-white" : "text-emerald-700 border-emerald-200 bg-white"}
-                                >
-                                    日本株 (All)
-                                </Button>
+
                             </div>
                         </div>
                         <div style={{ height: "600px" }}>

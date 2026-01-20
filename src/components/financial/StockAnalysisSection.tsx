@@ -1,8 +1,9 @@
+
 import { VisualIncomeStatement, IncomeStatementData } from "@/components/financial/VisualIncomeStatement";
 import { sp500Stocks, nikkei225Stocks } from "@/data/stockLists";
 import { TradingViewWidgetIframe } from "@/components/common/TradingViewWidgetIframe";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FileText, Building, LineChart, TrendingUp, Globe, BarChart2, Activity } from "lucide-react";
+import { FileText, Building, LineChart, TrendingUp, Globe, BarChart2, Activity, BookOpen } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend, LineChart as RechartsLine, Line } from "recharts";
 
 interface StockAnalysisSectionProps {
@@ -26,62 +27,57 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
     const isAeroEdge = symbol === "7409";
     const isIndex = isSp500 || isNikkei225;
 
-    // 日本株（4桁の数字）の場合はTSE:を付与してプロフィール等を表示
-    const getProfileSymbol = (s: string) => {
+    // チャート用：日本株はADR×ドル円の計算式を返す
+    const getChartSymbol = (s: string) => {
         const code = s.replace("TSE:", "");
         if (!/^[0-9]{4}$/.test(code)) return s;
 
-        // 特定銘柄の例外処理
-        // ユーザーの要望により、日本株は全て米国ADR（預託証券）等を使用し、
-        // TradingViewのシンボル計算機能を使ってJPY換算価格を表示します。
-        // 計算式: ADR価格 * ドル円レート / ADR比率
-        // ※ 比率は概算です（Toyota 1:10, Sony 1:1, etc.）
+        // 特定銘柄の例外処理 (ADR * USDJPY)
         const usdJpy = "FX_IDC:USDJPY";
         const exceptions: Record<string, string> = {
             // Main NYSE ADRs
-            "7203": `NYSE:TM*${usdJpy}/10`,      // トヨタ (1 ADR = 10 Shares)
-            "6758": `NYSE:SONY*${usdJpy}`,       // ソニーG (1 ADR = 1 Share)
-            "8306": `NYSE:MUFG*${usdJpy}`,       // 三菱UFJ (1 ADR = 1 Share)
-            "8316": `NYSE:SMFG*${usdJpy}/0.2`,   // 三井住友FG (1 ADR = 0.2 Share? SMFG ADR is usually 5 shares? check: price ~15USD vs 8000JPY? No. Price SMFG USD ~13. JPY 8000. 13*150=1950. 1 ADR = 1/5 share? No. Wait. Let's start with 1:1 default fallback or checked ones.)
-            "7267": `NYSE:HMC*${usdJpy}/3`,      // ホンダ (1 ADR = 3 Shares)
-            "8411": `NYSE:MFG*${usdJpy}/0.1`,    // みずほ (1 ADR = 0.something? MFG $4. JPY 3000? 4*150=600. So 1 ADR = 1/5 share? No, 5 ADR = 1 Share? Let's assume generic conversion for unverified to avoid massive errors, or just show USD for tricky ones? No user asked for JPY. I will guess based on price.)
+            "7203": `NYSE:TM*${usdJpy}/10`,      // トヨタ
+            "6758": `NYSE:SONY*${usdJpy}`,       // ソニーG
+            "8306": `NYSE:MUFG*${usdJpy}`,       // 三菱UFJ
+            "8316": `NYSE:SMFG*${usdJpy}/0.2`,   // 三井住友FG
+            "7267": `NYSE:HMC*${usdJpy}/3`,      // ホンダ
+            "8411": `NYSE:MFG*${usdJpy}/0.1`,    // みずほ
 
             // OTC / Other
-            "9984": `OTC:SFTBY*${usdJpy}*2`,     // ソフトバンクG (1 ADR = 0.5 Share => *2)
-            "7974": `OTC:NTDOY*${usdJpy}*4`,     // 任天堂 (1 ADR = 0.25 Share => *4)
-            "6861": `OTC:KYCCF*${usdJpy}`,       // キーエンス (Foreign Ordinary, usually 1:1)
-            "9983": `OTC:FRCOY*${usdJpy}*10`,    // ファストリ (1 ADR = 0.1 Share? Price FRCOY $30. JPY 45000. 30*150=4500. So 10x diff. 1 ADR = 0.1 Share => *10)
+            "9984": `OTC:SFTBY*${usdJpy}*2`,     // ソフトバンクG
+            "7974": `OTC:NTDOY*${usdJpy}*4`,     // 任天堂
+            "6861": `OTC:KYCCF*${usdJpy}`,       // キーエンス
+            "9983": `OTC:FRCOY*${usdJpy}*10`,    // ファストリ
 
-            // Default 1:1 assumptions for others (adjust if price is widely off)
+            // Default 1:1 assumptions
             "8035": `OTC:TOELF*${usdJpy}`,       // 東京エレク
-            "9432": `OTC:NTTYY*${usdJpy}`,       // NTT (NTTYY ~$25. NTT JPY ~150. 25*150=3750. So 1 ADR = 25 Shares? Wait, NTT did split. NTTYY is likely older bundle. Let's start with simple conversions for confirmed ones and standard close-enoughs.)
+            "9432": `OTC:NTTYY*${usdJpy}`,       // NTT
             "4568": `OTC:DSNKY*${usdJpy}`,       // 第一三共
             "6954": `OTC:FANUY*${usdJpy}`,       // ファナック
-            "9433": `OTC:KDDIY*${usdJpy}`,       // KDDI (KDDIY $16. JPY 4500. 16*150=2400. Ratio ~2?)
+            "9433": `OTC:KDDIY*${usdJpy}`,       // KDDI
             "6098": `OTC:RCRUY*${usdJpy}`,       // リクルート
             "6501": `OTC:HTHIY*${usdJpy}`,       // 日立
             "8001": `OTC:ITOCY*${usdJpy}`,       // 伊藤忠
             "6902": `OTC:DNZOY*${usdJpy}`,       // デンソー
             "4063": `OTC:SHECY*${usdJpy}`,       // 信越化学
-            "7409": "TSE:7409",                  // AeroEdge (ADRなし・TSEのみ)
+            "7409": "TSE:7409",                  // AeroEdge
         };
-
-        // Re-calibrating known ratios based on approx prices (Jan 2024):
-        // SMFG: JPY ~9000. SMFG(ADR) ~$12. 12*150 = 1800. 9000/1800 = 5. So 1 Share = 5 ADRs. Formula: ADR * USDJPY * 5.
-        // Mizuho (8411): JPY ~3000. MFG(ADR) ~$4. 4*150 = 600. 3000/600 = 5. So 1 Share = 5 ADRs. Formula: ADR * USDJPY * 5.
-        // NTT (9432): JPY ~180. NTTYY ~$26. 26*150 = 3900. 3900/180 = 21.6?? NTT had 25:1 split? Maybe NTTYY is 2 shares? Or 20? Let's leave NTT as standard multiplication for now or 1:1 if unsure, or check split.
-        // Let's stick to the high confidence ones (Toyota, Sony, SBG, Nintendo, Honda, Banks).
-
-        // Banks Correction:
-        exceptions["8316"] = `NYSE:SMFG*${usdJpy}*5`; // 三井住友FG
-        exceptions["8411"] = `NYSE:MFG*${usdJpy}*5`;  // みずほFG
 
         if (code in exceptions) {
             return exceptions[code];
         }
 
-        // デフォルトはTSE (ただし多くの場合はADR推奨)
-        return `TSE:${s}`;
+        return `TSE:${s.replace("TSE:", "")}`;
+    };
+
+    // 企業情報・決算用：日本株はTSE（東京証券取引所）のシンボルを返す
+    // ※ADRの計算式を入れるとウィジェットが表示されないため、正規のTSEコードを使用
+    const getCorporateSymbol = (s: string) => {
+        const code = s.replace("TSE:", "");
+        if (/^[0-9]{4}$/.test(code)) {
+            return `TSE:${code}`;
+        }
+        return s;
     };
 
     // テクニカル分析用のシンボル変換（TSEデータが表示されないためADR/OTCを使用）
@@ -172,7 +168,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                                         scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"
                                         config={{
                                             autosize: true,
-                                            symbol: getProfileSymbol(symbol),
+                                            symbol: getChartSymbol(symbol),
                                             interval: "D",
                                             timezone: activeScreener === "japan" ? "Asia/Tokyo" : "America/New_York",
                                             theme: "light",
@@ -372,7 +368,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                                         title="Symbol Info"
                                         scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js"
                                         config={{
-                                            symbol: getProfileSymbol(symbol),
+                                            symbol: getCorporateSymbol(symbol),
                                             width: "100%",
                                             locale: "ja",
                                             colorTheme: "light",
@@ -387,7 +383,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                                         title="Symbol Profile"
                                         scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js"
                                         config={{
-                                            symbol: getProfileSymbol(symbol),
+                                            symbol: getCorporateSymbol(symbol),
                                             width: "100%",
                                             height: "100%",
                                             colorTheme: "light",
@@ -541,39 +537,42 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                                 </div>
                             )}
 
-                            {/* --- 決算書・財務データセクション (個別株のみ) --- */}
-                            {!isIndex && (
+                            {/* 決算書・財務データ（日本株・米国株） */}
+                            {!isIndex && (financialDataMap[symbol] || financialDataMap[symbol.replace("TSE:", "")]) && (
                                 <div>
-                                    <h3 className="font-bold text-lg text-slate-800 border-b pb-2 mb-4 flex items-center gap-2">
-                                        <FileText className="w-5 h-5 text-amber-600" />
+                                    <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                                        <BookOpen className="w-6 h-6 text-emerald-600" />
                                         決算書・財務データ
                                     </h3>
 
-                                    {/* 損益計算書図解 */}
-                                    {/* 損益計算書図解 */}
-                                    {financialDataMap[symbol]?.incomeStatement && (
+                                    {/* 独自のビジュアル決算書（データがある場合のみ） */}
+                                    {(financialDataMap[symbol]?.incomeStatement || financialDataMap[symbol.replace("TSE:", "")]?.incomeStatement) && (
                                         <VisualIncomeStatement
-                                            data={financialDataMap[symbol].incomeStatement as IncomeStatementData}
-                                            symbol={symbol.replace("NASDAQ:", "").replace("TSE:", "")}
-                                            period={financialDataMap[symbol]?.currency === "JPY" ? "通期予想" : "直近12ヶ月 (TTM)"}
-                                            currency={financialDataMap[symbol]?.currency === "JPY" ? "¥" : "$"}
-                                            unit={financialDataMap[symbol]?.currency === "JPY" ? "億円" : "百万"}
-                                            exchangeRate={financialDataMap[symbol]?.currency === "JPY" ? undefined : 155}
+                                            data={financialDataMap[symbol]?.incomeStatement || financialDataMap[symbol.replace("TSE:", "")]?.incomeStatement!}
+                                            symbol={symbol}
+                                            period="2024年3月期(通期)"
+                                            currency={activeScreener === "us" ? "$" : "¥"}
+                                            unit={activeScreener === "us" ? "M" : "百万円"}
+                                            exchangeRate={150}
                                         />
                                     )}
 
-                                    {/* 損益計算書インフォグラフィック - Apple専用 */}
-                                    {symbol === "NASDAQ:AAPL" && (
-                                        <div className="mt-6 rounded-xl overflow-hidden shadow-lg">
+                                    {/* Appleの財務諸表イメージ（米国株の場合のみ） */}
+                                    {activeScreener === "us" && symbol === "NASDAQ:AAPL" && (
+                                        <div className="mt-8 rounded-xl overflow-hidden shadow-lg border border-slate-200">
+                                            <div className="bg-slate-100 px-4 py-2 border-b border-slate-200 font-bold text-slate-700">
+                                                Visualized Income Statement (Reference)
+                                            </div>
                                             <img
-                                                src="/images/apple-pl-infographic.jpg"
-                                                alt="Appleの「稼ぐ力」を解剖する：損益計算書(P/L)の仕組み"
-                                                className="w-full h-auto"
+                                                src="/apple-income-statement-infographic.jpg"
+                                                alt="Apple Income Statement Visualized"
+                                                className="w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-500"
                                             />
                                         </div>
                                     )}
 
-                                    <div style={{ height: "900px", marginTop: "2rem" }}>
+                                    {/* TradingView 財務データウィジェット */}
+                                    <div className="mt-8 h-[600px]">
                                         <TradingViewWidgetIframe
                                             key={`fin-${symbol}`}
                                             title="Financials"
@@ -585,7 +584,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                                                 width: "100%",
                                                 height: "100%",
                                                 colorTheme: "light",
-                                                symbol: getProfileSymbol(symbol),
+                                                symbol: getCorporateSymbol(symbol),
                                                 locale: "ja"
                                             }}
                                         />
