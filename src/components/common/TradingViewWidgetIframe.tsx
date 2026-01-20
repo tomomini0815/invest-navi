@@ -32,6 +32,7 @@ export const TradingViewWidgetIframe = ({ scriptSrc, config, title, height = "10
 
     return (
         <iframe
+            key={JSON.stringify(config) + scriptSrc}
             ref={iframeRef}
             src="/tradingview-widget.html"
             title={title}
