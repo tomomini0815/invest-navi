@@ -5,7 +5,7 @@ import RankingCardV2 from "@/components/features/RankingCardV2";
 import { SecuritiesComparisonTable } from "@/components/features/SecuritiesComparisonTable";
 import { Company } from "@/components/features/SurveyDiagnostic";
 
-const securitiesRankingList: Company[] = [
+export const securitiesRankingList: Company[] = [
     {
         name: "SBI証券",
         points: ["口座開設数No.1 (1,200万口座超)", "国内株手数料0円 (条件達成で完全無料)", "Tポイント・Pontaポイント等が貯まる", "IPO取扱実績No.1"],
