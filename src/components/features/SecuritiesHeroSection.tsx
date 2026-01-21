@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 
-const FXHeroSection = () => {
+const SecuritiesHeroSection = () => {
     return (
         <section className="relative overflow-hidden pt-10 pb-16 md:pt-20 md:pb-28 bg-gradient-to-r from-[#1e40af] to-[#10b981]">
 
@@ -13,25 +13,24 @@ const FXHeroSection = () => {
                 </div>
 
                 {/* Factual Title */}
-                {/* Factual Title */}
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 md:mb-3 tracking-wider flex items-end justify-center gap-2 whitespace-nowrap">
                     <span
                         className="text-white text-3xl sm:text-4xl md:text-5xl font-black drop-shadow-xl"
                     >
-                        FX口座
+                        ネット証券
                     </span>
                     徹底比較
                 </h1>
 
                 {/* Factual Description */}
                 <p className="max-w-4xl mx-auto text-[10px] sm:text-sm text-white/90 mb-4 md:mb-6 leading-relaxed">
-                    主要FX業者のスプレッド・スワップポイント・取引ツール・キャンペーン情報を一覧で掲載。<br />
+                    主要ネット証券の手数料・ポイント・NISA対応・ツール・キャンペーン情報を一覧で掲載。<br />
                     各社の公式サイトに基づくデータを元に比較しています。
                 </p>
 
                 {/* Factual Tags */}
                 <div className="flex flex-wrap justify-center gap-1.5 md:gap-2">
-                    {["口座スペック一覧", "スプレッド比較", "ツール機能比較"].map((text) => (
+                    {["手数料比較", "NISA対応", "ポイント還元率"].map((text) => (
                         <span key={text} className="flex items-center gap-1.5 px-2 py-1 md:px-3 md:py-1.5 rounded-full bg-white text-teal-800 text-[10px] sm:text-xs font-bold shadow-sm">
                             <Check className="w-3.5 h-3.5 md:w-5 md:h-5 text-green-500" strokeWidth={4} />
                             {text}
@@ -57,4 +56,5 @@ const FXHeroSection = () => {
     );
 };
 
-export default FXHeroSection;
+export const SecuritiesHeroSectionExport = SecuritiesHeroSection;
+export { SecuritiesHeroSection };

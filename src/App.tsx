@@ -9,6 +9,7 @@ import Index2 from "./pages/Index2";
 import Comparison from "./pages/Comparison";
 import CryptoComparison from "./pages/CryptoComparison";
 import FXComparison from "./pages/FXComparison";
+import SecuritiesComparison from "./pages/SecuritiesComparison";
 import GuideDetail from "./pages/GuideDetail";
 import Tools from "./pages/Tools";
 import Privacy from "./pages/Privacy";
@@ -137,6 +138,7 @@ const App = () => (
           <Route path="/comparison" element={<Comparison />} />
           <Route path="/crypto-comparison" element={<CryptoComparison />} />
           <Route path="/fx-comparison" element={<FXComparison />} />
+          <Route path="/securities-comparison" element={<SecuritiesComparison />} />
           <Route path="/fx/dmm-fx" element={<DmmFxDetail />} />
           <Route path="/stocks/dmm-stock" element={<DmmStockDetail />} />
           <Route path="/fx/matsui-fx" element={<MatsuiFxDetail />} />

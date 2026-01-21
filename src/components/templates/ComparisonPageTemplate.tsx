@@ -14,6 +14,7 @@ export interface ComparisonPageTemplateProps<T extends Company> {
     renderComparisonTable: () => React.ReactNode;
     disclaimerText?: React.ReactNode;
     categoryName?: string; // e.g. "FX口座"
+    surveyType?: "fx" | "securities";
 }
 
 export const ComparisonPageTemplate = <T extends Company>({
@@ -24,7 +25,8 @@ export const ComparisonPageTemplate = <T extends Company>({
     renderRankingCard,
     renderComparisonTable,
     disclaimerText,
-    categoryName = "口座"
+    categoryName = "口座",
+    surveyType = "fx" // Default to fx to support existing pages implicitly if not specified
 }: ComparisonPageTemplateProps<T>) => {
     const [filteredList, setFilteredList] = useState<T[]>(rankingList);
 
@@ -53,8 +55,9 @@ export const ComparisonPageTemplate = <T extends Company>({
 
             <main className="flex-grow">
                 {/* Survey Diagnosis Section */}
+                {/* Survey Diagnosis Section */}
                 <section className="py-12 -mt-10 mb-12 relative z-10 px-4">
-                    <SurveyDiagnostic data={rankingList} onSearch={handleSurveySearch} />
+                    <SurveyDiagnostic data={rankingList} onSearch={handleSurveySearch} type={surveyType} />
                 </section>
 
                 {/* Detailed Ranking Section */}

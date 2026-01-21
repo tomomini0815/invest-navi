@@ -66,7 +66,19 @@ export const FxStartGuide = ({
                     初心者でも簡単！
                 </span>
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-                    {companyName}の始め方 <span className="text-emerald-600">3 STEP</span>
+                    {guideTitle ? (
+                        guideTitle.includes("3 STEP") ? (
+                            <>
+                                {guideTitle.replace(" 3 STEP", "")} <span className="text-emerald-600">3 STEP</span>
+                            </>
+                        ) : (
+                            guideTitle
+                        )
+                    ) : (
+                        <>
+                            {companyName}の始め方 <span className="text-emerald-600">3 STEP</span>
+                        </>
+                    )}
                 </h2>
                 <p className="text-gray-500 mt-2">
                     お申し込みから最短即日で取引スタートできます
@@ -100,10 +112,9 @@ export const FxStartGuide = ({
 
             <div className="mt-10 p-6 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl border border-emerald-100 flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="text-center md:text-left">
-                    <p className="font-bold text-emerald-800 text-lg">
-                        {guideTitle || `まずは${companyName}で始めよう`}
+                    <p className="font-bold text-emerald-800 text-lg md:text-xl">
+                        {guideDescription || "初心者にも使いやすく、コストも安いので安心です。"}
                     </p>
-                    <p className="text-sm text-emerald-600">{guideDescription || "初心者にも使いやすく、コストも安いので安心です。"}</p>
                 </div>
                 <Button
                     onClick={() => window.open(affiliateUrl, '_blank')}

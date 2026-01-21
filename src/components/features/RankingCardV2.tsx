@@ -20,7 +20,21 @@ interface RankingCardV2Props {
     badgeText?: string;
     affiliateUrl: string;
     detailUrl: string;
-    detailedSpecs?: ComparisonRow; // Optional to avoid initial break, but logic depends on it
+    detailedSpecs?: ComparisonRow;
+    accordionData?: {
+        featuresTitle?: string;
+        features?: string;
+        goodPoints?: string[];
+        specTable?: {
+            row1: { label: string; value: string; className?: string }[];
+            row2: { label: string; value: string; className?: string }[];
+        };
+        startGuide?: {
+            title: string;
+            description: string;
+            steps: { title: string; image?: string; description: string }[];
+        };
+    };
 }
 
 const RankingCardV2 = ({
@@ -33,7 +47,8 @@ const RankingCardV2 = ({
     badgeText,
     affiliateUrl,
     detailUrl,
-    detailedSpecs
+    detailedSpecs,
+    accordionData
 }: RankingCardV2Props) => {
     const [isOpen, setIsOpen] = useState(false);
     const isTop3 = rank <= 3;
@@ -123,12 +138,12 @@ const RankingCardV2 = ({
                         </h4>
                         <div className="bg-white p-4 rounded border border-gray-200">
                             <p className="text-sm text-gray-600 leading-relaxed mb-3">
-                                {detailedSpecs.features}
+                                {accordionData?.features || detailedSpecs.features}
                             </p>
                             {/* Good Points List */}
-                            {detailedSpecs.goodPoints && detailedSpecs.goodPoints.length > 0 && (
+                            {(accordionData?.goodPoints || (detailedSpecs.goodPoints && detailedSpecs.goodPoints.length > 0)) && (
                                 <ul className="space-y-2 mt-2 pt-2 border-t border-gray-100">
-                                    {detailedSpecs.goodPoints.map((point, i) => (
+                                    {(accordionData?.goodPoints || detailedSpecs.goodPoints).map((point, i) => (
                                         <li key={i} className="flex items-start gap-2 text-sm text-gray-700 font-bold">
                                             <div className="min-w-[18px] h-[18px] rounded-full bg-orange-100 flex items-center justify-center text-orange-600 mt-0.5">
                                                 <Check className="w-3 h-3" />
@@ -151,50 +166,68 @@ const RankingCardV2 = ({
                             <table className="w-full text-center">
                                 <thead className="bg-gray-50 text-gray-500 text-xs">
                                     <tr>
-                                        <th className="py-2 border-r border-gray-100 font-normal">米ドル/円</th>
-                                        <th className="py-2 border-r border-gray-100 font-normal">ユーロ/円</th>
-                                        <th className="py-2 border-r border-gray-100 font-normal">豪ドル/円</th>
-                                        <th className="py-2 font-normal">ポンド/円</th>
+                                        {(accordionData?.specTable?.row1 || [
+                                            { label: "米ドル/円" },
+                                            { label: "ユーロ/円" },
+                                            { label: "豪ドル/円" },
+                                            { label: "ポンド/円" }
+                                        ]).map((th, i) => (
+                                            <th key={i} className={`py-2 border-r border-gray-100 font-normal ${i === 3 ? "border-r-0" : ""}`}>{th.label}</th>
+                                        ))}
                                     </tr>
                                 </thead>
                                 <tbody className="text-gray-800 font-bold">
                                     <tr className="border-b border-gray-100">
-                                        <td className="py-2 border-r border-gray-100">{detailedSpecs.spreadUsdJpyText}</td>
-                                        <td className="py-2 border-r border-gray-100">{detailedSpecs.spreadEurJpyText}</td>
-                                        <td className="py-2 border-r border-gray-100">{detailedSpecs.spreadAudJpyText}</td>
-                                        <td className="py-2">{detailedSpecs.spreadGbpJpyText}</td>
+                                        {(accordionData?.specTable?.row1.map(c => ({ value: c.value, className: c.className })) || [
+                                            { value: detailedSpecs?.spreadUsdJpyText },
+                                            { value: detailedSpecs?.spreadEurJpyText },
+                                            { value: detailedSpecs?.spreadAudJpyText },
+                                            { value: detailedSpecs?.spreadGbpJpyText }
+                                        ]).map((td, i) => (
+                                            <td key={i} className={`py-2 border-r border-gray-100 ${i === 3 ? "border-r-0" : ""} ${td.className || ""}`}>{td.value}</td>
+                                        ))}
                                     </tr>
                                 </tbody>
                                 <thead className="bg-gray-50 text-gray-500 text-xs">
                                     <tr>
-                                        <th className="py-2 border-r border-gray-100 font-normal">ユーロ/ドル</th>
-                                        <th className="py-2 border-r border-gray-100 font-normal">取引単位</th>
-                                        <th className="py-2 border-r border-gray-100 font-normal">デモ取引</th>
-                                        <th className="py-2 font-normal">キャッシュバック</th>
+                                        {(accordionData?.specTable?.row2 || [
+                                            { label: "ユーロ/ドル" },
+                                            { label: "取引単位" },
+                                            { label: "デモ取引" },
+                                            { label: "キャッシュバック" }
+                                        ]).map((th, i) => (
+                                            <th key={i} className={`py-2 border-r border-gray-100 font-normal ${i === 3 ? "border-r-0" : ""}`}>{th.label}</th>
+                                        ))}
                                     </tr>
                                 </thead>
                                 <tbody className="text-gray-800 font-bold">
                                     <tr>
-                                        <td className="py-2 border-r border-gray-100">{detailedSpecs.spreadEurUsdText}</td>
-                                        <td className="py-2 border-r border-gray-100">{detailedSpecs.transactionUnitText}</td>
-                                        <td className="py-2 border-r border-gray-100">{detailedSpecs.demoPeriod}</td>
-                                        <td className="py-2 text-red-500">{detailedSpecs.cashbackText}</td>
+                                        {(accordionData?.specTable?.row2.map(c => ({ value: c.value, className: c.className })) || [
+                                            { value: detailedSpecs?.spreadEurUsdText },
+                                            { value: detailedSpecs?.transactionUnitText },
+                                            { value: detailedSpecs?.demoPeriod },
+                                            { value: detailedSpecs?.cashbackText, className: "text-red-500" }
+                                        ]).map((td, i) => (
+                                            <td key={i} className={`py-2 border-r border-gray-100 ${i === 3 ? "border-r-0" : ""} ${td.className || ""}`}>{td.value}</td>
+                                        ))}
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
-                    {/* 3. FX Start Guide */}
-                    <div className="mt-8 pt-8 border-t border-gray-200">
-                        <FxStartGuide
-                            companyName={name.replace(/（.*?）/g, '')}
-                            affiliateUrl={affiliateUrl}
-                            steps={detailedSpecs.startGuideSteps}
-                            guideTitle={detailedSpecs.guideTitle}
-                            guideDescription={detailedSpecs.guideDescription}
-                        />
-                    </div>
+                    {/* 3. Start Guide */}
+                    {(accordionData?.startGuide || detailedSpecs?.startGuideSteps) && (
+                        <div className="mt-8 pt-8 border-t border-gray-200">
+                            <FxStartGuide
+                                companyName={name.replace(/（.*?）/g, '')}
+                                affiliateUrl={affiliateUrl}
+                                steps={accordionData?.startGuide?.steps || detailedSpecs?.startGuideSteps || []}
+                                guideTitle={accordionData?.startGuide?.title || detailedSpecs?.guideTitle}
+                                guideDescription={accordionData?.startGuide?.description || detailedSpecs?.guideDescription}
+                            />
+                        </div>
+                    )}
 
                     <div className="text-center mt-4">
                         <button
