@@ -25,6 +25,7 @@ interface RankingCardV2Props {
         featuresTitle?: string;
         features?: string;
         goodPoints?: string[];
+        specTitle?: string;
         specTable?: {
             row1: { label: string; value: string; className?: string }[];
             row2: { label: string; value: string; className?: string }[];
@@ -128,7 +129,8 @@ const RankingCardV2 = ({
             </div>
 
             {/* Accordion Detail Section */}
-            {isOpen && detailedSpecs && (
+            {/* Accordion Detail Section */}
+            {isOpen && (accordionData || detailedSpecs) && (
                 <div className="border-t border-gray-100 bg-gray-50/50 p-4 sm:p-6 animate-in slide-in-from-top-2 duration-300">
                     {/* 1. Features Description */}
                     <div className="mb-6">
@@ -138,12 +140,12 @@ const RankingCardV2 = ({
                         </h4>
                         <div className="bg-white p-4 rounded border border-gray-200">
                             <p className="text-sm text-gray-600 leading-relaxed mb-3">
-                                {accordionData?.features || detailedSpecs.features}
+                                {accordionData?.features || detailedSpecs?.features}
                             </p>
                             {/* Good Points List */}
-                            {(accordionData?.goodPoints || (detailedSpecs.goodPoints && detailedSpecs.goodPoints.length > 0)) && (
+                            {(accordionData?.goodPoints || (detailedSpecs?.goodPoints && detailedSpecs.goodPoints.length > 0)) && (
                                 <ul className="space-y-2 mt-2 pt-2 border-t border-gray-100">
-                                    {(accordionData?.goodPoints || detailedSpecs.goodPoints).map((point, i) => (
+                                    {(accordionData?.goodPoints || detailedSpecs?.goodPoints || []).map((point, i) => (
                                         <li key={i} className="flex items-start gap-2 text-sm text-gray-700 font-bold">
                                             <div className="min-w-[18px] h-[18px] rounded-full bg-orange-100 flex items-center justify-center text-orange-600 mt-0.5">
                                                 <Check className="w-3 h-3" />
@@ -160,7 +162,7 @@ const RankingCardV2 = ({
                     <div className="mb-8">
                         <h4 className="font-bold text-gray-800 mb-2 text-sm flex items-center gap-2">
                             <span className="w-1 h-4 bg-teal-400 rounded-full"></span>
-                            スプレッド・スペック詳細
+                            {accordionData?.specTitle || "スプレッド・スペック詳細"}
                         </h4>
                         <div className="bg-white rounded border border-gray-200 overflow-hidden text-sm">
                             <table className="w-full text-center">

@@ -14,7 +14,7 @@ export interface ComparisonPageTemplateProps<T extends Company> {
     renderComparisonTable: () => React.ReactNode;
     disclaimerText?: React.ReactNode;
     categoryName?: string; // e.g. "FX口座"
-    surveyType?: "fx" | "securities";
+    surveyType?: "fx" | "securities" | "crypto";
 }
 
 export const ComparisonPageTemplate = <T extends Company>({

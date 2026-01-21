@@ -26,9 +26,7 @@ export const SecuritiesComparisonTable = ({ data }: SecuritiesComparisonTablePro
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-800 tracking-wide flex items-center justify-center gap-2 mb-2">
                     ネット証券<span className="text-emerald-600 font-bold">{data.length}</span>社を徹底比較
                 </h2>
-                <p className="text-sm text-gray-500 flex items-center justify-center gap-1">
-                    <span>▼</span> 項目名を確認できます
-                </p>
+
             </div>
 
             {/* Design Match: Tabs (Integrated Design imitation - placeholder to keep structure) */}

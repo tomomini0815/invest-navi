@@ -10,24 +10,44 @@ export interface Company {
     campaignText?: string;
     badgeText?: string;
     affiliateUrl?: string;
+    // Extended properties for various page logic
+    id?: string;
+    rank?: number;
+    rating?: number;
+    detailUrl?: string;
+    accordionData?: {
+        features: string;
+        goodPoints: string[];
+        specTitle?: string;
+        specTable: {
+            row1: { label: string; value: string; className?: string }[];
+            row2: { label: string; value: string; className?: string }[];
+        };
+        startGuide: {
+            title: string;
+            description: string;
+            steps: { title: string; description: string }[];
+        };
+    };
 }
+
 
 interface SurveyDiagnosticProps {
     data: Company[];
     onSearch: (filtered: Company[]) => void;
-    type?: "fx" | "securities"; // Added prop
+    type?: "fx" | "securities" | "crypto"; // Added crypto
 }
 
 export const SurveyDiagnostic = ({ data, onSearch, type = "fx" }: SurveyDiagnosticProps) => {
     const [step, setStep] = useState(1);
 
-    // Unified state structure, but we'll use specific fields based on type
+    // Unified state structure
     const [answers, setAnswers] = useState({
         experience: "",
-        product: "", // For Securities (NISA, JP, US)
-        style: "", // For FX (Short, Long, Medium)
-        priorities: [] as string[], // For Securities (Fees, Points, etc.)
-        conditions: [] as string[], // For FX (Spread, Swap, etc.)
+        product: "", // For Securities/Crypto
+        style: "", // For FX
+        priorities: [] as string[], // For Securities/Crypto
+        conditions: [] as string[], // For FX
     });
 
     const [filteredData, setFilteredData] = useState<Company[]>(data);
@@ -50,8 +70,7 @@ export const SurveyDiagnostic = ({ data, onSearch, type = "fx" }: SurveyDiagnost
         let result = data;
 
         if (type === "securities") {
-            // --- SECURITIES LOGIC (Green) ---
-
+            // ... (Securities Logic) ...
             // 1. Experience Filter
             if (answers.experience === "beginner") {
                 result = result.filter(c =>
@@ -107,9 +126,45 @@ export const SurveyDiagnostic = ({ data, onSearch, type = "fx" }: SurveyDiagnost
                 }
             }
 
+        } else if (type === "crypto") {
+            // --- CRYPTO LOGIC (Purple) ---
+
+            // 1. Experience
+            if (answers.experience === "beginner") {
+                result = result.filter(c => c.points.some(p => p.includes("初心者") || p.includes("UI") || p.includes("簡単")));
+            } else if (answers.experience === "expert") {
+                result = result.filter(c => c.points.some(p => p.includes("板") || p.includes("手数料") || p.includes("ツール")));
+            }
+
+            // 2. Product (Style)
+            if (answers.product === "accumulate") { // 積立
+                result = result.filter(c => c.points.some(p => p.includes("積立") || p.includes("少額")));
+            } else if (answers.product === "trading") { // トレード
+                result = result.filter(c => c.points.some(p => p.includes("板") || p.includes("スプレッド") || p.includes("ツール")));
+            } else if (answers.product === "altcoin") { // アルトコイン
+                result = result.filter(c =>
+                    c.specs.some(s => s.label === "取扱通貨数" && parseInt(s.value) > 20)
+                );
+            }
+
+            // 3. Priorities
+            if (answers.priorities.length > 0) {
+                result = result.filter(c => {
+                    return answers.priorities.every(cond => {
+                        if (cond === "手数料が安い") return c.specs.some(s => s.label === "取引手数料" && (s.value.includes("無料") || s.value.includes("安")));
+                        if (cond === "銘柄数が多い") return c.specs.some(s => s.label === "取扱通貨数" && parseInt(s.value) > 25);
+                        if (cond === "アプリが使いやすい") return c.points.some(p => p.includes("アプリ") && p.includes("使いやすい"));
+                        if (cond === "送金無料") return c.specs.some(s => s.label === "送金手数料" && s.value.includes("無料"));
+                        return true;
+                    });
+                });
+            }
+
+            if (result.length === 0) result = data.slice(0, 3);
+
         } else {
             // --- FX LOGIC (Orange) ---
-
+            // ... (FX Logic) ...
             // 1. Experience Filter
             if (answers.experience === "beginner") {
                 result = result.filter(c =>
@@ -174,10 +229,11 @@ export const SurveyDiagnostic = ({ data, onSearch, type = "fx" }: SurveyDiagnost
         onSearch(filteredData.length > 0 ? filteredData : data);
     };
 
-    // Logic Switch
+    // Logic Switches
     const isSecurities = type === "securities";
+    const isCrypto = type === "crypto";
 
-    // Color Theme - Unified to Emerald/Green for both FX and Securities as per user request
+    // Dynamic Styling - Unified for all types as per user request
     const bgGradient = "bg-gradient-to-r from-emerald-500 to-teal-500";
     const bgLight = "bg-emerald-50";
     const textColor = "text-emerald-700";
@@ -188,6 +244,18 @@ export const SurveyDiagnostic = ({ data, onSearch, type = "fx" }: SurveyDiagnost
     // Helper to get conditional classes
     const getActiveClasses = (isActive: boolean) => isActive ? `${borderColor} ${ringColor} ring-1` : "border-gray-200 hover:border-gray-300";
     const getIconBg = (isActive: boolean) => isActive ? "bg-emerald-500 text-white" : "bg-gray-100 text-gray-400";
+    const getStepClasses = (s: number) => {
+        if (step >= s) {
+            return "bg-emerald-500 text-white border-emerald-500 shadow-md";
+        }
+        return "bg-white text-gray-300 border-gray-200";
+    }
+    const getStepBarClasses = (s: number) => {
+        if (step > s) {
+            return "bg-emerald-500";
+        }
+        return "bg-gray-100";
+    }
 
     return (
         <div className={`w-full max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-xl bg-white border-2 border-emerald-100`}>
@@ -206,14 +274,11 @@ export const SurveyDiagnostic = ({ data, onSearch, type = "fx" }: SurveyDiagnost
                     {[1, 2, 3].map((s) => (
                         <div key={s} className="flex items-center">
                             <div
-                                className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg border-2 transition-all ${step >= s
-                                    ? "bg-emerald-500 text-white border-emerald-500 shadow-md"
-                                    : "bg-white text-gray-300 border-gray-200"
-                                    }`}
+                                className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg border-2 transition-all ${getStepClasses(s)}`}
                             >
                                 {step > s ? <Check className="w-6 h-6" /> : s}
                             </div>
-                            {s < 3 && <div className={`w-12 h-1 mx-2 rounded-full ${step > s ? "bg-emerald-500" : "bg-gray-100"}`} />}
+                            {s < 3 && <div className={`w-12 h-1 mx-2 rounded-full ${getStepBarClasses(s)}`} />}
                         </div>
                     ))}
                 </div>
@@ -264,7 +329,7 @@ export const SurveyDiagnostic = ({ data, onSearch, type = "fx" }: SurveyDiagnost
                                 className="space-y-4"
                             >
                                 <div className="text-center mb-2">
-                                    <h3 className="text-xl font-bold text-gray-800">Q2. {isSecurities ? "興味のある商品は？" : "重視するポイントは？"}</h3>
+                                    <h3 className="text-xl font-bold text-gray-800">Q2. {isSecurities ? "興味のある商品は？" : (isCrypto ? "投資スタイルは？" : "重視するポイントは？")}</h3>
                                 </div>
                                 <div className="grid grid-cols-3 gap-2 sm:gap-3">
                                     {isSecurities ? (
@@ -283,6 +348,23 @@ export const SurveyDiagnostic = ({ data, onSearch, type = "fx" }: SurveyDiagnost
                                                 <div className="text-xs text-gray-400">{item.desc}</div>
                                             </button>
                                         ))
+                                    ) : isCrypto ? (
+                                        // Crypto Options
+                                        [
+                                            { label: "コツコツ積立", val: "accumulate", desc: "毎月定額" },
+                                            { label: "アクティブ", val: "trading", desc: "値動きで利益" },
+                                            { label: "アルトコイン", val: "altcoin", desc: "いろんな通貨" },
+                                        ].map((item) => (
+                                            <button
+                                                key={item.val}
+                                                onClick={() => handleSelect("product", item.val)}
+                                                className={`p-2 sm:p-4 rounded-xl border-2 transition-all flex flex-col items-center gap-1 sm:gap-2 text-center group bg-white hover:shadow-md ${getActiveClasses(answers.product === item.val)}`}
+                                            >
+                                                <div className={`font-bold text-lg ${answers.product === item.val ? textColor : "text-gray-700"}`}>{item.label}</div>
+                                                <div className="text-xs text-gray-400">{item.desc}</div>
+                                            </button>
+                                        ))
+
                                     ) : (
                                         // FX Options
                                         [
@@ -313,7 +395,7 @@ export const SurveyDiagnostic = ({ data, onSearch, type = "fx" }: SurveyDiagnost
                                 className="space-y-4"
                             >
                                 <div className="text-center mb-2">
-                                    <h3 className="text-xl font-bold text-gray-800">Q3. {isSecurities ? "重視するポイントは？" : "その他こだわり条件は？"}</h3>
+                                    <h3 className="text-xl font-bold text-gray-800">Q3. {isSecurities ? "重視するポイントは？" : (isCrypto ? "こだわり条件は？" : "その他こだわり条件は？")}</h3>
                                 </div>
                                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                                     {isSecurities ? (
@@ -321,6 +403,23 @@ export const SurveyDiagnostic = ({ data, onSearch, type = "fx" }: SurveyDiagnost
                                         [
                                             "手数料が安い", "ポイント重視", "ツールが高機能",
                                             "IPOに強い", "少額から投資"
+                                        ].map((cond) => (
+                                            <div
+                                                key={cond}
+                                                onClick={() => toggleList("priorities", cond)}
+                                                className={`p-3 rounded-lg border-2 cursor-pointer transition-all flex items-center justify-center text-center font-bold text-sm bg-white hover:shadow-sm ${answers.priorities.includes(cond)
+                                                    ? `${borderColor} ${bgLight} ${textColor} shadow-sm`
+                                                    : "border-gray-200 hover:border-gray-300 text-gray-600"
+                                                    }`}
+                                            >
+                                                {cond}
+                                            </div>
+                                        ))
+                                    ) : isCrypto ? (
+                                        // Crypto Conditions
+                                        [
+                                            "手数料が安い", "銘柄数が多い", "アプリが使いやすい",
+                                            "送金無料", "セキュリティ"
                                         ].map((cond) => (
                                             <div
                                                 key={cond}
@@ -390,3 +489,4 @@ export const SurveyDiagnostic = ({ data, onSearch, type = "fx" }: SurveyDiagnost
 };
 
 export default SurveyDiagnostic;
+
