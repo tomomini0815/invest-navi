@@ -26,8 +26,38 @@ export const VisualIncomeStatement: React.FC<VisualIncomeStatementProps> = ({
     isCompact = false,
     className = ""
 }) => {
+    // 日本語の金額表記フォーマット（万単位まで含める）
+    const formatJapaneseFormal = (val: number, currentUnit: string) => {
+        let multiplier = 1;
+        if (currentUnit === "億円") multiplier = 100000000;
+        else if (currentUnit === "百万") multiplier = 1000000;
+        else if (currentUnit === "M") multiplier = 1000000; // Fallback
+        else if (currentUnit === "千") multiplier = 1000;
+
+        let totalYen = Math.abs(val) * multiplier;
+
+        const trillions = Math.floor(totalYen / 1000000000000);
+        const remainderT = totalYen % 1000000000000;
+        const billions = Math.floor(remainderT / 100000000);
+        const remainderB = remainderT % 100000000;
+        const man = Math.floor(remainderB / 10000);
+        // 1万円未満は切り捨てまたは表示しない（ご要望のレベル感に合わせる）
+
+        let parts = [];
+        if (trillions > 0) parts.push(`${trillions.toLocaleString()}兆`);
+        if (billions > 0) parts.push(`${billions.toLocaleString()}億`);
+        if (man > 0) parts.push(`${man.toLocaleString()}万`);
+
+        if (parts.length === 0) return "0円";
+        return parts.join("") + "円";
+    };
+
     // 数値フォーマット関数（サマリー用）
     const formatValue = (value: number) => {
+        if (currency === "¥") {
+            // 日本円の場合は詳細表記
+            return formatJapaneseFormal(value, unit);
+        }
         return `${currency}${Math.abs(value).toLocaleString()}${unit}`;
     };
 

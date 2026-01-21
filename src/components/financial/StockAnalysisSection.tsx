@@ -546,16 +546,19 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                                     </h3>
 
                                     {/* 独自のビジュアル決算書（データがある場合のみ） */}
-                                    {(financialDataMap[symbol]?.incomeStatement || financialDataMap[symbol.replace("TSE:", "")]?.incomeStatement) && (
-                                        <VisualIncomeStatement
-                                            data={financialDataMap[symbol]?.incomeStatement || financialDataMap[symbol.replace("TSE:", "")]?.incomeStatement!}
-                                            symbol={symbol}
-                                            period="2024年3月期(通期)"
-                                            currency={activeScreener === "us" ? "$" : "¥"}
-                                            unit={activeScreener === "us" ? "M" : "百万円"}
-                                            exchangeRate={150}
-                                        />
-                                    )}
+                                    {(() => {
+                                        const isJpy = financialDataMap[symbol]?.currency === "JPY" || financialDataMap[symbol.replace("TSE:", "")]?.currency === "JPY";
+                                        return (
+                                            <VisualIncomeStatement
+                                                data={financialDataMap[symbol]?.incomeStatement || financialDataMap[symbol.replace("TSE:", "")]?.incomeStatement!}
+                                                symbol={symbol}
+                                                period="直近12ヶ月 (TTM)"
+                                                currency={isJpy ? "¥" : "$"}
+                                                unit={isJpy ? "億円" : "百万"}
+                                                exchangeRate={isJpy ? undefined : 155}
+                                            />
+                                        );
+                                    })()}
 
                                     {/* Appleの財務諸表イメージ（米国株の場合のみ） */}
                                     {activeScreener === "us" && symbol === "NASDAQ:AAPL" && (

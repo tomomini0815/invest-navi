@@ -52,8 +52,36 @@ export const HorizontalWaterfallChart: React.FC<HorizontalWaterfallChartProps> =
         return () => clearTimeout(timer);
     }, []);
 
+    // 日本語の金額表記フォーマット（万単位まで含める）
+    const formatJapaneseFormal = (val: number, currentUnit: string) => {
+        let multiplier = 1;
+        if (currentUnit === "億円") multiplier = 100000000;
+        else if (currentUnit === "百万") multiplier = 1000000;
+        else if (currentUnit === "M") multiplier = 1000000;
+        else if (currentUnit === "千") multiplier = 1000;
+
+        let totalYen = Math.abs(val) * multiplier;
+
+        const trillions = Math.floor(totalYen / 1000000000000);
+        const remainderT = totalYen % 1000000000000;
+        const billions = Math.floor(remainderT / 100000000);
+        const remainderB = remainderT % 100000000;
+        const man = Math.floor(remainderB / 10000);
+
+        let parts = [];
+        if (trillions > 0) parts.push(`${trillions.toLocaleString()}兆`);
+        if (billions > 0) parts.push(`${billions.toLocaleString()}億`);
+        if (man > 0) parts.push(`${man.toLocaleString()}万`);
+
+        if (parts.length === 0) return "0円";
+        return parts.join("") + "円";
+    };
+
     // 数値フォーマット関数
     const formatValue = (value: number) => {
+        if (currency === "¥") {
+            return formatJapaneseFormal(value, unit);
+        }
         return `${currency}${Math.abs(value).toLocaleString()}${unit}`;
     };
 
@@ -61,26 +89,37 @@ export const HorizontalWaterfallChart: React.FC<HorizontalWaterfallChartProps> =
     const formatJapaneseYen = (value: number) => {
         if (!exchangeRate) return null;
 
+        // 外貨 -> 日本円換算
+        // まず元の単位に基づいて実際の数値に戻す
         let actualValue = Math.abs(value);
-        if (unit === "百万") {
+        if (unit.includes("百万") || unit === "M") {
             actualValue = actualValue * 1000000;
+        } else if (unit.includes("億")) {
+            actualValue = actualValue * 100000000;
         } else if (unit === "千") {
             actualValue = actualValue * 1000;
-        } else if (unit === "億") {
-            actualValue = actualValue * 100000000;
         }
 
         const yenValue = actualValue * exchangeRate;
 
-        if (yenValue >= 1000000000000) {
-            return `約${(yenValue / 1000000000000).toFixed(1)}兆円`;
-        } else if (yenValue >= 100000000) {
-            return `約${(yenValue / 100000000).toFixed(1)}億円`;
-        } else if (yenValue >= 10000) {
-            return `約${(yenValue / 10000).toFixed(0)}万円`;
-        } else {
-            return `約${yenValue.toLocaleString()}円`;
-        }
+        // YenValueは「円」単位の実数なので、これをフォーマットする
+        // formatJapaneseFormalは unitを受け取るので、生の円(unit="")として渡せば良いが、
+        // ロジックを再利用するために工夫する。
+        // ここでは直接フォーマットロジックを書くか、専用のヘルパーを呼ぶ。
+
+        const trillions = Math.floor(yenValue / 1000000000000);
+        const remainderT = yenValue % 1000000000000;
+        const billions = Math.floor(remainderT / 100000000);
+        const remainderB = remainderT % 100000000;
+        const man = Math.floor(remainderB / 10000);
+
+        let parts = [];
+        if (trillions > 0) parts.push(`${trillions.toLocaleString()}兆`);
+        if (billions > 0) parts.push(`${billions.toLocaleString()}億`);
+        if (man > 0) parts.push(`${man.toLocaleString()}万`);
+
+        if (parts.length === 0) return "約0円";
+        return `約${parts.join("")}円`;
     };
 
     // パーセンテージ計算

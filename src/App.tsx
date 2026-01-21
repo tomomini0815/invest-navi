@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Index from "./pages/Index";
+import Index2 from "./pages/Index2";
 import Comparison from "./pages/Comparison";
 import CryptoComparison from "./pages/CryptoComparison";
 import FXComparison from "./pages/FXComparison";
@@ -126,6 +127,7 @@ const App = () => (
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/top2" element={<Index2 />} />
           <Route path="/basics" element={<Basics />} />
           <Route path="/stocks" element={<Stocks />} />
           <Route path="/nisa" element={<Nisa />} />
