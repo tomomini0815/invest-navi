@@ -107,7 +107,7 @@ export const SurveyDiagnostic = ({ data, onSearch }: SurveyDiagnosticProps) => {
         <div className="w-full max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-xl bg-white border-2 border-orange-100">
             {/* Header - ORANGE BACKGROUND */}
             <div className="p-4 text-white text-center bg-gradient-to-r from-orange-500 to-red-500">
-                <h2 className="text-xl sm:text-2xl font-bold flex items-center justify-center gap-3 drop-shadow-md">
+                <h2 className="text-xl sm:text-2xl font-bold flex items-center justify-center gap-3 drop-shadow-md whitespace-nowrap">
                     <Search className="w-6 h-6" />
                     あなたの投資スタイルから診断
                 </h2>
@@ -145,7 +145,7 @@ export const SurveyDiagnostic = ({ data, onSearch }: SurveyDiagnosticProps) => {
                                 <div className="text-center mb-2">
                                     <h3 className="text-xl font-bold text-gray-800">Q1. 投資経験はありますか？</h3>
                                 </div>
-                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <div className="grid grid-cols-3 gap-2 sm:gap-3">
                                     {[
                                         { label: "初めて", icon: UserCircle2, val: "beginner", desc: "これから始める" },
                                         { label: "少しある", icon: Wallet, val: "intermediate", desc: "数回程度" },
@@ -154,7 +154,7 @@ export const SurveyDiagnostic = ({ data, onSearch }: SurveyDiagnosticProps) => {
                                         <button
                                             key={item.val}
                                             onClick={() => handleSelect("experience", item.val)}
-                                            className={`p-4 rounded-xl border-2 transition-all flex flex-col items-center gap-2 text-center group bg-white hover:shadow-md ${answers.experience === item.val
+                                            className={`p-2 sm:p-4 rounded-xl border-2 transition-all flex flex-col items-center gap-1 sm:gap-2 text-center group bg-white hover:shadow-md ${answers.experience === item.val
                                                 ? "border-orange-500 ring-1 ring-orange-500"
                                                 : "border-gray-200 hover:border-orange-300"
                                                 }`}
@@ -164,7 +164,7 @@ export const SurveyDiagnostic = ({ data, onSearch }: SurveyDiagnosticProps) => {
                                             </div>
                                             <div>
                                                 <div className={`font-bold text-lg ${answers.experience === item.val ? "text-orange-700" : "text-gray-700"}`}>{item.label}</div>
-                                                <div className="text-xs text-gray-400 mt-1">{item.desc}</div>
+                                                <div className="hidden sm:block text-xs text-gray-400 mt-1">{item.desc}</div>
                                             </div>
                                         </button>
                                     ))}
@@ -183,7 +183,7 @@ export const SurveyDiagnostic = ({ data, onSearch }: SurveyDiagnosticProps) => {
                                 <div className="text-center mb-2">
                                     <h3 className="text-xl font-bold text-gray-800">Q2. 重視するポイントは？</h3>
                                 </div>
-                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <div className="grid grid-cols-3 gap-2 sm:gap-3">
                                     {[
                                         { label: "コスト重視", val: "short", desc: "スプレッド・手数料" },
                                         { label: "金利収入", val: "long", desc: "スワップポイント" },
@@ -192,13 +192,13 @@ export const SurveyDiagnostic = ({ data, onSearch }: SurveyDiagnosticProps) => {
                                         <button
                                             key={item.val}
                                             onClick={() => handleSelect("style", item.val)}
-                                            className={`p-4 rounded-xl border-2 transition-all flex flex-col items-center gap-2 text-center group bg-white hover:shadow-md ${answers.style === item.val
+                                            className={`p-2 sm:p-4 rounded-xl border-2 transition-all flex flex-col items-center gap-1 sm:gap-2 text-center group bg-white hover:shadow-md ${answers.style === item.val
                                                 ? "border-orange-500 ring-1 ring-orange-500"
                                                 : "border-gray-200 hover:border-orange-300"
                                                 }`}
                                         >
                                             <div className={`font-bold text-lg ${answers.style === item.val ? "text-orange-700" : "text-gray-700"}`}>{item.label}</div>
-                                            <div className="text-xs text-gray-400">{item.desc}</div>
+                                            <div className="hidden sm:block text-xs text-gray-400">{item.desc}</div>
                                         </button>
                                     ))}
                                 </div>

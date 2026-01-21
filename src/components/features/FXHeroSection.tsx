@@ -13,9 +13,10 @@ const FXHeroSection = () => {
                 </div>
 
                 {/* Factual Title */}
-                <h1 className="text-xl sm:text-3xl md:text-4xl font-bold text-white mb-2 md:mb-3 tracking-wider flex items-end justify-center gap-2">
+                {/* Factual Title */}
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 md:mb-3 tracking-wider flex items-end justify-center gap-2 whitespace-nowrap">
                     <span
-                        className="bg-gradient-to-r from-orange-400 via-orange-500 to-red-500 bg-clip-text text-transparent text-2xl sm:text-4xl md:text-5xl font-black drop-shadow-xl"
+                        className="bg-gradient-to-r from-orange-400 via-orange-500 to-red-500 bg-clip-text text-transparent text-3xl sm:text-4xl md:text-5xl font-black drop-shadow-xl"
                     >
                         FX口座
                     </span>
