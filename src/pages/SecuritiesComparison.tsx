@@ -7,6 +7,7 @@ import { Company } from "@/components/features/SurveyDiagnostic";
 
 export const securitiesRankingList: Company[] = [
     {
+        id: "sbi",
         name: "SBI証券",
         points: ["口座開設数No.1 (1,200万口座超)", "国内株手数料0円 (条件達成で完全無料)", "Tポイント・Pontaポイント等が貯まる", "IPO取扱実績No.1"],
         campaignText: "口座開設でもれなく現金プレゼント + 最大10万円還元",
@@ -22,6 +23,7 @@ export const securitiesRankingList: Company[] = [
         affiliateUrl: "https://www.sbisec.co.jp/"
     },
     {
+        id: "rakuten",
         name: "楽天証券",
         points: ["楽天ポイントが貯まる・使える", "「マーケットスピード II」が無料", "SPUで楽天市場の買い物がお得", "投信積立のクレカ決済が人気"],
         campaignText: "投信積立で楽天ポイント最大1%還元",
@@ -37,6 +39,7 @@ export const securitiesRankingList: Company[] = [
         affiliateUrl: "https://www.rakuten-sec.co.jp/"
     },
     {
+        id: "monex",
         name: "マネックス証券",
         points: ["NISAでの売買手数料が無料", "dポイントが貯まる", "米国株に強い", "銘柄スカウターが優秀"],
         campaignText: "d払い連携で20%還元キャンペーン",
@@ -52,6 +55,7 @@ export const securitiesRankingList: Company[] = [
         affiliateUrl: "https://www.monex.co.jp/"
     },
     {
+        id: "matsui",
         name: "松井証券",
         points: ["1日の約定50万円まで無料", "創業100年以上の歴史と信頼", "サポート体制が充実 (AIチャット等)", "IPO資金拘束なし"],
         campaignText: "NISA口座開設で最大〇〇ポイント",
@@ -67,6 +71,7 @@ export const securitiesRankingList: Company[] = [
         affiliateUrl: "https://www.matsui.co.jp/"
     },
     {
+        id: "au",
         name: "auカブコム証券",
         points: ["Pontaポイントが貯まる・使える", "三菱UFJグループの安心感", "プチ株 (単元未満株) が便利", "25歳以下 手数料無料"],
         campaignText: "口座開設キャンペーン実施中",
@@ -82,6 +87,7 @@ export const securitiesRankingList: Company[] = [
         affiliateUrl: "https://kabu.com/"
     },
     {
+        id: "gmo",
         name: "GMOクリック証券",
         points: ["国内株手数料が完全無料 (1日定額)", "CFD取引高 国内No.1", "高機能ツール「はっちゅう君」", "貸株サービスも充実"],
         campaignText: "FX/CFD口座開設で最大特典あり",
@@ -97,6 +103,7 @@ export const securitiesRankingList: Company[] = [
         affiliateUrl: "https://www.click-sec.com/"
     },
     {
+        id: "dmm",
         name: "DMM株 (DMM.com証券)",
         points: ["米国株の手数料が0円", "DMMポイントが貯まる (1%還元)", "25歳以下 国内株手数料実質無料", "最短即日取引開始"],
         campaignText: "米国株 信用取引手数料0円キャンペーン",
@@ -112,6 +119,7 @@ export const securitiesRankingList: Company[] = [
         affiliateUrl: "https://kabu.dmm.com/"
     },
     {
+        id: "ig",
         name: "IG証券",
         points: ["CFD銘柄数 17,000以上 (世界No.1)", "米国株・欧州株もCFDで取引", "ノックアウトオプション", "プロ級のチャートツール"],
         campaignText: "口座開設+取引で最大5万円キャッシュバック",
@@ -127,6 +135,7 @@ export const securitiesRankingList: Company[] = [
         affiliateUrl: "https://www.ig.com/jp"
     },
     {
+        id: "moomoo",
         name: "moomoo証券",
         points: ["米国株手数料 業界最安水準", "日本株手数料 完全無料", "機関投資家級の分析ツール", "24時間取引対応"],
         campaignText: "口座開設+入金で最大10万円相当株プレゼント",
@@ -142,6 +151,7 @@ export const securitiesRankingList: Company[] = [
         affiliateUrl: "https://www.moomoo.com/jp"
     },
     {
+        id: "paypay",
         name: "PayPay証券",
         points: ["100円から株が買える", "PayPayポイントで投資可能", "スマホで完結・初心者向け", "NISAも100円から"],
         campaignText: "投資デビュー応援キャンペーン実施中",
@@ -525,6 +535,7 @@ const SecuritiesComparison = () => {
                     <RankingCardV2
                         key={item.name}
                         {...item}
+                        id={item.id}
                         rating={4.5} // Placeholder
                         affiliateUrl={item.affiliateUrl}
                         detailUrl={item.affiliateUrl} // Direct to affiliate for now or generic detail

@@ -18,11 +18,12 @@ const Articles = () => {
   const articles = [
     {
       id: "ai-investment-fundamentals",
+      type: "article",
       title: "AI投資の基礎知識：アルゴリズム取引からロボアドバイザーまで完全解説",
       excerpt: "AIがどのように投資に活用されているのか、基礎から実践的な活用法まで詳しく解説します。初心者から上級者まで使えるAI投資手法を徹底紹介。",
       category: "投資AI",
       date: "2025年11月3日",
-      isNew: true,
+      isNew: false,
       isPopular: true,
       content: `
         <div class="prose max-w-none">
@@ -153,6 +154,39 @@ const Articles = () => {
           </div>
         </div>
       `,
+    },
+    {
+      id: "nisa-beginner",
+      type: "guide",
+      title: "【2026年最新】NISA完全ガイド：初心者が知るべき全て",
+      excerpt: "非課税枠が1,800万円に拡大！2026年現在、資産形成のスタンダードとなった「新NISA」の仕組み・メリット・失敗しない始め方を、どこよりも分かりやすく解説。",
+      category: "NISA",
+      date: "2026年1月22日",
+      isNew: true,
+      isPopular: true,
+      content: ""
+    },
+    {
+      id: "stocks-beginner",
+      type: "guide",
+      title: "株式投資の始め方：知識ゼロから月5万円稼ぐロードマップ",
+      excerpt: "「株って難しそう...」そんな常識を覆します。株主優待、配当金、値上がり益の3つのメリットと、初心者が陥りがちなリスク回避法を完全ガイド。",
+      category: "株式投資",
+      date: "2026年1月22日",
+      isNew: true,
+      isPopular: true,
+      content: ""
+    },
+    {
+      id: "investment-trust",
+      type: "guide",
+      title: "投資信託の仕組みと選び方：プロに任せる失敗しない資産運用",
+      excerpt: "100円からプロにお任せ！「インデックス」と「アクティブ」の違いは？手数料で損しないための選び方とは？初心者におすすめのファンドも紹介。",
+      category: "投資信託",
+      date: "2026年1月22日",
+      isNew: true,
+      isPopular: true,
+      content: ""
     },
     {
       id: "crypto-trends-2024",
@@ -367,7 +401,7 @@ const Articles = () => {
       excerpt: "移動平均線、RSI、MACDなど主要なテクニカル指標の使い方と活用ポイントを徹底解説。チャート分析の基本をマスターして投資スキルをアップさせましょう。",
       category: "インジケータ",
       date: "2025年11月3日",
-      isNew: true,
+      isNew: false,
       isPopular: true,
       content: `
         <div class="prose max-w-none">
@@ -559,7 +593,7 @@ const Articles = () => {
       excerpt: "無料で使える人気チャート分析ツール「トレーディングビュー」の基本操作を解説します。",
       category: "トレーディングビュー",
       date: "2025年11月3日",
-      isNew: true,
+      isNew: false,
       isPopular: true,
       content: `
         <div class="prose max-w-none">
@@ -820,13 +854,13 @@ const Articles = () => {
   // 記事をフィルタリングして並べ替えるロジック
   const filteredAndSortedArticles = useMemo(() => {
     // カテゴリでフィルタリング
-    let filtered = selectedCategory === "all" 
-      ? articles 
+    let filtered = selectedCategory === "all"
+      ? articles
       : articles.filter(article => article.category === selectedCategory);
-    
+
     // 並べ替え
     let sorted = [...filtered];
-    
+
     switch (sortOption) {
       case "newest":
         // 新着順（日付の降順）
@@ -862,7 +896,7 @@ const Articles = () => {
       default:
         break;
     }
-    
+
     return sorted;
   }, [articles, sortOption, selectedCategory]);
 
@@ -873,7 +907,7 @@ const Articles = () => {
         <meta name="description" content="最新の投資ニュース、テクニカル分析、投資戦略に関する記事を掲載しています。" />
         <meta name="keywords" content="投資,資産運用,株式投資,NISA,暗号資産,FX,投資信託,投資戦略" />
         <link rel="canonical" href="https://www.toushi-navi.com/articles" />
-        
+
         {/* Open Graph */}
         <meta property="og:title" content="投資記事一覧 | 投資総合ナビ" />
         <meta property="og:description" content="最新の投資ニュース、テクニカル分析、投資戦略に関する記事を掲載しています。" />
@@ -881,20 +915,20 @@ const Articles = () => {
         <meta property="og:url" content="https://www.toushi-navi.com/articles" />
         <meta property="og:site_name" content="投資総合ナビ" />
         <meta property="og:locale" content="ja_JP" />
-        
+
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@toushi_navi" />
       </Helmet>
-      
+
       <Header />
-      
+
       <main className="flex-grow">
         {/* Breadcrumb */}
         <div className="bg-gradient-to-r from-muted/50 to-muted/30 py-4 border-b">
           <div className="container mx-auto px-8">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors group"
             >
               <ArrowLeft className="h-4 w-4 mr-1 group-hover:-translate-x-1 transition-transform" />
@@ -931,17 +965,16 @@ const Articles = () => {
                     <button
                       key={category}
                       onClick={() => setSelectedCategory(category)}
-                      className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
-                        selectedCategory === category
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-muted text-muted-foreground hover:bg-muted/80"
-                      }`}
+                      className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${selectedCategory === category
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-muted text-muted-foreground hover:bg-muted/80"
+                        }`}
                     >
                       {category === "all" ? "すべて" : category}
                     </button>
                   ))}
                 </div>
-                
+
                 {/* 並べ替えセレクトボックス */}
                 <div className="relative">
                   <select
@@ -961,7 +994,7 @@ const Articles = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredAndSortedArticles.map((article) => (
                   <Card key={article.id} className="overflow-hidden border-2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-card/50">
@@ -991,13 +1024,19 @@ const Articles = () => {
                         )}
                       </div>
                       <div className="flex gap-2 mt-6">
-                        <button 
+                        <button
                           className="flex-1 px-4 py-2 bg-blue-100 text-primary rounded-md hover:bg-blue-200 transition-colors"
-                          onClick={() => navigate(`/articles/${article.id}`)}
+                          onClick={() => {
+                            if (article.type === 'guide') {
+                              navigate(`/guide/${article.id}`);
+                            } else {
+                              navigate(`/articles/${article.id}`);
+                            }
+                          }}
                         >
                           記事を読む
                         </button>
-                        <button 
+                        <button
                           className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
                           onClick={() => {
                             setCurrentArticle(article);
@@ -1021,7 +1060,7 @@ const Articles = () => {
             <div className="bg-white rounded-xl p-6 w-full max-w-md">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-bold">記事を共有</h3>
-                <button 
+                <button
                   onClick={() => setShowShareModal(false)}
                   className="text-gray-500 hover:text-gray-700"
                 >
@@ -1030,8 +1069,8 @@ const Articles = () => {
               </div>
               <p className="text-muted-foreground mb-6">共有先を選択してください</p>
               <div className="grid grid-cols-2 gap-4">
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="flex flex-col items-center justify-center h-24 gap-2"
                   onClick={() => {
                     window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.origin + '/articles/' + currentArticle.id)}&text=${encodeURIComponent(currentArticle.title)}`, '_blank');
@@ -1041,8 +1080,8 @@ const Articles = () => {
                   <X className="h-8 w-8 text-black" />
                   <span>X (Twitter)</span>
                 </Button>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="flex flex-col items-center justify-center h-24 gap-2"
                   onClick={() => {
                     window.open(`https://www.instagram.com/?url=${encodeURIComponent(window.location.origin + '/articles/' + currentArticle.id)}`, '_blank');
@@ -1052,8 +1091,8 @@ const Articles = () => {
                   <Instagram className="h-8 w-8" />
                   <span>Instagram</span>
                 </Button>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="flex flex-col items-center justify-center h-24 gap-2"
                   onClick={() => {
                     window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.origin + '/articles/' + currentArticle.id)}`, '_blank');
@@ -1063,8 +1102,8 @@ const Articles = () => {
                   <Facebook className="h-8 w-8 text-blue-600" />
                   <span>Facebook</span>
                 </Button>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="flex flex-col items-center justify-center h-24 gap-2"
                   onClick={() => {
                     window.open(`https://line.me/R/msg/text/?${encodeURIComponent(currentArticle.title + ' ' + window.location.origin + '/articles/' + currentArticle.id)}`, '_blank');

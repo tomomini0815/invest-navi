@@ -67,16 +67,16 @@ export const FxStartGuide = ({
                 </span>
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
                     {guideTitle ? (
-                        guideTitle.includes("3 STEP") ? (
+                        guideTitle.includes("3STEP") ? (
                             <>
-                                {guideTitle.replace(" 3 STEP", "")} <span className="text-emerald-600">3 STEP</span>
+                                {guideTitle.replace("3STEP", "")}<span className="text-emerald-600">3STEP</span>
                             </>
                         ) : (
                             guideTitle
                         )
                     ) : (
                         <>
-                            {companyName}の始め方 <span className="text-emerald-600">3 STEP</span>
+                            {companyName}の始め方 <span className="text-emerald-600">3STEP</span>
                         </>
                     )}
                 </h2>

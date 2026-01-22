@@ -271,6 +271,7 @@ const CryptoComparison = () => {
       renderRankingCard={(item, index) => (
         <RankingCardV2
           key={item.id}
+          id={item.id}
           rank={index + 1}
           name={item.name}
           rating={item.rating || 0}

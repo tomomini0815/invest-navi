@@ -2,18 +2,22 @@ import Header from "@/components/layout/Header";
 import TickerTape from "@/components/features/TickerTape";
 import HeroSection from "@/components/features/HeroSection";
 import CategoryCard from "@/components/features/CategoryCard";
-import RankingCard from "@/components/features/RankingCard";
 import InvestmentDiagnostic from "@/components/features/InvestmentDiagnostic";
 import { Helmet } from "react-helmet-async";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, ArrowRight, BookOpen, TrendingUp, PieChart, LineChart, Coins, Calculator } from "lucide-react";
+import { Calendar, ArrowRight, BookOpen, TrendingUp, PieChart, LineChart, Coins, Calculator, CheckCircle, ExternalLink, Trophy } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { tools } from "@/data/tools";
+
+// Import Ranking Data
+import { securitiesRankingList } from "@/pages/SecuritiesComparison";
+import { fxRankingList } from "@/pages/FXComparison";
+import { cryptoRankingList } from "@/pages/CryptoComparison";
 
 const Index = () => {
   const location = useLocation();
@@ -63,288 +67,44 @@ const Index = () => {
     },
   ];
 
-  const rankings = [
-    {
-      rank: 1,
-      name: "SBI証券",
-      features: [
-        "国内株式・米国株式手数料が業界最安水準（0円）",
-        "取扱商品が豊富で初心者にも最適",
-        "Tポイント・Vポイントで投資が可能",
-      ],
-      commission: "スタンダードプラン: 55円〜(現物取引 5万円以下)\nアクティブプラン: 約定代金合計100万円まで0円",
-      minInvestment: "原則100株 単元未満株(「S株」)1株〜可",
-      nisaSupport: true,
-      ipoCount: 80,
-      foreignStocks: true,
-      points: "Tポイント・Vポイントなどを連携可能",
-      rating: 5,
-      highlight: "総合1位",
-      affiliateUrl: "https://www.sbisec.co.jp/",
-      detailUrl: "/securities/sbi-pro",
-    },
-    {
-      rank: 2,
-      name: "楽天証券",
-      features: [
-        "楽天ポイントが貯まる・使える",
-        "取引ツールが使いやすい",
-        "楽天銀行との連携でお得",
-      ],
-      commission: "超割コース: 55円〜(現物取引 5万円以下)\nいちにち定額コース: 0円〜",
-      minInvestment: "原則100株 単元未満株(「いちかぶ」)1株〜可",
-      nisaSupport: true,
-      ipoCount: 70,
-      foreignStocks: true,
-      points: "楽天ポイントの獲得・利用可",
-      rating: 5,
-      highlight: "ポイント還元No.1",
-      affiliateUrl: "https://www.rakuten-sec.co.jp/",
-      detailUrl: "/securities/rakuten-pro",
-    },
-    {
-      rank: 3,
-      name: "マネックス証券",
-      features: [
-        "米国株の取扱銘柄数が豊富",
-        "投資情報・レポートが充実",
-        "dポイントで1.1%ポイント還元",
-      ],
-      commission: "取引毎手数料: 99円〜(現物取引 10万円以下)\n一日定額手数料コース: 0円〜",
-      minInvestment: "原則100株 単元未満株(「ワン株」)1株〜可",
-      nisaSupport: true,
-      ipoCount: 50,
-      foreignStocks: true,
-      points: "独自のマネックスポイント",
-      rating: 4,
-      highlight: "米国株取引におすすめ",
-      affiliateUrl: "https://www.monex.co.jp/",
-      detailUrl: "/securities/monex-pro",
-    },
-  ];
-
-  // 国内暗号資産取引所ランキング
-  const domesticCryptoExchanges = [
-    {
-      rank: 1,
-      name: "GMOコイン",
-      features: [
-        "入出金・送金の無料範囲が広い",
-        "板の流動性が高め",
-        "APIが安定",
-      ],
-      tradingFee: "Maker -0.01% / Taker 0.05% 程度",
-      withdrawalFee: "入金: 無料（即時入金対応）/ 出金: 無料",
-      supportedCoins: 30,
-      security: "コールド保管、二段階認証、分別管理、システム冗長化",
-      rating: 5,
-      highlight: "手数料最安",
-      affiliateUrl: "https://coin.z.com/jp/",
-    },
-    {
-      rank: 2,
-      name: "bitFlyer",
-      features: [
-        "老舗・口座数多い",
-        "板の厚み",
-        "Lightning（高機能板）",
-      ],
-      tradingFee: "0.01%～0.15% 程度（Lightning現物、出来高連動）",
-      withdrawalFee: "入金: 無料～330円、出金: 220円～770円",
-      supportedCoins: 45,
-      security: "コールド保管、2FA、出金ホワイトリスト、ISMS",
-      rating: 5,
-      highlight: "実績No.1",
-      affiliateUrl: "https://bitflyer.com/ja-jp/",
-    },
-    {
-      rank: 3,
-      name: "Coincheck",
-      features: [
-        "アプリ利用者数が多い",
-        "NFTマーケット連携",
-        "UIが分かりやすい",
-      ],
-      tradingFee: "取引所（BTC等）0% 例あり / 販売所は—（スプレッド）",
-      withdrawalFee: "入金: 無料～1,018円、出金: 407円",
-      supportedCoins: 30,
-      security: "コールド保管、2FA、分別管理",
-      rating: 4,
-      highlight: "初心者向け",
-      affiliateUrl: "https://coincheck.com/ja/",
-    },
-  ];
-
-  // 国外暗号資産取引所ランキング
-  const internationalCryptoExchanges = [
-    {
-      rank: 1,
-      name: "Binance",
-      features: [
-        "流動性最大級",
-        "先物/オプション",
-        "Earn/Launchpad",
-      ],
-      tradingFee: "現物: 約0.10%/0.10%、先物: 約0.02%/0.04%",
-      withdrawalFee: "暗号資産入金: 無料 / 出金: ネットワーク手数料",
-      supportedCoins: 350,
-      security: "PoR公表、コールド保管、2FA、出金ホワイトリスト、バグバウンティ",
-      rating: 5,
-      highlight: "世界最大",
-      affiliateUrl: "https://www.binance.com/",
-    },
-    {
-      rank: 2,
-      name: "OKX",
-      features: [
-        "先物・オプション強い",
-        "OKX Wallet/DeFi連携",
-        "Earn/Jumpstart",
-      ],
-      tradingFee: "現物: 約0.08%/0.10%、先物: 約0.02%/0.05%",
-      withdrawalFee: "暗号資産入金: 無料 / 出金: ネットワーク手数料",
-      supportedCoins: 350,
-      security: "PoR公表、MPCウォレット、コールド保管、2FA",
-      rating: 4,
-      highlight: "先物取引",
-      affiliateUrl: "https://www.okx.com/",
-    },
-    {
-      rank: 3,
-      name: "Bybit",
-      features: [
-        "デリバティブの板厚",
-        "コピー取引",
-        "Earn",
-      ],
-      tradingFee: "現物: 約0.10%/0.10%、先物: 約0.02%/0.055（目安）",
-      withdrawalFee: "暗号資産入金: 無料 / 出金: ネットワーク手数料",
-      supportedCoins: 400,
-      security: "PoR公表、コールド保管、2FA、出金ホワイトリスト",
-      rating: 4,
-      highlight: "copy trading",
-      affiliateUrl: "https://www.bybit.com/",
-    },
-  ];
-
-  // 国内FX業者ランキング
-  const domesticFxBrokers = [
-    {
-      rank: 1,
-      name: "GMOクリック証券（FXネオ）",
-      features: [
-        "FX取引高世界第1位",
-        "高機能取引ツール",
-        "低スプレッド",
-      ],
-      spread: "米ドル/円 0.2銭原則固定",
-      minTradeUnit: "1,000通貨",
-      currencyPairs: 20,
-      swapPoints: "ドル円: -230円/+230円\nポンド円: -280円/+280円\nユーロ円: -210円/+210円",
-      scalping: "非推奨（明記なし）",
-      rating: 5,
-      highlight: "総合1位",
-      affiliateUrl: "https://www.click-sec.com/corp/guide/fxneo/",
-    },
-    {
-      rank: 2,
-      name: "DMM FX",
-      features: [
-        "LINEサポート対応",
-        "最短当日取引開始",
-        "スワップポイントが高い",
-      ],
-      spread: "米ドル/円 0.2銭原則固定",
-      minTradeUnit: "10,000通貨",
-      currencyPairs: 21,
-      swapPoints: "ドル円: -225円/+225円\nポンド円: -270円/+270円\nユーロ円: -205円/+205円",
-      scalping: "非推奨",
-      rating: 5,
-      highlight: "初心者向け",
-      affiliateUrl: "https://fx.dmm.com/",
-    },
-    {
-      rank: 3,
-      name: "SBI FXトレード",
-      features: [
-        "業界最狭水準スプレッド",
-        "1通貨から取引可能",
-        "スワップポイントが高い",
-      ],
-      spread: "米ドル/円 0.18銭～",
-      minTradeUnit: "1通貨",
-      currencyPairs: 34,
-      swapPoints: "ドル円: -240円/+240円\nポンド円: -290円/+290円\nユーロ円: -215円/+215円",
-      scalping: "可能",
-      rating: 5,
-      highlight: "スプレッド最安",
-      affiliateUrl: "https://www.sbifxt.co.jp/",
-    },
-  ];
-
-  // 国外FX業者ランキング
-  const internationalFxBrokers = [
-    {
-      rank: 1,
-      name: "XMTrading（エックスエム）",
-      features: [
-        "最大1000倍レバレッジ",
-        "豪華ボーナス",
-        "日本語サポート完備",
-      ],
-      spread: "米ドル/円 1.6pips（スタンダード口座）",
-      minTradeUnit: "0.01ロット（1,000通貨）",
-      currencyPairs: 57,
-      swapPoints: "ドル円: -8.5/+2.5USD\nポンド円: -12.3/+3.8USD\nユーロ円: -10.2/+3.1USD",
-      scalping: "可能",
-      rating: 5,
-      highlight: "世界最大",
-      affiliateUrl: "https://www.xmtrading.com/",
-    },
-    {
-      rank: 2,
-      name: "FXGT（エフエックスジーティー）",
-      features: [
-        "最大1000倍レバレッジ",
-        "仮想通貨FXに強い",
-        "充実のボーナス",
-      ],
-      spread: "米ドル/円 1.5pips（スタンダード+口座）",
-      minTradeUnit: "0.01ロット（1,000通貨）",
-      currencyPairs: 53,
-      swapPoints: "ドル円: -7.8/+2.2USD\nポンド円: -11.5/+3.5USD\nユーロ円: -9.8/+2.9USD",
-      scalping: "可能",
-      rating: 5,
-      highlight: "仮想通貨FX",
-      affiliateUrl: "https://fxgt.com/",
-    },
-    {
-      rank: 3,
-      name: "Exness（エクスネス）",
-      features: [
-        "無制限レバレッジ",
-        "低スプレッド",
-        "高速約定",
-      ],
-      spread: "米ドル/円 1.1pips（スタンダード口座）",
-      minTradeUnit: "0.01ロット（1,000通貨）",
-      currencyPairs: 95,
-      swapPoints: "ドル円: -6.9/+1.8USD\nポンド円: -10.2/+2.9USD\nユーロ円: -8.5/+2.3USD",
-      scalping: "可能",
-      rating: 5,
-      highlight: "低スプレッド",
-      affiliateUrl: "https://www.exness.com/",
-    },
-  ];
-
   const articles = [
+    {
+      id: "nisa-beginner",
+      type: "guide",
+      title: "【2026年最新】NISA完全ガイド：初心者が知るべき全て",
+      excerpt: "非課税枠が1,800万円に拡大！2026年現在、資産形成のスタンダードとなった「新NISA」の仕組み・メリット・失敗しない始め方を、どこよりも分かりやすく解説。",
+      category: "NISA",
+      date: "2026年1月22日",
+      isNew: true,
+      isPopular: true,
+    },
+    {
+      id: "stocks-beginner",
+      type: "guide",
+      title: "株式投資の始め方：知識ゼロから月5万円稼ぐロードマップ",
+      excerpt: "「株って難しそう...」そんな常識を覆します。株主優待、配当金、値上がり益の3つのメリットと、初心者が陥りがちなリスク回避法を完全ガイド。",
+      category: "株式投資",
+      date: "2026年1月22日",
+      isNew: true,
+      isPopular: true,
+    },
+    {
+      id: "investment-trust",
+      type: "guide",
+      title: "投資信託の仕組みと選び方：プロに任せる失敗しない資産運用",
+      excerpt: "100円からプロにお任せ！「インデックス」と「アクティブ」の違いは？手数料で損しないための選び方とは？初心者におすすめのファンドも紹介。",
+      category: "投資信託",
+      date: "2026年1月22日",
+      isNew: true,
+      isPopular: true,
+    },
     {
       id: "ai-investment-fundamentals",
       title: "AI投資の基礎知識：アルゴリズム取引からロボアドバイザーまで完全解説",
       excerpt: "AIがどのように投資に活用されているのか、基礎から実践的な活用法まで詳しく解説します。初心者から上級者まで使えるAI投資手法を徹底紹介。",
       category: "投資AI",
       date: "2025年11月3日",
-      isNew: true,
+      isNew: false,
       isPopular: true,
     },
     {
@@ -353,7 +113,7 @@ const Index = () => {
       excerpt: "初心者から上級者まで使える主要なテクニカル指標を解説します。",
       category: "インジケータ",
       date: "2025年11月3日",
-      isNew: true,
+      isNew: false,
       isPopular: true,
     },
     {
@@ -362,7 +122,7 @@ const Index = () => {
       excerpt: "無料で使える人気チャート分析ツール「トレーディングビュー」の基本操作を解説します。",
       category: "トレーディングビュー",
       date: "2025年11月3日",
-      isNew: true,
+      isNew: false,
       isPopular: true,
     },
     {
@@ -449,10 +209,6 @@ const Index = () => {
     },
   ];
 
-  const [activeTab, setActiveTab] = useState<"domestic" | "international">("domestic");
-  const [activeFxTab, setActiveFxTab] = useState<"domestic" | "international">("domestic");
-  const [activeCryptoTab, setActiveCryptoTab] = useState<'domestic' | 'international'>('domestic');
-
   // ページ遷移後に投資診断セクションにスクロールする
   useEffect(() => {
     // NISAページからの遷移の場合
@@ -480,6 +236,45 @@ const Index = () => {
       return () => clearTimeout(timer);
     }
   }, [location.state, location.hash]);
+
+  // Recommended Card Component
+  const RecommendedCard = ({ item, categoryPath }: { item: any, categoryPath: string }) => (
+    <Card className="h-full hover:shadow-lg transition-shadow flex flex-col overflow-hidden border-2 border-orange-100">
+
+      {/* Badge Section - Matching the image style */}
+      <div className="w-fit bg-gradient-to-r from-orange-400 to-red-500 text-white px-4 py-1.5 flex items-center gap-2 font-bold text-sm rounded-br-2xl shadow-sm">
+        <Trophy className="w-4 h-4 text-yellow-200 fill-yellow-200" />
+        <span>{item.badgeText || "おすすめ！"}</span>
+      </div>
+
+      <CardContent className="p-6 flex-grow flex flex-col pt-4">
+
+        <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4 line-clamp-2 h-14 flex items-center">
+          {item.name}
+        </h3>
+
+        <div className="space-y-3 mb-6 flex-grow">
+          {item.points.map((point: string, i: number) => (
+            <div key={i} className="flex items-start gap-2">
+              <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+              <span className="text-sm text-gray-600 font-medium leading-tight">{point}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-auto pt-4 border-t border-gray-100">
+          <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold mb-3" onClick={() => window.open(item.affiliateUrl, '_blank')}>
+            公式サイトを見る <ExternalLink className="ml-2 w-4 h-4" />
+          </Button>
+          <div className="text-center">
+            <Link to={`${categoryPath}#${item.id || ""}`} className="text-xs text-gray-500 underline hover:text-emerald-600">
+              詳細を見る
+            </Link>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
 
   return (
     <div className="min-h-screen bg-background">
@@ -575,188 +370,92 @@ const Index = () => {
           </div>
         </section>
 
-        {/* 証券会社ランキングセクション */}
-        <section className="py-16 sm:py-20 bg-muted/30">
+        {/* 証券会社 おすすめポイントセクション */}
+        <section className="py-16 sm:py-20">
           <div className="container mx-auto px-8">
-            <div className="text-center mb-12 sm:mb-16">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-4">証券会社比較ランキング</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                手数料やサービス内容を比較して、あなたに最適な証券会社を選びましょう
-              </p>
+            <div className="flex flex-row items-end justify-between mb-8 gap-4">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 flex items-center gap-3">
+                  <span className="bg-emerald-100 text-emerald-800 text-sm font-bold px-3 py-1 rounded-full">ネット証券</span>
+                  おすすめ口座
+                </h2>
+                <p className="text-gray-500 mt-2">手数料の安さやポイント還元で選ぶならこの3社</p>
+              </div>
+              <Link to="/securities-comparison" className="text-emerald-600 font-bold flex items-center hover:underline whitespace-nowrap">
+                全てを見る <ArrowRight className="ml-1 w-4 h-4" />
+              </Link>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-              {rankings.map((ranking) => (
-                <RankingCard key={ranking.rank} {...ranking} />
+            <div className="grid md:grid-cols-3 gap-6">
+              {securitiesRankingList.slice(0, 3).map((item, index) => (
+                <RecommendedCard key={index} item={item} categoryPath="/securities-comparison" />
               ))}
-            </div>
-            <div className="text-center mt-10">
-              <a
-                href="/comparison"
-                className="inline-flex items-center justify-center px-8 py-4 text-white rounded-xl hover:opacity-90 transition-all duration-300 text-lg font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 whitespace-nowrap"
-                style={{ backgroundColor: '#10B77F' }}
-              >
-                詳細比較を見る
-                <svg
-                  className="ml-3 h-6 w-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </a>
             </div>
           </div>
         </section>
 
-        {/* FX業者ランキングセクション */}
+        {/* FX おすすめポイントセクション */}
         <section className="py-16 sm:py-20 bg-muted/30">
           <div className="container mx-auto px-8">
-            <div className="text-center mb-12 sm:mb-16">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-4">FX業者ランキング</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                スプレッド・スワップポイント・使いやすさを比較して、最適なFX業者を選びましょう
-              </p>
-            </div>
-
-            {/* 国内外の切替ボタン */}
-            <div className="flex justify-center mb-10">
-              <div className="inline-flex rounded-md shadow-sm" role="group">
-                <button
-                  type="button"
-                  className={`px-6 py-3 text-base font-medium rounded-l-lg border ${activeTab === 'domestic'
-                    ? 'bg-primary text-white border-primary'
-                    : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100'
-                    }`}
-                  onClick={() => setActiveTab('domestic')}
-                >
-                  国内業者
-                </button>
-                <button
-                  type="button"
-                  className={`px-6 py-3 text-base font-medium rounded-r-lg border ${activeTab === 'international'
-                    ? 'bg-primary text-white border-primary'
-                    : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100'
-                    }`}
-                  onClick={() => setActiveTab('international')}
-                >
-                  海外業者
-                </button>
+            <div className="flex flex-row items-end justify-between mb-8 gap-4">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 flex items-center gap-3">
+                  <span className="bg-blue-100 text-blue-800 text-sm font-bold px-3 py-1 rounded-full">FX</span>
+                  おすすめ口座
+                </h2>
+                <p className="text-gray-500 mt-2">スプレッドの狭さとツールの使いやすさが決め手</p>
               </div>
+              <Link to="/fx-comparison" className="text-blue-600 font-bold flex items-center hover:underline whitespace-nowrap">
+                全てを見る <ArrowRight className="ml-1 w-4 h-4" />
+              </Link>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-              {(activeTab === 'domestic' ? domesticFxBrokers : internationalFxBrokers).map((broker) => (
-                <RankingCard key={broker.rank} {...broker} />
+            <div className="grid md:grid-cols-3 gap-6">
+              {fxRankingList.slice(0, 3).map((item, index) => (
+                <RecommendedCard key={index} item={item} categoryPath="/fx-comparison" />
               ))}
-            </div>
-            <div className="text-center mt-10">
-              <a
-                href="/fx-comparison"
-                className="inline-flex items-center justify-center px-8 py-4 text-white rounded-xl hover:opacity-90 transition-all duration-300 text-lg font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 whitespace-nowrap"
-                style={{ backgroundColor: '#10B77F' }}
-              >
-                詳細比較を見る
-                <svg
-                  className="ml-3 h-6 w-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </a>
             </div>
           </div>
         </section>
 
-        {/* 暗号資産取引所ランキング */}
-        <section className="py-16 sm:py-20 bg-muted/30">
+        {/* 暗号資産 おすすめポイントセクション */}
+        <section className="py-16 sm:py-20">
           <div className="container mx-auto px-8">
-            <div className="text-center mb-12 sm:mb-16">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-4">暗号資産取引所ランキング</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                海外の人気暗号資産取引所を比較ランキング形式でご紹介
-              </p>
-            </div>
-
-            {/* 海外の切替ボタン */}
-            <div className="flex justify-center mb-10">
-              <div className="inline-flex rounded-md shadow-sm" role="group">
-                <button
-                  type="button"
-                  className={`px-6 py-3 text-base font-medium rounded-l-lg border ${activeCryptoTab === 'domestic'
-                    ? 'bg-primary text-white border-primary'
-                    : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100'
-                    }`}
-                  onClick={() => setActiveCryptoTab('domestic')}
-                >
-                  国内取引所
-                </button>
-                <button
-                  type="button"
-                  className={`px-6 py-3 text-base font-medium rounded-r-lg border ${activeCryptoTab === 'international'
-                    ? 'bg-primary text-white border-primary'
-                    : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100'
-                    }`}
-                  onClick={() => setActiveCryptoTab('international')}
-                >
-                  海外取引所
-                </button>
+            <div className="flex flex-row items-end justify-between mb-8 gap-4">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 flex items-center gap-3">
+                  <span className="bg-purple-100 text-purple-800 text-sm font-bold px-3 py-1 rounded-full">暗号資産</span>
+                  おすすめ取引所
+                </h2>
+                <p className="text-gray-500 mt-2">取扱通貨数とアプリの使いやすさで厳選</p>
               </div>
+              <Link to="/crypto-comparison" className="text-purple-600 font-bold flex items-center hover:underline whitespace-nowrap">
+                全てを見る <ArrowRight className="ml-1 w-4 h-4" />
+              </Link>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-              {(activeCryptoTab === 'domestic' ? domesticCryptoExchanges : internationalCryptoExchanges).map((exchange) => (
-                <RankingCard key={exchange.rank} {...exchange} />
+            <div className="grid md:grid-cols-3 gap-6">
+              {cryptoRankingList.slice(0, 3).map((item, index) => (
+                <RecommendedCard key={index} item={item} categoryPath="/crypto-comparison" />
               ))}
-            </div>
-            <div className="text-center mt-10">
-              <a
-                href="/crypto-comparison"
-                className="inline-flex items-center justify-center px-8 py-4 text-white rounded-xl hover:opacity-90 transition-all duration-300 text-lg font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 whitespace-nowrap"
-                style={{ backgroundColor: '#10B77F' }}
-              >
-                詳細比較を見る
-                <svg
-                  className="ml-3 h-6 w-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </a>
             </div>
           </div>
         </section>
 
         {/* 新着記事セクション */}
-        <section className="py-16 sm:py-20">
+        <section className="py-16 sm:py-20 bg-muted/30">
           <div className="container mx-auto px-8">
-            <div className="text-center mb-12 sm:mb-16">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-4">新着記事</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                最新の投資ニュースやテクニカル分析をチェック
-              </p>
+            <div className="flex flex-row items-end justify-between mb-8 gap-4">
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold mb-2">新着記事</h2>
+                <p className="text-muted-foreground">
+                  最新の投資ニュースやテクニカル分析をチェック
+                </p>
+              </div>
+              <Link
+                to="/articles"
+                className="text-blue-600 font-bold flex items-center hover:underline whitespace-nowrap"
+              >
+                すべての記事を見る
+                <ArrowRight className="ml-1 w-4 h-4" />
+              </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {articles
@@ -774,7 +473,10 @@ const Index = () => {
                         )}
                       </div>
                       <CardTitle className="text-xl line-clamp-2">
-                        <a href={`/articles/${article.id}`} className="hover:text-primary transition-colors">
+                        <a
+                          href={article.type === 'guide' ? `/guide/${article.id}` : `/articles/${article.id}`}
+                          className="hover:text-primary transition-colors"
+                        >
                           {article.title}
                         </a>
                       </CardTitle>
@@ -795,7 +497,13 @@ const Index = () => {
                       </div>
                       <button
                         className="w-full mt-6 px-4 py-2 bg-blue-100 text-primary rounded-md hover:bg-blue-200 transition-colors whitespace-nowrap"
-                        onClick={() => navigate(`/articles/${article.id}`)}
+                        onClick={() => {
+                          if (article.type === 'guide') {
+                            navigate(`/guide/${article.id}`);
+                          } else {
+                            navigate(`/articles/${article.id}`);
+                          }
+                        }}
                       >
                         記事を読む
                       </button>
@@ -803,16 +511,7 @@ const Index = () => {
                   </Card>
                 ))}
             </div>
-            <div className="text-center mt-10">
-              <a
-                href="/articles"
-                className="inline-flex items-center justify-center px-6 py-3 text-white rounded-lg hover:opacity-90 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1 whitespace-nowrap"
-                style={{ backgroundColor: '#10B77F' }}
-              >
-                すべての記事を見る
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </a>
-            </div>
+
           </div>
         </section>
 

@@ -8,263 +8,263 @@ import Footer from "@/components/layout/Footer";
 import { ComparisonPageTemplate } from "@/components/templates/ComparisonPageTemplate";
 import { useState } from "react";
 
-const FXComparison = () => {
-  // Full Ranking Data (12 Companies)
-  const rankingList = [
-    {
-      id: "gmo",
-      rank: 1,
-      name: "GMOクリック証券（FXネオ）",
-      rating: 4.8,
-      points: [
-        "FX取引高世界第1位！圧倒的な実績",
-        "高機能取引ツール「はっちゅう君FX」",
-        "スプレッド・スワップ共に業界最高水準"
-      ],
-      specs: [
-        { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
-        { label: "ツール・アプリ", value: "高機能チャート" },
-        { label: "通貨ペア", value: "約30ペア" },
-        { label: "最小取引単位", value: "1,000通貨" },
-      ],
-      campaignText: "【期間限定】最大550,000円キャッシュバックキャンペーン実施中！",
-      affiliateUrl: "https://www.click-sec.com/corp/guide/fxneo/",
-      detailUrl: "/fx/gmo-click",
-      badgeText: "総合力No.1！迷ったらコレ"
-    },
-    {
-      id: "dmm",
-      rank: 2,
-      name: "DMM FX",
-      rating: 4.7,
-      points: [
-        "口座開設数 国内No.1",
-        "LINEでのお問い合わせ24時間対応",
-        "取引でDMMポイントが貯まる"
-      ],
-      specs: [
-        { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
-        { label: "ツール・アプリ", value: "高機能チャート" },
-        { label: "通貨ペア", value: "約29ペア" },
-        { label: "最小取引単位", value: "10,000通貨" },
-      ],
-      campaignText: "最大300,000円キャッシュバック！",
-      affiliateUrl: "https://fx.dmm.com/",
-      detailUrl: "/fx/dmm-fx",
-      badgeText: "安心の国内口座数No.1"
-    },
-    {
-      id: "sbi",
-      rank: 3,
-      name: "SBI FXトレード",
-      rating: 4.5,
-      points: [
-        "1通貨から取引可能！少額から始められる",
-        "業界最狭水準のスプレッド",
-        "積立FXも可能"
-      ],
-      specs: [
-        { label: "スプレッド(ドル円)", value: "0.18銭", isHighlight: true },
-        { label: "ツール・アプリ", value: "積立FX対応" },
-        { label: "通貨ペア", value: "約34ペア" },
-        { label: "最小取引単位", value: "1通貨", isHighlight: true },
-      ],
-      campaignText: "最大100万円キャッシュバック！",
-      affiliateUrl: "https://www.sbifxt.co.jp/",
-      detailUrl: "/fx/sbi-fx",
-      badgeText: "少額取引・積立なら最強"
-    },
-    {
-      id: "gaitame",
-      rank: 4,
-      name: "外為どっとコム",
-      rating: 4.4,
-      points: [
-        "ニュース・情報コンテンツが圧倒的に豊富",
-        "初心者向けセミナーを多数開催",
-        "スマホアプリが使いやすく高機能"
-      ],
-      specs: [
-        { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
-        { label: "ツール・アプリ", value: "情報分析" },
-        { label: "通貨ペア", value: "約30ペア" },
-        { label: "最小取引単位", value: "1,000通貨" },
-      ],
-      campaignText: "最大100万円キャッシュバックキャンペーン",
-      affiliateUrl: "#",
-      detailUrl: "#",
-      badgeText: "情報力・学びやすさNo.1"
-    },
-    {
-      id: "matsui",
-      rank: 5,
-      name: "松井証券（MATSUI FX）",
-      rating: 4.3,
-      points: [
-        "100円から取引可能！超少額スタート",
-        "リピート系自動売買機能が使える",
-        "老舗証券会社の安心感"
-      ],
-      specs: [
-        { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
-        { label: "ツール・アプリ", value: "自動売買" },
-        { label: "通貨ペア", value: "約32ペア" },
-        { label: "最小取引単位", value: "1通貨", isHighlight: true },
-      ],
-      campaignText: "最大100万円キャッシュバック実施中",
-      affiliateUrl: "#",
-      detailUrl: "#",
-      badgeText: "100円から始める自動売買"
-    },
-    {
-      id: "hirose",
-      rank: 6,
-      name: "ヒロセ通商（LION FX）",
-      rating: 4.3,
-      points: [
-        "スキャルピング公認！短期売買に最適",
-        "毎月の豪華食品キャンペーンが大人気",
-        "取扱通貨ペア54種類と豊富"
-      ],
-      specs: [
-        { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
-        { label: "ツール・アプリ", value: "高速注文" },
-        { label: "通貨ペア", value: "約54ペア", isHighlight: true },
-        { label: "最小取引単位", value: "1,000通貨" },
-      ],
-      campaignText: "最大100万円+豪華食品プレゼント！",
-      affiliateUrl: "#",
-      detailUrl: "#",
-      badgeText: "食品CP＆スキャル公認"
-    },
-    {
-      id: "line",
-      rank: 7,
-      name: "LINE FX",
-      rating: 4.2,
-      points: [
-        "LINEアプリで重要な相場変動を通知",
-        "直感的な操作で初心者も迷わない",
-        "最短即日で口座開設完了"
-      ],
-      specs: [
-        { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
-        { label: "ツール・アプリ", value: "スマホ特化" },
-        { label: "通貨ペア", value: "約35ペア" },
-        { label: "最小取引単位", value: "1,000通貨" },
-      ],
-      campaignText: "口座開設+取引で最大305,000円！",
-      affiliateUrl: "#",
-      detailUrl: "#",
-      badgeText: "スマホ通知・手軽さNo.1"
-    },
-    {
-      id: "ig",
-      rank: 8,
-      name: "IG証券",
-      rating: 4.2,
-      points: [
-        "取扱通貨ペア約100種類！圧倒的ラインナップ",
-        "ノックアウトオプションなど多様な取引が可能",
-        "世界的な信頼性を誇るグローバル企業"
-      ],
-      specs: [
-        { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
-        { label: "ツール・アプリ", value: "プロ仕様" },
-        { label: "通貨ペア", value: "約100ペア", isHighlight: true },
-        { label: "最小取引単位", value: "1万通貨" },
-      ],
-      campaignText: "最大50,000円キャッシュバック",
-      affiliateUrl: "#",
-      detailUrl: "#",
-      badgeText: "通貨ペア数No.1"
-    },
-    {
-      id: "minna",
-      rank: 9,
-      name: "みんなのFX",
-      rating: 4.1,
-      points: [
-        "高水準のスワップポイント",
-        "TradingViewチャートが無料で使える",
-        "約定率99.9%の安定した取引"
-      ],
-      specs: [
-        { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
-        { label: "ツール・アプリ", value: "TradingView" },
-        { label: "通貨ペア", value: "約46ペア" },
-        { label: "最小取引単位", value: "1,000通貨" },
-      ],
-      campaignText: "最大100万円キャッシュバック！",
-      affiliateUrl: "#",
-      detailUrl: "#",
-      badgeText: "TradingView x 高スワップ"
-    },
-    {
-      id: "light",
-      rank: 10,
-      name: "LIGHT FX",
-      rating: 4.0,
-      points: [
-        "スワップ運用に特化したLIGHTペア",
-        "業界最狭水準のスプレッド",
-        "シンプルで使いやすい取引ツール"
-      ],
-      specs: [
-        { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
-        { label: "ツール・アプリ", value: "TradingView" },
-        { label: "通貨ペア", value: "約51ペア" },
-        { label: "最小取引単位", value: "1,000通貨" },
-      ],
-      campaignText: "最大100万円キャッシュバック",
-      affiliateUrl: "#",
-      detailUrl: "#",
-      badgeText: "スワップ運用ならココ"
-    },
-    {
-      id: "triauto",
-      rank: 11,
-      name: "トライオートFX",
-      rating: 4.0,
-      points: [
-        "リストから選ぶだけの簡単自動売買",
-        "優秀なストラテジーが豊富",
-        "自分だけの自動売買も作成可能"
-      ],
-      specs: [
-        { label: "スプレッド(ドル円)", value: "0.3銭", isHighlight: false },
-        { label: "ツール・アプリ", value: "自動売買" },
-        { label: "通貨ペア", value: "約23ペア" },
-        { label: "最小取引単位", value: "1,000通貨" },
-      ],
-      campaignText: "新規口座開設で最大70,000円",
-      affiliateUrl: "#",
-      detailUrl: "#",
-      badgeText: "選ぶだけの自動売買"
-    },
-    {
-      id: "au",
-      rank: 12,
-      name: "auカブコム証券",
-      rating: 3.9,
-      points: [
-        "MUFGグループの安心感と信頼性",
-        "自動売買機能も搭載",
-        "株式・投信との連携がスムーズ"
-      ],
-      specs: [
-        { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
-        { label: "ツール・アプリ", value: "高機能ツール" },
-        { label: "通貨ペア", value: "約30ペア" },
-        { label: "最小取引単位", value: "1,000通貨" },
-      ],
-      campaignText: "最大100万円キャッシュバック",
-      affiliateUrl: "#",
-      detailUrl: "#",
-      badgeText: "メガバンクグループの安心感"
-    }
-  ];
+export const fxRankingList = [
+  {
+    id: "gmo",
+    rank: 1,
+    name: "GMOクリック証券（FXネオ）",
+    rating: 4.8,
+    points: [
+      "FX取引高世界第1位！圧倒的な実績",
+      "高機能取引ツール「はっちゅう君FX」",
+      "スプレッド・スワップ共に業界最高水準"
+    ],
+    specs: [
+      { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
+      { label: "ツール・アプリ", value: "高機能チャート" },
+      { label: "通貨ペア", value: "約30ペア" },
+      { label: "最小取引単位", value: "1,000通貨" },
+    ],
+    campaignText: "【期間限定】最大550,000円キャッシュバックキャンペーン実施中！",
+    affiliateUrl: "https://www.click-sec.com/corp/guide/fxneo/",
+    detailUrl: "/fx/gmo-click",
+    badgeText: "総合力No.1！迷ったらコレ"
+  },
+  {
+    id: "dmm",
+    rank: 2,
+    name: "DMM FX",
+    rating: 4.7,
+    points: [
+      "口座開設数 国内No.1",
+      "LINEでのお問い合わせ24時間対応",
+      "取引でDMMポイントが貯まる"
+    ],
+    specs: [
+      { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
+      { label: "ツール・アプリ", value: "高機能チャート" },
+      { label: "通貨ペア", value: "約29ペア" },
+      { label: "最小取引単位", value: "10,000通貨" },
+    ],
+    campaignText: "最大300,000円キャッシュバック！",
+    affiliateUrl: "https://fx.dmm.com/",
+    detailUrl: "/fx/dmm-fx",
+    badgeText: "安心の国内口座数No.1"
+  },
+  {
+    id: "sbi",
+    rank: 3,
+    name: "SBI FXトレード",
+    rating: 4.5,
+    points: [
+      "1通貨から取引可能！少額から始められる",
+      "業界最狭水準のスプレッド",
+      "積立FXも可能"
+    ],
+    specs: [
+      { label: "スプレッド(ドル円)", value: "0.18銭", isHighlight: true },
+      { label: "ツール・アプリ", value: "積立FX対応" },
+      { label: "通貨ペア", value: "約34ペア" },
+      { label: "最小取引単位", value: "1通貨", isHighlight: true },
+    ],
+    campaignText: "最大100万円キャッシュバック！",
+    affiliateUrl: "https://www.sbifxt.co.jp/",
+    detailUrl: "/fx/sbi-fx",
+    badgeText: "少額取引・積立なら最強"
+  },
+  {
+    id: "gaitame",
+    rank: 4,
+    name: "外為どっとコム",
+    rating: 4.4,
+    points: [
+      "ニュース・情報コンテンツが圧倒的に豊富",
+      "初心者向けセミナーを多数開催",
+      "スマホアプリが使いやすく高機能"
+    ],
+    specs: [
+      { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
+      { label: "ツール・アプリ", value: "情報分析" },
+      { label: "通貨ペア", value: "約30ペア" },
+      { label: "最小取引単位", value: "1,000通貨" },
+    ],
+    campaignText: "最大100万円キャッシュバックキャンペーン",
+    affiliateUrl: "#",
+    detailUrl: "#",
+    badgeText: "情報力・学びやすさNo.1"
+  },
+  {
+    id: "matsui",
+    rank: 5,
+    name: "松井証券（MATSUI FX）",
+    rating: 4.3,
+    points: [
+      "100円から取引可能！超少額スタート",
+      "リピート系自動売買機能が使える",
+      "老舗証券会社の安心感"
+    ],
+    specs: [
+      { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
+      { label: "ツール・アプリ", value: "自動売買" },
+      { label: "通貨ペア", value: "約32ペア" },
+      { label: "最小取引単位", value: "1通貨", isHighlight: true },
+    ],
+    campaignText: "最大100万円キャッシュバック実施中",
+    affiliateUrl: "#",
+    detailUrl: "#",
+    badgeText: "100円から始める自動売買"
+  },
+  {
+    id: "hirose",
+    rank: 6,
+    name: "ヒロセ通商（LION FX）",
+    rating: 4.3,
+    points: [
+      "スキャルピング公認！短期売買に最適",
+      "毎月の豪華食品キャンペーンが大人気",
+      "取扱通貨ペア54種類と豊富"
+    ],
+    specs: [
+      { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
+      { label: "ツール・アプリ", value: "高速注文" },
+      { label: "通貨ペア", value: "約54ペア", isHighlight: true },
+      { label: "最小取引単位", value: "1,000通貨" },
+    ],
+    campaignText: "最大100万円+豪華食品プレゼント！",
+    affiliateUrl: "#",
+    detailUrl: "#",
+    badgeText: "食品CP＆スキャル公認"
+  },
+  {
+    id: "line",
+    rank: 7,
+    name: "LINE FX",
+    rating: 4.2,
+    points: [
+      "LINEアプリで重要な相場変動を通知",
+      "直感的な操作で初心者も迷わない",
+      "最短即日で口座開設完了"
+    ],
+    specs: [
+      { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
+      { label: "ツール・アプリ", value: "スマホ特化" },
+      { label: "通貨ペア", value: "約35ペア" },
+      { label: "最小取引単位", value: "1,000通貨" },
+    ],
+    campaignText: "口座開設+取引で最大305,000円！",
+    affiliateUrl: "#",
+    detailUrl: "#",
+    badgeText: "スマホ通知・手軽さNo.1"
+  },
+  {
+    id: "ig",
+    rank: 8,
+    name: "IG証券",
+    rating: 4.2,
+    points: [
+      "取扱通貨ペア約100種類！圧倒的ラインナップ",
+      "ノックアウトオプションなど多様な取引が可能",
+      "世界的な信頼性を誇るグローバル企業"
+    ],
+    specs: [
+      { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
+      { label: "ツール・アプリ", value: "プロ仕様" },
+      { label: "通貨ペア", value: "約100ペア", isHighlight: true },
+      { label: "最小取引単位", value: "1万通貨" },
+    ],
+    campaignText: "最大50,000円キャッシュバック",
+    affiliateUrl: "#",
+    detailUrl: "#",
+    badgeText: "通貨ペア数No.1"
+  },
+  {
+    id: "minna",
+    rank: 9,
+    name: "みんなのFX",
+    rating: 4.1,
+    points: [
+      "高水準のスワップポイント",
+      "TradingViewチャートが無料で使える",
+      "約定率99.9%の安定した取引"
+    ],
+    specs: [
+      { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
+      { label: "ツール・アプリ", value: "TradingView" },
+      { label: "通貨ペア", value: "約46ペア" },
+      { label: "最小取引単位", value: "1,000通貨" },
+    ],
+    campaignText: "最大100万円キャッシュバック！",
+    affiliateUrl: "#",
+    detailUrl: "#",
+    badgeText: "TradingView x 高スワップ"
+  },
+  {
+    id: "light",
+    rank: 10,
+    name: "LIGHT FX",
+    rating: 4.0,
+    points: [
+      "スワップ運用に特化したLIGHTペア",
+      "業界最狭水準のスプレッド",
+      "シンプルで使いやすい取引ツール"
+    ],
+    specs: [
+      { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
+      { label: "ツール・アプリ", value: "TradingView" },
+      { label: "通貨ペア", value: "約51ペア" },
+      { label: "最小取引単位", value: "1,000通貨" },
+    ],
+    campaignText: "最大100万円キャッシュバック",
+    affiliateUrl: "#",
+    detailUrl: "#",
+    badgeText: "スワップ運用ならココ"
+  },
+  {
+    id: "triauto",
+    rank: 11,
+    name: "トライオートFX",
+    rating: 4.0,
+    points: [
+      "リストから選ぶだけの簡単自動売買",
+      "優秀なストラテジーが豊富",
+      "自分だけの自動売買も作成可能"
+    ],
+    specs: [
+      { label: "スプレッド(ドル円)", value: "0.3銭", isHighlight: false },
+      { label: "ツール・アプリ", value: "自動売買" },
+      { label: "通貨ペア", value: "約23ペア" },
+      { label: "最小取引単位", value: "1,000通貨" },
+    ],
+    campaignText: "新規口座開設で最大70,000円",
+    affiliateUrl: "#",
+    detailUrl: "#",
+    badgeText: "選ぶだけの自動売買"
+  },
+  {
+    id: "au",
+    rank: 12,
+    name: "auカブコム証券",
+    rating: 3.9,
+    points: [
+      "MUFGグループの安心感と信頼性",
+      "自動売買機能も搭載",
+      "株式・投信との連携がスムーズ"
+    ],
+    specs: [
+      { label: "スプレッド(ドル円)", value: "0.2銭", isHighlight: true },
+      { label: "ツール・アプリ", value: "高機能ツール" },
+      { label: "通貨ペア", value: "約30ペア" },
+      { label: "最小取引単位", value: "1,000通貨" },
+    ],
+    campaignText: "最大100万円キャッシュバック",
+    affiliateUrl: "#",
+    detailUrl: "#",
+    badgeText: "メガバンクグループの安心感"
+  }
+];
 
+
+const FXComparison = () => {
   const comparisonData = [
     {
       id: "gmo",
@@ -301,7 +301,7 @@ const FXComparison = () => {
           description: <>アプリ「GMOクリック FXneo」をDL。<br />チャートを見ながらワンタップで注文完了！</>
         }
       ],
-      guideTitle: "まずは総合力No.1のGMOクリック証券で始めよう",
+      guideTitle: "GMOクリック証券の始め方 3STEP",
       guideDescription: "高性能なツールと低コストな環境で、プロへの第一歩を。",
       campaign: "特典あり",
       spreadUsdJpy: 0.2, spreadUsdJpyText: "0.2銭",
@@ -345,7 +345,7 @@ const FXComparison = () => {
           description: <>初心者でも直感的に操作できるアプリ。<br />まずはデモ取引で練習するのもおすすめ！</>
         }
       ],
-      guideTitle: "まずは口座開設数No.1のDMM FXで始めよう",
+      guideTitle: "DMM FXの始め方 3STEP",
       guideDescription: "LINEで気軽に質問できるから、初めてでも迷わず安心！",
       campaign: "CP実施中",
       spreadUsdJpy: 0.2, spreadUsdJpyText: "0.2銭",
@@ -389,7 +389,7 @@ const FXComparison = () => {
           description: <>まずは小さい金額で買い注文。<br />慣れてきたら積立設定も試してみましょう。</>
         }
       ],
-      guideTitle: "まずは少額から始められるSBI FXトレードで始めよう",
+      guideTitle: "SBI FXトレードの始め方 3STEP",
       guideDescription: "約5円から取引可能。お試し感覚でFXを体験してみましょう。",
       spreadUsdJpy: 0.18, spreadUsdJpyText: "0.18銭",
       spreadEurJpy: 0.4, spreadEurJpyText: "0.4銭",
@@ -432,7 +432,7 @@ const FXComparison = () => {
           description: <>取引しながら、豊富なニュースやレポートで<br />相場の勉強も並行して進められます。</>
         }
       ],
-      guideTitle: "まずは情報力No.1の外為どっとコムで始めよう",
+      guideTitle: "外為どっとコムの始め方 3STEP",
       guideDescription: "豊富なニュースと「マネ育」コンテンツで、学びながら成長できます。",
       spreadUsdJpy: 0.2, spreadUsdJpyText: "0.2銭",
       spreadEurJpy: 0.4, spreadEurJpyText: "0.4銭",
@@ -475,7 +475,7 @@ const FXComparison = () => {
           description: <>通常の裁量取引はもちろん、<br />簡単な設定で自動売買も始められます。</>
         }
       ],
-      guideTitle: "まずは老舗の安心感がある松井証券で始めよう",
+      guideTitle: "松井証券の始め方 3STEP",
       guideDescription: "100円から自動売買も可能。リスクを抑えてコツコツ資産形成。",
       spreadUsdJpy: 0.2, spreadUsdJpyText: "0.2銭",
       spreadEurJpy: 0.5, spreadEurJpyText: "0.5銭",
@@ -518,7 +518,7 @@ const FXComparison = () => {
           description: <>短期売買（スキャルピング）も公認。<br />アクティブに取引したい人に最適です。</>
         }
       ],
-      guideTitle: "まずはキャンペーンが豊富なヒロセ通商で始めよう",
+      guideTitle: "ヒロセ通商の始め方 3STEP",
       guideDescription: "スキャルピング公認！取引するほど食品が貰えて楽しみ倍増。",
       spreadUsdJpy: 0.2, spreadUsdJpyText: "0.2銭",
       spreadEurJpy: 0.4, spreadEurJpyText: "0.4銭",
@@ -561,7 +561,7 @@ const FXComparison = () => {
           description: <>LINEで相場変動通知を設定すれば<br />チャンスを逃さず取引できます。</>
         }
       ],
-      guideTitle: "まずは使い慣れたLINEでできるLINE FXで始めよう",
+      guideTitle: "LINE FXの始め方 3STEP",
       guideDescription: "いつものLINEで相場変動をお知らせ。隙間時間でチャンスを逃さない。",
       spreadUsdJpy: 0.2, spreadUsdJpyText: "0.2銭",
       spreadEurJpy: 0.4, spreadEurJpyText: "0.4銭",
@@ -604,7 +604,7 @@ const FXComparison = () => {
           description: <>FXだけでなく、ノックアウトオプションなど<br />幅広い投資手法に挑戦できます。</>
         }
       ],
-      guideTitle: "まずはプロ仕様のIG証券で本格的に始めよう",
+      guideTitle: "IG証券の始め方 3STEP",
       guideDescription: "世界No.1のブランド。ノックアウトオプションなど多彩な戦略が可能。",
       spreadUsdJpy: 0.2, spreadUsdJpyText: "0.2銭",
       spreadEurJpy: 0.5, spreadEurJpyText: "0.5銭",
@@ -647,7 +647,7 @@ const FXComparison = () => {
           description: <>アプリ内でTradingViewを表示。<br />高度な分析をして注文を出しましょう。</>
         }
       ],
-      guideTitle: "まずは約定力の高いみんなのFXで始めよう",
+      guideTitle: "みんなのFXの始め方 3STEP",
       guideDescription: "TradingViewで高度な分析。スワップポイントも高水準で長期保有も◎",
       spreadUsdJpy: 0.2, spreadUsdJpyText: "0.2銭",
       spreadEurJpy: 0.4, spreadEurJpyText: "0.4銭",
@@ -690,7 +690,7 @@ const FXComparison = () => {
           description: <>高金利通貨の「LIGHTペア」を選んで<br />スワップポイント狙いの運用を開始！</>
         }
       ],
-      guideTitle: "まずはスワップ運用のLIGHT FXで始めよう",
+      guideTitle: "LIGHT FXの始め方 3STEP",
       guideDescription: "スワップ運用ならここ！高金利通貨でコツコツ利益を積み上げよう。",
       spreadUsdJpy: 0.2, spreadUsdJpyText: "0.2銭",
       spreadEurJpy: 0.4, spreadEurJpyText: "0.4銭",
@@ -733,7 +733,7 @@ const FXComparison = () => {
           description: <>ランキングから成績の良いプログラムを選んで<br />稼働させるだけで自動売買スタート。</>
         }
       ],
-      guideTitle: "まずは自動売買のトライオートFXで始めよう",
+      guideTitle: "トライオートFXの始め方 3STEP",
       guideDescription: "プログラムを選ぶだけで自動売買。忙しいあなたに代わって24時間取引。",
       spreadUsdJpy: 0.3, spreadUsdJpyText: "0.3銭",
       spreadEurJpy: 0.5, spreadEurJpyText: "0.5銭",
@@ -776,7 +776,7 @@ const FXComparison = () => {
           description: <>高機能なスマホアプリやPCツールを使って<br />自分のスタイルに合った取引を。</>
         }
       ],
-      guideTitle: "まずは安心と信頼のauカブコム証券で始めよう",
+      guideTitle: "auカブコム証券の始め方 3STEP",
       guideDescription: "MUFGグループの安心感。株や投信と資産を一元管理できて便利。",
       spreadUsdJpy: 0.2, spreadUsdJpyText: "0.2銭",
       spreadEurJpy: 0.5, spreadEurJpyText: "0.5銭",
@@ -793,12 +793,13 @@ const FXComparison = () => {
       metaDescription="初心者におすすめのFX口座を徹底比較。スプレッド、スワップポイント、ツール、キャンペーンなど、最新の情報を元にランキング形式で紹介します。"
       categoryName="FX口座"
       heroSection={<FXHeroSection />}
-      rankingList={rankingList}
+      rankingList={fxRankingList}
       renderRankingCard={(item, index) => {
         const detailedSpecs = comparisonData.find((c) => c.id === item.id) || comparisonData[0];
         return (
           <RankingCardV2
             key={item.name}
+            id={item.id}
             {...item}
             detailedSpecs={detailedSpecs}
           />

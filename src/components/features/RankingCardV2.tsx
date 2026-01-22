@@ -1,12 +1,14 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check, ChevronRight, Star, ExternalLink, Trophy, ChevronDown, ChevronUp } from "lucide-react";
 import { FxStartGuide } from "@/components/features/FxStartGuide";
 import { ComparisonRow } from "@/components/features/ComparisonTable";
+import { useLocation } from "react-router-dom";
 
 interface RankingCardV2Props {
+    id?: string;
     rank: number;
     name: string;
     rating: number;
@@ -39,6 +41,7 @@ interface RankingCardV2Props {
 }
 
 const RankingCardV2 = ({
+    id,
     rank,
     name,
     rating,
@@ -53,10 +56,31 @@ const RankingCardV2 = ({
 }: RankingCardV2Props) => {
     const [isOpen, setIsOpen] = useState(false);
     const isTop3 = rank <= 3;
-    const cardBorder = isTop3 ? "border-orange-200" : "border-gray-200";
+    const cardBorder = "border-orange-200";
+    const location = useLocation();
+
+    useEffect(() => {
+        if (id && location.hash === `#${id}`) {
+            setIsOpen(true);
+            // Smooth scroll to the element with a slight delay to ensure DOM is ready and override ScrollToTop
+            setTimeout(() => {
+                const element = document.getElementById(id);
+                if (element) {
+                    const headerOffset = 180; // Adjust for header + ticker height
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            }, 500);
+        }
+    }, [id, location.hash]);
 
     return (
-        <Card className={`overflow-hidden border-2 ${cardBorder} shadow-sm hover:shadow-md transition-shadow relative`}>
+        <Card id={id} className={`overflow-hidden border-2 ${cardBorder} shadow-sm hover:shadow-md transition-shadow relative`}>
             {/* "Best For" Badge */}
             {badgeText && (
                 <div className="absolute top-0 left-0 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs sm:text-sm font-bold px-3 py-1 rounded-br-xl z-20 shadow-sm flex items-center gap-1">

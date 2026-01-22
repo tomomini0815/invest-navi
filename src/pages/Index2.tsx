@@ -1,5 +1,10 @@
 
 import Header from "@/components/layout/Header";
+import { Link } from "react-router-dom";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Calendar, ArrowRight, TrendingUp } from "lucide-react";
 import TickerTape from "@/components/features/TickerTape";
 import HeroSection from "@/components/features/HeroSection";
 import SurveyDiagnostic from "@/components/features/SurveyDiagnostic";
@@ -930,6 +935,124 @@ const Index2 = () => {
                 </section>
 
             </main>
+
+            {/* New Articles Section */}
+            <section className="py-16 bg-white border-t border-gray-100">
+                <div className="container mx-auto px-4 max-w-6xl">
+                    <div className="text-center mb-10">
+                        <h2 className="text-2xl font-bold text-slate-800 mb-2">
+                            <span className="text-emerald-500 mr-2">New</span>
+                            新着の投資ガイド
+                        </h2>
+                        <p className="text-slate-500">
+                            初心者向けの最新記事をチェックして、賢く資産形成を始めましょう。
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {/* NISA Guide */}
+                        <Card className="hover:shadow-lg transition-shadow border-emerald-100 group cursor-pointer h-full flex flex-col">
+                            <Link to="/guide/nisa-beginner" className="flex flex-col h-full">
+                                <CardHeader className="pb-3">
+                                    <div className="flex justify-between items-start mb-2">
+                                        <Badge className="bg-emerald-500 hover:bg-emerald-600">NISA</Badge>
+                                        <Badge variant="outline" className="text-emerald-600 border-emerald-200 bg-emerald-50">
+                                            New
+                                        </Badge>
+                                    </div>
+                                    <CardTitle className="text-lg group-hover:text-emerald-700 transition-colors">
+                                        【2026年最新】NISA完全ガイド
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent className="flex-1 flex flex-col justify-between pt-0 text-sm">
+                                    <p className="text-slate-600 mb-4 line-clamp-2">
+                                        非課税枠が1,800万円に拡大！資産形成のスタンダード「新NISA」の仕組みを完全解説。
+                                    </p>
+                                    <div className="flex items-center justify-between text-slate-400 text-xs mt-auto">
+                                        <div className="flex items-center gap-1">
+                                            <Calendar className="h-3 w-3" />
+                                            2026.01.22
+                                        </div>
+                                        <div className="flex items-center gap-1 text-emerald-600 font-bold group-hover:translate-x-1 transition-transform">
+                                            読む <ArrowRight className="h-3 w-3" />
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Link>
+                        </Card>
+
+                        {/* Stocks Guide */}
+                        <Card className="hover:shadow-lg transition-shadow border-indigo-100 group cursor-pointer h-full flex flex-col">
+                            <Link to="/guide/stocks-beginner" className="flex flex-col h-full">
+                                <CardHeader className="pb-3">
+                                    <div className="flex justify-between items-start mb-2">
+                                        <Badge className="bg-indigo-500 hover:bg-indigo-600">株式投資</Badge>
+                                        <Badge variant="outline" className="text-indigo-600 border-indigo-200 bg-indigo-50">
+                                            New
+                                        </Badge>
+                                    </div>
+                                    <CardTitle className="text-lg group-hover:text-indigo-700 transition-colors">
+                                        株式投資の始め方など...
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent className="flex-1 flex flex-col justify-between pt-0 text-sm">
+                                    <p className="text-slate-600 mb-4 line-clamp-2">
+                                        知識ゼロから月5万円稼ぐロードマップ。メリット・リスクを正しく理解しよう。
+                                    </p>
+                                    <div className="flex items-center justify-between text-slate-400 text-xs mt-auto">
+                                        <div className="flex items-center gap-1">
+                                            <Calendar className="h-3 w-3" />
+                                            2026.01.22
+                                        </div>
+                                        <div className="flex items-center gap-1 text-indigo-600 font-bold group-hover:translate-x-1 transition-transform">
+                                            読む <ArrowRight className="h-3 w-3" />
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Link>
+                        </Card>
+
+                        {/* Investment Trust Guide */}
+                        <Card className="hover:shadow-lg transition-shadow border-blue-100 group cursor-pointer h-full flex flex-col">
+                            <Link to="/guide/investment-trust" className="flex flex-col h-full">
+                                <CardHeader className="pb-3">
+                                    <div className="flex justify-between items-start mb-2">
+                                        <Badge className="bg-blue-500 hover:bg-blue-600">投資信託</Badge>
+                                        <Badge variant="outline" className="text-blue-600 border-blue-200 bg-blue-50">
+                                            New
+                                        </Badge>
+                                    </div>
+                                    <CardTitle className="text-lg group-hover:text-blue-700 transition-colors">
+                                        投資信託の仕組みと選び方
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent className="flex-1 flex flex-col justify-between pt-0 text-sm">
+                                    <p className="text-slate-600 mb-4 line-clamp-2">
+                                        100円からプロにお任せ！「インデックス」と「アクティブ」の違いも解説。
+                                    </p>
+                                    <div className="flex items-center justify-between text-slate-400 text-xs mt-auto">
+                                        <div className="flex items-center gap-1">
+                                            <Calendar className="h-3 w-3" />
+                                            2026.01.22
+                                        </div>
+                                        <div className="flex items-center gap-1 text-blue-600 font-bold group-hover:translate-x-1 transition-transform">
+                                            読む <ArrowRight className="h-3 w-3" />
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Link>
+                        </Card>
+                    </div>
+
+                    <div className="text-center mt-10">
+                        <Button variant="outline" size="lg" asChild className="rounded-full px-8">
+                            <Link to="/articles">
+                                記事一覧を見る <ArrowRight className="ml-2 h-4 w-4" />
+                            </Link>
+                        </Button>
+                    </div>
+                </div>
+            </section>
 
             {/* Risk Disclaimer */}
             <div className="bg-gray-50 border-t border-gray-200 py-10">

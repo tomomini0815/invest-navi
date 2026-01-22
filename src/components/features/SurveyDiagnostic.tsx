@@ -294,7 +294,7 @@ export const SurveyDiagnostic = ({ data, onSearch, type = "fx" }: SurveyDiagnost
                                 className="space-y-4"
                             >
                                 <div className="text-center mb-2">
-                                    <h3 className="text-xl font-bold text-gray-800">Q1. 投資経験はありますか？</h3>
+                                    <h3 className="text-xl font-bold text-gray-800">Q1. {isSecurities ? "株式投資の経験はありますか？" : (isCrypto ? "暗号資産投資の経験はありますか？" : "FX取引の経験はありますか？")}</h3>
                                 </div>
                                 <div className="grid grid-cols-3 gap-2 sm:gap-3">
                                     {[
