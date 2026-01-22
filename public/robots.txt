@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.toushi-navi.com/sitemap.xml
+Sitemap: https://invest-navi.com/sitemap.xml
 
 User-agent: Googlebot
 Allow: /
