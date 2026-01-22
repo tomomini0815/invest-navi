@@ -36,7 +36,7 @@ const SEO = ({
             "name": siteTitle,
             "logo": {
                 "@type": "ImageObject",
-                "url": `${siteUrl}/logo_v2.png`
+                "url": `${siteUrl}/logo_square.png`
             }
         }
     };
