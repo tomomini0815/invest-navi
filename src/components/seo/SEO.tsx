@@ -31,6 +31,14 @@ const SEO = ({
         "name": fullTitle,
         "description": description,
         "url": fullUrl,
+        "publisher": {
+            "@type": "Organization",
+            "name": siteTitle,
+            "logo": {
+                "@type": "ImageObject",
+                "url": `${siteUrl}/logo_v2.png`
+            }
+        }
     };
 
     return (
