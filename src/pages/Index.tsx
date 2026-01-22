@@ -294,7 +294,7 @@ const Index = () => {
 
       <main className="flex-grow">
         {/* 投資適性診断セクション */}
-        <section className="py-16 sm:py-20 bg-muted/30">
+        <section className="pt-[42px] pb-0 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto text-center mb-8 sm:mb-12">
               <h2 id="診断" className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">あなたに最適な投資方法を診断</h2>

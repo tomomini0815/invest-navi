@@ -33,7 +33,7 @@ const InvestmentDiagnostic = () => {
     investmentPeriod: '',
     investmentPurpose: ''
   });
-  
+
   // FX計算ツール専用の入力状態を追加
   const [fxInputs, setFxInputs] = useState({
     currencyPair: 'USD/JPY',
@@ -52,12 +52,12 @@ const InvestmentDiagnostic = () => {
     const expectedReturn = parseFloat(sipInputs.expectedReturn) || 0;
     const investmentPeriod = parseFloat(sipInputs.investmentPeriod) || 0;
     const initialAmount = parseFloat(sipInputs.initialAmount) || 0;
-    
+
     // 月利を計算
     const monthlyRate = expectedReturn / 100 / 12;
     // 総月数を計算
     const totalMonths = investmentPeriod * 12;
-    
+
     // 複利計算で将来価値を算出
     let futureValue = initialAmount * Math.pow(1 + monthlyRate, totalMonths);
     if (monthlyRate > 0) {
@@ -65,17 +65,17 @@ const InvestmentDiagnostic = () => {
     } else {
       futureValue += monthlyInvestment * totalMonths;
     }
-    
+
     const totalInvestment = initialAmount + (monthlyInvestment * totalMonths);
     const profit = futureValue - totalInvestment;
-    
+
     setCalculationResult({
       type: 'sip',
       totalInvestment: totalInvestment.toLocaleString(),
       futureValue: Math.round(futureValue).toLocaleString(),
       profit: Math.round(profit).toLocaleString()
     });
-    
+
     // モバイル時の自動スクロール
     setTimeout(() => {
       const resultElement = document.getElementById('sip-result');
@@ -91,12 +91,12 @@ const InvestmentDiagnostic = () => {
     const shares = parseFloat(stockInputs.shares) || 0;
     const purchasePrice = parseFloat(stockInputs.purchasePrice) || 0;
     const dividendYield = parseFloat(stockInputs.dividendYield) || 0;
-    
+
     const investmentAmount = purchasePrice * shares;
     const currentValue = stockPrice * shares;
     const profitLoss = currentValue - investmentAmount;
     const dividendIncome = currentValue * (dividendYield / 100);
-    
+
     setCalculationResult({
       type: 'stock',
       investmentAmount: investmentAmount.toLocaleString(),
@@ -104,7 +104,7 @@ const InvestmentDiagnostic = () => {
       profitLoss: Math.round(profitLoss).toLocaleString(),
       dividendIncome: Math.round(dividendIncome).toLocaleString()
     });
-    
+
     // モバイル時の自動スクロール
     setTimeout(() => {
       const resultElement = document.getElementById('stock-result');
@@ -125,43 +125,43 @@ const InvestmentDiagnostic = () => {
     const currency = fxInputs.currency || 'USD';
     const pipUnit = fxInputs.pipUnit; // 1pipの単位（1000通貨または10000通貨）
     const position = fxInputs.position; // 売り('sell')または買い('buy')
-    
+
     // JPYペアの場合は価格差に100をかける（小数点第2位まで）
     // それ以外のペアは価格差に10000をかける（小数点第4位まで）
     let priceDifference = exitPrice - entryPrice;
-    
+
     // 売りポジションの場合、価格差を反転
     if (position === 'sell') {
       priceDifference = -priceDifference;
     }
-    
+
     // GMOクリック証券FXネオのシミュレーターのロジックを参考に修正
-    
+
     // 必要証拠金の計算
     // 必要証拠金 = 取引数量 × 通貨単位 × 売買レート × 0.04
     const requiredMargin = lotSize * pipUnit * entryPrice * 0.04;
-    
+
     // 1pipあたりの価値の計算
     // 1pipあたりの価値 = 取引数量 × 通貨単位 × 0.01
     const pipValue = lotSize * pipUnit * 0.01;
-    
+
     // 利益/損失の計算
     // GMOクリック証券FXネオでは、価格差が1pip=0.01円(JPYペア)または0.0001(非JPYペア)単位で計算される
     const pipDifference = currencyPair.includes('JPY') ? priceDifference * 100 : priceDifference * 10000;
     const profit = pipDifference * pipValue;
-    
+
     // 取引手数料（10,000通貨あたり500円を基準）
     const fee = (lotSize * 500).toFixed(0);
-    
+
     // リスクリワード比の計算（利益/損失の絶対値 ÷ 取引手数料）
     const riskRewardRatio = (Math.abs(profit) / parseFloat(fee)).toFixed(2);
-    
+
     // 総利益/損失（利益/損失 - 手数料）
     const totalProfit = (profit - parseFloat(fee)).toFixed(0);
-    
+
     // 初心者向けアドバイス
     let advice = 'FX取引はリスクがあります。まずはデモ口座で練習してみましょう。';
-    
+
     if (profit > 0) {
       advice = '利益が出ていますが、利益確定のタイミングも重要です。';
       if (parseFloat(totalProfit) < 0) {
@@ -170,7 +170,7 @@ const InvestmentDiagnostic = () => {
     } else if (profit < 0) {
       advice = '損失が出ています。損切りラインを設定し、損失を最小限に抑えましょう。';
     }
-    
+
     // レバレッジに関するアドバイス
     if (leverage > 100) {
       advice += '高レバレッジはリスクが高くなります。初心者には10倍以下のレバレッジをおすすめします。';
@@ -179,12 +179,12 @@ const InvestmentDiagnostic = () => {
     } else {
       advice += '適切なレバレッジを使用しています。';
     }
-    
+
     // 必要証拠金に関するアドバイス
     if (requiredMargin > 100000) {
       advice += '必要証拠金が高額です。少額から始めるのが初心者にはおすすめです。';
     }
-    
+
     setCalculationResult({
       type: 'risk',
       profit: Math.round(profit).toLocaleString(),
@@ -196,7 +196,7 @@ const InvestmentDiagnostic = () => {
       position: position,
       pipUnit: pipUnit
     });
-    
+
     // モバイル時の自動スクロール
     setTimeout(() => {
       const resultElement = document.getElementById('risk-result');
@@ -302,7 +302,7 @@ const InvestmentDiagnostic = () => {
     const answer7 = answers[7] || [];
     const answer8 = answers[8] || [];
     const answer9 = answers[9] || [];
-    
+
     // 各質問から最初の回答のみを使用
     const firstAnswer0 = answer0.length > 0 ? answer0[0] : "";
     const firstAnswer1 = answer1.length > 0 ? answer1[0] : "";
@@ -314,7 +314,7 @@ const InvestmentDiagnostic = () => {
     const firstAnswer7 = answer7.length > 0 ? answer7[0] : "";
     const firstAnswer8 = answer8.length > 0 ? answer8[0] : "";
     const firstAnswer9 = answer9.length > 0 ? answer9[0] : "";
-    
+
     if (firstAnswer0 === "beginner") {
       if (firstAnswer2 === "conservative") {
         return {
@@ -341,9 +341,9 @@ const InvestmentDiagnostic = () => {
               buttonLink: "/comparison"
             }
           ],
-          selectedAnswers: { 
-            answer0: [firstAnswer0], 
-            answer1: [firstAnswer1], 
+          selectedAnswers: {
+            answer0: [firstAnswer0],
+            answer1: [firstAnswer1],
             answer2: [firstAnswer2],
             answer3: [firstAnswer3],
             answer4: [firstAnswer4],
@@ -379,9 +379,9 @@ const InvestmentDiagnostic = () => {
             buttonLink: "/comparison"
           }
         ],
-        selectedAnswers: { 
-          answer0: [firstAnswer0], 
-          answer1: [firstAnswer1], 
+        selectedAnswers: {
+          answer0: [firstAnswer0],
+          answer1: [firstAnswer1],
           answer2: [firstAnswer2],
           answer3: [firstAnswer3],
           answer4: [firstAnswer4],
@@ -393,7 +393,7 @@ const InvestmentDiagnostic = () => {
         }
       };
     }
-    
+
     if (firstAnswer2 === "aggressive") {
       return {
         title: "個別株投資 + 成長株戦略",
@@ -419,9 +419,9 @@ const InvestmentDiagnostic = () => {
             buttonLink: "/fx-comparison"
           }
         ],
-        selectedAnswers: { 
-          answer0: [firstAnswer0], 
-          answer1: [firstAnswer1], 
+        selectedAnswers: {
+          answer0: [firstAnswer0],
+          answer1: [firstAnswer1],
           answer2: [firstAnswer2],
           answer3: [firstAnswer3],
           answer4: [firstAnswer4],
@@ -458,17 +458,17 @@ const InvestmentDiagnostic = () => {
           buttonLink: "/comparison"
         }
       ],
-      selectedAnswers: { 
-        answer0: [firstAnswer0], 
-        answer1: [firstAnswer1], 
+      selectedAnswers: {
+        answer0: [firstAnswer0],
+        answer1: [firstAnswer1],
         answer2: [firstAnswer2],
         answer3: [firstAnswer3],
         answer4: [firstAnswer4],
-          answer5: [firstAnswer5],
-          answer6: [firstAnswer6],
-          answer7: [firstAnswer7],
-          answer8: [firstAnswer8],
-          answer9: [firstAnswer9]
+        answer5: [firstAnswer5],
+        answer6: [firstAnswer6],
+        answer7: [firstAnswer7],
+        answer8: [firstAnswer8],
+        answer9: [firstAnswer9]
       }
     };
   };
@@ -511,8 +511,8 @@ const InvestmentDiagnostic = () => {
   if (result) {
     const recommendation = getRecommendation();
     return (
-      <section id="診断" className="py-8 sm:py-12 bg-muted/30">
-        <div className="container mx-auto px-4">
+      <>
+        <div className="container mx-auto px-4 pb-12">
           <Card className="max-w-3xl mx-auto shadow-lg">
             <CardHeader className="text-center px-4 sm:px-6">
               <div className="mx-auto w-12 h-12 sm:w-16 sm:h-16 bg-secondary/10 rounded-full flex items-center justify-center mb-3 sm:mb-4">
@@ -541,9 +541,9 @@ const InvestmentDiagnostic = () => {
                 <p className="text-blue-700 text-center mb-6">
                   各シミュレーションツールで将来の資産がどのようになるかを試算できます。
                 </p>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <Card 
+                  <Card
                     className="border-2 hover:shadow-lg transition-shadow cursor-pointer hover:scale-105"
                     onClick={() => {
                       setCalculatorType('sip');
@@ -565,8 +565,8 @@ const InvestmentDiagnostic = () => {
                       </Button>
                     </CardContent>
                   </Card>
-                  
-                  <Card 
+
+                  <Card
                     className="border-2 hover:shadow-lg transition-shadow cursor-pointer hover:scale-105"
                     onClick={() => {
                       setCalculatorType('stock');
@@ -588,8 +588,8 @@ const InvestmentDiagnostic = () => {
                       </Button>
                     </CardContent>
                   </Card>
-                  
-                  <Card 
+
+                  <Card
                     className="border-2 hover:shadow-lg transition-shadow cursor-pointer hover:scale-105"
                     onClick={() => {
                       setCalculatorType('risk');
@@ -656,8 +656,8 @@ const InvestmentDiagnostic = () => {
                   {calculatorType === 'stock' && '個別株投資シミュレータ'}
                   {calculatorType === 'risk' && 'FX計算ツール'}
                 </h3>
-                <Button 
-                  variant="ghost" 
+                <Button
+                  variant="ghost"
                   size="icon"
                   className="h-6 w-6 sm:h-8 sm:w-8"
                   onClick={() => setShowCalculator(false)}
@@ -669,7 +669,7 @@ const InvestmentDiagnostic = () => {
                 {calculatorType === 'sip' && (
                   <div className="space-y-3">
                     <p className="text-muted-foreground text-sm">つみたてNISAや投資信託など、定期的な積立投資の効果を簡単にシミュレーションできます。複利の力で資産がどのように増えていくかを試算しましょう。</p>
-                    
+
                     <div className="bg-blue-50 p-3 rounded-lg">
                       <h5 className="font-bold text-blue-800 mb-1 text-sm">積立投資初心者向けガイド</h5>
                       <ul className="list-disc pl-4 space-y-1 text-xs">
@@ -679,7 +679,7 @@ const InvestmentDiagnostic = () => {
                         <li>初期投資額：最初に投資する金額（例：10万円）</li>
                       </ul>
                     </div>
-                    
+
                     <div className="space-y-3">
                       <div>
                         <Label htmlFor="monthlyInvestment" className="text-sm">毎月の投資額（円）</Label>
@@ -743,8 +743,8 @@ const InvestmentDiagnostic = () => {
                         <div className="mt-2 p-2 bg-yellow-50 rounded">
                           <p className="font-semibold text-yellow-800 text-xs">投資アドバイス:</p>
                           <p className="text-yellow-700 text-xs">
-                            {parseInt(calculationResult.profit.replace(/,/g, "")) > 0 
-                              ? "利益が出ています。複利の効果により、長期的な資産形成が期待できます。" 
+                            {parseInt(calculationResult.profit.replace(/,/g, "")) > 0
+                              ? "利益が出ています。複利の効果により、長期的な資産形成が期待できます。"
                               : "利益が少ないようです。投資期間を延ばすか、リターンの高い商品を検討してみましょう。"}
                           </p>
                         </div>
@@ -755,11 +755,11 @@ const InvestmentDiagnostic = () => {
                     )}
                   </div>
                 )}
-                
+
                 {calculatorType === 'stock' && (
                   <div className="space-y-3">
                     <p className="text-muted-foreground text-sm">個別株への投資で期待されるリターンとリスクを簡単にシミュレーションできます。株価の変動と配当収入による収益を試算しましょう。</p>
-                    
+
                     <div className="bg-green-50 p-3 rounded-lg">
                       <h5 className="font-bold text-green-800 mb-1 text-sm">個別株投資初心者向けガイド</h5>
                       <ul className="list-disc pl-4 space-y-1 text-xs">
@@ -769,7 +769,7 @@ const InvestmentDiagnostic = () => {
                         <li>配当利回り：年間の配当金の割合（例：2.5%）</li>
                       </ul>
                     </div>
-                    
+
                     <div className="space-y-3">
                       <div>
                         <Label htmlFor="stockPrice" className="text-sm">株価（円）</Label>
@@ -833,11 +833,11 @@ const InvestmentDiagnostic = () => {
                         <div className="mt-2 p-2 bg-yellow-50 rounded">
                           <p className="font-semibold text-yellow-800 text-xs">投資アドバイス:</p>
                           <p className="text-yellow-700 text-xs">
-                            {parseInt(calculationResult.profitLoss.replace(/,/g, "")) > 0 
-                              ? "評価損益がプラスです。株価が上がったことで利益が出ています。" 
+                            {parseInt(calculationResult.profitLoss.replace(/,/g, "")) > 0
+                              ? "評価損益がプラスです。株価が上がったことで利益が出ています。"
                               : "評価損益がマイナスです。株価が下がったことで損失が出ています。"}
-                            {parseInt(calculationResult.dividendIncome.replace(/,/g, "")) > 0 
-                              ? "また、配当収入も得られています。" 
+                            {parseInt(calculationResult.dividendIncome.replace(/,/g, "")) > 0
+                              ? "また、配当収入も得られています。"
                               : "配当収入はまだ得られていません。"}
                           </p>
                         </div>
@@ -848,11 +848,11 @@ const InvestmentDiagnostic = () => {
                     )}
                   </div>
                 )}
-                
+
                 {calculatorType === 'risk' && (
                   <div className="space-y-4">
                     <p className="text-muted-foreground text-sm">FX（外国為替証拠金取引）の利益とリスクを簡単に計算できます。実際の取引前にシミュレーションして、自分の投資計画を立てましょう。</p>
-                    
+
                     <div className="bg-blue-50 p-3 rounded-lg">
                       <h5 className="font-bold text-blue-800 mb-2 text-sm">FX初心者向けガイド</h5>
                       <ul className="list-disc pl-4 space-y-1 text-xs">
@@ -863,7 +863,7 @@ const InvestmentDiagnostic = () => {
                         <li>必要証拠金：取引に必要な保証金（ロット数 × 通貨単位 × エントリー価格 × 0.04）</li>
                       </ul>
                     </div>
-                    
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       <div>
                         <Label htmlFor="currencyPair" className="text-sm">通貨ペア</Label>
@@ -1050,13 +1050,14 @@ const InvestmentDiagnostic = () => {
             </div>
           </div>
         )}
-      </section>
+
+      </>
     );
   }
 
   return (
-    <section id="診断" className="py-8 sm:py-12 bg-muted/30">
-      <div className="container mx-auto px-4">
+    <>
+      <div className="container mx-auto px-4 pb-12">
         <div className="max-w-3xl mx-auto">
           <Card className="shadow-lg">
             <CardHeader className="px-4 sm:px-6">
@@ -1071,11 +1072,10 @@ const InvestmentDiagnostic = () => {
                 {questions[step].options.map((option) => {
                   const isChecked = (answers[step] || []).includes(option.value);
                   return (
-                    <div 
-                      key={option.value} 
-                      className={`flex items-center space-x-2 sm:space-x-3 p-3 sm:p-4 border-2 rounded-lg transition-all duration-200 cursor-pointer ${
-                        isChecked ? "border-primary bg-primary/10 shadow-sm" : "border-border hover:border-primary/50"
-                      }`}
+                    <div
+                      key={option.value}
+                      className={`flex items-center space-x-2 sm:space-x-3 p-3 sm:p-4 border-2 rounded-lg transition-all duration-200 cursor-pointer ${isChecked ? "border-primary bg-primary/10 shadow-sm" : "border-border hover:border-primary/50"
+                        }`}
                       onClick={() => handleAnswer(option.value)}
                     >
                       <div className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground">
@@ -1093,9 +1093,9 @@ const InvestmentDiagnostic = () => {
                 {/* モバイル用のボタンレイアウト */}
                 <div className="flex gap-3 sm:hidden">
                   {step > 0 && (
-                    <Button 
-                      onClick={() => setStep(step - 1)} 
-                      variant="outline" 
+                    <Button
+                      onClick={() => setStep(step - 1)}
+                      variant="outline"
                       size="icon"
                       className="h-12 w-12"
                     >
@@ -1109,16 +1109,16 @@ const InvestmentDiagnostic = () => {
                   >
                     {step < questions.length - 1 ? "次へ" : "診断結果を見る"}
                   </Button>
-                  <Button 
-                    onClick={handleReset} 
-                    variant="destructive" 
+                  <Button
+                    onClick={handleReset}
+                    variant="destructive"
                     size="icon"
                     className="h-12 w-12"
                   >
                     <X className="h-5 w-5" />
                   </Button>
                 </div>
-                
+
                 {/* PC用のボタンレイアウト */}
                 <div className="hidden sm:flex gap-3">
                   {step > 0 && (
@@ -1145,9 +1145,9 @@ const InvestmentDiagnostic = () => {
                       </>
                     )}
                   </Button>
-                  <Button 
-                    onClick={handleReset} 
-                    variant="destructive" 
+                  <Button
+                    onClick={handleReset}
+                    variant="destructive"
                     size="lg"
                     disabled={step === 0 && (!answers[0] || answers[0].length === 0)}
                     className="px-6 py-6"
@@ -1156,14 +1156,13 @@ const InvestmentDiagnostic = () => {
                     <X className="ml-2 h-5 w-5" />
                   </Button>
                 </div>
-                
+
                 <div className="flex gap-1 justify-center">
                   {questions.map((_, index) => (
                     <div
                       key={index}
-                      className={`h-2 w-12 sm:w-16 rounded-full transition-colors ${
-                        index <= step ? "bg-primary" : "bg-muted"
-                      }`}
+                      className={`h-2 w-12 sm:w-16 rounded-full transition-colors ${index <= step ? "bg-primary" : "bg-muted"
+                        }`}
                     />
                   ))}
                 </div>
@@ -1172,7 +1171,7 @@ const InvestmentDiagnostic = () => {
           </Card>
         </div>
       </div>
-    </section>
+    </>
   );
 };
 
