@@ -116,7 +116,7 @@ export const securitiesRankingList: Company[] = [
             { label: "ツール", value: "DMM株 PRO" }
         ],
         badgeText: "米国株の取引手数料0円！",
-        affiliateUrl: "https://kabu.dmm.com/"
+        affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100kz3n00ol0m"
     },
     {
         id: "ig",
@@ -531,6 +531,23 @@ const SecuritiesComparison = () => {
                     spreadEurUsdText: "-", transactionUnitText: "100株", demoPeriod: "なし", cashbackText: "-"
                 };
 
+                let customLogo;
+                let promotionBanner;
+
+                if (item.id === "monex") {
+                    promotionBanner = (
+                        <a href="https://h.accesstrade.net/sp/cc?rk=0100kwxh00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
+                            <img src="https://h.accesstrade.net/sp/rr?rk=0100kwxh00ol0m" alt="株・投資信託ならネット証券のマネックス" style={{ border: 0 }} />
+                        </a>
+                    );
+                } else if (item.id === "dmm") {
+                    promotionBanner = (
+                        <a href="https://h.accesstrade.net/sp/cc?rk=0100mkjo00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
+                            <img src="https://h.accesstrade.net/sp/rr?rk=0100mkjo00ol0m" alt="【DMM 株】口座開設" style={{ border: 0 }} />
+                        </a>
+                    );
+                }
+
                 return (
                     <RankingCardV2
                         key={item.name}
@@ -542,6 +559,8 @@ const SecuritiesComparison = () => {
                         detailedSpecs={mockDetailedSpecs}
                         accordionData={accordionData}
                         rank={index + 1}
+                        customLogo={customLogo}
+                        promotionBanner={promotionBanner}
                     />
                 );
             }}

@@ -38,6 +38,8 @@ interface RankingCardV2Props {
             steps: { title: string; image?: string; description: string }[];
         };
     };
+    customLogo?: React.ReactNode;
+    promotionBanner?: React.ReactNode;
 }
 
 const RankingCardV2 = ({
@@ -52,7 +54,9 @@ const RankingCardV2 = ({
     affiliateUrl,
     detailUrl,
     detailedSpecs,
-    accordionData
+    accordionData,
+    customLogo,
+    promotionBanner
 }: RankingCardV2Props) => {
     const [isOpen, setIsOpen] = useState(false);
     const isTop3 = rank <= 3;
@@ -93,29 +97,45 @@ const RankingCardV2 = ({
                 {/* Left Side: Logo & Info */}
                 <div className={`flex-1 p-3 sm:p-4 flex items-start gap-3 sm:gap-4 ${badgeText ? "pt-10 sm:pt-11" : "pt-4"}`}>
                     {/* Logo Placeholder - simplified style */}
-                    <div className="hidden sm:flex items-center justify-center w-14 h-14 rounded-lg bg-gray-50 border border-gray-100 text-xs text-gray-400 shrink-0 font-bold">
-                        {detailedSpecs?.logoText || "LOGO"}
-                    </div>
+                    {customLogo ? (
+                        <div className="hidden sm:flex items-center justify-center w-14 h-14 shrink-0">
+                            {customLogo}
+                        </div>
+                    ) : (
+                        <div className="hidden sm:flex items-center justify-center w-14 h-14 rounded-lg bg-gray-50 border border-gray-100 text-xs text-gray-400 shrink-0 font-bold">
+                            {detailedSpecs?.logoText || "LOGO"}
+                        </div>
+                    )}
 
                     <div className="flex-1 mt-1 sm:mt-0">
-                        <div className="flex items-center gap-2 mb-2 flex-wrap pr-8">
-                            <h3 className="text-base sm:text-lg font-bold text-gray-800 leading-tight">{name}</h3>
-                        </div>
+                        <div className="flex sm:gap-1 justify-between items-start">
+                            <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-2 mb-1 flex-wrap pr-1">
+                                    <h3 className="text-base sm:text-lg font-bold text-gray-800 leading-tight">{name}</h3>
+                                </div>
 
-                        {campaignText && (
-                            <div className="text-[10px] sm:text-xs text-red-600 font-bold bg-red-50 border border-red-100 px-2 py-1 rounded inline-block mb-2">
-                                {campaignText}
+                                {campaignText && (
+                                    <div className="text-[10px] sm:text-xs text-red-600 font-bold bg-red-50 border border-red-100 px-2 py-1 rounded inline-block mb-1">
+                                        {campaignText}
+                                    </div>
+                                )}
+
+                                <ul className="space-y-0.5">
+                                    {points.map((point, i) => (
+                                        <li key={i} className="flex items-start gap-1.5 text-xs sm:text-sm text-gray-600">
+                                            <span className="text-green-500 font-bold">✓</span>
+                                            <span className="font-medium leading-snug">{point}</span>
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
-                        )}
 
-                        <ul className="space-y-1">
-                            {points.map((point, i) => (
-                                <li key={i} className="flex items-start gap-1.5 text-xs sm:text-sm text-gray-600">
-                                    <span className="text-green-500 font-bold">✓</span>
-                                    <span className="font-medium leading-snug">{point}</span>
-                                </li>
-                            ))}
-                        </ul>
+                            {promotionBanner && (
+                                <div className="shrink-0 -mt-1 ml-1 flex items-center [&_img]:h-full [&_img]:w-auto [&_img]:max-h-[120px] sm:[&_img]:max-h-[150px] [&_img]:object-contain" style={{ maxWidth: '140px' }}>
+                                    {promotionBanner}
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
 
@@ -129,6 +149,8 @@ const RankingCardV2 = ({
                             </div>
                         ))}
                     </div>
+
+
 
                     <div className="space-y-2">
                         <Button

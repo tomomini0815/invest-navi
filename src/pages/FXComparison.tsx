@@ -47,8 +47,8 @@ export const fxRankingList = [
       { label: "最小取引単位", value: "10,000通貨" },
     ],
     campaignText: "最大300,000円キャッシュバック！",
-    affiliateUrl: "https://fx.dmm.com/",
-    detailUrl: "/fx/dmm-fx",
+    affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=01004jqz00ol0m",
+    detailUrl: "https://h.accesstrade.net/sp/cc?rk=01004jqz00ol0m",
     badgeText: "安心の国内口座数No.1"
   },
   {
@@ -110,8 +110,8 @@ export const fxRankingList = [
       { label: "最小取引単位", value: "1通貨", isHighlight: true },
     ],
     campaignText: "最大100万円キャッシュバック実施中",
-    affiliateUrl: "#",
-    detailUrl: "#",
+    affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100ohhx00ol0m",
+    detailUrl: "https://h.accesstrade.net/sp/cc?rk=0100ohhx00ol0m",
     badgeText: "100円から始める自動売買"
   },
   {
@@ -314,8 +314,8 @@ const FXComparison = () => {
       id: "dmm",
       name: "DMM FX",
       logoText: "DMM",
-      detailUrl: "/fx/dmm-fx",
-      affiliateUrl: "https://fx.dmm.com/",
+      detailUrl: "https://h.accesstrade.net/sp/cc?rk=01004jqz00ol0m",
+      affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=01004jqz00ol0m",
       overallRating: 5,
       overallRatingText: "初心者向け",
       transactionUnit: 10000,
@@ -444,8 +444,8 @@ const FXComparison = () => {
       id: "matsui",
       name: "松井証券",
       logoText: "松井",
-      detailUrl: "#",
-      affiliateUrl: "#",
+      detailUrl: "https://h.accesstrade.net/sp/cc?rk=0100ohhx00ol0m",
+      affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100ohhx00ol0m",
       overallRating: 4,
       overallRatingText: "自動売買",
       transactionUnit: 1,
@@ -796,12 +796,41 @@ const FXComparison = () => {
       rankingList={fxRankingList}
       renderRankingCard={(item, index) => {
         const detailedSpecs = comparisonData.find((c) => c.id === item.id) || comparisonData[0];
+        let customLogo;
+        let promotionBanner;
+
+        if (item.id === "dmm") {
+          customLogo = (
+            <a href="https://h.accesstrade.net/sp/cc?rk=01004iwt00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
+              <img src="https://h.accesstrade.net/sp/rr?rk=01004iwt00ol0m" alt="【DMM FX】入金" style={{ border: 0 }} />
+            </a>
+          );
+          promotionBanner = (
+            <a href="https://h.accesstrade.net/sp/cc?rk=010072t900ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
+              <img src="https://h.accesstrade.net/sp/rr?rk=010072t900ol0m" alt="【DMM FX】入金" style={{ border: 0 }} />
+            </a>
+          );
+        } else if (item.id === "matsui") {
+          customLogo = (
+            <a href="https://h.accesstrade.net/sp/cc?rk=0100ohhu00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
+              <img src="https://h.accesstrade.net/sp/rr?rk=0100ohhu00ol0m" alt="松井証券FX　新規口座開設獲得プロモーション" style={{ border: 0 }} />
+            </a>
+          );
+          promotionBanner = (
+            <a href="https://h.accesstrade.net/sp/cc?rk=0100ohhq00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
+              <img src="https://h.accesstrade.net/sp/rr?rk=0100ohhq00ol0m" alt="松井証券FX　新規口座開設獲得プロモーション" style={{ border: 0 }} />
+            </a>
+          );
+        }
+
         return (
           <RankingCardV2
             key={item.name}
             id={item.id}
             {...item}
             detailedSpecs={detailedSpecs}
+            customLogo={customLogo}
+            promotionBanner={promotionBanner}
           />
         );
       }}
