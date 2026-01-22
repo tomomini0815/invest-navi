@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Clock, TrendingUp, Calendar, Share2, X, Instagram, Facebook, MessageCircle } from "lucide-react";
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/seo/SEO";
 import { useState } from "react";
 
 const ArticleDetail = () => {
@@ -1124,39 +1124,27 @@ const ArticleDetail = () => {
   }
 
   // 関連記事（同じカテゴリの他の記事）
-  const relatedArticles = articles.filter(articleItem => 
+  const relatedArticles = articles.filter(articleItem =>
     articleItem.category === article.category && articleItem.id !== article.id
   ).slice(0, 3);
 
   return (
     <div className="min-h-screen bg-background">
-      <Helmet>
-        <title>{article.title} | 投資総合ナビ</title>
-        <meta name="description" content={article.excerpt} />
-        <meta name="keywords" content={`投資,資産運用,${article.category},投資戦略`} />
-        <link rel="canonical" href={`https://www.toushi-navi.com/articles/${article.id}`} />
-        
-        {/* Open Graph */}
-        <meta property="og:title" content={`${article.title} | 投資総合ナビ`} />
-        <meta property="og:description" content={article.excerpt} />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://www.toushi-navi.com/articles/${article.id}`} />
-        <meta property="og:site_name" content="投資総合ナビ" />
-        <meta property="og:locale" content="ja_JP" />
-        
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@toushi_navi" />
-      </Helmet>
-      
+      <SEO
+        title={article.title}
+        description={article.excerpt}
+        path={`/articles/${article.id}`}
+        type="article"
+      />
+
       <Header />
-      
+
       <main className="flex-grow">
         {/* Breadcrumb */}
         <div className="bg-gradient-to-r from-muted/50 to-muted/30 py-4 border-b">
           <div className="container mx-auto px-8">
-            <Link 
-              to="/articles" 
+            <Link
+              to="/articles"
               className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors group"
             >
               <ArrowLeft className="h-4 w-4 mr-1 group-hover:-translate-x-1 transition-transform" />
@@ -1182,14 +1170,14 @@ const ArticleDetail = () => {
                   </div>
                 </div>
               </div>
-              
+
               <h1 className="text-3xl md:text-4xl font-bold mb-8 leading-tight">{article.title}</h1>
-              
+
               <div className="bg-card border rounded-xl p-6 mb-10">
                 <div className="flex flex-wrap justify-between items-center gap-4">
                   <p className="text-muted-foreground">{article.excerpt}</p>
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     className="flex items-center gap-2"
                     onClick={() => setShowShareModal(true)}
                   >
@@ -1198,19 +1186,19 @@ const ArticleDetail = () => {
                   </Button>
                 </div>
               </div>
-              
-              <div 
+
+              <div
                 className="prose max-w-none mb-16"
-                dangerouslySetInnerHTML={{ __html: article.content }} 
+                dangerouslySetInnerHTML={{ __html: article.content }}
               />
-              
+
               {/* ソーシャルメディア共有モーダル */}
               {showShareModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
                   <div className="bg-white rounded-xl p-6 w-full max-w-md">
                     <div className="flex justify-between items-center mb-4">
                       <h3 className="text-xl font-bold">記事を共有</h3>
-                      <button 
+                      <button
                         onClick={() => setShowShareModal(false)}
                         className="text-gray-500 hover:text-gray-700"
                       >
@@ -1219,8 +1207,8 @@ const ArticleDetail = () => {
                     </div>
                     <p className="text-muted-foreground mb-6">共有先を選択してください</p>
                     <div className="grid grid-cols-2 gap-4">
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         className="flex flex-col items-center justify-center h-24 gap-2"
                         onClick={() => {
                           window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(article.title)}`, '_blank');
@@ -1230,8 +1218,8 @@ const ArticleDetail = () => {
                         <X className="h-8 w-8 text-black" />
                         <span>X (Twitter)</span>
                       </Button>
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         className="flex flex-col items-center justify-center h-24 gap-2"
                         onClick={() => {
                           window.open(`https://www.instagram.com/?url=${encodeURIComponent(window.location.href)}`, '_blank');
@@ -1241,8 +1229,8 @@ const ArticleDetail = () => {
                         <Instagram className="h-8 w-8" />
                         <span>Instagram</span>
                       </Button>
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         className="flex flex-col items-center justify-center h-24 gap-2"
                         onClick={() => {
                           window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank');
@@ -1252,8 +1240,8 @@ const ArticleDetail = () => {
                         <Facebook className="h-8 w-8 text-blue-600" />
                         <span>Facebook</span>
                       </Button>
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         className="flex flex-col items-center justify-center h-24 gap-2"
                         onClick={() => {
                           window.open(`https://line.me/R/msg/text/?${encodeURIComponent(article.title + ' ' + window.location.href)}`, '_blank');
@@ -1283,12 +1271,12 @@ const ArticleDetail = () => {
                         </CardHeader>
                         <CardContent>
                           <p className="text-sm text-muted-foreground line-clamp-3 mb-4">{relatedArticle.excerpt}</p>
-                          <button 
-                              className="w-full px-3 py-1.5 text-sm bg-blue-100 text-primary rounded-md hover:bg-blue-200 transition-colors"
-                              onClick={() => navigate(`/articles/${relatedArticle.id}`)}
-                            >
-                              記事を読む
-                            </button>
+                          <button
+                            className="w-full px-3 py-1.5 text-sm bg-blue-100 text-primary rounded-md hover:bg-blue-200 transition-colors"
+                            onClick={() => navigate(`/articles/${relatedArticle.id}`)}
+                          >
+                            記事を読む
+                          </button>
                         </CardContent>
                       </Card>
                     ))}

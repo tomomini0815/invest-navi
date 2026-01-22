@@ -14,6 +14,7 @@ import { InvestmentBasics } from "@/components/guides/InvestmentBasics";
 import { StocksBeginner } from "@/components/guides/StocksBeginner";
 import { InvestmentTrust } from "@/components/guides/InvestmentTrust";
 import { NisaBeginner } from "@/components/guides/NisaBeginner";
+import SEO from "@/components/seo/SEO";
 
 const GuideDetail = () => {
   const { id } = useParams();
@@ -118,6 +119,12 @@ const GuideDetail = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-background via-background/90 to-muted/30">
+      <SEO
+        title={article.title}
+        description={`${article.title}について解説した完全ガイドです。${article.category}に関する基礎知識から実践的な内容まで網羅しています。`}
+        path={`/guide/${id}`}
+        type="article"
+      />
       <Header />
 
       <main className="flex-1">

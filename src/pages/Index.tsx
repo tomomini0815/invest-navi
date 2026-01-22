@@ -3,7 +3,7 @@ import TickerTape from "@/components/features/TickerTape";
 import HeroSection from "@/components/features/HeroSection";
 import CategoryCard from "@/components/features/CategoryCard";
 import InvestmentDiagnostic from "@/components/features/InvestmentDiagnostic";
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/seo/SEO";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -278,24 +278,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Helmet>
-        <title>投資総合ナビ | 株式・FX・暗号資産・投資信託の比較と診断</title>
-        <meta name="description" content="投資総合ナビは、株式投資・FX・暗号資産・投資信託など、すべての投資商品を比較・診断する総合投資ガイドです。初心者から中級者まで、最適な投資方法を見つけましょう。2024年最新の投資情報も提供しています。" />
-        <meta name="keywords" content="投資,資産運用,株式投資,NISA,つみたてNISA,iDeCo,証券会社,比較,ランキング,初心者,暗号資産,FX,REIT,投資信託,投資総合ナビ,2024年最新情報" />
-        <link rel="canonical" href="https://www.toushi-navi.com" />
-
-        {/* Open Graph */}
-        <meta property="og:title" content="投資総合ナビ | 株式・FX・暗号資産・投資信託の比較と診断" />
-        <meta property="og:description" content="投資総合ナビは、株式投資・FX・暗号資産・投資信託など、すべての投資商品を比較・診断する総合投資ガイドです。初心者から中級者まで、最適な投資方法を見つけましょう。2024年最新の投資情報も提供しています。" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.toushi-navi.com" />
-        <meta property="og:site_name" content="投資総合ナビ" />
-        <meta property="og:locale" content="ja_JP" />
-
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@toushi_navi" />
-      </Helmet>
+      <SEO
+        title="投資総合ナビ | 株式・FX・暗号資産・投資信託の比較と診断"
+        description="投資総合ナビは、株式投資・FX・暗号資産・投資信託など、すべての投資商品を比較・診断する総合投資ガイドです。初心者から中級者まで、最適な投資方法を見つけましょう。2024年最新の投資情報も提供しています。"
+        path="/"
+      />
 
       <Header />
 
