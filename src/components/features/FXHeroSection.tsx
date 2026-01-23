@@ -13,12 +13,15 @@ const FXHeroSection = () => {
                 </div>
 
                 {/* Factual Title */}
-                {/* Factual Title */}
-                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 md:mb-3 tracking-wider flex items-end justify-center gap-2 whitespace-nowrap">
-                    <span
-                        className="text-white text-3xl sm:text-4xl md:text-5xl font-black drop-shadow-xl"
-                    >
+                <h1 className="text-lg xs:text-xl sm:text-2xl md:text-4xl font-bold text-white mb-2 md:mb-3 tracking-wider flex items-end justify-center gap-1 sm:gap-2 whitespace-nowrap">
+                    <span className="text-white text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-black drop-shadow-xl">
                         FX口座
+                    </span>
+                    <span className="text-white text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-black drop-shadow-xl">
+                        12
+                    </span>
+                    <span className="text-white text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-black drop-shadow-xl">
+                        社
                     </span>
                     徹底比較
                 </h1>

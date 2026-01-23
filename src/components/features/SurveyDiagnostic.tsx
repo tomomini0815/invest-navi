@@ -15,6 +15,9 @@ export interface Company {
     rank?: number;
     rating?: number;
     detailUrl?: string;
+    customLogo?: React.ReactNode;
+    promotionBanner?: React.ReactNode;
+    customAffiliateButton?: React.ReactNode;
     accordionData?: {
         features: string;
         goodPoints: string[];

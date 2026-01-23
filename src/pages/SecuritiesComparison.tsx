@@ -4,6 +4,7 @@ import { SecuritiesHeroSection } from "@/components/features/SecuritiesHeroSecti
 import RankingCardV2 from "@/components/features/RankingCardV2";
 import { SecuritiesComparisonTable } from "@/components/features/SecuritiesComparisonTable";
 import { Company } from "@/components/features/SurveyDiagnostic";
+import { ExternalLink } from "lucide-react";
 
 export const securitiesRankingList: Company[] = [
     {
@@ -52,7 +53,31 @@ export const securitiesRankingList: Company[] = [
             { label: "ツール", value: "銘柄スカウター", isHighlight: true }
         ],
         badgeText: "外国株・IPO投資に強い",
-        affiliateUrl: "https://www.monex.co.jp/"
+        affiliateUrl: "https://www.monex.co.jp/",
+        customLogo: (
+            <a href="https://h.accesstrade.net/sp/cc?rk=0100n99e00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
+                <img src="https://h.accesstrade.net/sp/rr?rk=0100n99e00ol0m" alt="株・投資信託ならネット証券のマネックス" style={{ border: 0 }} />
+            </a>
+        ),
+        customAffiliateButton: (
+            <div className="relative w-full">
+                <a
+                    href="https://h.accesstrade.net/sp/cc?rk=0100q1bu00ol0m"
+                    rel="nofollow"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold h-10 text-sm shadow-sm transition-colors flex items-center justify-center rounded-md"
+                    target="_blank"
+                >
+                    公式サイト <ExternalLink className="ml-2 w-4 h-4" />
+                    <img src="https://h.accesstrade.net/sp/rr?rk=0100q1bu00ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
+                </a>
+            </div>
+        ),
+        promotionBanner: (
+            <a href="https://h.accesstrade.net/sp/cc?rk=0100p6oa00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
+                <img src="https://h.accesstrade.net/sp/rr?rk=0100p6oa00ol0m" alt="マネックス証券" style={{ border: 0 }} />
+            </a>
+        )
     },
     {
         id: "matsui",
@@ -116,7 +141,12 @@ export const securitiesRankingList: Company[] = [
             { label: "ツール", value: "DMM株 PRO" }
         ],
         badgeText: "米国株の取引手数料0円！",
-        affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100kz3n00ol0m"
+        affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100kz3n00ol0m",
+        customLogo: (
+            <a href="https://h.accesstrade.net/sp/cc?rk=0100mjw300ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
+                <img src="https://h.accesstrade.net/sp/rr?rk=0100mjw300ol0m" alt="【DMM 株】口座開設" style={{ border: 0 }} />
+            </a>
+        )
     },
     {
         id: "ig",
@@ -531,16 +561,10 @@ const SecuritiesComparison = () => {
                     spreadEurUsdText: "-", transactionUnitText: "100株", demoPeriod: "なし", cashbackText: "-"
                 };
 
-                let customLogo;
-                let promotionBanner;
+                let customLogo = item.customLogo;
+                let promotionBanner = item.promotionBanner;
 
-                if (item.id === "monex") {
-                    promotionBanner = (
-                        <a href="https://h.accesstrade.net/sp/cc?rk=0100kwxh00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
-                            <img src="https://h.accesstrade.net/sp/rr?rk=0100kwxh00ol0m" alt="株・投資信託ならネット証券のマネックス" style={{ border: 0 }} />
-                        </a>
-                    );
-                } else if (item.id === "dmm") {
+                if (item.id === "dmm") {
                     promotionBanner = (
                         <a href="https://h.accesstrade.net/sp/cc?rk=0100mkjo00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
                             <img src="https://h.accesstrade.net/sp/rr?rk=0100mkjo00ol0m" alt="【DMM 株】口座開設" style={{ border: 0 }} />

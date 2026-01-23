@@ -40,6 +40,7 @@ interface RankingCardV2Props {
     };
     customLogo?: React.ReactNode;
     promotionBanner?: React.ReactNode;
+    customAffiliateButton?: React.ReactNode;
 }
 
 const RankingCardV2 = ({
@@ -56,7 +57,8 @@ const RankingCardV2 = ({
     detailedSpecs,
     accordionData,
     customLogo,
-    promotionBanner
+    promotionBanner,
+    customAffiliateButton
 }: RankingCardV2Props) => {
     const [isOpen, setIsOpen] = useState(false);
     const isTop3 = rank <= 3;
@@ -95,14 +97,14 @@ const RankingCardV2 = ({
 
             <div className="flex flex-col md:flex-row mt-6 md:mt-0">
                 {/* Left Side: Logo & Info */}
-                <div className={`flex-1 p-3 sm:p-4 flex items-start gap-3 sm:gap-4 ${badgeText ? "pt-10 sm:pt-11" : "pt-4"}`}>
+                <div className={`flex-1 p-3 sm:p-4 pt-3 sm:pt-10 flex items-start gap-3 sm:gap-4`}>
                     {/* Logo Placeholder - simplified style */}
                     {customLogo ? (
-                        <div className="hidden sm:flex items-center justify-center w-14 h-14 shrink-0">
+                        <div className="flex items-center justify-center w-14 h-14 shrink-0">
                             {customLogo}
                         </div>
                     ) : (
-                        <div className="hidden sm:flex items-center justify-center w-14 h-14 rounded-lg bg-gray-50 border border-gray-100 text-xs text-gray-400 shrink-0 font-bold">
+                        <div className="flex items-center justify-center w-14 h-14 rounded-lg bg-gray-50 border border-gray-100 text-xs text-gray-400 shrink-0 font-bold">
                             {detailedSpecs?.logoText || "LOGO"}
                         </div>
                     )}
@@ -153,12 +155,16 @@ const RankingCardV2 = ({
 
 
                     <div className="space-y-2">
-                        <Button
-                            onClick={() => window.open(affiliateUrl, '_blank')}
-                            className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-sm shadow-sm transition-colors"
-                        >
-                            公式サイト <ExternalLink className="ml-1 w-3 h-3" />
-                        </Button>
+                        {customAffiliateButton ? (
+                            customAffiliateButton
+                        ) : (
+                            <Button
+                                onClick={() => window.open(affiliateUrl, '_blank')}
+                                className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-sm shadow-sm transition-colors"
+                            >
+                                公式サイト <ExternalLink className="ml-1 w-3 h-3" />
+                            </Button>
+                        )}
                         <div className="text-center">
                             <Button
                                 variant="ghost"
@@ -167,7 +173,7 @@ const RankingCardV2 = ({
                                 className="w-full text-sm font-bold text-gray-500 hover:text-emerald-600 hover:bg-emerald-50 transition-colors flex items-center justify-center gap-1 h-10 border border-gray-200"
                             >
                                 {isOpen ? "閉じる" : "詳細を見る"}
-                                {isOpen ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                                {isOpen ? <ChevronUp className="w-3 h-3" strokeWidth={3} /> : <ChevronDown className="w-3 h-3" strokeWidth={3} />}
                             </Button>
                         </div>
                     </div>

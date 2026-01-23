@@ -19,6 +19,7 @@ export interface ComparisonRow {
   cashback: number;
   cashbackText: string;
   features: string;
+  tableFeatures?: string;
   campaign?: string;
   // Spreads (Values for sorting, Text for display)
   spreadUsdJpy: number;
@@ -42,7 +43,7 @@ interface ComparisonTableProps {
   data: ComparisonRow[];
 }
 
-type SortKey = "overallRating" | "transactionUnit" | "appUsability" | "cashback" | "spreadUsdJpy" | "spreadEurJpy" | "spreadGbpJpy" | "spreadAudJpy" | "spreadEurUsd";
+type SortKey = "overallRating" | "transactionUnit" | "appUsability" | "cashback" | "spreadUsdJpy" | "spreadEurJpy" | "spreadGbpJpy" | "spreadAudJpy" | "spreadEurUsd" | "demoPeriod";
 type SortDirection = "asc" | "desc";
 type TabType = "overall" | "spread";
 
@@ -73,8 +74,8 @@ const ComparisonTable = ({ data }: ComparisonTableProps) => {
   };
 
   const SortIcon = ({ columnKey }: { columnKey: SortKey }) => {
-    if (sortConfig?.key !== columnKey) return <ArrowUpDown className="w-4 h-4 text-gray-400 ml-1.5 inline transition-colors hover:text-emerald-500" />;
-    return sortConfig.direction === "asc" ? <ChevronUp className="w-4 h-4 ml-1.5 inline text-emerald-600 font-bold" /> : <ChevronDown className="w-4 h-4 ml-1.5 inline text-emerald-600 font-bold" />;
+    if (sortConfig?.key !== columnKey) return <ArrowUpDown className="w-4 h-4 text-white/50 ml-1.5 inline transition-colors hover:text-white" />;
+    return sortConfig.direction === "asc" ? <ChevronUp className="w-4 h-4 ml-1.5 inline text-white font-bold" /> : <ChevronDown className="w-4 h-4 ml-1.5 inline text-white font-bold" />;
   };
 
   const renderRatingIcon = (score: number) => {
@@ -103,8 +104,8 @@ const ComparisonTable = ({ data }: ComparisonTableProps) => {
     <div className="w-full">
       <div className="text-center mb-6">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-800 tracking-wide flex items-center justify-center gap-2 mb-2">
-          <Scale className="w-6 h-6 text-emerald-600" />
-          FX口座<span className="text-emerald-600">12</span>社を徹底比較
+          <Scale className="w-8 h-8 text-emerald-600" />
+          FX口座<span className="text-emerald-600 text-5xl font-extrabold -mt-2 mx-1">12</span>社を徹底比較
         </h2>
         <p className="text-sm text-gray-500 flex items-center justify-center gap-1">
           <span>▼</span> 項目名をクリックすると並び替えができます
@@ -148,8 +149,8 @@ const ComparisonTable = ({ data }: ComparisonTableProps) => {
                   <th className="px-2 py-3 w-[100px] text-center border-r border-emerald-500 cursor-pointer hover:bg-emerald-700" onClick={() => handleSort("appUsability")}>
                     アプリ<br /><span className="text-[10px] opacity-90"><SortIcon columnKey="appUsability" /></span>
                   </th>
-                  <th className="px-2 py-3 w-[100px] text-center border-r border-emerald-500">
-                    デモ取引<br />(期間)
+                  <th className="px-2 py-3 w-[100px] text-center border-r border-emerald-500 cursor-pointer hover:bg-emerald-700" onClick={() => handleSort("demoPeriod")}>
+                    デモ取引<br />(期間)<span className="text-[10px] opacity-90"><SortIcon columnKey="demoPeriod" /></span>
                   </th>
                   <th className="px-2 py-3 w-[110px] text-center border-r border-emerald-500 cursor-pointer hover:bg-emerald-700" onClick={() => handleSort("cashback")}>
                     キャッシュ<br />バック<span className="text-[10px] opacity-90"><SortIcon columnKey="cashback" /></span>
@@ -189,9 +190,18 @@ const ComparisonTable = ({ data }: ComparisonTableProps) => {
                 {/* Company Name & Logo */}
                 <td className="px-4 py-4 border-r border-gray-200 text-center">
                   <div className="font-bold text-gray-800 text-base mb-1">{item.logoText}</div>
-                  <a href={item.detailUrl} className="text-xs text-blue-600 hover:underline font-medium hover:text-blue-800 transition-colors">
-                    {item.name} &gt;
-                  </a>
+                  {item.id === "hirose" ? (
+                    <div className="relative inline-block">
+                      <a href="https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T" rel="nofollow" target="_blank" className="text-xs text-blue-600 hover:underline font-medium hover:text-blue-800 transition-colors">
+                        {item.name} &gt;
+                      </a>
+                      <img style={{ border: 'none', position: 'absolute', width: 1, height: 1, opacity: 0 }} src="https://www18.a8.net/0.gif?a8mat=45I5TK+6AU69E+1FOU+6BU5T" alt="" />
+                    </div>
+                  ) : (
+                    <a href={item.affiliateUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline font-medium hover:text-blue-800 transition-colors">
+                      {item.name} &gt;
+                    </a>
+                  )}
                 </td>
 
                 {activeTab === "overall" ? (
@@ -236,7 +246,7 @@ const ComparisonTable = ({ data }: ComparisonTableProps) => {
                     {/* Features */}
                     <td className="px-4 py-4 border-r border-gray-200 text-left">
                       <p className="text-xs sm:text-sm text-gray-700 leading-relaxed font-medium">
-                        {item.features}
+                        {item.tableFeatures || item.features}
                       </p>
                     </td>
                   </>
@@ -283,13 +293,28 @@ const ComparisonTable = ({ data }: ComparisonTableProps) => {
                       {item.campaign}
                     </div>
                   )}
-                  <Button
-                    size="sm"
-                    onClick={() => window.open(item.affiliateUrl, '_blank')}
-                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs h-9 shadow-sm"
-                  >
-                    公式サイトへ
-                  </Button>
+                  {item.id === "hirose" ? (
+                    <div className="relative w-full">
+                      <Button
+                        asChild
+                        size="sm"
+                        className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs h-9 shadow-sm"
+                      >
+                        <a href="https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T" rel="nofollow" target="_blank">
+                          公式サイトへ
+                        </a>
+                      </Button>
+                      <img style={{ border: 'none', position: 'absolute', width: 1, height: 1, opacity: 0 }} src="https://www18.a8.net/0.gif?a8mat=45I5TK+6AU69E+1FOU+6BU5T" alt="" />
+                    </div>
+                  ) : (
+                    <Button
+                      size="sm"
+                      onClick={() => window.open(item.affiliateUrl, '_blank')}
+                      className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs h-9 shadow-sm"
+                    >
+                      公式サイトへ
+                    </Button>
+                  )}
                 </td>
               </tr>
             ))}

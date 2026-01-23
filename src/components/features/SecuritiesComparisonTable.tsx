@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Check, ArrowUpDown } from "lucide-react";
+import { Check, ArrowUpDown, Scale } from "lucide-react";
 import { Company } from "./SurveyDiagnostic";
 
 interface SecuritiesComparisonTableProps {
@@ -24,7 +24,8 @@ export const SecuritiesComparisonTable = ({ data }: SecuritiesComparisonTablePro
             <div className="text-center mb-6">
                 {/* Design Match: Header Title like ComparisonTable */}
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-800 tracking-wide flex items-center justify-center gap-2 mb-2">
-                    ネット証券<span className="text-emerald-600 font-bold">{data.length}</span>社を徹底比較
+                    <Scale className="w-8 h-8 text-emerald-600" />
+                    ネット証券<span className="text-emerald-600 text-5xl font-extrabold -mt-2 mx-1">{data.length}</span>社を徹底比較
                 </h2>
 
             </div>
@@ -67,13 +68,30 @@ export const SecuritiesComparisonTable = ({ data }: SecuritiesComparisonTablePro
                                 <tr key={company.name} className={`border-b border-gray-200 hover:bg-emerald-50 transition-colors ${index % 2 === 0 ? "bg-white" : "bg-gray-50"}`}>
                                     <td className="px-2 py-4 border-r border-gray-200 text-center">
                                         <div className="font-bold text-gray-800 text-base mb-1">{company.name}</div>
-                                        {/* Placeholder for detailed link style match */}
-                                        <Link
-                                            to={getDetailUrl(company.name)}
-                                            className="text-xs text-blue-600 hover:underline font-medium hover:text-blue-800 transition-colors cursor-pointer block"
-                                        >
-                                            詳細 &gt;
-                                        </Link>
+                                        {/* Link to affiliate URL */}
+                                        {company.id === "monex" ? (
+                                            <div className="relative inline-block">
+                                                <a
+                                                    href="https://h.accesstrade.net/sp/cc?rk=0100q1bu00ol0m"
+                                                    rel="nofollow"
+                                                    referrerPolicy="no-referrer-when-downgrade"
+                                                    target="_blank"
+                                                    className="text-xs text-blue-600 hover:underline font-medium hover:text-blue-800 transition-colors cursor-pointer block"
+                                                >
+                                                    詳細 &gt;
+                                                    <img src="https://h.accesstrade.net/sp/rr?rk=0100q1bu00ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
+                                                </a>
+                                            </div>
+                                        ) : (
+                                            <a
+                                                href={company.affiliateUrl || "#"}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-xs text-blue-600 hover:underline font-medium hover:text-blue-800 transition-colors cursor-pointer block"
+                                            >
+                                                詳細 &gt;
+                                            </a>
+                                        )}
                                     </td>
                                     <td className="px-2 py-4 border-r border-gray-200 text-center">
                                         <div className={`font-bold ${domesticFee.includes("無料") || domesticFee.includes("0円") ? "text-red-600" : "text-gray-700"}`}>
@@ -116,12 +134,26 @@ export const SecuritiesComparisonTable = ({ data }: SecuritiesComparisonTablePro
                                     </td>
                                     {/* CTA Column Content */}
                                     <td className="px-2 py-4 text-center">
-                                        <button
-                                            onClick={() => window.open(company.affiliateUrl || "#", '_blank')}
-                                            className="w-auto inline-block px-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs h-9 shadow-sm rounded-md"
-                                        >
-                                            公式サイトへ
-                                        </button>
+                                        {company.id === "monex" ? (
+                                            <div className="relative inline-block">
+                                                <a
+                                                    href="https://h.accesstrade.net/sp/cc?rk=0100q1bu00ol0m"
+                                                    rel="nofollow"
+                                                    referrerPolicy="no-referrer-when-downgrade"
+                                                    className="w-auto inline-flex items-center justify-center px-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs h-9 shadow-sm rounded-md"
+                                                >
+                                                    マネックス証券
+                                                    <img src="https://h.accesstrade.net/sp/rr?rk=0100q1bu00ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
+                                                </a>
+                                            </div>
+                                        ) : (
+                                            <button
+                                                onClick={() => window.open(company.affiliateUrl || "#", '_blank')}
+                                                className="w-auto inline-block px-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs h-9 shadow-sm rounded-md"
+                                            >
+                                                公式サイトへ
+                                            </button>
+                                        )}
                                     </td>
                                 </tr>
                             );

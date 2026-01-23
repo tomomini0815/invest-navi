@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, ArrowRight, BookOpen, TrendingUp, PieChart, LineChart, Coins, Calculator, CheckCircle, ExternalLink, Trophy } from "lucide-react";
+import { Calendar, ArrowRight, BookOpen, TrendingUp, PieChart, LineChart, Coins, Calculator, CheckCircle, ExternalLink, Trophy, ChevronDown } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -239,38 +239,68 @@ const Index = () => {
 
   // Recommended Card Component
   const RecommendedCard = ({ item, categoryPath }: { item: any, categoryPath: string }) => (
-    <Card className="h-full hover:shadow-lg transition-shadow flex flex-col overflow-hidden border-2 border-orange-100">
+    <Card className="h-full hover:shadow-lg transition-shadow flex flex-col overflow-hidden border-2 border-orange-100 relative">
 
-      {/* Badge Section - Matching the image style */}
-      <div className="w-fit bg-gradient-to-r from-orange-400 to-red-500 text-white px-4 py-1.5 flex items-center gap-2 font-bold text-sm rounded-br-2xl shadow-sm">
-        <Trophy className="w-4 h-4 text-yellow-200 fill-yellow-200" />
+      <div className="w-fit bg-gradient-to-r from-orange-400 to-red-500 text-white px-4 py-1.5 flex items-center gap-2 font-bold text-sm rounded-tl-xl rounded-br-2xl shadow-sm z-10 absolute top-0 left-0">
+        <Trophy className="w-4 h-4 text-white" />
         <span>{item.badgeText || "おすすめ！"}</span>
       </div>
 
-      <CardContent className="p-6 flex-grow flex flex-col pt-4">
+      <CardContent className="p-4 sm:p-5 flex-grow flex flex-col pt-12 sm:pt-14 bg-white/50">
 
-        <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4 line-clamp-2 h-14 flex items-center">
+        <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">
           {item.name}
         </h3>
 
-        <div className="space-y-3 mb-6 flex-grow">
+        {/* Campaign - Added based on request */}
+        {item.campaignText && (
+          <div className="bg-red-50 text-red-600 text-[10px] sm:text-xs font-bold px-2 py-1.5 rounded border border-red-100 mb-3 inline-block self-start">
+            {item.campaignText}
+          </div>
+        )}
+
+        <div className="space-y-2 mb-4 flex-grow">
           {item.points.map((point: string, i: number) => (
             <div key={i} className="flex items-start gap-2">
-              <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+              <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
               <span className="text-sm text-gray-600 font-medium leading-tight">{point}</span>
             </div>
           ))}
         </div>
 
-        <div className="mt-auto pt-4 border-t border-gray-100">
-          <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold mb-3" onClick={() => window.open(item.affiliateUrl, '_blank')}>
-            公式サイトを見る <ExternalLink className="ml-2 w-4 h-4" />
-          </Button>
-          <div className="text-center">
-            <Link to={`${categoryPath}#${item.id || ""}`} className="text-xs text-gray-500 underline hover:text-emerald-600">
-              詳細を見る
-            </Link>
+        {/* Specs Grid - Added based on request */}
+        {item.specs && (
+          <div className="grid grid-cols-2 gap-2 mb-4">
+            {item.specs.slice(0, 4).map((spec: any, i: number) => (
+              <div key={i} className="bg-white border border-gray-100 rounded p-1.5 text-center shadow-sm">
+                <div className="text-[10px] text-gray-400 font-medium mb-0.5">{spec.label}</div>
+                <div className={`text-xs font-bold ${spec.isHighlight ? "text-red-500" : "text-gray-800"}`}>
+                  {spec.value}
+                </div>
+              </div>
+            ))}
           </div>
+        )}
+
+        <div className="mt-auto space-y-2">
+          {item.customAffiliateButton ? (
+            item.customAffiliateButton
+          ) : (
+            <Button
+              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold h-10 shadow-sm" // Color maintained
+              onClick={() => window.open(item.affiliateUrl, '_blank')}
+            >
+              公式サイト <ExternalLink className="ml-2 w-4 h-4" />
+            </Button>
+          )}
+
+          <Button
+            variant="outline"
+            className="w-full bg-gray-50 hover:bg-gray-100 text-gray-500 font-bold border-gray-200 h-10"
+            onClick={() => navigate(`${categoryPath}#${item.id}`)}
+          >
+            詳細を見る <ChevronDown className="ml-1 w-4 h-4" />
+          </Button>
         </div>
       </CardContent>
     </Card>
@@ -360,17 +390,17 @@ const Index = () => {
         {/* 証券会社 おすすめポイントセクション */}
         <section className="py-16 sm:py-20">
           <div className="container mx-auto px-8">
-            <div className="flex flex-row items-end justify-between mb-8 gap-4">
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 flex items-center gap-3">
-                  <span className="bg-emerald-100 text-emerald-800 text-sm font-bold px-3 py-1 rounded-full">ネット証券</span>
+            <div className="mb-8">
+              <div className="flex items-end justify-between gap-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
+                  <span className="bg-emerald-100 text-emerald-800 text-sm font-bold px-3 py-1 rounded-full whitespace-nowrap">ネット証券</span>
                   おすすめ口座
                 </h2>
-                <p className="text-gray-500 mt-2">手数料の安さやポイント還元で選ぶならこの3社</p>
+                <Link to="/securities-comparison" className="text-emerald-600 font-bold flex items-center hover:underline whitespace-nowrap shrink-0 text-sm sm:text-base">
+                  全てを見る <ArrowRight className="ml-1 w-4 h-4" />
+                </Link>
               </div>
-              <Link to="/securities-comparison" className="text-emerald-600 font-bold flex items-center hover:underline whitespace-nowrap">
-                全てを見る <ArrowRight className="ml-1 w-4 h-4" />
-              </Link>
+              <p className="text-gray-500 mt-2">手数料の安さやポイント還元で選ぶならこの3社</p>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {securitiesRankingList.slice(0, 3).map((item, index) => (
@@ -383,17 +413,17 @@ const Index = () => {
         {/* FX おすすめポイントセクション */}
         <section className="py-16 sm:py-20 bg-muted/30">
           <div className="container mx-auto px-8">
-            <div className="flex flex-row items-end justify-between mb-8 gap-4">
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 flex items-center gap-3">
-                  <span className="bg-blue-100 text-blue-800 text-sm font-bold px-3 py-1 rounded-full">FX</span>
+            <div className="mb-8">
+              <div className="flex items-end justify-between gap-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
+                  <span className="bg-blue-100 text-blue-800 text-sm font-bold px-3 py-1 rounded-full whitespace-nowrap">FX</span>
                   おすすめ口座
                 </h2>
-                <p className="text-gray-500 mt-2">スプレッドの狭さとツールの使いやすさが決め手</p>
+                <Link to="/fx-comparison" className="text-blue-600 font-bold flex items-center hover:underline whitespace-nowrap shrink-0 text-sm sm:text-base">
+                  全てを見る <ArrowRight className="ml-1 w-4 h-4" />
+                </Link>
               </div>
-              <Link to="/fx-comparison" className="text-blue-600 font-bold flex items-center hover:underline whitespace-nowrap">
-                全てを見る <ArrowRight className="ml-1 w-4 h-4" />
-              </Link>
+              <p className="text-gray-500 mt-2">スプレッドの狭さとツールの使いやすさが決め手</p>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {fxRankingList.slice(0, 3).map((item, index) => (
@@ -406,17 +436,17 @@ const Index = () => {
         {/* 暗号資産 おすすめポイントセクション */}
         <section className="py-16 sm:py-20">
           <div className="container mx-auto px-8">
-            <div className="flex flex-row items-end justify-between mb-8 gap-4">
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 flex items-center gap-3">
-                  <span className="bg-purple-100 text-purple-800 text-sm font-bold px-3 py-1 rounded-full">暗号資産</span>
+            <div className="mb-8">
+              <div className="flex items-end justify-between gap-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
+                  <span className="bg-purple-100 text-purple-800 text-sm font-bold px-3 py-1 rounded-full whitespace-nowrap">暗号資産</span>
                   おすすめ取引所
                 </h2>
-                <p className="text-gray-500 mt-2">取扱通貨数とアプリの使いやすさで厳選</p>
+                <Link to="/crypto-comparison" className="text-purple-600 font-bold flex items-center hover:underline whitespace-nowrap shrink-0 text-sm sm:text-base">
+                  全てを見る <ArrowRight className="ml-1 w-4 h-4" />
+                </Link>
               </div>
-              <Link to="/crypto-comparison" className="text-purple-600 font-bold flex items-center hover:underline whitespace-nowrap">
-                全てを見る <ArrowRight className="ml-1 w-4 h-4" />
-              </Link>
+              <p className="text-gray-500 mt-2">取扱通貨数とアプリの使いやすさで厳選</p>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {cryptoRankingList.slice(0, 3).map((item, index) => (
@@ -429,20 +459,20 @@ const Index = () => {
         {/* 新着記事セクション */}
         <section className="py-16 sm:py-20 bg-muted/30">
           <div className="container mx-auto px-8">
-            <div className="flex flex-row items-end justify-between mb-8 gap-4">
-              <div>
-                <h2 className="text-2xl sm:text-3xl font-bold mb-2">新着記事</h2>
-                <p className="text-muted-foreground">
-                  最新の投資ニュースやテクニカル分析をチェック
-                </p>
+            <div className="mb-8">
+              <div className="flex items-end justify-between gap-4">
+                <h2 className="text-2xl sm:text-3xl font-bold">新着記事</h2>
+                <Link
+                  to="/articles"
+                  className="text-blue-600 font-bold flex items-center hover:underline whitespace-nowrap shrink-0 text-sm sm:text-base"
+                >
+                  全てを見る
+                  <ArrowRight className="ml-1 w-4 h-4" />
+                </Link>
               </div>
-              <Link
-                to="/articles"
-                className="text-blue-600 font-bold flex items-center hover:underline whitespace-nowrap"
-              >
-                すべての記事を見る
-                <ArrowRight className="ml-1 w-4 h-4" />
-              </Link>
+              <p className="text-muted-foreground mt-2">
+                最新の投資ニュースやテクニカル分析をチェック
+              </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {articles

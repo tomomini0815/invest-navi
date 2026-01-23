@@ -1,7 +1,7 @@
 import Header from "@/components/layout/Header";
 import TickerTape from "@/components/features/TickerTape";
 import FXHeroSection from "@/components/features/FXHeroSection";
-import SurveyDiagnostic from "@/components/features/SurveyDiagnostic";
+import SurveyDiagnostic, { Company } from "@/components/features/SurveyDiagnostic";
 import RankingCardV2 from "@/components/features/RankingCardV2";
 import ComparisonTable from "@/components/features/ComparisonTable";
 import Footer from "@/components/layout/Footer";
@@ -12,7 +12,7 @@ export const fxRankingList = [
   {
     id: "gmo",
     rank: 1,
-    name: "GMOクリック証券（FXネオ）",
+    name: "GMOクリック証券 FXネオ",
     rating: 4.8,
     points: [
       "FX取引高世界第1位！圧倒的な実績",
@@ -33,7 +33,7 @@ export const fxRankingList = [
   {
     id: "dmm",
     rank: 2,
-    name: "DMM FX",
+    name: "DMM.com証券 DMM FX",
     rating: 4.7,
     points: [
       "口座開設数 国内No.1",
@@ -96,7 +96,7 @@ export const fxRankingList = [
   {
     id: "matsui",
     rank: 5,
-    name: "松井証券（MATSUI FX）",
+    name: "松井証券 MATSUI FX",
     rating: 4.3,
     points: [
       "100円から取引可能！超少額スタート",
@@ -117,7 +117,7 @@ export const fxRankingList = [
   {
     id: "hirose",
     rank: 6,
-    name: "ヒロセ通商（LION FX）",
+    name: "ヒロセ通商 LION FX",
     rating: 4.3,
     points: [
       "スキャルピング公認！短期売買に最適",
@@ -138,7 +138,7 @@ export const fxRankingList = [
   {
     id: "line",
     rank: 7,
-    name: "LINE FX",
+    name: "LINE証券 LINE FX",
     rating: 4.2,
     points: [
       "LINEアプリで重要な相場変動を通知",
@@ -180,7 +180,7 @@ export const fxRankingList = [
   {
     id: "minna",
     rank: 9,
-    name: "みんなのFX",
+    name: "トレイダーズ証券 みんなのFX",
     rating: 4.1,
     points: [
       "高水準のスワップポイント",
@@ -201,7 +201,7 @@ export const fxRankingList = [
   {
     id: "light",
     rank: 10,
-    name: "LIGHT FX",
+    name: "トレイダーズ証券 LIGHT FX",
     rating: 4.0,
     points: [
       "スワップ運用に特化したLIGHTペア",
@@ -222,7 +222,7 @@ export const fxRankingList = [
   {
     id: "triauto",
     rank: 11,
-    name: "トライオートFX",
+    name: "インヴァスト証券 トライオートFX",
     rating: 4.0,
     points: [
       "リストから選ぶだけの簡単自動売買",
@@ -269,7 +269,7 @@ const FXComparison = () => {
     {
       id: "gmo",
       name: "GMOクリック証券",
-      logoText: "GMO",
+      logoText: "GMOクリック証券",
       detailUrl: "/fx/gmo-click",
       affiliateUrl: "https://www.click-sec.com/corp/guide/fxneo/",
       overallRating: 5,
@@ -281,11 +281,14 @@ const FXComparison = () => {
       demoPeriod: "1ヶ月",
       cashback: 550000,
       cashbackText: "最大55万",
-      features: "スマホアプリが使いやすく情報配信量が充実！最短当日取引開始できる",
+      tableFeatures: "スマホアプリが使いやすく情報配信量が充実！最短当日取引開始できる",
+      features: "GMOクリック証券は、FX取引高で世界第1位を誇る業界最大手のFX会社です。スプレッドは業界最狭水準の0.2銭（米ドル/円）を提供し、取引コストを徹底的に抑えられます。高機能取引ツール「はっちゅう君FX」や「プラチナチャート」は、初心者からプロトレーダーまで幅広く支持されています。スマホアプリ「GMOクリック FXneo」は直感的な操作性と豊富な情報配信で、外出先でも快適な取引環境を実現。24時間サポート体制も整っており、FX初心者でも安心して取引を始められます。",
       goodPoints: [
-        "スプレッドが業界最狭水準でコストを抑えられる",
-        "高機能ツール「はっちゅう君FX」など取引環境が充実",
-        "24時間サポートがあり初心者でも安心"
+        "FX取引高世界第1位の圧倒的な実績と信頼性。多くのトレーダーに選ばれ続けている安心感",
+        "スプレッドが業界最狭水準（米ドル/円0.2銭）でコストを最小限に抑えられる",
+        "高機能ツール「はっちゅう君FX」「プラチナチャート」で本格的なテクニカル分析が可能",
+        "24時間電話・メールサポート対応で、初心者でも安心して取引できる環境",
+        "スマホアプリ「FXneo」は使いやすさと機能性を両立し、外出先でも快適に取引可能"
       ],
       startGuideSteps: [
         {
@@ -313,7 +316,7 @@ const FXComparison = () => {
     {
       id: "dmm",
       name: "DMM FX",
-      logoText: "DMM",
+      logoText: "DMM FX",
       detailUrl: "https://h.accesstrade.net/sp/cc?rk=01004jqz00ol0m",
       affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=01004jqz00ol0m",
       overallRating: 5,
@@ -325,11 +328,14 @@ const FXComparison = () => {
       demoPeriod: "3ヶ月",
       cashback: 300000,
       cashbackText: "最大30万",
-      features: "最短即日で取引できる！クイック入金も対応でFXを始めやすい",
+      tableFeatures: "最短即日で取引できる！クイック入金も対応でFXを始めやすい",
+      features: "DMM FXは、口座開設数が国内No.1を誇る人気のFX会社です。スプレッドは業界最狭水準で、米ドル/円0.2銭という低コストで取引できます。最大の特徴は、LINEで24時間365日いつでも問い合わせができるサポート体制。FX初心者でも気軽に質問でき、疑問をすぐに解決できます。取引でDMMポイントが貯まり、貯まったポイントは1ポイント=1円で現金化可能。スマホアプリは初心者向けの「かんたんモード」と上級者向けの「ノーマルモード」を切り替えられ、レベルに応じた最適な取引環境を提供します。最短即日で取引開始できるスピード感も魅力です。",
       goodPoints: [
-        "口座開設数が国内No.1で多くの利用者に選ばれている",
-        "LINEで24時間365日お問い合わせが可能",
-        "DMMポイントが貯まる・使える"
+        "口座開設数が国内No.1で、多くの投資家に選ばれている圧倒的な人気と実績",
+        "LINEで24時間365日お問い合わせが可能。初心者でも気軽に質問できる安心サポート",
+        "取引でDMMポイントが貯まり、1ポイント=1円で現金化できるお得な還元システム",
+        "スマホアプリは2つのモード搭載で、初心者から上級者まで使いやすい設計",
+        "スプレッドは業界最狭水準（米ドル/円0.2銭）で取引コストを徹底的に削減"
       ],
       startGuideSteps: [
         {
@@ -357,7 +363,7 @@ const FXComparison = () => {
     {
       id: "sbi",
       name: "SBI FXトレード",
-      logoText: "SBI",
+      logoText: "SBI FXトレード",
       detailUrl: "/fx/sbi-fx",
       affiliateUrl: "https://www.sbifxt.co.jp/",
       overallRating: 4,
@@ -369,11 +375,14 @@ const FXComparison = () => {
       demoPeriod: "なし",
       cashback: 1000000,
       cashbackText: "最大100万",
-      features: "1円から取引可能！少額から始めたい人や自動売買との同時運用にも◎",
+      tableFeatures: "1円から取引可能！少額から始めたい人や自動売買との同時運用にも◎",
+      features: "SBI FXトレードは、1通貨（約4円）から取引できる業界唯一の超少額取引対応FX会社です。スプレッドは業界最狭水準の0.18銭（米ドル/円）を提供し、少額でもコストを抑えた取引が可能。積立FXサービスでは、毎日・毎週・毎月など自分のペースで自動的に外貨を購入でき、ドルコスト平均法による長期的な資産形成に最適です。取引量に応じてポイントが貯まり、現金やマイルに交換可能。初心者が少額でFXを体験したい場合や、自動売買と併用してリスク分散したい上級者まで、幅広いニーズに対応できる柔軟性が魅力です。",
       goodPoints: [
-        "1通貨単位（約4円）から取引可能でリスクが低い",
-        "業界最狭水準のスプレッドを提供",
-        "積立FXなど長期運用向けのサービスも充実"
+        "1通貨単位（約4円）から取引可能で、FX初心者でも気軽に始められる超少額対応",
+        "業界最狭水準のスプレッド（米ドル/円0.18銭）で、少額取引でもコストを最小化",
+        "積立FXサービスで、ドルコスト平均法による計画的な資産形成が可能",
+        "取引量に応じてポイントが貯まり、現金やマイルに交換できるお得な特典",
+        "少額から始められるため、リスクを抑えながらFXの経験を積める"
       ],
       startGuideSteps: [
         {
@@ -400,9 +409,9 @@ const FXComparison = () => {
     {
       id: "gaitame",
       name: "外為どっとコム",
-      logoText: "外為",
+      logoText: "外為どっとコム",
       detailUrl: "#",
-      affiliateUrl: "#",
+      affiliateUrl: "https://www.gaitame.com/",
       overallRating: 4,
       overallRatingText: "情報豊富",
       transactionUnit: 1000,
@@ -412,11 +421,14 @@ const FXComparison = () => {
       demoPeriod: "90日間",
       cashback: 1000000,
       cashbackText: "最大100万",
-      features: "アプリ内機能が充実！本格的な分析ができる経験者向きFX口座",
+      tableFeatures: "アプリ内機能が充実！本格的な分析ができる経験者向きFX口座",
+      features: "外為どっとコムは、情報コンテンツの豊富さで業界トップクラスを誇るFX会社です。独自の情報コンテンツ『マネ育』では、FXの基礎から実践的な取引手法まで学べ、初心者のスキルアップを強力にサポート。オンラインセミナーも多数開催され、著名アナリストによる相場分析や投資戦略を無料で学べます。スマホアプリ「外貨ネNextネオ」は高機能チャートや経済指標カレンダーを搭載し、本格的な分析が可能。スワップポイントも高水準で、長期保有にも適しています。情報収集と取引を一体化したい経験者向けのFX口座です。",
       goodPoints: [
-        "独自の情報コンテンツ「マネ育」が充実",
-        "初心者向けのオンラインセミナーを多数開催",
-        "スワップポイントが高水準で長期保有にも向く"
+        "独自の情報コンテンツ『マネ育』でFXの基礎から実践まで体系的に学べる充実の学習環境",
+        "初心者向けオンラインセミナーを多数開催。著名アナリストの相場分析を無料で視聴可能",
+        "スワップポイントが高水準で、長期保有による金利収入を狙いやすい",
+        "スマホアプリ「外貨ネNextネオ」は高機能チャートと経済指標を搭載し本格的な分析が可能",
+        "ニュース配信が豊富で、相場の動きをリアルタイムで把握できる情報力"
       ],
       startGuideSteps: [
         {
@@ -443,7 +455,7 @@ const FXComparison = () => {
     {
       id: "matsui",
       name: "松井証券",
-      logoText: "松井",
+      logoText: "松井証券",
       detailUrl: "https://h.accesstrade.net/sp/cc?rk=0100ohhx00ol0m",
       affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100ohhx00ol0m",
       overallRating: 4,
@@ -455,11 +467,14 @@ const FXComparison = () => {
       demoPeriod: "未対応",
       cashback: 100000,
       cashbackText: "最大10万",
-      features: "100円から取引できる！少額から始めたい人におすすめ",
+      tableFeatures: "100円から取引できる！少額から始めたい人におすすめ",
+      features: "松井証券は、100年以上の歴史を持つ老舗証券会社の安心感と、革新的なサービスを併せ持つFX会社です。25歳以下は株式手数料が無料、NISA取引も無料という若い世代を応援する体制が特徴。FXでも100円から取引できる超少額対応で、初心者が気軽に始められます。「FX自動売買」機能では、簡単な設定でリピート系自動売買が可能で、忍しい方でも効率的に取引できます。サポート体制はHDI-Japan問合せ窓口格付けで「三つ星」を連続獲得しており、初心者でも安心して相談できる環境が整っています。",
       goodPoints: [
-        "100年の歴史を持つ老舗証券会社の安心感",
-        "1通貨から取引可能で初心者も安心",
-        "「FX自動売買」機能が使いやすい"
+        "100年以上の歴史を持つ老舗証券会社の圧倒的な安心感と信頼性",
+        "100円からFX取引が可能で、超少額から気軽に始められる",
+        "「FX自動売買」機能が使いやすく、忍しい方でも効率的に取引できる",
+        "HDI-Japan問合せ窓口格付けで「三つ星」を連続獲得する業界最高水準のサポート体制",
+        "25歳以下は株式手数料無料で、若い世代の投資を応援する体制"
       ],
       startGuideSteps: [
         {
@@ -486,9 +501,33 @@ const FXComparison = () => {
     {
       id: "hirose",
       name: "ヒロセ通商",
-      logoText: "lion",
+      logoText: "ヒロセ通商",
       detailUrl: "#",
-      affiliateUrl: "#",
+      customLogo: (
+        <div className="w-full h-full flex items-center justify-center relative">
+          <a href="https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T" rel="nofollow" target="_blank" className="w-full h-full flex items-center justify-center">
+            <img style={{ border: 'none', objectFit: 'contain', maxWidth: '100%', maxHeight: '100%' }} width="125" height="125" alt="" src="https://www23.a8.net/svt/bgt?aid=251110136381&wid=001&eno=01&mid=s00000006699001027000&mc=1" />
+          </a>
+          <img style={{ border: 'none', position: 'absolute', width: 1, height: 1, opacity: 0 }} src="https://www18.a8.net/0.gif?a8mat=45I5TK+6AU69E+1FOU+6BU5T" alt="" />
+        </div>
+      ),
+      promotionBanner: (
+        <div className="relative">
+          <a href="https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T" rel="nofollow" target="_blank">
+            <img style={{ border: 'none' }} width="300" height="250" alt="" src="https://www28.a8.net/svt/bgt?aid=251110136381&wid=001&eno=01&mid=s00000006699001063000&mc=1" />
+          </a>
+          <img style={{ border: 'none', position: 'absolute', width: 1, height: 1, opacity: 0 }} src="https://www18.a8.net/0.gif?a8mat=45I5TK+6AU69E+1FOU+6BU5T" alt="" />
+        </div>
+      ),
+      customAffiliateButton: (
+        <div className="relative">
+          <a href="https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T" rel="nofollow" target="_blank" className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-sm shadow-sm transition-colors flex items-center justify-center rounded-md">
+            公式サイト
+          </a>
+          <img style={{ border: 'none', position: 'absolute', width: 1, height: 1, opacity: 0 }} src="https://www18.a8.net/0.gif?a8mat=45I5TK+6AU69E+1FOU+6BU5T" alt="" />
+        </div>
+      ),
+      affiliateUrl: "https://hirose-fx.co.jp/",
       overallRating: 4,
       overallRatingText: "スキャル",
       transactionUnit: 1000,
@@ -498,11 +537,14 @@ const FXComparison = () => {
       demoPeriod: "土日可",
       cashback: 1000000,
       cashbackText: "100万+食品",
-      features: "スキャルピング公認！食品キャンペーンも豊富な人気業者",
+      tableFeatures: "スキャルピング公認！食品キャンペーンも豊富な人気業者",
+      features: "ヒロセ通商は、スキャルピング（短期売買）を公認している数少ないFX会社の一つです。多くのFX会社がスキャルピングを制限する中、ヒロセ通商は短期売買を歓迎し、高速約定システムでストレスなく取引できます。取扱通貨ペア54種類と業界トップクラスの豊富さで、マイナー通貨への投資も可能。毎月の取引量に応じて豪華な食品がもらえるユニークなキャンペーンも大人気。取引をしながら食品を獲得できる楽しみがあり、モチベーション維持にもつながります。アクティブに取引したいトレーダーに最適なFX会社です。",
       goodPoints: [
-        "スキャルピング取引OKを公言している数少ない業者",
-        "毎月の取引量に応じて豪華な食品がもらえる",
-        "約定スピードが速くストレスがない"
+        "スキャルピング取引OKを公言している数少ない業者で、短期売買に最適",
+        "毎月の取引量に応じて豪華な食品がもらえるユニークなキャンペーンで楽しみ増加",
+        "約定スピードが速く、ストレスなくスムーズに取引できる高速約定システム",
+        "取扱通貨ペア54種類と業界トップクラスの豊富さで、マイナー通貨への投資も可能",
+        "取引ツール「LION FX」は操作性が高く、カスタマイズ性に優れた設計"
       ],
       startGuideSteps: [
         {
@@ -529,9 +571,9 @@ const FXComparison = () => {
     {
       id: "line",
       name: "LINE FX",
-      logoText: "LINE",
+      logoText: "LINE FX",
       detailUrl: "#",
-      affiliateUrl: "#",
+      affiliateUrl: "https://line-fx.com/",
       overallRating: 3,
       overallRatingText: "普通",
       transactionUnit: 1000,
@@ -541,11 +583,14 @@ const FXComparison = () => {
       demoPeriod: "未対応",
       cashback: 1005000,
       cashbackText: "最大100万",
-      features: "2万円以上の入金と1万通貨以上の取引で5,000円プレゼント中",
+      tableFeatures: "2万円以上の入金と1万通貨以上の取引て5,000円プレゼント中",
+      features: "LINE FXは、普段使い慣れたLINEアプリと連携した手軽さが最大の魅力です。LINEアプリで経済指標や相場変動の通知が届くため、取引チャンスを逃さずに捕えられます。口座開設は非常に簡単で、LINEアプリから数タップで申し込みが完了。スマホ特化のインターフェースで、直感的な操作が可能です。スプレッドも業界最狭水準で、コストを抑えた取引ができます。FX初心者やスマホで手軽に取引したい方に最適なFX会社です。",
       goodPoints: [
-        "LINEアプリで経済指標や相場変動の通知が届く",
-        "普段使い慣れたLINEアプリのような操作感",
-        "口座開設が非常に簡単でスピーディー"
+        "LINEアプリで経済指標や相場変動の通知が届き、取引チャンスを逃さない",
+        "普段使い慣れたLINEアプリのような操作感で、初心者でも迷わず使える",
+        "口座開設が非常に簡単でスピーディー。LINEアプリから数タップで申し込み完了",
+        "スマホ特化のインターフェースで、外出先でも快適に取引できる",
+        "スプレッドは業界最狭水準で、取引コストを抑えられる"
       ],
       startGuideSteps: [
         {
@@ -572,9 +617,9 @@ const FXComparison = () => {
     {
       id: "ig",
       name: "IG証券",
-      logoText: "IG",
+      logoText: "IG証券",
       detailUrl: "#",
-      affiliateUrl: "#",
+      affiliateUrl: "https://www.ig.com/jp",
       overallRating: 4,
       overallRatingText: "プロ向け",
       transactionUnit: 10000,
@@ -584,11 +629,14 @@ const FXComparison = () => {
       demoPeriod: "あり",
       cashback: 50000,
       cashbackText: "最大5万",
-      features: "通貨ペア約100種！ノックアウトオプションなど多様な取引が可能",
+      tableFeatures: "通貨ペア約100種！ノックアウトオプションなど多様な取引が可能",
+      features: "IG証券は、世界中の金融商品を取引できるCFDのリーディングカンパニーです。通貨ペア約100種類を含む、17,000銘柄以上の商品をラインナップ。個別株CFD、株価指数、商品、債券など、多彩な投資先へアクセスできます。「ノックアウトオプション」は、リスクを限定しながら高い資金効率で投資できる独自商品で、上級者に人気。プロ仕様のチャート分析ツールやニュース配信が充実し、グローバルな投資戦略を実現できます。世界的な金融グループの信頼性と、45年以上の実績を誇るプロ向けFX会社です。",
       goodPoints: [
-        "FX以外にもCFDなど多様な金融商品を扱える",
-        "「ノックアウトオプション」でリスク限定の取引が可能",
-        "プロ仕様の高度なチャート分析ができる"
+        "取扱銘柁数17,000以上で、世界中の株、指数、商品、債券などへアクセス可能",
+        "「ノックアウトオプション」でリスクを限定しながら高い資金効率で投資できる独自商品",
+        "プロ仕様の高機能プラットフォームで、高度なチャート分析やニュース配信が充実",
+        "世界的な金融グループの信頼性と45年以上の実績で安心して取引できる",
+        "「IGアカデミー」で投資の基礎から上級テクニックまで学べる充実の学習コンテンツ"
       ],
       startGuideSteps: [
         {
@@ -615,9 +663,9 @@ const FXComparison = () => {
     {
       id: "minna",
       name: "みんなのFX",
-      logoText: "みんFX",
+      logoText: "みんなのFX",
       detailUrl: "#",
-      affiliateUrl: "#",
+      affiliateUrl: "https://min-fx.jp/",
       overallRating: 4,
       overallRatingText: "普通",
       transactionUnit: 1000,
@@ -627,11 +675,14 @@ const FXComparison = () => {
       demoPeriod: "30日間",
       cashback: 1000000,
       cashbackText: "最大100万",
-      features: "約定力99.9%の実績で注文ミスが少ない点が◎",
+      tableFeatures: "約定力99.9%の実績で注文ミスが少ない点が◎",
+      features: "みんなのFXは、高水準のスワップポイントと優れた約定力が特徴のFX会社です。99.9%という高い約定力で、注文が思い通りの価格で約定され、ストレスなく取引できます。スワップポイントは業界最高水準で、長期保有による金利収入を狙いやすいのが大きな魅力。TradingViewが無料で使えるため、世界中のトレーダーが使う高機能チャートで本格的なテクニカル分析が可能。スプレッドも業界最狭水準で、コストを抑えた取引ができます。トレイダーズ証券が運営する信頼性の高いFXサービスです。",
       goodPoints: [
-        "スワップポイントが業界最高水準",
-        "TradingViewが無料で使える",
-        "99.9%という高い約定力で思い通りの取引"
+        "スワップポイントが業界最高水準で、長期保有による金利収入を狙いやすい",
+        "TradingViewが無料で使え、世界中のトレーダーが使う高機能チャートで分析可能",
+        "99.9%という高い約定力で、注文が思い通りの価格で約定されストレスフリー",
+        "スプレッドは業界最狭水準で、取引コストを最小限に抑えられる",
+        "トレイダーズ証券が運営する信頼性の高いFXサービスで安心して取引できる"
       ],
       startGuideSteps: [
         {
@@ -658,9 +709,9 @@ const FXComparison = () => {
     {
       id: "light",
       name: "LIGHT FX",
-      logoText: "LIGHT",
+      logoText: "LIGHT FX",
       detailUrl: "#",
-      affiliateUrl: "#",
+      affiliateUrl: "https://lightfx.jp/",
       overallRating: 3,
       overallRatingText: "スワップ",
       transactionUnit: 1000,
@@ -670,11 +721,14 @@ const FXComparison = () => {
       demoPeriod: "未対応",
       cashback: 1000000,
       cashbackText: "最大100万",
-      features: "スワップ20%増額キャンペーン実施中！スプレッドは広め△",
+      tableFeatures: "スワップ20%増額キャンペーン実施中！スプレッドは広め△",
+      features: "LIGHT FXは、スワップポイント運用に特化したFX会社です。「LIGHTペア」というスワップポイント優遇通貨ペアを提供し、高金利通貨での長期運用に最適。トレイダーズ証券が運営する「みんなのFX」の姉妹サービスで、同様にTradingViewが無料で使えるため、高機能チャートで分析しながらスワップ運用ができます。スプレッドも業界最狭水準で、コストを抑えた取引が可能。長期保有でコツコツと金利収入を積み上げたい方に最適なFX会社です。",
       goodPoints: [
-        "「LIGHTペア」ならスワップポイントが優遇される",
-        "取引単位が1,000通貨からで手軽",
-        "みんなのFXと同様にTradingViewが使える"
+        "「LIGHTペア」でスワップポイントが優遇され、高金利通貨での長期運用に最適",
+        "取引単位が1,000通貨からで手軽に始められ、少額からスワップ運用が可能",
+        "みんなのFXと同様にTradingViewが無料で使え、高機能チャートで分析可能",
+        "トレイダーズ証券が運営する信頼性の高いサービスで安心して長期運用できる",
+        "スプレッドは業界最狭水準で、取引コストを抑えられる"
       ],
       startGuideSteps: [
         {
@@ -701,9 +755,9 @@ const FXComparison = () => {
     {
       id: "triauto",
       name: "トライオートFX",
-      logoText: "トライ",
+      logoText: "トライオートFX",
       detailUrl: "#",
-      affiliateUrl: "#",
+      affiliateUrl: "https://www.invast.jp/triauto/",
       overallRating: 3,
       overallRatingText: "普通",
       transactionUnit: 1000,
@@ -713,11 +767,14 @@ const FXComparison = () => {
       demoPeriod: "未対応",
       cashback: 20000,
       cashbackText: "最大2万",
-      features: "自動売買だからプログラムを選ぶだけ！ツール手数料も無料",
+      tableFeatures: "自動売買だからプログラムを選ぶだけ！ツール手数料も無料",
+      features: "トライオートFXは、リストから選ぶだけで自動売買が始められるFX会社です。「セレクト」機能では、優秀な自動売買プログラムがランキング形式で表示され、初心者でも簡単に選べます。上級者は自分だけのオリジナル自動売買ロジックも作成可能。ETF（上場投資信託）の自動売買も同じ口座ででき、多様な投資戦略を実現できます。インヴァスト証券が運営する信頼性の高いサービスで、24時間自動で取引してくれるため、忍しい方や感情に左右されずに取引したい方に最適です。",
       goodPoints: [
-        "「セレクト」機能で優秀なプログラムを選ぶだけ",
-        "自分だけの自動売買ロジックも作成できる",
-        "ETF（上場投資信託）の自動売買も同じ口座で可能"
+        "「セレクト」機能で優秀なプログラムを選ぶだけで、初心者でも簡単に自動売買を始められる",
+        "自分だけのオリジナル自動売買ロジックも作成でき、上級者のカスタマイズにも対応",
+        "ETF（上場投資信託）の自動売買も同じ口座で可能で、多様な投資戦略を実現",
+        "インヴァスト証券が運営する信頼性の高いサービスで安心して利用できる",
+        "24時間自動で取引してくれるため、忍しい方や感情に左右されずに取引したい方に最適"
       ],
       startGuideSteps: [
         {
@@ -744,9 +801,9 @@ const FXComparison = () => {
     {
       id: "au",
       name: "auカブコム証券",
-      logoText: "au",
+      logoText: "auカブコム証券",
       detailUrl: "#",
-      affiliateUrl: "#",
+      affiliateUrl: "https://kabu.com/",
       overallRating: 3,
       overallRatingText: "普通",
       transactionUnit: 1000,
@@ -756,11 +813,14 @@ const FXComparison = () => {
       demoPeriod: "3ヶ月",
       cashback: 1000000,
       cashbackText: "最大100万",
-      features: "MUFGグループの安心感。デモ取引も充実。",
+      tableFeatures: "MUFGグループの安心感。デモ取引も充実。",
+      features: "auカブコム証券は、MUFG（三菱UFJフィナンシャル・グループ）とKDDIグループの強みを融合したFX会社です。メガバンクグループの圧倒的な信頼性と安心感が最大の魅力。株式や投資信託も同じIDで管理でき、資産を一元管理したい方に便利。PCツールのチャート機能は非常に高性能で、本格的なテクニカル分析が可能。デモ取引も充実しており、初心者がリスクなく練習できる環境が整っています。auユーザーなら口座開設がさらにスムーズで、総合的な資産運用をしたい方に最適です。",
       goodPoints: [
-        "MUFG（三菱UFJフィナンシャル・グループ）の信頼性",
-        "株や投資信託も同じIDで管理できる",
-        "PCツールのチャート機能が非常に高性能"
+        "MUFG（三菱UFJフィナンシャル・グループ）の圧倒的な信頼性と安心感",
+        "株や投資信託も同じIDで管理でき、資産を一元管理しやすい",
+        "PCツールのチャート機能が非常に高性能で、本格的なテクニカル分析が可能",
+        "デモ取引が充実しており、初心者がリスクなく練習できる環境",
+        "auユーザーなら口座開設がスムーズで、総合的な資産運用がしやすい"
       ],
       startGuideSteps: [
         {
@@ -796,8 +856,9 @@ const FXComparison = () => {
       rankingList={fxRankingList}
       renderRankingCard={(item, index) => {
         const detailedSpecs = comparisonData.find((c) => c.id === item.id) || comparisonData[0];
-        let customLogo;
-        let promotionBanner;
+        let customLogo = (item as any).customLogo;
+        let promotionBanner = (item as any).promotionBanner;
+        let customAffiliateButton = (item as any).customAffiliateButton;
 
         if (item.id === "dmm") {
           customLogo = (
@@ -821,6 +882,31 @@ const FXComparison = () => {
               <img src="https://h.accesstrade.net/sp/rr?rk=0100ohhq00ol0m" alt="松井証券FX　新規口座開設獲得プロモーション" style={{ border: 0 }} />
             </a>
           );
+        } else if (item.id === "hirose") {
+          customLogo = (
+            <div className="w-full h-full flex items-center justify-center relative">
+              <a href="https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T" rel="nofollow" target="_blank" className="w-full h-full flex items-center justify-center">
+                <img style={{ border: 'none', objectFit: 'contain', maxWidth: '100%', maxHeight: '100%' }} width="125" height="125" alt="" src="https://www23.a8.net/svt/bgt?aid=251110136381&wid=001&eno=01&mid=s00000006699001027000&mc=1" />
+              </a>
+              <img style={{ border: 'none', position: 'absolute', width: 1, height: 1, opacity: 0 }} src="https://www18.a8.net/0.gif?a8mat=45I5TK+6AU69E+1FOU+6BU5T" alt="" />
+            </div>
+          );
+          promotionBanner = (
+            <div className="relative">
+              <a href="https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T" rel="nofollow" target="_blank">
+                <img style={{ border: 'none' }} width="300" height="250" alt="" src="https://www28.a8.net/svt/bgt?aid=251110136381&wid=001&eno=01&mid=s00000006699001063000&mc=1" />
+              </a>
+              <img style={{ border: 'none', position: 'absolute', width: 1, height: 1, opacity: 0 }} src="https://www18.a8.net/0.gif?a8mat=45I5TK+6AU69E+1FOU+6BU5T" alt="" />
+            </div>
+          );
+          customAffiliateButton = (
+            <div className="relative">
+              <a href="https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T" rel="nofollow" target="_blank" className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-sm shadow-sm transition-colors flex items-center justify-center rounded-md">
+                公式サイト
+              </a>
+              <img style={{ border: 'none', position: 'absolute', width: 1, height: 1, opacity: 0 }} src="https://www18.a8.net/0.gif?a8mat=45I5TK+6AU69E+1FOU+6BU5T" alt="" />
+            </div>
+          );
         }
 
         return (
@@ -831,6 +917,7 @@ const FXComparison = () => {
             detailedSpecs={detailedSpecs}
             customLogo={customLogo}
             promotionBanner={promotionBanner}
+            customAffiliateButton={customAffiliateButton}
           />
         );
       }}
