@@ -142,7 +142,7 @@ export const SecuritiesComparisonTable = ({ data }: SecuritiesComparisonTablePro
                                                     referrerPolicy="no-referrer-when-downgrade"
                                                     className="w-auto inline-flex items-center justify-center px-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs h-9 shadow-sm rounded-md"
                                                 >
-                                                    マネックス証券
+                                                    公式サイトへ
                                                     <img src="https://h.accesstrade.net/sp/rr?rk=0100q1bu00ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
                                                 </a>
                                             </div>
