@@ -65,7 +65,7 @@ export const securitiesRankingList: Company[] = [
                     href="https://h.accesstrade.net/sp/cc?rk=0100q1bu00ol0m"
                     rel="nofollow"
                     referrerPolicy="no-referrer-when-downgrade"
-                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold h-10 text-sm shadow-sm transition-colors flex items-center justify-center rounded-md"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-sm shadow-sm transition-colors flex items-center justify-center rounded-md"
                     target="_blank"
                 >
                     公式サイト <ExternalLink className="ml-2 w-4 h-4" />

@@ -7,8 +7,8 @@ const Company = () => {
       {/* ヘッダー */}
       <div className="bg-gradient-to-r from-muted/50 to-muted/30 py-4 border-b">
         <div className="container mx-auto px-4">
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors group"
           >
             <ChevronLeft className="h-4 w-4 mr-1 group-hover:-translate-x-1 transition-transform" />
@@ -24,39 +24,39 @@ const Company = () => {
             <h1 className="text-3xl md:text-4xl font-bold mb-8 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
               運営会社情報
             </h1>
-            
+
             <div className="bg-card rounded-xl shadow-lg p-4 md:p-6 space-y-8">
               <div className="bg-gradient-to-br from-card to-card/50 border-2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 p-6 rounded-lg mb-8">
                 <h2 className="text-2xl font-bold mb-6 text-center">会社概要</h2>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                   <div className="p-4 bg-accent/10 rounded-lg">
                     <h3 className="font-bold mb-2">会社名</h3>
                     <p>株式会社ユーザーバリュー</p>
                   </div>
-                  
+
                   <div className="p-4 bg-accent/10 rounded-lg">
                     <h3 className="font-bold mb-2">設立</h3>
                     <p>2021年2月</p>
                   </div>
-                  
+
                   <div className="p-4 bg-accent/10 rounded-lg">
                     <h3 className="font-bold mb-2">所在地</h3>
-                    <p>神奈川県秦野市渋沢768-9</p>
+                    <p>神奈川県秦野市渋沢</p>
                   </div>
-                  
+
                   <div className="p-4 bg-accent/10 rounded-lg">
                     <h3 className="font-bold mb-2">資本金</h3>
                     <p>500万円</p>
                   </div>
-                  
+
                   <div className="p-4 bg-accent/10 rounded-lg">
                     <h3 className="font-bold mb-2">事業内容</h3>
                     <p>投資情報提供サービス</p>
                   </div>
                 </div>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <div className="bg-gradient-to-br from-card to-card/50 border-2 hover:shadow-2xl transition-all duration-300 p-6 rounded-lg text-center">
                   <div className="bg-accent/20 p-3 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4">
@@ -67,7 +67,7 @@ const Company = () => {
                     投資で皆様の生活をより豊かに。信頼性の高い情報提供を通じて、資産形成をサポートします。
                   </p>
                 </div>
-                
+
                 <div className="bg-gradient-to-br from-card to-card/50 border-2 hover:shadow-2xl transition-all duration-300 p-6 rounded-lg text-center">
                   <div className="bg-accent/20 p-3 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4">
                     <Target className="h-6 w-6 text-accent" />
@@ -77,7 +77,7 @@ const Company = () => {
                     皆様の資産運用を一歩先へ導くナビゲーションとして、信頼される投資情報プラットフォームを目指します。
                   </p>
                 </div>
-                
+
                 <div className="bg-gradient-to-br from-card to-card/50 border-2 hover:shadow-2xl transition-all duration-300 p-6 rounded-lg text-center">
                   <div className="bg-accent/20 p-3 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4">
                     <Eye className="h-6 w-6 text-accent" />
@@ -88,7 +88,7 @@ const Company = () => {
                   </p>
                 </div>
               </div>
-              
+
               {/* 監修者紹介セクションを追加 */}
               <div className="bg-gradient-to-br from-card to-card/50 border-2 hover:shadow-2xl transition-all duration-300 p-6 rounded-lg">
                 <div className="flex flex-col items-center justify-center mb-6">
@@ -110,7 +110,7 @@ const Company = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* 更新日 */}
               <div className="pt-4 border-t border-border">
                 <p className="text-sm text-muted-foreground text-right">

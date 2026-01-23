@@ -287,7 +287,7 @@ const Index = () => {
             item.customAffiliateButton
           ) : (
             <Button
-              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold h-10 shadow-sm" // Color maintained
+              className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 shadow-sm" // Color maintained
               onClick={() => window.open(item.affiliateUrl, '_blank')}
             >
               公式サイト <ExternalLink className="ml-2 w-4 h-4" />
