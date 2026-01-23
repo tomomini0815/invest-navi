@@ -20,7 +20,7 @@ const Header = () => {
     },
     { name: "銘柄スクリーナー", href: "/screener" },
     { name: "証券会社比較", href: "/comparison" },
-    { name: "FX業者比較", href: "/fx-comparison" },
+    { name: "FX口座比較", href: "/fx-comparison" },
     { name: "暗号資産取引所比較", href: "/crypto-comparison" },
     { name: "投資計算ツール", href: "/tools" },
   ];
