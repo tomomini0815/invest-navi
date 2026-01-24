@@ -145,22 +145,20 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                     <div className="flex">
                         <button
                             onClick={() => setFinancialTab("chart")}
-                            className={`flex-1 px-4 py-4 text-sm font-medium flex items-center justify-center gap-2 transition-colors whitespace-nowrap ${financialTab === "chart"
+                            className={`flex-1 px-4 py-4 text-sm font-bold flex items-center justify-center gap-2 transition-colors whitespace-nowrap ${financialTab === "chart"
                                 ? "bg-blue-100 text-blue-700 border-b-2 border-blue-500"
                                 : "text-slate-600 hover:bg-blue-100"
                                 }`}
                         >
-                            <LineChart className="w-4 h-4" />
                             チャート・財務データ
                         </button>
                         <button
                             onClick={() => setFinancialTab("overview")}
-                            className={`flex-1 px-4 py-4 text-sm font-medium flex items-center justify-center gap-2 transition-colors whitespace-nowrap ${financialTab === "overview"
+                            className={`flex-1 px-4 py-4 text-sm font-bold flex items-center justify-center gap-2 transition-colors whitespace-nowrap ${financialTab === "overview"
                                 ? "bg-blue-100 text-blue-700 border-b-2 border-blue-500"
                                 : "text-slate-600 hover:bg-blue-100"
                                 }`}
                         >
-                            <Building className="w-4 h-4" />
                             企業情報・決算
                         </button>
                     </div>
