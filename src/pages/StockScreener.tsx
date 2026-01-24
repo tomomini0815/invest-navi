@@ -31,9 +31,16 @@ const generateMockHistory = (startPrice: number, endPrice: number) => {
     startDate.setFullYear(now.getFullYear() - 1);
 
     let currentPrice = startPrice;
-    const totalChange = endPrice - startPrice;
-    const dailyDrift = totalChange / days;
-    const volatility = startPrice * 0.02; // 2% daily volatility
+
+    // Create a few trend points to create "waves" instead of a straight line
+    const trendPoints = [
+        startPrice,
+        startPrice + (endPrice - startPrice) * 0.3 * (0.8 + Math.random() * 0.4), // 30% progress point
+        startPrice + (endPrice - startPrice) * 0.6 * (0.8 + Math.random() * 0.4), // 60% progress point
+        endPrice
+    ];
+
+    const segmentLength = Math.floor(days / 3);
 
     for (let i = 0; i <= days; i++) {
         const date = new Date(startDate);
@@ -44,17 +51,29 @@ const generateMockHistory = (startPrice: number, endPrice: number) => {
 
         const dateStr = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
 
-        // Random walk with drift
-        const change = dailyDrift + (Math.random() - 0.5) * volatility;
+        // Determine which segment we are in
+        const segmentIndex = Math.min(Math.floor(i / segmentLength), 2);
+        const segmentStartPrice = trendPoints[segmentIndex];
+        const segmentEndPrice = trendPoints[segmentIndex + 1];
+
+        // Calculate target drift for this segment
+        const segmentDrift = (segmentEndPrice - segmentStartPrice) / segmentLength;
+
+        // Volatility scales with price (higher price = bigger swings)
+        // 3-5% daily volatility for more "wiggle"
+        const volatility = currentPrice * 0.04;
+
+        // Random walk with drift for this segment
+        const change = segmentDrift + (Math.random() - 0.5) * volatility;
         currentPrice += change;
 
         // Ensure price doesn't go negative or too far off
-        if (currentPrice < 0) currentPrice = 100;
+        if (currentPrice < 1) currentPrice = 1;
 
         data.push({ date: dateStr, close: Math.round(currentPrice) });
     }
 
-    // Force the last price to match endPrice roughly (smoothing the approach)
+    // Force the last price to match endPrice roughly
     if (data.length > 0) {
         data[data.length - 1].close = endPrice;
     }
@@ -843,6 +862,7 @@ const StockScreener = () => {
         },
         "7409": { // AeroEdge
             currency: "JPY",
+            priceHistory: generateMockHistory(570, 3455),
             revenue: [
                 { quarter: "23年1Q", value: 0.008 }, { quarter: "23年2Q", value: 0.009 },
                 { quarter: "23年3Q", value: 0.010 }, { quarter: "23年4Q", value: 0.009 },
@@ -1613,37 +1633,44 @@ const StockScreener = () => {
             currency: "JPY_Oku",
             priceHistory: generateMockHistory(1200, 1720),
             revenue: [
-                { quarter: "23.3", value: 3.5 }, { quarter: "23.6", value: 4.0 },
-                { quarter: "23.9", value: 4.5 }, { quarter: "23.12", value: 5.0 },
-                { quarter: "24.3", value: 6.0 }, { quarter: "24.6", value: 7.0 },
-                { quarter: "24.9", value: 8.0 }, { quarter: "24.12", value: 9.0 },
-                { quarter: "25.3", value: 10.0 }, { quarter: "25.6", value: 12.0 }
+                { quarter: "23.5", value: 3.8 }, { quarter: "23.8", value: 5.2 },
+                { quarter: "23.11", value: 6.1 }, { quarter: "24.2", value: 6.8 },
+                { quarter: "24.5", value: 4.9 }, { quarter: "24.8", value: 1.0 },
+                { quarter: "24.11", value: 9.15 }, { quarter: "25.2", value: 7.5 },
+                { quarter: "25.5", value: 8.0 }, { quarter: "25.8", value: 9.0 }
             ],
             profit: [
-                { quarter: "23.3", operating: -0.05, net: -0.06 }, { quarter: "23.6", operating: -0.04, net: -0.05 },
-                { quarter: "23.9", operating: -0.03, net: -0.04 }, { quarter: "23.12", operating: -0.02, net: -0.03 },
-                { quarter: "24.3", operating: -0.01, net: -0.015 }, { quarter: "24.6", operating: 0.01, net: 0.005 },
-                { quarter: "24.9", operating: 0.05, net: 0.03 }, { quarter: "24.12", operating: 0.12, net: 0.08 },
-                { quarter: "25.3", operating: 0.25, net: 0.18 }, { quarter: "25.6", operating: 0.45, net: 0.32 }
+                { quarter: "23.5", operating: -2.0, net: -1.0 }, { quarter: "23.8", operating: -1.8, net: -0.9 },
+                { quarter: "23.11", operating: -1.5, net: -0.7 }, { quarter: "24.2", operating: -1.2, net: -0.5 },
+                { quarter: "24.5", operating: 2.89, net: 2.5 }, { quarter: "24.8", operating: -0.5, net: -0.2 },
+                { quarter: "24.11", operating: -9.03, net: -2.27 }, { quarter: "25.2", operating: 0.1, net: 0.05 },
+                { quarter: "25.5", operating: 0.0, net: 0.0 }, { quarter: "25.8", operating: -2.0, net: -0.8 }
             ],
             segments: [
                 { name: "SAR衛星データ販売", value: 90, color: "#3b82f6" },
                 { name: "衛星開発受託", value: 10, color: "#10b981" }
             ],
             metrics: [
-                { name: "PSR", value: "45倍" }, { name: "PBR", value: "22.5倍" },
-                { name: "ROE", value: "-12.5%" }, { name: "自己資本比率", value: "60.0%" },
-                { name: "時価総額", value: "1200億円" }, { name: "テーマ", value: "宇宙/防衛" },
-                { name: "売上高成長率", value: "+35.5%" }, { name: "EV/EBITDA", value: "N/A" }
+                { name: "時価総額", value: "830億円" }, { name: "EV", value: "803億円" },
+                { name: "PBR", value: "5.47倍" }, { name: "DEレシオ", value: "0.35" },
+                { name: "売上総利益率", value: "2.66%" }, { name: "ROA", value: "-1.77%" },
+                { name: "ROE", value: "-3.16%" }, { name: "ROIC", value: "-2.13%" }
             ],
             incomeStatement: {
-                revenue: 15, costOfGoodsSold: 8, grossProfit: 7,
-                sellingGeneralAdmin: 15, operatingIncome: -8, nonOperatingIncome: 2,
-                ordinaryIncome: -6, specialIncome: 0, preTaxIncome: -6,
-                incomeTax: 1, netIncome: -7
+                revenue: 23.5,
+                costOfGoodsSold: 22.88,
+                grossProfit: 0.62,
+                sellingGeneralAdmin: 8.86,
+                operatingIncome: -8.24,
+                nonOperatingIncome: 4.78,
+                ordinaryIncome: -3.46,
+                specialIncome: 0,
+                preTaxIncome: -3.46,
+                incomeTax: 0,
+                netIncome: -3.46
             },
-            balanceSheet: { totalAssets: 150, totalLiabilities: 60, totalEquity: 90, totalDebt: 40 },
-            cashFlow: { operatingCashFlow: -5, investingCashFlow: -35, financingCashFlow: 50, freeCashFlow: -40 }
+            balanceSheet: { totalAssets: 238.7, totalLiabilities: 88.5, totalEquity: 150.2, totalDebt: 53.0 },
+            cashFlow: { operatingCashFlow: -5, investingCashFlow: -5, financingCashFlow: 10, freeCashFlow: -10 }
         },
         "1942": {
             currency: "JPY_Oku",

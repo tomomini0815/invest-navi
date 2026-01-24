@@ -145,7 +145,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                     <div className="flex">
                         <button
                             onClick={() => setFinancialTab("chart")}
-                            className={`flex-1 px-4 py-4 text-sm font-medium flex items-center justify-center gap-2 transition-colors ${financialTab === "chart"
+                            className={`flex-1 px-4 py-4 text-sm font-medium flex items-center justify-center gap-2 transition-colors whitespace-nowrap ${financialTab === "chart"
                                 ? "bg-blue-100 text-blue-700 border-b-2 border-blue-500"
                                 : "text-slate-600 hover:bg-blue-100"
                                 }`}
@@ -155,7 +155,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                         </button>
                         <button
                             onClick={() => setFinancialTab("overview")}
-                            className={`flex-1 px-4 py-4 text-sm font-medium flex items-center justify-center gap-2 transition-colors ${financialTab === "overview"
+                            className={`flex-1 px-4 py-4 text-sm font-medium flex items-center justify-center gap-2 transition-colors whitespace-nowrap ${financialTab === "overview"
                                 ? "bg-blue-100 text-blue-700 border-b-2 border-blue-500"
                                 : "text-slate-600 hover:bg-blue-100"
                                 }`}
@@ -172,7 +172,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                     {financialTab === "chart" && (
                         <div>
                             {/* メインチャート (Daily) */}
-                            <div className="mb-6" style={{ height: getFinancialData().priceHistory ? "450px" : "850px" }}>
+                            <div className="mb-6" style={{ height: getFinancialData().priceHistory ? "450px" : (isAeroEdge ? "400px" : "850px") }}>
                                 {getFinancialData().priceHistory ? (
                                     <div className="h-full p-4 bg-white rounded-lg border border-slate-200">
                                         <div className="flex items-center justify-between mb-4">
