@@ -40,12 +40,6 @@ const ArticleCard = ({
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground line-clamp-3 mb-3">{excerpt}</p>
-          <div className="flex items-center justify-between text-xs text-muted-foreground">
-            <div className="flex items-center gap-1">
-              <TrendingUp className="h-3 w-3" />
-              <span>人気記事</span>
-            </div>
-          </div>
         </CardContent>
       </Card>
     </Link>

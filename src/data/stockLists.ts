@@ -732,3 +732,16 @@ export const nikkei225Stocks = [
     { "symbol": "8053", "name": "Sumitomo Corp" },
     { "symbol": "8015", "name": "Toyota Tsusho Corp" }
 ];
+
+export const promisingStocks2026 = [
+    { symbol: "5805", name: "SWCC", description: "「第2のフジクラ」最右翼", theme: "電線・データセンター" },
+    { symbol: "6315", name: "TOWA", description: "生成AI半導体の「後工程」世界王者", theme: "半導体製造装置" },
+    { symbol: "3778", name: "さくらインターネット", description: "「国策」ガバメントクラウド・AI", theme: "クラウド・AI" },
+    { symbol: "5595", name: "QPS研究所", description: "宇宙・防衛のリアルな技術力", theme: "宇宙・防衛" },
+    { symbol: "1942", name: "関電工", description: "データセンター建設の「現場監督」", theme: "電気工事・DC" },
+    { symbol: "6506", name: "安川電機", description: "「フィジカルAI」の主役", theme: "ロボット・AI" },
+    { symbol: "6269", name: "三井海洋開発", description: "エネルギー安全保障の「洋上工場」", theme: "エネルギー" },
+    { symbol: "6965", name: "浜松ホトニクス", description: "「核融合」という夢のエネルギー", theme: "光技術・核融合" },
+    { symbol: "5253", name: "カバー", description: "世界で戦える「日本発エンタメ」", theme: "VTuber・IP" },
+    { symbol: "6228", name: "JET", description: "半導体洗浄のニッチトップ", theme: "半導体洗浄" }
+];

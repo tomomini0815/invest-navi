@@ -17,146 +17,106 @@ const Articles = () => {
 
   const articles = [
     {
-      id: "ai-investment-fundamentals",
+      id: "daytrade-vs-longterm-2026",
       type: "article",
-      title: "AI投資の基礎知識：アルゴリズム取引からロボアドバイザーまで完全解説",
-      excerpt: "AIがどのように投資に活用されているのか、基礎から実践的な活用法まで詳しく解説します。初心者から上級者まで使えるAI投資手法を徹底紹介。",
-      category: "投資AI",
-      date: "2025年11月3日",
-      isNew: false,
+      title: "【2026年最新】デイトレード vs 中長期投資：スタイル別・注目銘柄10選と勝ち方",
+      excerpt: "デイトレ向きの「お祭り銘柄」と、中長期向きの「テンバガー候補」。性質の異なる2つの投資スタイルにおすすめの銘柄を各5選紹介。",
+      category: "投資戦略",
+      date: "2026年1月25日",
+      isNew: true,
+      isPopular: true,
+      content: ""
+    },
+    {
+      id: "stocks-roadmap-50k",
+      type: "article",
+      title: "株式投資の始め方：知識ゼロから5万円を稼ぐロードマップ",
+      excerpt: "投資初心者必見！口座開設から銘柄選び、そして最初の利益5万円を手にするまでの具体的なステップと戦略を、知識ゼロでも分かるように徹底解説します。",
+      category: "株式投資",
+      date: "2026年1月25日",
+      isNew: true,
       isPopular: true,
       content: `
         <div class="prose max-w-none">
-          <p class="text-lg leading-relaxed mb-6">人工知能（AI）は、投資の世界でも急速に普及しています。高度なアルゴリズムと膨大なデータ処理能力により、従来の投資手法では見逃しがちなパターンや機会を捉えることが可能になっています。ここでは、AI投資の基礎知識から実践的な活用法まで詳しく解説します。</p>
+          <p class="text-lg leading-relaxed mb-6">「株式投資を始めたいけど、何から手をつければいいか分からない」「まずは5万円くらい利益を出してみたい」そんな悩みを持つ初心者の方へ。知識ゼロからスタートして、最初の5万円を稼ぐまでの具体的なロードマップを公開します。</p>
           
-          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">AI投資とは？基本概念と仕組み</h2>
-          <p class="mb-4">AI投資とは、機械学習、ディープラーニング、自然言語処理などのAI技術を活用して、投資判断やポートフォリオ管理を行う手法です。主な応用分野には、テクニカル分析、ファンダメンタル分析、リスク管理、ポートフォリオ最適化などがあります。</p>
+          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">【STEP 0】マインドセット：株式投資はギャンブルではない</h2>
+          <p class="mb-4">まず最初に理解すべきことは、株式投資は「運と勘」で行うギャンブルではなく、「データと戦略」に基づいて行う資産形成手段だということです。正しい知識とリスク管理があれば、着実に資産を増やすことが可能です。</p>
           
-          <div class="bg-blue-50 p-6 rounded-xl my-8">
-            <h3 class="font-bold text-blue-800 mb-3">AI投資の基本仕組み</h3>
-            <ul class="list-disc pl-5 space-y-2">
-              <li>データ収集：市場データ、ニュース、SNS情報などを収集</li>
-              <li>データ分析：AIが膨大なデータを分析し、パターンを学習</li>
-              <li>予測モデル：学習したパターンを基に将来の価格変動を予測</li>
-              <li>自動取引：予測に基づいて自動的に売買を実行</li>
-            </ul>
+          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">【STEP 1】準備編：最強の投資環境を整える</h2>
+          <div class="bg-emerald-50 p-6 rounded-xl my-8 border border-emerald-100">
+            <h3 class="font-bold text-emerald-800 mb-3">1. ネット証券口座を開設する</h3>
+            <p class="mb-3">手数料が安く、ツールの使いやすいネット証券（SBI証券や楽天証券など）を選びましょう。対面型の証券会社や銀行は手数料が高いため避けましょう。</p>
+            <h3 class="font-bold text-emerald-800 mb-3">2. NISA口座を活用する</h3>
+            <p>2026年現在、NISA（少額投資非課税制度）は必須です。利益にかかる約20%の税金がゼロになるため、これを使わない手はありません。</p>
           </div>
           
-          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">主なAI投資手法と実践例</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-            <div class="bg-blue-50 p-6 rounded-xl">
-              <h3 class="font-bold text-blue-800 mb-3">アルゴリズム取引</h3>
-              <p>事前に設定したルールに従って、コンピュータが自動的に売買を行う手法です。</p>
-              <div class="mt-4">
-                <h4 class="font-bold text-blue-700 mb-2">具体的な活用例：</h4>
-                <ul class="list-disc pl-5 space-y-1">
-                  <li>高頻度取引（HFT）：1秒間に数千回の取引を行う</li>
-                  <li>ニュースベース取引：ニュース速報を自動解析して取引</li>
-                  <li>裁定取引：複数の取引所間の価格差を利用して利益を得る</li>
-                </ul>
-              </div>
-            </div>
-            <div class="bg-green-50 p-6 rounded-xl">
-              <h3 class="font-bold text-green-800 mb-3">ロボアドバイザー</h3>
-              <p>AIが投資家のリスク許容度や目標に基づいて、最適な資産運用を提案します。</p>
-              <div class="mt-4">
-                <h4 class="font-bold text-green-700 mb-2">具体的な活用例：</h4>
-                <ul class="list-disc pl-5 space-y-1">
-                  <li>ポートフォリオ最適化：リスクとリターンのバランスを自動調整</li>
-                  <li>リバランス：定期的に資産配分を最適化</li>
-                  <li>税務最適化：税負担を最小限に抑える売買タイミングの提案</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">【STEP 2】資金編：種銭（たねせん）を作る</h2>
+          <p class="mb-4">5万円を稼ぐためには、ある程度の元手が必要です。まずは生活防衛資金（生活費の3〜6ヶ月分）を確保した上で、余剰資金を投資に回しましょう。</p>
+          <ul class="list-disc pl-5 space-y-2 mb-6">
+            <li><strong>不用品販売:</strong> フリマアプリで不要なものを売る</li>
+            <li><strong>ポイントサイト:</strong> ポイ活で初期費用を貯める</li>
+            <li><strong>固定費削減:</strong> 保険やスマホ代を見直して投資資金を捻出</li>
+          </ul>
           
-          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">AI投資ツールの選び方と比較</h2>
-          <div class="overflow-x-auto my-8">
-            <table class="min-w-full bg-white border border-gray-200 rounded-lg">
-              <thead>
-                <tr class="bg-gray-100">
-                  <th class="py-3 px-4 border-b text-left">ツール名</th>
-                  <th class="py-3 px-4 border-b text-left">特徴</th>
-                  <th class="py-3 px-4 border-b text-left">料金</th>
-                  <th class="py-3 px-4 border-b text-left">評価</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="py-3 px-4 border-b font-semibold">QuantConnect</td>
-                  <td class="py-3 px-4 border-b">オープンソースのアルゴリズム取引プラットフォーム</td>
-                  <td class="py-3 px-4 border-b">無料〜有料プランあり</td>
-                  <td class="py-3 px-4 border-b">★★★★☆</td>
-                </tr>
-                <tr class="bg-gray-50">
-                  <td class="py-3 px-4 border-b font-semibold">Alpaca</td>
-                  <td class="py-3 px-4 border-b">APIベースの自動取引プラットフォーム</td>
-                  <td class="py-3 px-4 border-b">無料</td>
-                  <td class="py-3 px-4 border-b">★★★★★</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4 border-b font-semibold">Wealthfront</td>
-                  <td class="py-3 px-4 border-b">ロボアドバイザー</td>
-                  <td class="py-3 px-4 border-b">管理資産の0.25%</td>
-                  <td class="py-3 px-4 border-b">★★★★☆</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">【STEP 3】実践編：最初の5万円を稼ぐ3つの戦略</h2>
           
-          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">AI投資の利点とリスク</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-            <div class="bg-yellow-50 p-6 rounded-xl border border-yellow-200">
-              <h3 class="font-bold text-yellow-800 mb-3">利点</h3>
-              <ul class="list-disc pl-5 space-y-2">
-                <li>感情に左右されない客観的な判断</li>
-                <li>膨大なデータの高速処理</li>
-                <li>24時間365日の継続運用</li>
-                <li>複雑なパターンの検出</li>
-                <li>バックテストによる戦略検証</li>
-              </ul>
-            </div>
-            <div class="bg-red-50 p-6 rounded-xl border border-red-200">
-              <h3 class="font-bold text-red-800 mb-3">リスクと課題</h3>
-              <ul class="list-disc pl-5 space-y-2">
-                <li>ブラックボックス化による判断理由の不明確さ</li>
-                <li>システム障害時のリスク</li>
-                <li>過学習による過去データへの過剰適応</li>
-                <li>市場状況の急変への対応遅れ</li>
-                <li>セキュリティリスク</li>
-              </ul>
-            </div>
-          </div>
-          
-          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">AI投資を始めるためのステップ</h2>
           <div class="space-y-6 my-8">
-            <div class="border-l-4 border-blue-500 pl-4 bg-blue-50 p-4 rounded-r-lg">
-              <h3 class="font-bold text-blue-700 mb-2">ステップ1：基本知識の習得</h3>
-              <p>AI投資の基本概念、主要手法、リスクについて学びましょう。関連書籍やオンラインコースの活用もおすすめです。</p>
+            <div class="border-l-4 border-blue-500 pl-6 py-2">
+              <h3 class="font-bold text-lg text-blue-800 mb-2">戦略A：高配当株投資（コツコツ派）</h3>
+              <p>配当利回り4%以上の銘柄を購入し、配当金を受け取る方法です。確実性は高いですが、5万円稼ぐには元手が125万円程度必要になるため、時間はかかりますが最も堅実です。</p>
             </div>
-            <div class="border-l-4 border-green-500 pl-4 bg-green-50 p-4 rounded-r-lg">
-              <h3 class="font-bold text-green-700 mb-2">ステップ2：シミュレーション取引</h3>
-              <p>実際の資金を使わずに、シミュレーション取引でAI投資ツールの操作方法や性能を確認しましょう。</p>
+            
+            <div class="border-l-4 border-orange-500 pl-6 py-2">
+              <h3 class="font-bold text-lg text-orange-800 mb-2">戦略B：割安成長株への投資（ミドルリスク）</h3>
+              <p>業績が良いのに株価が放置されている「割安株（バリュー株）」を見つけて投資します。株価が適正水準に戻る過程で、10%〜20%の値上がり益を狙います。50万円の投資なら10%上昇で5万円達成です。</p>
             </div>
-            <div class="border-l-4 border-purple-500 pl-4 bg-purple-50 p-4 rounded-r-lg">
-              <h3 class="font-bold text-purple-700 mb-2">ステップ3：少額からの実践</h3>
-              <p>シミュレーション取引で一定のスキルを習得したら、少額の資金から実際の取引を開始しましょう。</p>
+            
+            <div class="border-l-4 border-purple-500 pl-6 py-2">
+              <h3 class="font-bold text-lg text-purple-800 mb-2">戦略C：IPO（新規公開株）投資（ローリスク・ハイリターン）</h3>
+              <p>新規上場する企業の株を抽選で買う方法です。人気銘柄に当選して初値で売れば、一撃で数万円〜数十万円の利益が出ることも珍しくありません。抽選なので確実ではありませんが、リスクは極めて低いです。</p>
             </div>
-            <div class="border-l-4 border-yellow-500 pl-4 bg-yellow-50 p-4 rounded-r-lg">
-              <h3 class="font-bold text-yellow-700 mb-2">ステップ4：戦略の見直しと最適化</h3>
-              <p>運用結果を定期的に分析し、必要に応じて戦略やパラメータを調整しましょう。</p>
+          </div>
+          
+          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">【ロードマップ】達成までの具体的スケジュール</h2>
+          <div class="relative border-l-2 border-slate-200 ml-4 pl-8 space-y-8 my-8">
+            <div class="relative">
+              <div class="absolute -left-[41px] top-0 bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">1</div>
+              <h3 class="font-bold text-lg mb-2">1ヶ月目：口座開設と勉強</h3>
+              <p class="text-sm text-slate-600">証券口座を開設し、チャートの見方や注文方法（成行・指値）をマスターします。また、気になる銘柄を「ウォッチリスト」に入れて値動きを観察しましょう。</p>
+            </div>
+            <div class="relative">
+              <div class="absolute -left-[41px] top-0 bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">2</div>
+              <h3 class="font-bold text-lg mb-2">2ヶ月目：少額でテスト購入</h3>
+              <p class="text-sm text-slate-600">1株単位（単元未満株）で買えるサービスを使って、数千円から実際に株を買ってみましょう。自分のお金が増減する感覚に慣れることが重要です。</p>
+            </div>
+            <div class="relative">
+              <div class="absolute -left-[41px] top-0 bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">3</div>
+              <h3 class="font-bold text-lg mb-2">3ヶ月目以降：本格投資で5万円を目指す</h3>
+              <p class="text-sm text-slate-600">自分に合った戦略（A, B, C）で本格的に資金を投入します。利益が出てもすぐに贅沢せず、再投資することで資産形成が加速します。</p>
             </div>
           </div>
           
           <div class="bg-gray-50 p-6 rounded-xl my-8">
-            <h3 class="font-bold text-gray-800 mb-3">重要なポイント</h3>
-            <p class="mb-3">AI投資は強力なツールですが、万能ではありません。市場の変化、テクノロジーの進化、規制の変更などに対応するため、継続的な学習と戦略の見直しが必要です。また、AI投資を行う際は、必ず自己資金の範囲内で行い、過度なレバレッジは避けるようにしましょう。</p>
+            <h3 class="font-bold text-gray-800 mb-3">まとめ</h3>
+            <p>「5万円」は投資家としての第一歩です。この成功体験が、将来の「50万円」「500万円」へと繋がっていきます。まずは焦らず、正しい知識で第一歩を踏み出しましょう。</p>
           </div>
         </div>
       `,
     },
     {
-      id: "nisa-beginner",
+      id: "tenbagger-candidate-2026",
+      type: "article",
+      title: "【2026年注目】テンバガー（株価10倍）候補・話題株 10選",
+      excerpt: "市場の期待値やテーマ性（AI、データセンター、国策）の強さを踏まえた、話題の10銘柄です。",
+      category: "株式投資",
+      date: "2026年1月25日",
+      isNew: true,
+      isPopular: true,
+      content: ""
+    },
+    {
+      id: "nisa-beginner-2026",
       type: "guide",
       title: "【2026年最新】NISA完全ガイド：初心者が知るべき全て",
       excerpt: "非課税枠が1,800万円に拡大！2026年現在、資産形成のスタンダードとなった「新NISA」の仕組み・メリット・失敗しない始め方を、どこよりも分かりやすく解説。",
@@ -167,18 +127,7 @@ const Articles = () => {
       content: ""
     },
     {
-      id: "stocks-beginner",
-      type: "guide",
-      title: "株式投資の始め方：知識ゼロから月5万円稼ぐロードマップ",
-      excerpt: "「株って難しそう...」そんな常識を覆します。株主優待、配当金、値上がり益の3つのメリットと、初心者が陥りがちなリスク回避法を完全ガイド。",
-      category: "株式投資",
-      date: "2026年1月22日",
-      isNew: true,
-      isPopular: true,
-      content: ""
-    },
-    {
-      id: "investment-trust",
+      id: "investment-trust-2026",
       type: "guide",
       title: "投資信託の仕組みと選び方：プロに任せる失敗しない資産運用",
       excerpt: "100円からプロにお任せ！「インデックス」と「アクティブ」の違いは？手数料で損しないための選び方とは？初心者におすすめのファンドも紹介。",
@@ -280,119 +229,6 @@ const Articles = () => {
           <li>AIの判断根拠を理解するための学習と検証</li>
           <li>リスク管理を徹底した運用ルールの設定</li>
         </ol>
-      `,
-    },
-    {
-      id: "nisa-beginner",
-      title: "【2024年最新版】NISA完全ガイド：初心者が知るべき全て",
-      excerpt: "新NISAが始まり、より使いやすくなった非課税制度。制度の概要から活用方法まで徹底解説します。",
-      category: "NISA",
-      date: "2024年1月15日",
-      isPopular: true,
-      content: `
-        <p>2024年から新NISA制度が始まりました。年間180万円の非課税枠（うち120万円が分配金・配当金、60万円が譲渡益）が導入され、従来のNISAとつみたてNISAが統合されました。新NISAは、従来の制度のメリットを活かしつつ、より柔軟な運用が可能になっています。</p>
-        
-        <h2 className="text-2xl font-bold mt-8 mb-4">新NISAの特徴</h2>
-        <p>新NISA制度の主な特徴は以下の通りです：</p>
-        <ul className="list-disc pl-6 mt-4 space-y-2">
-          <li>統一された非課税枠：年間180万円（従来のNISAとつみたてNISAの枠が統合）</li>
-          <li>積立投資の推奨：自動引き落とし機能が充実</li>
-          <li>商品の多様化：株式、投資信託、ETF、ETNだけでなく、REITや外国株式なども対象</li>
-          <li>非課税期間の延長：最長20年間</li>
-        </ul>
-        
-        <h2 className="text-2xl font-bold mt-8 mb-4">口座開設の流れ</h2>
-        <p>新NISA口座を開設するには、以下の手順が必要です：</p>
-        <ol className="list-decimal pl-6 mt-4 space-y-2">
-          <li>証券会社を選ぶ</li>
-          <li>必要な書類を準備する（本人確認書類、印鑑、印鑑証明書など）</li>
-          <li>口座開設申込書に記入する</li>
-          <li>本人確認と印鑑証明書の提出</li>
-          <li>口座開設の完了</li>
-        </ol>
-        
-        <h2 className="text-2xl font-bold mt-8 mb-4">活用ポイント</h2>
-        <p>新NISAを最大限に活用するためのポイント：</p>
-        <ul className="list-disc pl-6 mt-4 space-y-2">
-          <li>年間非課税枠を最大限に活用する</li>
-          <li>分散投資によるリスク管理</li>
-          <li>長期的な資産形成を目指す</li>
-          <li>他の節税制度（iDeCoなど）と組み合わせる</li>
-        </ul>
-      `,
-    },
-    {
-      id: "stocks-beginner",
-      title: "株式投資の始め方：証券口座開設から銘柄選びまで",
-      excerpt: "株式投資を始めたい方へ。口座開設の手順から最初の銘柄選びまで、わかりやすく解説します。",
-      category: "株式投資",
-      date: "2024年1月12日",
-      isPopular: true,
-      content: `
-        <p>株式投資は、多くの人々が資産形成のために選ぶ投資方法の一つです。しかし、初めて株式投資を始める方にとっては、何から始めれば良いのかわからないという人も多いのではないでしょうか。ここでは、株式投資の始め方について、基礎からわかりやすく解説します。</p>
-        
-        <h2 className="text-2xl font-bold mt-8 mb-4">証券口座の開設</h2>
-        <p>株式投資を始めるには、まず証券会社に口座を開設する必要があります。口座開設の手順は以下の通りです：</p>
-        <ol className="list-decimal pl-6 mt-4 space-y-2">
-          <li>自分に合った証券会社を選ぶ</li>
-          <li>必要な書類を準備する（本人確認書類、印鑑、源泉徴収票など）</li>
-          <li>口座開設申込書に記入する</li>
-          <li>本人確認と印鑑証明書の提出</li>
-          <li>口座開設の完了と初期入金</li>
-        </ol>
-        
-        <h2 className="text-2xl font-bold mt-8 mb-4">銘柄選びの基本</h2>
-        <p>初心者が銘柄を選ぶ際には、以下の点を考慮すると良いでしょう：</p>
-        <ul className="list-disc pl-6 mt-4 space-y-2">
-          <li>自分が理解できる業種・企業を選ぶ</li>
-          <li>財務状況が健全な企業を選ぶ</li>
-          <li>配当を支払う企業を選ぶ</li>
-          <li>流動性が高い銘柄を選ぶ</li>
-        </ul>
-        
-        <h2 className="text-2xl font-bold mt-8 mb-4">リスク管理と資金管理</h2>
-        <p>株式投資では、以下のリスク管理が重要です：</p>
-        <ul className="list-disc pl-6 mt-4 space-y-2">
-          <li>損切りラインを事前に設定する</li>
-          <li>分散投資を行う</li>
-          <li>自己資金のみで投資する</li>
-          <li>感情的な売買を避ける</li>
-        </ul>
-      `,
-    },
-    {
-      id: "investment-trust",
-      title: "投資信託とは？メリット・デメリットと選び方のポイント",
-      excerpt: "投資信託の基本から、自分に合った商品の選び方まで詳しく説明します。",
-      category: "投資信託",
-      date: "2024年1月10日",
-      isPopular: true,
-      content: `
-        <p>投資信託とは、多くの投資家の資金を pooling して、プロのファンドマネージャーに運用を委ねる仕組みです。個人投資家が直接株式や債券を購入するよりも、手軽に分散投資を行うことができるのが特徴です。</p>
-        
-        <h2 className="text-2xl font-bold mt-8 mb-4">投資信託のメリット</h2>
-        <ul className="list-disc pl-6 mt-4 space-y-2">
-          <li>少額から始められる</li>
-          <li>プロの運用が受けられる</li>
-          <li>分散投資が容易</li>
-          <li>手間がかからない</li>
-        </ul>
-        
-        <h2 className="text-2xl font-bold mt-8 mb-4">投資信託のデメリット</h2>
-        <ul className="list-disc pl-6 mt-4 space-y-2">
-          <li>信託報酬が発生する</li>
-          <li>運用結果がファンドマネージャーに依存する</li>
-          <li>中途解約には手数料がかかる場合がある</li>
-        </ul>
-        
-        <h2 className="text-2xl font-bold mt-8 mb-4">選び方のポイント</h2>
-        <p>投資信託を選ぶ際には、以下の点を考慮すると良いでしょう：</p>
-        <ul className="list-disc pl-6 mt-4 space-y-2">
-          <li>運用目的（成長・配当・バランスなど）を明確にする</li>
-          <li>信託報酬の安さを比較する</li>
-          <li>過去の運用実績を確認する</li>
-          <li>ファンドマネージャーの経験と実績を調べる</li>
-        </ul>
       `,
     },
     {
@@ -856,7 +692,7 @@ const Articles = () => {
     // カテゴリでフィルタリング
     let filtered = selectedCategory === "all"
       ? articles
-      : articles.filter(article => article.category === selectedCategory);
+      : articles.filter(article => article.category.trim() === selectedCategory.trim());
 
     // 並べ替え
     let sorted = [...filtered];
@@ -938,7 +774,7 @@ const Articles = () => {
         </div>
 
         {/* ヒーローセクション */}
-        <section className="relative py-20 container mx-auto px-8 overflow-hidden">
+        <section className="relative py-[20px] container mx-auto px-8 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-accent/5 animate-fade-in" />
           <div className="max-w-4xl mx-auto text-center relative z-10">
             <Badge variant="secondary" className="mb-6 px-6 py-2 text-sm font-semibold animate-fade-in hover:scale-105 transition-transform">
@@ -1016,14 +852,9 @@ const Articles = () => {
                           <Calendar className="h-4 w-4" />
                           <span>{article.date}</span>
                         </div>
-                        {article.isPopular && (
-                          <div className="flex items-center gap-1">
-                            <TrendingUp className="h-4 w-4" />
-                            <span>人気記事</span>
-                          </div>
-                        )}
+
                       </div>
-                      <div className="flex gap-2 mt-6">
+                      <div className="flex gap-2 mt-3">
                         <button
                           className="flex-1 px-4 py-2 bg-blue-100 text-primary rounded-md hover:bg-blue-200 transition-colors"
                           onClick={() => {

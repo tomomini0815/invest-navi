@@ -37,7 +37,7 @@ const FinancialGuide = () => {
             icon: <DollarSign className="w-5 h-5" />,
             formula: "商品やサービスの販売で得た収入の合計",
             description: "会社が1年間に商品やサービスを売って得たお金の総額です。ここからすべてがスタートします。",
-            example: "家計簿で言うと「給料」。毎月の手取り収入のことです",
+            example: "家計簿で例えると「給料」。毎月の手取り収入のことです",
             point: "すべての利益の出発点",
             color: "blue",
             bgGradient: "from-blue-50 to-blue-100",
@@ -51,7 +51,7 @@ const FinancialGuide = () => {
             icon: <PiggyBank className="w-5 h-5" />,
             formula: "売上高 − 売上原価",
             description: "売上から材料費や仕入れ値を引いた利益。商品そのものの収益力を示します。",
-            example: "家計簿で言うと「給料 − 通勤費」。仕事をするための最低限の費用を引いた残り",
+            example: "家計簿で例えると「給料 − 通勤費」。仕事をするための最低限の費用を引いた残り",
             point: "商品力・ブランド力の強さ",
             color: "emerald",
             bgGradient: "from-emerald-50 to-emerald-100",
@@ -65,7 +65,7 @@ const FinancialGuide = () => {
             icon: <Building2 className="w-5 h-5" />,
             formula: "売上総利益 − 販管費",
             description: "本業で稼いだ利益。人件費・広告費・家賃などを引いた後に残る、企業の「稼ぐ力」そのもの。",
-            example: "家計簿で言うと「給料 − 生活費全部」。食費・光熱費・家賃を払った後の残り",
+            example: "家計簿で例えると「給料 − 生活費全部」。食費・光熱費・家賃を払った後の残り",
             point: "本業の実力を示す最重要指標",
             color: "orange",
             bgGradient: "from-orange-50 to-orange-100",
@@ -79,7 +79,7 @@ const FinancialGuide = () => {
             icon: <Calculator className="w-5 h-5" />,
             formula: "営業利益 + 営業外収益 − 営業外費用",
             description: "本業以外の活動（利息・配当・為替差益など）も含めた、毎期繰り返される通常活動での利益。",
-            example: "家計簿で言うと「生活費を引いた残り + 副業収入や投資の利息 − ローン利息」",
+            example: "家計簿で例えると「生活費を引いた残り + 副業収入や投資の利息 − ローン利息」",
             point: "財務活動を含めた総合力",
             color: "violet",
             bgGradient: "from-violet-50 to-violet-100",
@@ -93,7 +93,7 @@ const FinancialGuide = () => {
             icon: <Target className="w-5 h-5" />,
             formula: "税引前利益 − 法人税等",
             description: "すべての費用・税金を差し引いた最終的な利益。株主への配当や将来の投資の原資となります。",
-            example: "家計簿で言うと「貯金できる金額」。税金も払い終わって、本当に手元に残るお金",
+            example: "家計簿で例えると「貯金できる金額」。税金も払い終わって、本当に手元に残るお金",
             point: "株主にとっての最終成果",
             color: "amber",
             bgGradient: "from-amber-50 to-amber-100",
@@ -550,7 +550,7 @@ const FinancialGuide = () => {
                                             {/* 家計簿に例えると */}
                                             <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-400 p-3 rounded-r-lg mb-3">
                                                 <div className="flex flex-col sm:flex-row sm:items-start gap-2">
-                                                    <span className="text-blue-600 text-xs font-bold whitespace-nowrap">💡 家計簿で言うと</span>
+                                                    <span className="text-blue-600 text-xs font-bold whitespace-nowrap">💡 家計簿で例えると</span>
                                                     <p className="text-sm text-blue-900 leading-relaxed">{indicator.householdAnalogy}</p>
                                                 </div>
                                             </div>

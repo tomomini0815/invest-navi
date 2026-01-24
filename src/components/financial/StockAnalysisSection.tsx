@@ -1,14 +1,16 @@
-
 import { VisualIncomeStatement, IncomeStatementData } from "@/components/financial/VisualIncomeStatement";
 import { sp500Stocks, nikkei225Stocks } from "@/data/stockLists";
 import { TradingViewWidgetIframe } from "@/components/common/TradingViewWidgetIframe";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText, Building, LineChart, TrendingUp, Globe, BarChart2, Activity, BookOpen } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend, LineChart as RechartsLine, Line } from "recharts";
+import { VisualBalanceSheet } from "./VisualBalanceSheet";
+import { VisualCashFlow } from "./VisualCashFlow";
+import { StockPriceChart } from "./StockPriceChart";
 
 interface StockAnalysisSectionProps {
     symbol: string | null;
-    activeScreener: "total" | "japan" | "us" | "crypto" | "forex";
+    activeScreener: "total" | "japan" | "us" | "crypto" | "forex" | "promising";
     financialTab: "overview" | "chart";
     setFinancialTab: (tab: "overview" | "chart") => void;
     financialDataMap: Record<string, any>;
@@ -61,6 +63,18 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
             "6902": `OTC:DNZOY*${usdJpy}`,       // デンソー
             "4063": `OTC:SHECY*${usdJpy}`,       // 信越化学
             "7409": "TSE:7409",                  // AeroEdge
+
+            // 注目銘柄 (2026 Promising Stocks) - Display Fixes
+            "5805": `OTC:SWCPF*${usdJpy}`,       // SWCC (Pink)
+            "3778": `OTC:SKURF*${usdJpy}`,       // さくらインターネット (Pink)
+            "5595": "TSE:464A",                  // QPS研究所 (Ticker Change)
+            "1942": `FWB:5EY*FX_IDC:EURJPY`,     // 関電工 (Frankfurt as fallback)
+            "6506": `OTC:YASKY*${usdJpy}`,       // 安川電機 (ADR)
+            "6965": `OTC:HPHTY*${usdJpy}`,       // 浜松ホトニクス (ADR)
+            "5253": `OTC:COVCF*${usdJpy}`,       // カバー (Pink)
+            "6315": `OTC:TOWCF*${usdJpy}`,       // TOWA (Pink)
+            "6269": `OTC:MDIKY*${usdJpy}`,       // 三井海洋開発 (ADR)
+            // Note: 6228 (JET) has no liquid OTC/ADR. Defaulting to TSE.
         };
 
         if (code in exceptions) {
@@ -74,6 +88,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
     // ※ADRの計算式を入れるとウィジェットが表示されないため、正規のTSEコードを使用
     const getCorporateSymbol = (s: string) => {
         const code = s.replace("TSE:", "");
+        if (code === "5595") return "TSE:464A"; // QPS研究所 (Ticker Change)
         if (/^[0-9]{4}$/.test(code)) {
             return `TSE:${code}`;
         }
@@ -106,6 +121,16 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
             "9433": "OTC:KDDIY",  // KDDI
             "6098": "OTC:RCRUY",  // リクルート
             "7267": "NYSE:HMC",   // ホンダ
+
+            // 注目銘柄 (Promising Stocks) - Tech Analysis Fixes
+            "5805": "OTC:SWCPF",  // SWCC
+            "3778": "OTC:SKURF",  // さくらインターネット
+            "5595": "TSE:464A",   // QPS研究所 (Ticker Change)
+            "1942": "FWB:5EY",    // 関電工 (Frankfurt as fallback)
+            "6506": "OTC:YASKY",  // 安川電機
+            "6965": "OTC:HPHTY",  // 浜松ホトニクス
+            "5253": "OTC:COVCF",  // カバー
+            "6315": "OTC:TOWCF",  // TOWA
         };
 
         return adrMap[code] || s; // マップになければそのまま（表示されない可能性あり）
@@ -147,8 +172,22 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                     {financialTab === "chart" && (
                         <div>
                             {/* メインチャート (Daily) */}
-                            <div className="mb-6" style={{ height: "850px" }}>
-                                {isAeroEdge ? (
+                            <div className="mb-6" style={{ height: getFinancialData().priceHistory ? "450px" : "850px" }}>
+                                {getFinancialData().priceHistory ? (
+                                    <div className="h-full p-4 bg-white rounded-lg border border-slate-200">
+                                        <div className="flex items-center justify-between mb-4">
+                                            <h3 className="font-bold text-lg text-slate-800">株価推移 (直近1年)</h3>
+                                            <span className="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded">
+                                                Based on closing price (JPY)
+                                            </span>
+                                        </div>
+                                        <StockPriceChart
+                                            data={getFinancialData().priceHistory || []}
+                                            symbol={symbol}
+                                            currency="JPY"
+                                        />
+                                    </div>
+                                ) : isAeroEdge ? (
                                     <TradingViewWidgetIframe
                                         key={`main-chart-info-${symbol}`}
                                         title="Symbol Info"
@@ -231,16 +270,29 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                                     {/* 売上高推移 */}
                                     <div className="bg-white p-4 rounded-lg border border-slate-200">
                                         <h4 className="font-semibold text-slate-700 mb-3">
-                                            売上高推移（{financialDataMap[symbol || ""]?.currency === "JPY" ? "兆円" : "十億ドル"}）
+                                            売上高推移（{
+                                                financialDataMap[symbol || ""]?.currency === "JPY" ? "兆円" :
+                                                    financialDataMap[symbol || ""]?.currency === "JPY_Oku" ? "億円" :
+                                                        "十億ドル"
+                                            }）
                                         </h4>
                                         <ResponsiveContainer width="100%" height={250}>
                                             <BarChart data={getFinancialData().revenue}>
                                                 <CartesianGrid strokeDasharray="3 3" />
                                                 <XAxis dataKey="quarter" />
-                                                <YAxis tickFormatter={(value) => financialDataMap[symbol || ""]?.currency === "JPY" ? `¥${value}兆` : `$${value}B`} />
+                                                <YAxis tickFormatter={(value) => {
+                                                    const currency = financialDataMap[symbol || ""]?.currency;
+                                                    if (currency === "JPY") return `¥${value}兆`;
+                                                    if (currency === "JPY_Oku") return `¥${value.toLocaleString()}`;
+                                                    return `$${value}B`;
+                                                }} />
                                                 <Tooltip formatter={(value: number) => {
-                                                    if (financialDataMap[symbol || ""]?.currency === "JPY") {
+                                                    const currency = financialDataMap[symbol || ""]?.currency;
+                                                    if (currency === "JPY") {
                                                         return [`¥${value}兆円`, "売上高"];
+                                                    }
+                                                    if (currency === "JPY_Oku") {
+                                                        return [`¥${value.toLocaleString()}億円`, "売上高"];
                                                     }
                                                     const jpyBillion = Number(value) * 155;
                                                     const trillion = Math.floor(jpyBillion / 1000);
@@ -258,17 +310,30 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                                     {/* 利益推移 */}
                                     <div className="bg-white p-4 rounded-lg border border-slate-200">
                                         <h4 className="font-semibold text-slate-700 mb-3">
-                                            利益推移（{financialDataMap[symbol || ""]?.currency === "JPY" ? "兆円" : "十億ドル"}）
+                                            利益推移（{
+                                                financialDataMap[symbol || ""]?.currency === "JPY" ? "兆円" :
+                                                    financialDataMap[symbol || ""]?.currency === "JPY_Oku" ? "億円" :
+                                                        "十億ドル"
+                                            }）
                                         </h4>
                                         <ResponsiveContainer width="100%" height={250}>
                                             <RechartsLine data={getFinancialData().profit}>
                                                 <CartesianGrid strokeDasharray="3 3" />
                                                 <XAxis dataKey="quarter" />
-                                                <YAxis tickFormatter={(value) => financialDataMap[symbol || ""]?.currency === "JPY" ? `¥${value}兆` : `$${value}B`} />
+                                                <YAxis tickFormatter={(value) => {
+                                                    const currency = financialDataMap[symbol || ""]?.currency;
+                                                    if (currency === "JPY") return `¥${value}兆`;
+                                                    if (currency === "JPY_Oku") return `¥${value.toLocaleString()}`;
+                                                    return `$${value}B`;
+                                                }} />
                                                 <Tooltip formatter={(value: number, name) => {
                                                     const label = name === 'operating' ? '営業利益' : '純利益';
-                                                    if (financialDataMap[symbol || ""]?.currency === "JPY") {
+                                                    const currency = financialDataMap[symbol || ""]?.currency;
+                                                    if (currency === "JPY") {
                                                         return [`¥${value}兆円`, label];
+                                                    }
+                                                    if (currency === "JPY_Oku") {
+                                                        return [`¥${value.toLocaleString()}億円`, label];
                                                     }
                                                     const jpyBillion = Number(value) * 155;
                                                     const trillion = Math.floor(jpyBillion / 1000);
@@ -362,7 +427,8 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                                     会社概要
                                 </h3>
                                 {/* Symbol Info */}
-                                <div className="mb-4" style={{ height: "200px" }}>
+                                {/* Symbol Info */}
+                                <div className="mb-4 h-[280px] md:h-[200px]">
                                     <TradingViewWidgetIframe
                                         key={`info-${symbol}`}
                                         title="Symbol Info"
@@ -545,18 +611,45 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                                         決算書・財務データ
                                     </h3>
 
-                                    {/* 独自のビジュアル決算書（データがある場合のみ） */}
+                                    {/* 損益計算書セクション */}
                                     {(() => {
-                                        const isJpy = financialDataMap[symbol]?.currency === "JPY" || financialDataMap[symbol.replace("TSE:", "")]?.currency === "JPY";
+                                        const finData = financialDataMap[symbol] || financialDataMap[symbol.replace("TSE:", "")];
+                                        const isJpy = finData?.currency === "JPY" || finData?.currency === "JPY_Oku";
                                         return (
-                                            <VisualIncomeStatement
-                                                data={financialDataMap[symbol]?.incomeStatement || financialDataMap[symbol.replace("TSE:", "")]?.incomeStatement!}
-                                                symbol={symbol}
-                                                period="直近12ヶ月 (TTM)"
-                                                currency={isJpy ? "¥" : "$"}
-                                                unit={isJpy ? "億円" : "百万"}
-                                                exchangeRate={isJpy ? undefined : 155}
-                                            />
+                                            <div className="space-y-8">
+                                                {finData.incomeStatement && (
+                                                    <VisualIncomeStatement
+                                                        data={finData.incomeStatement}
+                                                        symbol={symbol}
+                                                        period="直近12ヶ月 (TTM)"
+                                                        currency={isJpy ? "¥" : "$"}
+                                                        unit={isJpy ? "億円" : "百万"}
+                                                        exchangeRate={isJpy ? undefined : 155}
+                                                    />
+                                                )}
+
+                                                {finData.balanceSheet && (
+                                                    <VisualBalanceSheet
+                                                        data={finData.balanceSheet}
+                                                        symbol={symbol}
+                                                        period="四半期 (Q2)"
+                                                        currency={isJpy ? "¥" : "$"}
+                                                        unit={isJpy ? "億円" : "百万"}
+                                                        exchangeRate={isJpy ? undefined : 155}
+                                                    />
+                                                )}
+
+                                                {finData.cashFlow && (
+                                                    <VisualCashFlow
+                                                        data={finData.cashFlow}
+                                                        symbol={symbol}
+                                                        period="直近12ヶ月 (TTM)"
+                                                        currency={isJpy ? "¥" : "$"}
+                                                        unit={isJpy ? "億円" : "百万"}
+                                                        exchangeRate={isJpy ? undefined : 155}
+                                                    />
+                                                )}
+                                            </div>
                                         );
                                     })()}
 

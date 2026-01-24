@@ -37,19 +37,14 @@ export const VisualIncomeStatement: React.FC<VisualIncomeStatementProps> = ({
         let totalYen = Math.abs(val) * multiplier;
 
         const trillions = Math.floor(totalYen / 1000000000000);
-        const remainderT = totalYen % 1000000000000;
-        const billions = Math.floor(remainderT / 100000000);
-        const remainderB = remainderT % 100000000;
-        const man = Math.floor(remainderB / 10000);
-        // 1万円未満は切り捨てまたは表示しない（ご要望のレベル感に合わせる）
+        const billions = Math.floor((totalYen % 1000000000000) / 100000000);
 
         let parts = [];
-        if (trillions > 0) parts.push(`${trillions.toLocaleString()}兆`);
-        if (billions > 0) parts.push(`${billions.toLocaleString()}億`);
-        if (man > 0) parts.push(`${man.toLocaleString()}万`);
+        if (trillions > 0) parts.push(`${trillions}兆`);
+        if (billions > 0 || parts.length === 0) parts.push(`${billions.toLocaleString()}億円`);
+        else parts.push("円");
 
-        if (parts.length === 0) return "0円";
-        return parts.join("") + "円";
+        return parts.join("");
     };
 
     // 数値フォーマット関数（サマリー用）

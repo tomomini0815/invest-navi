@@ -261,7 +261,7 @@ def risk_parity_weights(cov_matrix, max_iter=100, tolerance=1e-6):
         <meta name="description" content={article.excerpt} />
         <meta name="keywords" content="投資AI, ポートフォリオ最適化, 機械学習, リスク管理, 資産運用" />
         <link rel="canonical" href={`https://www.toushi-navi.com/articles/${article.id}`} />
-        
+
         {/* Open Graph */}
         <meta property="og:title" content={`${article.title} | 投資総合ナビ`} />
         <meta property="og:description" content={article.excerpt} />
@@ -269,20 +269,20 @@ def risk_parity_weights(cov_matrix, max_iter=100, tolerance=1e-6):
         <meta property="og:url" content={`https://www.toushi-navi.com/articles/${article.id}`} />
         <meta property="og:site_name" content="投資総合ナビ" />
         <meta property="og:locale" content="ja_JP" />
-        
+
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@toushi_navi" />
       </Helmet>
-      
+
       <Header />
-      
+
       <main className="flex-grow">
         {/* Breadcrumb */}
         <div className="bg-gradient-to-r from-muted/50 to-muted/30 py-4 border-b">
           <div className="container mx-auto px-8">
-            <Link 
-              to="/articles" 
+            <Link
+              to="/articles"
               className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors group"
             >
               <ArrowLeft className="h-4 w-4 mr-1 group-hover:-translate-x-1 transition-transform" />
@@ -302,27 +302,24 @@ def risk_parity_weights(cov_matrix, max_iter=100, tolerance=1e-6):
                     <Calendar className="h-4 w-4" />
                     <span>{article.date}</span>
                   </div>
-                  <div className="flex items-center gap-1">
-                    <TrendingUp className="h-4 w-4" />
-                    <span>人気記事</span>
-                  </div>
+
                 </div>
               </div>
-              
+
               <h1 className="text-3xl md:text-4xl font-bold mb-8 leading-tight">{article.title}</h1>
-              
+
               <div className="bg-card border rounded-xl p-6 mb-10">
                 <div className="flex flex-wrap justify-between items-center gap-4">
                   <p className="text-muted-foreground">{article.excerpt}</p>
                   <Button variant="outline">記事を共有</Button>
                 </div>
               </div>
-              
-              <div 
+
+              <div
                 className="prose max-w-none mb-16"
-                dangerouslySetInnerHTML={{ __html: article.content }} 
+                dangerouslySetInnerHTML={{ __html: article.content }}
               />
-              
+
               {/* 関連記事 */}
               <div className="border-t pt-12 mt-16">
                 <h2 className="text-2xl font-bold mb-8">関連記事</h2>
@@ -331,16 +328,12 @@ def risk_parity_weights(cov_matrix, max_iter=100, tolerance=1e-6):
                     <CardHeader>
                       <div className="flex items-center justify-between mb-2">
                         <Badge variant="secondary">投資AI</Badge>
-                        <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                          <Clock className="h-3 w-3" />
-                          20分
-                        </div>
                       </div>
                       <CardTitle className="text-lg line-clamp-2">機械学習を活用した株式予測モデルの構築方法</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm text-muted-foreground line-clamp-3 mb-4">Pythonと機械学習アルゴリズムを使用して、株式の価格予測モデルを構築する実践的な方法を解説します。</p>
-                      <button 
+                      <button
                         className="w-full px-3 py-1.5 text-sm bg-blue-100 text-primary rounded-md hover:bg-blue-200 transition-colors"
                         onClick={() => navigate("/articles/ml-stock-prediction")}
                       >
@@ -352,16 +345,12 @@ def risk_parity_weights(cov_matrix, max_iter=100, tolerance=1e-6):
                     <CardHeader>
                       <div className="flex items-center justify-between mb-2">
                         <Badge variant="secondary">投資AI</Badge>
-                        <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                          <Clock className="h-3 w-3" />
-                          22分
-                        </div>
                       </div>
                       <CardTitle className="text-lg line-clamp-2">ディープラーニングを用いた為替予測の実際</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm text-muted-foreground line-clamp-3 mb-4">LSTMやTransformerなどの深層学習モデルを使用して、為替相場の動向を予測する実践的なアプローチを解説します。</p>
-                      <button 
+                      <button
                         className="w-full px-3 py-1.5 text-sm bg-blue-100 text-primary rounded-md hover:bg-blue-200 transition-colors"
                         onClick={() => navigate("/articles/dl-forex-prediction")}
                       >
@@ -373,16 +362,12 @@ def risk_parity_weights(cov_matrix, max_iter=100, tolerance=1e-6):
                     <CardHeader>
                       <div className="flex items-center justify-between mb-2">
                         <Badge variant="secondary">投資戦略</Badge>
-                        <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                          <Clock className="h-3 w-3" />
-                          15分
-                        </div>
                       </div>
                       <CardTitle className="text-lg line-clamp-2">AIを活用した投資戦略の実際：機械学習からファンダメンタル分析まで</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm text-muted-foreground line-clamp-3 mb-4">人工知能を活用した投資手法を実例とともに解説。初心者から上級者まで使えるテクニックを紹介します。</p>
-                      <button 
+                      <button
                         className="w-full px-3 py-1.5 text-sm bg-blue-100 text-primary rounded-md hover:bg-blue-200 transition-colors"
                         onClick={() => navigate("/articles/ai-investment-strategy")}
                       >

@@ -124,7 +124,7 @@ const Footer = () => {
 
         <div className="border-t border-border pt-4 flex flex-col md:flex-row justify-between items-center gap-3">
           <p className="text-xs text-muted-foreground order-2 md:order-1">
-            © 2024-2025 投資総合ナビ. All rights reserved.
+            © 2024-2026 投資総合ナビ. All rights reserved.
           </p>
           <div className="flex flex-wrap gap-3 text-xs text-muted-foreground order-1 md:order-2">
             <Link to="/privacy" className="hover:text-primary transition-colors no-underline">

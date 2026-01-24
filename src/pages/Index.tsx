@@ -68,8 +68,28 @@ const Index = () => {
   ];
 
   const articles = [
+    // 新規記事: デイトレ vs 中長期
     {
-      id: "nisa-beginner",
+      id: "daytrade-vs-longterm-2026",
+      title: "【2026年最新】デイトレード vs 中長期投資：スタイル別・注目銘柄10選と勝ち方",
+      excerpt: "デイトレ向きの「お祭り銘柄」と、中長期向きの「テンバガー候補」。性質の異なる2つの投資スタイルにおすすめの銘柄を各5選紹介。",
+      category: "投資戦略",
+      date: "2026年1月25日",
+      isNew: true,
+      isPopular: true,
+    },
+    // 新規記事: 2026年注目テンバガー候補
+    {
+      id: "tenbagger-candidate-2026",
+      title: "【2026年注目】テンバガー（株価10倍）候補・話題株 10選",
+      excerpt: "市場の期待値やテーマ性（AI、データセンター、国策）の強さを踏まえた、2026年注目の話題の10銘柄を厳選紹介。",
+      category: "株式投資",
+      date: "2026年1月25日",
+      isNew: true,
+      isPopular: true,
+    },
+    {
+      id: "nisa-beginner-2026",
       type: "guide",
       title: "【2026年最新】NISA完全ガイド：初心者が知るべき全て",
       excerpt: "非課税枠が1,800万円に拡大！2026年現在、資産形成のスタンダードとなった「新NISA」の仕組み・メリット・失敗しない始め方を、どこよりも分かりやすく解説。",
@@ -79,32 +99,13 @@ const Index = () => {
       isPopular: true,
     },
     {
-      id: "stocks-beginner",
-      type: "guide",
-      title: "株式投資の始め方：知識ゼロから月5万円稼ぐロードマップ",
-      excerpt: "「株って難しそう...」そんな常識を覆します。株主優待、配当金、値上がり益の3つのメリットと、初心者が陥りがちなリスク回避法を完全ガイド。",
-      category: "株式投資",
-      date: "2026年1月22日",
-      isNew: true,
-      isPopular: true,
-    },
-    {
-      id: "investment-trust",
+      id: "investment-trust-2026",
       type: "guide",
       title: "投資信託の仕組みと選び方：プロに任せる失敗しない資産運用",
       excerpt: "100円からプロにお任せ！「インデックス」と「アクティブ」の違いは？手数料で損しないための選び方とは？初心者におすすめのファンドも紹介。",
       category: "投資信託",
       date: "2026年1月22日",
       isNew: true,
-      isPopular: true,
-    },
-    {
-      id: "ai-investment-fundamentals",
-      title: "AI投資の基礎知識：アルゴリズム取引からロボアドバイザーまで完全解説",
-      excerpt: "AIがどのように投資に活用されているのか、基礎から実践的な活用法まで詳しく解説します。初心者から上級者まで使えるAI投資手法を徹底紹介。",
-      category: "投資AI",
-      date: "2025年11月3日",
-      isNew: false,
       isPopular: true,
     },
     {
@@ -161,27 +162,6 @@ const Index = () => {
       excerpt: "人工知能を活用した投資手法を実例とともに解説。初心者から上級者まで使えるテクニックを紹介します。",
       category: "投資戦略",
       date: "2024年5月10日",
-    },
-    {
-      id: "nisa-beginner",
-      title: "【2024年最新版】NISA完全ガイド：初心者が知るべき全て",
-      excerpt: "新NISAが始まり、より使いやすくなった非課税制度。制度の概要から活用方法まで徹底解説します。",
-      category: "NISA",
-      date: "2024年1月15日",
-    },
-    {
-      id: "stocks-beginner",
-      title: "株式投資の始め方：証券口座開設から銘柄選びまで",
-      excerpt: "株式投資を始めたい方へ。口座開設の手順から最初の銘柄選びまで、わかりやすく解説します。",
-      category: "株式投資",
-      date: "2024年1月12日",
-    },
-    {
-      id: "investment-trust",
-      title: "投資信託とは？メリット・デメリットと選び方のポイント",
-      excerpt: "投資信託の基本から、自分に合った商品の選び方まで詳しく説明します。",
-      category: "投資信託",
-      date: "2024年1月10日",
     },
     // 新規記事: 機械学習を活用した株式予測モデルの構築方法
     {
@@ -477,7 +457,7 @@ const Index = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {articles
                 .filter(article => article.isPopular)
-                .slice(0, 6)
+                .slice(0, 9)
                 .map((article) => (
                   <Card key={article.id} className="overflow-hidden border-2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-card/50">
                     <CardHeader>
@@ -505,15 +485,10 @@ const Index = () => {
                           <Calendar className="h-4 w-4" />
                           <span>{article.date}</span>
                         </div>
-                        {article.isPopular && (
-                          <div className="flex items-center gap-1">
-                            <TrendingUp className="h-4 w-4" />
-                            <span>人気記事</span>
-                          </div>
-                        )}
+
                       </div>
                       <button
-                        className="w-full mt-6 px-4 py-2 bg-blue-100 text-primary rounded-md hover:bg-blue-200 transition-colors whitespace-nowrap"
+                        className="w-full mt-3 px-4 py-2 bg-blue-100 text-primary rounded-md hover:bg-blue-200 transition-colors whitespace-nowrap"
                         onClick={() => {
                           if (article.type === 'guide') {
                             navigate(`/guide/${article.id}`);

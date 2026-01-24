@@ -15,6 +15,80 @@ const ArticleDetail = () => {
 
   const articles = [
     {
+      id: "stocks-roadmap-50k",
+      title: "株式投資の始め方：知識ゼロから5万円を稼ぐロードマップ",
+      excerpt: "投資初心者必見！口座開設から銘柄選び、そして最初の利益5万円を手にするまでの具体的なステップと戦略を、知識ゼロでも分かるように徹底解説します。",
+      category: "株式投資",
+      date: "2026年1月25日",
+      content: `
+        <div class="prose max-w-none">
+          <p class="text-lg leading-relaxed mb-6">「株式投資を始めたいけど、何から手をつければいいか分からない」「まずは5万円くらい利益を出してみたい」そんな悩みを持つ初心者の方へ。知識ゼロからスタートして、最初の5万円を稼ぐまでの具体的なロードマップを公開します。</p>
+          
+          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">【STEP 0】マインドセット：株式投資はギャンブルではない</h2>
+          <p class="mb-4">まず最初に理解すべきことは、株式投資は「運と勘」で行うギャンブルではなく、「データと戦略」に基づいて行う資産形成手段だということです。正しい知識とリスク管理があれば、着実に資産を増やすことが可能です。</p>
+          
+          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">【STEP 1】準備編：最強の投資環境を整える</h2>
+          <div class="bg-emerald-50 p-6 rounded-xl my-8 border border-emerald-100">
+            <h3 class="font-bold text-emerald-800 mb-3">1. ネット証券口座を開設する</h3>
+            <p class="mb-3">手数料が安く、ツールの使いやすいネット証券（SBI証券や楽天証券など）を選びましょう。対面型の証券会社や銀行は手数料が高いため避けましょう。</p>
+            <h3 class="font-bold text-emerald-800 mb-3">2. NISA口座を活用する</h3>
+            <p>2026年現在、NISA（少額投資非課税制度）は必須です。利益にかかる約20%の税金がゼロになるため、これを使わない手はありません。</p>
+          </div>
+          
+          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">【STEP 2】資金編：種銭（たねせん）を作る</h2>
+          <p class="mb-4">5万円を稼ぐためには、ある程度の元手が必要です。まずは生活防衛資金（生活費の3〜6ヶ月分）を確保した上で、余剰資金を投資に回しましょう。</p>
+          <ul class="list-disc pl-5 space-y-2 mb-6">
+            <li><strong>不用品販売:</strong> フリマアプリで不要なものを売る</li>
+            <li><strong>ポイントサイト:</strong> ポイ活で初期費用を貯める</li>
+            <li><strong>固定費削減:</strong> 保険やスマホ代を見直して投資資金を捻出</li>
+          </ul>
+          
+          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">【STEP 3】実践編：最初の5万円を稼ぐ3つの戦略</h2>
+          
+          <div class="space-y-6 my-8">
+            <div class="border-l-4 border-blue-500 pl-6 py-2">
+              <h3 class="font-bold text-lg text-blue-800 mb-2">戦略A：高配当株投資（コツコツ派）</h3>
+              <p>配当利回り4%以上の銘柄を購入し、配当金を受け取る方法です。確実性は高いですが、5万円稼ぐには元手が125万円程度必要になるため、時間はかかりますが最も堅実です。</p>
+            </div>
+            
+            <div class="border-l-4 border-orange-500 pl-6 py-2">
+              <h3 class="font-bold text-lg text-orange-800 mb-2">戦略B：割安成長株への投資（ミドルリスク）</h3>
+              <p>業績が良いのに株価が放置されている「割安株（バリュー株）」を見つけて投資します。株価が適正水準に戻る過程で、10%〜20%の値上がり益を狙います。50万円の投資なら10%上昇で5万円達成です。</p>
+            </div>
+            
+            <div class="border-l-4 border-purple-500 pl-6 py-2">
+              <h3 class="font-bold text-lg text-purple-800 mb-2">戦略C：IPO（新規公開株）投資（ローリスク・ハイリターン）</h3>
+              <p>新規上場する企業の株を抽選で買う方法です。人気銘柄に当選して初値で売れば、一撃で数万円〜数十万円の利益が出ることも珍しくありません。抽選なので確実ではありませんが、リスクは極めて低いです。</p>
+            </div>
+          </div>
+          
+          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">【ロードマップ】達成までの具体的スケジュール</h2>
+          <div class="relative border-l-2 border-slate-200 ml-4 pl-8 space-y-8 my-8">
+            <div class="relative">
+              <div class="absolute -left-[41px] top-0 bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">1</div>
+              <h3 class="font-bold text-lg mb-2">1ヶ月目：口座開設と勉強</h3>
+              <p class="text-sm text-slate-600">証券口座を開設し、チャートの見方や注文方法（成行・指値）をマスターします。また、気になる銘柄を「ウォッチリスト」に入れて値動きを観察しましょう。</p>
+            </div>
+            <div class="relative">
+              <div class="absolute -left-[41px] top-0 bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">2</div>
+              <h3 class="font-bold text-lg mb-2">2ヶ月目：少額でテスト購入</h3>
+              <p class="text-sm text-slate-600">1株単位（単元未満株）で買えるサービスを使って、数千円から実際に株を買ってみましょう。自分のお金が増減する感覚に慣れることが重要です。</p>
+            </div>
+            <div class="relative">
+              <div class="absolute -left-[41px] top-0 bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">3</div>
+              <h3 class="font-bold text-lg mb-2">3ヶ月目以降：本格投資で5万円を目指す</h3>
+              <p class="text-sm text-slate-600">自分に合った戦略（A, B, C）で本格的に資金を投入します。利益が出てもすぐに贅沢せず、再投資することで資産形成が加速します。</p>
+            </div>
+          </div>
+          
+          <div class="bg-gray-50 p-6 rounded-xl my-8">
+            <h3 class="font-bold text-gray-800 mb-3">まとめ</h3>
+            <p>「5万円」は投資家としての第一歩です。この成功体験が、将来の「50万円」「500万円」へと繋がっていきます。まずは焦らず、正しい知識で第一歩を踏み出しましょう。</p>
+          </div>
+        </div>
+      `,
+    },
+    {
       id: "crypto-trends-2024",
       title: "【2024年最新】暗号資産投資トレンド：AIコインからDeFiまで",
       excerpt: "2024年の暗号資産市場の最新動向を徹底解説。AI関連トークン、DeFi、NFTの今後を予測します。",
@@ -228,322 +302,6 @@ const ArticleDetail = () => {
           <div class="bg-gray-50 p-6 rounded-xl my-8">
             <h3 class="font-bold text-gray-800 mb-3">今後の展望</h3>
             <p>AI投資は今後、さらに進化していくと考えられます。量子コンピューティングとの融合、より高度なディープラーニングモデルの開発、リアルタイムデータ処理能力の向上などが期待されています。これらの技術革新により、より精度の高い投資判断が可能になるでしょう。</p>
-          </div>
-        </div>
-      `,
-    },
-    {
-      id: "nisa-beginner",
-      title: "【2024年最新版】NISA完全ガイド：初心者が知るべき全て",
-      excerpt: "新NISAが始まり、より使いやすくなった非課税制度。制度の概要から活用方法まで徹底解説します。",
-      category: "NISA",
-      date: "2024年1月15日",
-      content: `
-        <div class="prose max-w-none">
-          <p class="text-lg leading-relaxed mb-6">2024年から新NISA制度が始まりました。年間180万円の非課税枠（うち120万円が分配金・配当金、60万円が譲渡益）が導入され、従来のNISAとつみたてNISAが統合されました。新NISAは、従来の制度のメリットを活かしつつ、より柔軟な運用が可能になっています。</p>
-          
-          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">新NISAの特徴</h2>
-          <p class="mb-4">新NISA制度の主な特徴は以下の通りです：</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-            <div class="bg-blue-50 p-6 rounded-xl">
-              <h3 class="font-bold text-blue-800 mb-3">制度的特徴</h3>
-              <ul class="list-disc pl-5 space-y-2">
-                <li>統一された非課税枠：年間180万円（従来のNISAとつみたてNISAの枠が統合）</li>
-                <li>積立投資の推奨：自動引き落とし機能が充実</li>
-                <li>商品の多様化：株式、投資信託、ETF、ETNだけでなく、REITや外国株式なども対象</li>
-                <li>非課税期間の延長：最長20年間</li>
-              </ul>
-            </div>
-            <div class="bg-green-50 p-6 rounded-xl">
-              <h3 class="font-bold text-green-800 mb-3">利点</h3>
-              <ul class="list-disc pl-5 space-y-2">
-                <li>より大きな非課税枠で効率的な資産運用</li>
-                <li>長期的な資産形成が可能</li>
-                <li>多様な投資商品の選択肢</li>
-                <li>複利効果の最大化</li>
-              </ul>
-            </div>
-          </div>
-          
-          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">口座開設の流れ</h2>
-          <p class="mb-4">新NISA口座を開設するには、以下の手順が必要です：</p>
-          <ol class="list-decimal pl-6 mt-4 space-y-3 mb-6 bg-gray-50 p-6 rounded-xl">
-            <li><strong>証券会社を選ぶ</strong> - 手数料、取扱商品、使いやすさなどを比較</li>
-            <li><strong>必要な書類を準備する</strong> - 本人確認書類、印鑑、印鑑証明書（市区町村で発行、3か月以内）など</li>
-            <li><strong>口座開設申込書に記入する</strong> - 証券会社の指示に従って記入</li>
-            <li><strong>本人確認と印鑑証明書の提出</strong> - オンラインまたは対面で提出</li>
-            <li><strong>口座開設の完了</strong> - 完了通知を受け取り、初期入金</li>
-          </ol>
-          
-          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">活用ポイント</h2>
-          <p class="mb-4">新NISAを最大限に活用するためのポイント：</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-            <div class="border border-blue-300 rounded-lg p-6">
-              <h3 class="font-bold text-blue-700 mb-3 flex items-center gap-2">
-                <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">1</span>
-                年間非課税枠の活用
-              </h3>
-              <p>年間180万円の非課税枠を最大限に活用することが重要です。月々の積立額や一括投資額を計画的に設定しましょう。</p>
-            </div>
-            <div class="border border-green-300 rounded-lg p-6">
-              <h3 class="font-bold text-green-700 mb-3 flex items-center gap-2">
-                <span class="bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">2</span>
-                分散投資の実施
-              </h3>
-              <p>リスクを分散するために、国内株式、海外株式、債券など異なる資産クラスに投資しましょう。</p>
-            </div>
-            <div class="border border-purple-300 rounded-lg p-6">
-              <h3 class="font-bold text-purple-700 mb-3 flex items-center gap-2">
-                <span class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">3</span>
-                長期的な視点
-              </h3>
-              <p>非課税期間が最長20年間と長期化しているため、短期的な値動きに一喜一憂せず、長期的な資産形成を目指しましょう。</p>
-            </div>
-            <div class="border border-yellow-300 rounded-lg p-6">
-              <h3 class="font-bold text-yellow-700 mb-3 flex items-center gap-2">
-                <span class="bg-yellow-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">4</span>
-                他の制度との併用
-              </h3>
-              <p>iDeCoや一般の特定口座など他の制度と組み合わせることで、より効果的な節税と資産運用が可能です。</p>
-            </div>
-          </div>
-          
-          <div class="bg-yellow-50 p-6 rounded-xl my-8 border border-yellow-200">
-            <h3 class="font-bold text-yellow-800 mb-3">成功するNISA活用法</h3>
-            <p class="mb-3">新NISAは、従来の制度の良い点を維持しつつ、より多くの人々が資産運用に取り組みやすくなった制度です。特に、若い世代にとっては長期的な資産形成のための強力なツールとなるでしょう。ただし、非課税枠が大きくなった分、自己責任での運用がより重要になりますので、投資知識の習得にも努めてください。</p>
-          </div>
-          <div class="bg-gray-50 p-6 rounded-xl my-8">
-            <h3 class="font-bold text-gray-800 mb-3">参考文献</h3>
-            <ul class="list-disc pl-5 space-y-2">
-              <li><a href="https://www.fsa.go.jp" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">金融庁の公式サイト</a></li>
-              <li><a href="https://www.nta.go.jp" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">国税庁のNISAに関するページ</a></li>
-              <li>「2024年版 NISA制度ガイド」大手証券会社</li>
-            </ul>
-          </div>
-        </div>
-      `,
-    },
-    {
-      id: "stocks-beginner",
-      title: "株式投資の始め方：証券口座開設から銘柄選びまで",
-      excerpt: "株式投資を始めたい方へ。口座開設の手順から最初の銘柄選びまで、わかりやすく解説します。",
-      category: "株式投資",
-      date: "2024年1月12日",
-      content: `
-        <div class="prose max-w-none">
-          <p class="text-lg leading-relaxed mb-6">株式投資は、多くの人々が資産形成のために選ぶ投資方法の一つです。しかし、初めて株式投資を始める方にとっては、何から始めれば良いのかわからないという人も多いのではないでしょうか。ここでは、株式投資の始め方について、基礎からわかりやすく解説します。</p>
-          
-          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">証券口座の開設</h2>
-          <p class="mb-4">株式投資を始めるには、まず証券会社に口座を開設する必要があります。口座開設の手順は以下の通りです：</p>
-          <div class="bg-gray-50 p-6 rounded-xl my-8">
-            <ol class="list-decimal pl-6 space-y-3">
-              <li><strong>自分に合った証券会社を選ぶ</strong> - 手数料、取扱商品、使いやすさ、キャンペーンなどを比較検討</li>
-              <li><strong>必要な書類を準備する</strong> - 本人確認書類（運転免許証、パスポートなど）、印鑑、印鑑証明書（市区町村で発行、3か月以内）、源泉徴収票または確定申告書（一部の証券会社）</li>
-              <li><strong>口座開設申込書に記入する</strong> - 証券会社の指示に従って正確に記入</li>
-              <li><strong>本人確認と印鑑証明書の提出</strong> - オンラインまたは対面で提出（オンラインの場合、本人確認のためのビデオ通話が必要な場合も）</li>
-              <li><strong>口座開設の完了</strong> - 審査が完了すると口座開設完了の通知が届き、初期入金して利用開始</li>
-            </ol>
-          </div>
-          
-          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">証券会社の選び方</h2>
-          <p class="mb-4">自分に合った証券会社を選ぶ際には、以下のポイントを考慮すると良いでしょう：</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-            <div class="bg-blue-50 p-6 rounded-xl">
-              <h3 class="font-bold text-blue-800 mb-3">費用面</h3>
-              <ul class="list-disc pl-5 space-y-2">
-                <li>取引手数料の安さ</li>
-                <li>口座管理費や年会費の有無</li>
-                <li>振込手数料の設定</li>
-              </ul>
-            </div>
-            <div class="bg-green-50 p-6 rounded-xl">
-              <h3 class="font-bold text-green-800 mb-3">サービス面</h3>
-              <ul class="list-disc pl-5 space-y-2">
-                <li>取扱商品の充実度</li>
-                <li>使いやすい取引ツール</li>
-                <li>情報提供の質</li>
-                <li>サポート体制</li>
-              </ul>
-            </div>
-          </div>
-          
-          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">銘柄選びの基本</h2>
-          <p class="mb-4">初心者が銘柄を選ぶ際には、以下の点を考慮すると良いでしょう：</p>
-          <div class="space-y-6 my-8">
-            <div class="border-l-4 border-blue-500 pl-4 bg-blue-50 p-4 rounded-r-lg">
-              <h3 class="font-bold text-blue-700 mb-2">自分が理解できる業種・企業を選ぶ</h3>
-              <p>日常的に利用している商品やサービスを提供する企業など、自分が理解しやすい業種の銘柄から始めるのが良いでしょう。</p>
-            </div>
-            <div class="border-l-4 border-green-500 pl-4 bg-green-50 p-4 rounded-r-lg">
-              <h3 class="font-bold text-green-700 mb-2">財務状況が健全な企業を選ぶ</h3>
-              <p>決算短信や有価証券報告書を確認し、売上高、利益、自己資本比率などの指標が良好な企業を選びましょう。</p>
-            </div>
-            <div class="border-l-4 border-purple-500 pl-4 bg-purple-50 p-4 rounded-r-lg">
-              <h3 class="font-bold text-purple-700 mb-2">配当を支払う企業を選ぶ</h3>
-              <p>安定した配当を支払う企業は、株価が下落しても配当収入で補えるため、リスクが比較的低いとされています。</p>
-            </div>
-            <div class="border-l-4 border-yellow-500 pl-4 bg-yellow-50 p-4 rounded-r-lg">
-              <h3 class="font-bold text-yellow-700 mb-2">流動性が高い銘柄を選ぶ</h3>
-              <p>売買高や売買代金が大きい銘柄は、必要な時に売却しやすいため、資金の流動性を確保できます。</p>
-            </div>
-          </div>
-          
-          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">リスク管理と資金管理</h2>
-          <p class="mb-4">株式投資では、以下のリスク管理が重要です：</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-            <div class="bg-red-50 p-6 rounded-xl">
-              <h3 class="font-bold text-red-800 mb-3">リスク管理</h3>
-              <ul class="list-disc pl-5 space-y-2">
-                <li>損切りラインを事前に設定する</li>
-                <li>分散投資を行う</li>
-                <li>自己資金のみで投資する</li>
-                <li>感情的な売買を避ける</li>
-              </ul>
-            </div>
-            <div class="bg-orange-50 p-6 rounded-xl">
-              <h3 class="font-bold text-orange-800 mb-3">資金管理</h3>
-              <ul class="list-disc pl-5 space-y-2">
-                <li>投資資金は全体の資産の一部にとどめる</li>
-                <li>月々の投資額を予算内で計画する</li>
-                <li>緊急資金を別途確保しておく</li>
-                <li>投資による損失を生活に影響が出ないよう配慮</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="bg-yellow-50 p-6 rounded-xl my-8 border border-yellow-200">
-            <h3 class="font-bold text-yellow-800 mb-3">初心者向けアドバイス</h3>
-            <p class="mb-3">最初は難しく感じましたが、自分が使っている商品の会社の株から始めるのが良かったです。業績も理解しやすくて、投資を続けるモチベーションになりました。</p>
-          </div>
-          <div class="bg-gray-50 p-6 rounded-xl my-8">
-            <h3 class="font-bold text-gray-800 mb-3">参考文献</h3>
-            <ul class="list-disc pl-5 space-y-2">
-              <li><a href="https://www.fsa.go.jp" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">金融庁の公式サイト</a></li>
-              <li><a href="https://www.jpx.co.jp" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">日本取引所グループ</a></li>
-              <li>「株式投資の基本と実践」大手証券会社 リサーチセンター</li>
-            </ul>
-          </div>
-        </div>
-      `,
-    },
-    {
-      id: "investment-trust",
-      title: "投資信託とは？メリット・デメリットと選び方のポイント",
-      excerpt: "投資信託の基本から、自分に合った商品の選び方まで詳しく説明します。",
-      category: "投資信託",
-      date: "2024年1月10日",
-      content: `
-        <div class="prose max-w-none">
-          <p class="text-lg leading-relaxed mb-6">投資信託とは、多くの投資家の資金を pooling して、プロのファンドマネージャーに運用を委ねる仕組みです。個人投資家が直接株式や債券を購入するよりも、手軽に分散投資を行うことができるのが特徴です。</p>
-          
-          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">投資信託のメリット</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-            <div class="bg-green-50 p-6 rounded-xl">
-              <h3 class="font-bold text-green-800 mb-3">経済的メリット</h3>
-              <ul class="list-disc pl-5 space-y-2">
-                <li>少額から始められる（1口数百円〜）</li>
-                <li>プロの運用が受けられる</li>
-                <li>分散投資が容易でリスク低減</li>
-              </ul>
-            </div>
-            <div class="bg-blue-50 p-6 rounded-xl">
-              <h3 class="font-bold text-blue-800 mb-3">運用のメリット</h3>
-              <ul class="list-disc pl-5 space-y-2">
-                <li>手間がかからない</li>
-                <li>定期的な情報提供を受ける</li>
-                <li>柔軟な売買が可能</li>
-              </ul>
-            </div>
-          </div>
-          
-          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">投資信託のデメリット</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-            <div class="bg-red-50 p-6 rounded-xl">
-              <h3 class="font-bold text-red-800 mb-3">コスト面のデメリット</h3>
-              <ul class="list-disc pl-5 space-y-2">
-                <li>信託報酬が発生する（年率0.1〜2%程度）</li>
-                <li>売買時に手数料がかかる場合がある</li>
-                <li>中途解約には手数料がかかる場合がある</li>
-              </ul>
-            </div>
-            <div class="bg-orange-50 p-6 rounded-xl">
-              <h3 class="font-bold text-orange-800 mb-3">運用面のデメリット</h3>
-              <ul class="list-disc pl-5 space-y-2">
-                <li>運用結果がファンドマネージャーに依存する</li>
-                <li>自分の意思で売買タイミングを決められない</li>
-                <li>パフォーマンスが市場平均を下回る可能性</li>
-              </ul>
-            </div>
-          </div>
-          
-          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">投資信託の種類</h2>
-          <p class="mb-4">投資信託には様々な種類があります。目的に応じて適切な商品を選びましょう：</p>
-          <div class="overflow-x-auto my-8">
-            <table class="min-w-full bg-white border border-gray-200 rounded-lg">
-              <thead>
-                <tr class="bg-gray-100">
-                  <th class="py-3 px-4 border-b text-left">種類</th>
-                  <th class="py-3 px-4 border-b text-left">特徴</th>
-                  <th class="py-3 px-4 border-b text-left">向いている人</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="py-3 px-4 border-b font-semibold">インデックス型</td>
-                  <td class="py-3 px-4 border-b">市場平均を追跡する運用</td>
-                  <td class="py-3 px-4 border-b">コスト重視、長期投資</td>
-                </tr>
-                <tr class="bg-gray-50">
-                  <td class="py-3 px-4 border-b font-semibold">アクティブ型</td>
-                  <td class="py-3 px-4 border-b">プロの選択で上値を目指す</td>
-                  <td class="py-3 px-4 border-b">リターン重視、専門知識</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4 border-b font-semibold">バランス型</td>
-                  <td class="py-3 px-4 border-b">株式と債券のバランス運用</td>
-                  <td class="py-3 px-4 border-b">リスクとリターンのバランス</td>
-                </tr>
-                <tr class="bg-gray-50">
-                  <td class="py-3 px-4 border-b font-semibold">債券型</td>
-                  <td class="py-3 px-4 border-b">主に債券に投資</td>
-                  <td class="py-3 px-4 border-b">安定重視、保守的投資</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          
-          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">選び方のポイント</h2>
-          <p class="mb-4">投資信託を選ぶ際には、以下の点を考慮すると良いでしょう：</p>
-          <div class="space-y-6 my-8">
-            <div class="border-l-4 border-blue-500 pl-4 bg-blue-50 p-4 rounded-r-lg">
-              <h3 class="font-bold text-blue-700 mb-2">運用目的を明確にする</h3>
-              <p>成長・配当・バランスなど、自分の投資目標に合った運用目的の投資信託を選びましょう。</p>
-            </div>
-            <div class="border-l-4 border-green-500 pl-4 bg-green-50 p-4 rounded-r-lg">
-              <h3 class="font-bold text-green-700 mb-2">信託報酬の安さを比較する</h3>
-              <p>信託報酬は長期的にリターンに大きな影響を与えるため、できるだけ低いものを選ぶのが基本です。</p>
-            </div>
-            <div class="border-l-4 border-purple-500 pl-4 bg-purple-50 p-4 rounded-r-lg">
-              <h3 class="font-bold text-purple-700 mb-2">過去の運用実績を確認する</h3>
-              <p>3〜5年の運用実績やベンチマークとの比較を確認し、安定した運用を行っているかを評価しましょう。</p>
-            </div>
-            <div class="border-l-4 border-yellow-500 pl-4 bg-yellow-50 p-4 rounded-r-lg">
-              <h3 class="font-bold text-yellow-700 mb-2">ファンドマネージャーの経験と実績を調べる</h3>
-              <p>ファンドマネージャーの経験年数や他のファンドでの実績などを確認することで、運用の質を評価できます。</p>
-            </div>
-          </div>
-          
-          <div class="bg-yellow-50 p-6 rounded-xl my-8 border border-yellow-200">
-            <h3 class="font-bold text-yellow-800 mb-3">投資信託活用のポイント</h3>
-            <p class="mb-3">投資信託は、他の投資商品と組み合わせることで、より効果的な資産運用が可能です。例えば、個別株と組み合わせることで、プロの運用と自分の選んだ銘柄の両方のメリットを享受できます。また、NISAやiDeCoなどの非課税制度と組み合わせることで、節税効果も期待できます。</p>
-          </div>
-          <div class="bg-gray-50 p-6 rounded-xl my-8">
-            <h3 class="font-bold text-gray-800 mb-3">参考文献</h3>
-            <ul class="list-disc pl-5 space-y-2">
-              <li><a href="https://www.fsa.go.jp" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">金融庁の公式サイト</a></li>
-              <li><a href="https://www.jpx.co.jp" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">日本取引所グループ</a></li>
-              <li>「投資信託の基礎と選び方」大手証券会社 リサーチセンター</li>
-            </ul>
           </div>
         </div>
       `,
@@ -1102,6 +860,338 @@ const ArticleDetail = () => {
           </div>
         </div>
       `,
+    },
+    {
+      id: "daytrade-vs-longterm-2026",
+      title: "【2026年最新】デイトレード vs 中長期投資：スタイル別・注目銘柄10選と勝ち方",
+      excerpt: "デイトレ向きの「お祭り銘柄」と、中長期向きの「テンバガー候補」。性質の異なる2つの投資スタイルにおすすめの銘柄を各5選紹介。",
+      category: "投資戦略",
+      date: "2026年1月25日",
+      content: `
+        <div class="prose max-w-none">
+          <p class="text-lg leading-relaxed mb-6">デイトレード（短期売買）と中長期投資では、求められる銘柄の性質が全く異なります。1日で大きな利益を狙うのか、数年かけて資産を育てるのか。それぞれのスタイルに寄り添った「正解」の銘柄選びを解説します。</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div class="bg-red-50 p-4 rounded-lg border border-red-100">
+              <h4 class="font-bold text-red-800 mb-2">デイトレ向き</h4>
+              <p class="text-sm">1日の値幅（ボラティリティ）が大きく、売買代金（流動性）が桁違いに多い銘柄。「お祭り状態」になっている株。</p>
+            </div>
+            <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+              <h4 class="font-bold text-blue-800 mb-2">中長期向き</h4>
+              <p class="text-sm">業績の裏付けがあり、成長ストーリー（国策や構造改革）が崩れない限り、ジワジワと上がり続ける銘柄。</p>
+            </div>
+          </div>
+
+          <p class="mb-8">これまで名前が挙がった銘柄を中心に、この2つに分類・整理しました。</p>
+
+          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b border-red-200 text-red-800">1. 【デイトレ向き】値動きが激しく、チャンスが多い</h2>
+          <p class="mb-4">1日で5%〜10%以上動くことも珍しくない、「ハイリスク・ハイリターン」な銘柄群です。ニュース一つで乱高下するため、持ち越し（オーバーナイト）には注意が必要です。</p>
+
+          <div class="space-y-6 my-8">
+            <!-- 1. Sakura Internet -->
+            <div class="border-l-4 border-red-500 pl-4 bg-red-50 p-5 rounded-r-lg">
+              <div class="flex justify-between items-center mb-2">
+                <h3 class="font-bold text-red-900 text-lg">さくらインターネット (3778)</h3>
+                <span class="text-xs font-bold bg-red-200 text-red-800 px-2 py-1 rounded">デイトレの王様</span>
+              </div>
+              <p class="text-sm"><span class="font-bold">特徴：</span>国策クラウドのテーマ性から、機関投資家も個人も全員参加しており、常に出来高が上位。数分で株価が急変するため、スキャルピング（超短期売買）にも最適。</p>
+            </div>
+
+            <!-- 2. Mitsui E&S -->
+            <div class="border-l-4 border-orange-500 pl-4 bg-orange-50 p-5 rounded-r-lg">
+              <div class="flex justify-between items-center mb-2">
+                <h3 class="font-bold text-orange-900 text-lg">三井E&S (7003)</h3>
+                <span class="text-xs font-bold bg-orange-200 text-orange-800 px-2 py-1 rounded">仕手戦の主役</span>
+              </div>
+              <p class="text-sm"><span class="font-bold">特徴：</span>米国クレーン問題という材料で急騰して以来、投機的な資金が入り続けています。「上がると信じて買う」参加者が多いため、勢いがつくと止まりません。</p>
+            </div>
+
+            <!-- 3. QPS -->
+            <div class="border-l-4 border-yellow-500 pl-4 bg-yellow-50 p-5 rounded-r-lg">
+              <div class="flex justify-between items-center mb-2">
+                <h3 class="font-bold text-yellow-900 text-lg">QPS研究所 (5595)</h3>
+                <span class="text-xs font-bold bg-yellow-200 text-yellow-800 px-2 py-1 rounded">宇宙ベンチャー</span>
+              </div>
+              <p class="text-sm"><span class="font-bold">特徴：</span>「防衛省から受注」などのニュースが出るたびにストップ高（制限値幅いっぱい）を演じます。赤字バイオ株のように夢で買われる側面があり、値動きが非常に軽いです。</p>
+            </div>
+
+            <!-- 4. Micronics -->
+            <div class="border-l-4 border-pink-500 pl-4 bg-pink-50 p-5 rounded-r-lg">
+              <div class="flex justify-between items-center mb-2">
+                <h3 class="font-bold text-pink-900 text-lg">マイクロニクス (6871)</h3>
+                <span class="text-xs font-bold bg-pink-200 text-pink-800 px-2 py-1 rounded">半導体の暴れ馬</span>
+              </div>
+              <p class="text-sm"><span class="font-bold">特徴：</span>半導体関連の中でも特に値動きが荒いことで有名。AI半導体ニュースに過敏に反応するため、半導体指数の動きを見ながらのトレードがしやすいです。</p>
+            </div>
+
+            <!-- 5. Cover -->
+            <div class="border-l-4 border-purple-500 pl-4 bg-purple-50 p-5 rounded-r-lg">
+              <div class="flex justify-between items-center mb-2">
+                <h3 class="font-bold text-purple-900 text-lg">カバー (5253)</h3>
+                <span class="text-xs font-bold bg-purple-200 text-purple-800 px-2 py-1 rounded">個人の人気株</span>
+              </div>
+              <p class="text-sm"><span class="font-bold">特徴：</span>VTuberファンや個人投資家の保有率が高く、需給（売りと買いのバランス）だけで大きく動くことがあります。決算発表直後の動きが特に激しいです。</p>
+            </div>
+          </div>
+
+          <h2 class="text-2xl font-bold mt-12 mb-6 pb-2 border-b border-blue-200 text-blue-800">2. 【中長期向き】腰を据えて「テンバガー」を育てる</h2>
+          <p class="mb-4">短期的な急騰よりも、四半期ごとの決算で確実に利益が増えていることを確認しながら、数ヶ月〜数年単位で保有するのに適した銘柄群です。</p>
+
+          <div class="space-y-6 my-8">
+            <!-- 1. SWCC -->
+            <div class="border-l-4 border-blue-500 pl-4 bg-blue-50 p-5 rounded-r-lg">
+              <div class="flex justify-between items-center mb-2">
+                <h3 class="font-bold text-blue-900 text-lg">SWCC (5805)</h3>
+                <span class="text-xs font-bold bg-blue-200 text-blue-800 px-2 py-1 rounded">第2のフジクラ</span>
+              </div>
+              <p class="text-sm"><span class="font-bold">特徴：</span>フジクラの成功モデル（構造改革×データセンター需要）を後追いしています。派手さはありませんが、業績改善に伴って株価水準が訂正されていく（切り上がる）動きが期待できます。</p>
+            </div>
+
+            <!-- 2. Hokkaido Electric -->
+            <div class="border-l-4 border-cyan-500 pl-4 bg-cyan-50 p-5 rounded-r-lg">
+              <div class="flex justify-between items-center mb-2">
+                <h3 class="font-bold text-cyan-900 text-lg">北海道電力 (9509)</h3>
+                <span class="text-xs font-bold bg-cyan-200 text-cyan-800 px-2 py-1 rounded">データセンター・インフラ</span>
+              </div>
+              <p class="text-sm"><span class="font-bold">特徴：</span>ラピダス工場やデータセンター稼働はこれからが本番。電力需要は今後数年減ることがないため、長期トレンドが崩れにくい「押し目買い」の対象です。</p>
+            </div>
+
+            <!-- 3. Kandenko -->
+            <div class="border-l-4 border-teal-500 pl-4 bg-teal-50 p-5 rounded-r-lg">
+              <div class="flex justify-between items-center mb-2">
+                <h3 class="font-bold text-teal-900 text-lg">関電工 (1942)</h3>
+                <span class="text-xs font-bold bg-teal-200 text-teal-800 px-2 py-1 rounded">堅実な成長</span>
+              </div>
+              <p class="text-sm"><span class="font-bold">特徴：</span>建設・設備株は動きが遅いですが、受注残（これからやる仕事）が積み上がっています。増配（配当金を増やす）意欲も高く、NISAなどで長く持つ投資家に好まれます。</p>
+            </div>
+
+            <!-- 4. Ise Chemical -->
+            <div class="border-l-4 border-indigo-500 pl-4 bg-indigo-50 p-5 rounded-r-lg">
+              <div class="flex justify-between items-center mb-2">
+                <h3 class="font-bold text-indigo-900 text-lg">伊勢化学工業 (4107)</h3>
+                <span class="text-xs font-bold bg-indigo-200 text-indigo-800 px-2 py-1 rounded">世界シェアトップ</span>
+              </div>
+              <p class="text-sm"><span class="font-bold">特徴：</span>ヨウ素という代替の効かない資源を握っている強みがあります。市況に左右はされますが、競争相手が少ないため、企業の存続リスクが低く長期保有に適しています。</p>
+            </div>
+
+            <!-- 5. TOWA -->
+            <div class="border-l-4 border-sky-500 pl-4 bg-sky-50 p-5 rounded-r-lg">
+              <div class="flex justify-between items-center mb-2">
+                <h3 class="font-bold text-sky-900 text-lg">TOWA (6315)</h3>
+                <span class="text-xs font-bold bg-sky-200 text-sky-800 px-2 py-1 rounded">実力派の半導体</span>
+              </div>
+              <p class="text-sm"><span class="font-bold">特徴：</span>値動きは荒いですが、期待だけで上がっている銘柄とは違い、圧倒的な世界シェアと技術力があります。「AI半導体が普及するなら、必ずここが儲かる」という実需の裏付けがあります。</p>
+            </div>
+          </div>
+
+          <!--Comparison / Advice-->
+          <h2 class="text-2xl font-bold mt-12 mb-6 pb-2 border-b">どちらを選ぶべきか？</h2>
+          
+          <div class="bg-gray-100 p-6 rounded-xl mb-8">
+            <h3 class="font-bold text-gray-800 mb-3">今のフジクラ（5803）は「中長期銘柄として完成された」状態</h3>
+            <p class="text-sm mb-0">今のフジクラの立ち位置：すでに機関投資家（プロ）が大量に保有しているため、以前のような「毎日ストップ高」のような動きは減りましたが、決算のたびにドカンと上がる階段状のチャートを描いています。</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="border border-red-200 rounded-xl p-6 bg-white shadow-sm">
+              <h3 class="font-bold text-red-700 mb-4 border-b border-red-100 pb-2">短期間で資金を増やしたいなら</h3>
+              <p class="text-sm text-gray-700 mb-4">「毎日ハラハラしながらでも、短期間で資金を回転させたい」なら、<span class="font-bold text-red-600">さくらインターネット</span>や<span class="font-bold text-red-600">三井E&S</span>の波に乗るのが有効です。</p>
+            </div>
+            
+            <div class="border border-blue-200 rounded-xl p-6 bg-white shadow-sm">
+              <h3 class="font-bold text-blue-700 mb-4 border-b border-blue-100 pb-2">仕事が忙しい・着実に増やしたいなら</h3>
+              <p class="text-sm text-gray-700 mb-4">「日中は仕事で株価を見られない。数ヶ月後に資産が増えていればいい」なら、<span class="font-bold text-blue-600">SWCC</span>や<span class="font-bold text-blue-600">北海道電力</span>のような、トレンドが明確な銘柄を安値で拾うのが安全です。</p>
+            </div>
+          </div>
+          
+          <p class="mt-8 text-center font-bold text-lg">ご自身の投資スタイルや、日中どのくらい株価を見られるかによって使い分けるのがおすすめです。</p>
+        </div>
+      `,
+    },
+    {
+      id: "tenbagger-candidate-2026",
+      title: "【2026年注目】テンバガー（株価10倍）候補・話題株 10選",
+      excerpt: "市場の期待値やテーマ性（AI、データセンター、国策）の強さを踏まえた、2026年注目の話題の10銘柄を厳選しました。",
+      category: "株式投資",
+      date: "2026年1月25日",
+      content: `
+        <div class="prose max-w-none">
+          <p class="text-lg leading-relaxed mb-6">市場の期待値やテーマ性（AI、データセンター、国策）の強さを踏まえた、2026年注目の話題の10銘柄を厳選しました。</p>
+          
+          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">注目銘柄 10選</h2>
+
+          <div class="space-y-8 my-8">
+            <!-- 1. SWCC -->
+            <div class="border-l-4 border-red-500 pl-4 bg-red-50 p-6 rounded-r-lg">
+              <h3 class="font-bold text-red-800 text-xl mb-1">1. SWCC（5805）【旧：昭和電線】</h3>
+              <p class="text-sm font-bold text-red-600 mb-3">キャッチコピー：「第2のフジクラ」最右翼</p>
+              <p class="mb-3"><span class="font-bold">理由：</span>フジクラと同じ「電線御三家」の一角。社名を変えて不採算事業を整理し、利益率を重視する改革（ROIC経営）を行っている点がフジクラと酷似しています。データセンター向けケーブル需要という追い風も全く同じで、市場からの期待が最も熱い銘柄の一つです。</p>
+            </div>
+
+            <!-- 2. TOWA -->
+            <div class="border-l-4 border-blue-500 pl-4 bg-blue-50 p-6 rounded-r-lg">
+              <h3 class="font-bold text-blue-800 text-xl mb-1">2. TOWA（6315）</h3>
+              <p class="text-sm font-bold text-blue-600 mb-3">キャッチコピー：生成AI半導体の「後工程」世界王者</p>
+              <p class="mb-3"><span class="font-bold">理由：</span>AI用チップ（HBM）を作るのに不可欠な「モールディング（樹脂で固める）装置」で世界シェア首位。半導体の微細化が限界を迎える中、チップを積み上げるこの技術がないと高性能AIは作れません。</p>
+            </div>
+
+            <!-- 3. さくらインターネット -->
+            <div class="border-l-4 border-green-500 pl-4 bg-green-50 p-6 rounded-r-lg">
+              <h3 class="font-bold text-green-800 text-xl mb-1">3. さくらインターネット（3778）</h3>
+              <p class="text-sm font-bold text-green-600 mb-3">キャッチコピー：「国策」ガバメントクラウド・AI</p>
+              <p class="mb-3"><span class="font-bold">理由：</span>日本政府が支援する「国産クラウド」の筆頭格。NVIDIAの最新GPUを大量に確保し、日本版AI開発の基盤を一手に担おうとしています。国の補助金という強力なバックアップがあるのが強みです。</p>
+            </div>
+
+            <!-- 4. QPS研究所 -->
+            <div class="border-l-4 border-purple-500 pl-4 bg-purple-50 p-6 rounded-r-lg">
+              <h3 class="font-bold text-purple-800 text-xl mb-1">4. QPS研究所（5595）</h3>
+              <p class="text-sm font-bold text-purple-600 mb-3">キャッチコピー：宇宙・防衛のリアルな技術力</p>
+              <p class="mb-3"><span class="font-bold">理由：</span>九州大学発の宇宙ベンチャー。天候に関係なく地表を撮影できる小型レーダー衛星（SAR衛星）を自社開発。防衛省や政府からの大型受注が続いており、赤字から黒字へ転換するタイミングでの爆発力が期待されています。</p>
+            </div>
+
+            <!-- 5. 関電工 -->
+            <div class="border-l-4 border-yellow-500 pl-4 bg-yellow-50 p-6 rounded-r-lg">
+              <h3 class="font-bold text-yellow-800 text-xl mb-1">5. 関電工（1942）</h3>
+              <p class="text-sm font-bold text-yellow-600 mb-3">キャッチコピー：データセンター建設の「現場監督」</p>
+              <p class="mb-3"><span class="font-bold">理由：</span>データセンターは建てるだけでは動かず、膨大な電力設備の工事が必要です。関電工はこの送電・屋内配線工事で圧倒的な強みを持ちます。AIが普及すればするほど工事現場が忙しくなる「ツルハシ銘柄」です。</p>
+            </div>
+
+            <!-- 6. 安川電機 -->
+            <div class="border-l-4 border-teal-500 pl-4 bg-teal-50 p-6 rounded-r-lg">
+              <h3 class="font-bold text-teal-800 text-xl mb-1">6. 安川電機（6506）</h3>
+              <p class="text-sm font-bold text-teal-600 mb-3">キャッチコピー：「フィジカルAI」の主役</p>
+              <p class="mb-3"><span class="font-bold">理由：</span>生成AIがデジタルの世界から現実世界（ロボット）へ進出する「フィジカルAI」トレンドの中心。AIが考え、ロボットが動く時代において、世界的なモーター・ロボット技術を持つ同社は欠かせない存在です。</p>
+            </div>
+
+            <!-- 7. 三井海洋開発 -->
+            <div class="border-l-4 border-indigo-500 pl-4 bg-indigo-50 p-6 rounded-r-lg">
+              <h3 class="font-bold text-indigo-800 text-xl mb-1">7. 三井海洋開発（6269）</h3>
+              <p class="text-sm font-bold text-indigo-600 mb-3">キャッチコピー：エネルギー安全保障の「洋上工場」</p>
+              <p class="mb-3"><span class="font-bold">理由：</span>海の上に浮かぶ石油・ガス生産設備（FPSO）の世界大手。原油価格の高止まりやエネルギー安全保障の観点から南米などで受注が絶好調。構造改革を経て利益体質に変わった点も評価されています。</p>
+            </div>
+
+            <!-- 8. 浜松ホトニクス -->
+            <div class="border-l-4 border-pink-500 pl-4 bg-pink-50 p-6 rounded-r-lg">
+              <h3 class="font-bold text-pink-800 text-xl mb-1">8. 浜松ホトニクス（6965）</h3>
+              <p class="text-sm font-bold text-pink-600 mb-3">キャッチコピー：「核融合」という夢のエネルギー</p>
+              <p class="mb-3"><span class="font-bold">理由：</span>次世代のクリーンエネルギー「核融合発電」の研究で、点火用レーザーなどの超高度な光技術を提供。AIの電力不足を根本解決する夢の技術として、長期的な大化けが期待されるテーマです。</p>
+            </div>
+
+            <!-- 9. カバー -->
+            <div class="border-l-4 border-orange-500 pl-4 bg-orange-50 p-6 rounded-r-lg">
+              <h3 class="font-bold text-orange-800 text-xl mb-1">9. カバー（5253）</h3>
+              <p class="text-sm font-bold text-orange-600 mb-3">キャッチコピー：世界で戦える「日本発エンタメ」</p>
+              <p class="mb-3"><span class="font-bold">理由：</span>VTuber事務所「ホロライブ」を運営。日本のアニメ文化とYouTubeを組み合わせ、世界中に熱狂的なファンを持ちます。グッズ販売やライセンスビジネスの利益率が高く、海外展開の余地が大きいです。</p>
+            </div>
+
+            <!-- 10. JET -->
+            <div class="border-l-4 border-cyan-500 pl-4 bg-cyan-50 p-6 rounded-r-lg">
+              <h3 class="font-bold text-cyan-800 text-xl mb-1">10. JET（6228）</h3>
+              <p class="text-sm font-bold text-cyan-600 mb-3">キャッチコピー：半導体洗浄のニッチトップ</p>
+              <p class="mb-3"><span class="font-bold">理由：</span>半導体製造装置の中でも「洗浄」に特化した企業。韓国や台湾の大手メーカーとのパイプが太く、半導体市場の回復とともに業績が急拡大するポテンシャルを秘めています。</p>
+            </div>
+          </div>
+
+          <div class="bg-red-50 p-6 rounded-xl my-8 border border-red-200">
+            <h3 class="font-bold text-red-800 mb-3">注意点：テンバガーを狙うリスク</h3>
+            <p class="mb-3">これらの銘柄は期待が高い分、「期待外れの決算」が出た瞬間に株価が半値になるようなリスクも孕んでいます。 フジクラのように「赤字事業からの撤退」や「実際の利益急増」が数字で見え始めたタイミングで投資するのが、成功確率を高めるコツと言われています。</p>
+          </div>
+
+          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">個人投資家の注目度が高い「ランキング常連」5選</h2>
+          <p class="mb-4">「株探（かぶたん）」などの投資メディアで人気化する銘柄は、<strong>「好決算」「新高値（青空圏）」「強力なテーマ性」</strong>の3拍子が揃ったものが中心です。</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+            <div class="bg-gray-50 p-5 rounded-xl border border-gray-200">
+              <h3 class="font-bold text-gray-800 text-lg mb-2">1. マイクロニクス（6871）</h3>
+              <p class="text-xs font-bold bg-gray-200 inline-block px-2 py-1 rounded mb-2">半導体検査</p>
+              <p class="text-sm">AI用半導体（HBMなど）の検査器具大手。<strong>「値動きが軽く、爆発力がある銘柄」</strong>として人気。</p>
+            </div>
+            
+            <div class="bg-gray-50 p-5 rounded-xl border border-gray-200">
+              <h3 class="font-bold text-gray-800 text-lg mb-2">2. 北海道電力（9509）</h3>
+              <p class="text-xs font-bold bg-gray-200 inline-block px-2 py-1 rounded mb-2">ラピダス・データセンター・原発</p>
+              <p class="text-sm">次世代半導体工場「ラピダス」への電力供給。<strong>「国策半導体工場のインフラ銘柄」</strong>として評価が一変。</p>
+            </div>
+            
+            <div class="bg-gray-50 p-5 rounded-xl border border-gray-200">
+              <h3 class="font-bold text-gray-800 text-lg mb-2">3. 伊勢化学工業（4107）</h3>
+              <p class="text-xs font-bold bg-gray-200 inline-block px-2 py-1 rounded mb-2">ペロブスカイト太陽電池</p>
+              <p class="text-sm">次世代太陽電池の材料「ヨウ素」で世界シェアトップクラス。<strong>「ニッチトップかつ世界シェアが高い」</strong>大化け株の条件。</p>
+            </div>
+            
+            <div class="bg-gray-50 p-5 rounded-xl border border-gray-200">
+              <h3 class="font-bold text-gray-800 text-lg mb-2">4. M&A総研ホールディングス（9552）</h3>
+              <p class="text-xs font-bold bg-gray-200 inline-block px-2 py-1 rounded mb-2">AI × 事業承継</p>
+              <p class="text-sm">AIを使ってM&Aマッチングを高速化。<strong>「超・高成長株（グロース株）」</strong>の代表格。</p>
+            </div>
+            
+            <div class="bg-gray-50 p-5 rounded-xl border border-gray-200">
+              <h3 class="font-bold text-gray-800 text-lg mb-2">5. 三井E&S（7003）</h3>
+              <p class="text-xs font-bold bg-gray-200 inline-block px-2 py-1 rounded mb-2">港湾クレーン・防衛・水素</p>
+              <p class="text-sm">米国港湾クレーンの日本製置き換え需要。<strong>「仕手性（投機的な動き）」</strong>が強く、出来高が多い。</p>
+            </div>
+          </div>
+
+          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">「株探」的な銘柄選びのコツ</h2>
+          <div class="bg-yellow-50 p-6 rounded-xl my-8">
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <span class="bg-yellow-500 text-white font-bold text-xs px-2 py-1 rounded shrink-0 mt-0.5">上方修正</span>
+                <div>
+                  <span class="font-bold block text-yellow-900">上方修正（じょうほうしゅうせい）</span>
+                  <span class="text-sm text-yellow-800">企業の予想よりも儲かっていること。発表直後は株価が跳ね上がります。</span>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="bg-yellow-500 text-white font-bold text-xs px-2 py-1 rounded shrink-0 mt-0.5">青空圏</span>
+                <div>
+                  <span class="font-bold block text-yellow-900">青空圏（あおぞらけん）</span>
+                  <span class="text-sm text-yellow-800">過去の上場来高値を更新し、上で売ろうと待ち構えている人が誰もいない状態。株価が軽くなります。</span>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="bg-yellow-500 text-white font-bold text-xs px-2 py-1 rounded shrink-0 mt-0.5">連想買い</span>
+                <div>
+                  <span class="font-bold block text-yellow-900">周辺銘柄（しゅうへんめいがら）への連想</span>
+                  <span class="text-sm text-yellow-800">
+                    例：フジクラが買えない → 出遅れている<strong>古河電気工業</strong>を買う。<br>
+                    例：三菱重工が高い → 割安な<strong>川崎重工</strong>を買う。<br>
+                    といった「連想ゲーム」で次の株が選ばれます。
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          
+          <p class="text-sm text-gray-500 mt-8 text-right">※ 本記事は投資勧誘を目的としたものではありません。投資は自己責任で行ってください。</p>
+        </div>
+      `,
+    },
+    {
+      id: "nisa-beginner-2026",
+      title: "【2026年最新】NISA完全ガイド：初心者が知るべき全て",
+      excerpt: "非課税枠が1,800万円に拡大！2026年現在、資産形成のスタンダードとなった「新NISA」の仕組み・メリット・失敗しない始め方を解説。",
+      category: "NISA",
+      date: "2026年1月22日",
+      content: `
+        <div class="prose max-w-none">
+          <p class="text-lg leading-relaxed mb-6">2026年現在、NISA制度は日本国民の資産形成において不可欠な存在となりました。</p>
+          <p>（※詳細記事は現在準備中です。最新の制度については金融庁の公式サイトも併せてご確認ください。）</p>
+        </div>
+      `,
+    },
+    {
+      id: "investment-trust-2026",
+      title: "投資信託の仕組みと選び方：プロに任せる資産運用",
+      excerpt: "100円からプロにお任せ！「インデックス」と「アクティブ」の違いは？初心者におすすめのファンドも紹介。",
+      category: "投資信託",
+      date: "2026年1月22日",
+      content: `
+        <div class="prose max-w-none">
+          <p class="text-lg leading-relaxed mb-6">投資信託は、プロの力を借りて少額から資産運用を始められる優れた仕組みです。</p>
+          <p>（※詳細記事は現在準備中です。最新の人気ファンドについては各証券会社のランキングをご確認ください。）</p>
+        </div>
+      `,
     }
   ];
 
@@ -1163,10 +1253,6 @@ const ArticleDetail = () => {
                   <div className="flex items-center gap-1">
                     <Calendar className="h-4 w-4" />
                     <span>{article.date}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <TrendingUp className="h-4 w-4" />
-                    <span>人気記事</span>
                   </div>
                 </div>
               </div>
