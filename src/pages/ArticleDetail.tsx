@@ -1175,8 +1175,24 @@ const ArticleDetail = () => {
       date: "2026年1月22日",
       content: `
         <div class="prose max-w-none">
-          <p class="text-lg leading-relaxed mb-6">2026年現在、NISA制度は日本国民の資産形成において不可欠な存在となりました。</p>
-          <p>（※詳細記事は現在準備中です。最新の制度については金融庁の公式サイトも併せてご確認ください。）</p>
+          <p class="text-lg leading-relaxed mb-6">2026年現在、NISA制度は日本国民の資産形成において不可欠な存在となりました。非課税保有期間の無期限化、口座開設期間の恒久化により、長期的な資産形成がより容易になっています。</p>
+          
+          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">新NISAのポイント</h2>
+          <ul class="list-disc pl-5 space-y-2 mb-8">
+            <li><strong>成長投資枠：</strong>年間240万円、生涯最大1,200万円まで株式や投資信託が買える</li>
+            <li><strong>つみたて投資枠：</strong>年間120万円、長期の積立・分散投資に最適</li>
+            <li><strong>非課税限度額：</strong>全体で1,800万円。売却すれば枠が再利用可能</li>
+          </ul>
+
+          <div class="bg-blue-50 p-6 rounded-xl my-8 border border-blue-100">
+            <h3 class="font-bold text-blue-800 mb-2">より詳細なガイドはこちら</h3>
+            <p class="mb-4">具体的な銘柄選びや、証券会社の比較を含めた完全版ガイドを以下のページで公開しています。</p>
+            <a href="/guide/nisa-beginner" class="inline-block px-6 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-colors">
+              NISA完全ガイドを見る
+            </a>
+          </div>
+          
+          <p class="mt-8">最新の制度詳細については、金融庁の公式サイトも併せてご確認ください。</p>
         </div>
       `,
     },
@@ -1188,8 +1204,24 @@ const ArticleDetail = () => {
       date: "2026年1月22日",
       content: `
         <div class="prose max-w-none">
-          <p class="text-lg leading-relaxed mb-6">投資信託は、プロの力を借りて少額から資産運用を始められる優れた仕組みです。</p>
-          <p>（※詳細記事は現在準備中です。最新の人気ファンドについては各証券会社のランキングをご確認ください。）</p>
+          <p class="text-lg leading-relaxed mb-6">投資信託は、プロの力を借りて少額から資産再生を始められる優れた仕組みです。数千種類あるファンドの中から自分に合ったものを選ぶことが、成功への第一歩となります。</p>
+
+          <h2 class="text-2xl font-bold mt-10 mb-6 pb-2 border-b">投資信託のメリット</h2>
+          <ul class="list-disc pl-5 space-y-2 mb-8">
+            <li><strong>少額投資：</strong>ネット証券なら100円から購入可能</li>
+            <li><strong>分散投資：</strong>一つのファンドで数十〜数千の銘柄に分散でき、リスクを抑えられる</li>
+            <li><strong>手間いらず：</strong>運用はプロ（運用会社）が行うため、日々の管理が楽</li>
+          </ul>
+
+          <div class="bg-green-50 p-6 rounded-xl my-8 border border-green-100">
+            <h3 class="font-bold text-green-800 mb-2">詳しい選び方はこちら</h3>
+            <p class="mb-4">インデックス銘柄の比較や、手数料で損をしないためのチェックポイントを解説したガイドを公開中です。</p>
+            <a href="/guide/investment-trust" class="inline-block px-6 py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition-colors">
+              投資信託の選び方ガイドを見る
+            </a>
+          </div>
+          
+          <p class="mt-8">最新の人気ファンドについては、各証券会社のランキングをご確認ください。</p>
         </div>
       `,
     }

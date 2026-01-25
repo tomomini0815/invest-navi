@@ -89,7 +89,7 @@ const Index = () => {
       isPopular: true,
     },
     {
-      id: "nisa-beginner-2026",
+      id: "nisa-beginner",
       type: "guide",
       title: "【2026年最新】NISA完全ガイド：初心者が知るべき全て",
       excerpt: "非課税枠が1,800万円に拡大！2026年現在、資産形成のスタンダードとなった「新NISA」の仕組み・メリット・失敗しない始め方を、どこよりも分かりやすく解説。",
@@ -99,7 +99,7 @@ const Index = () => {
       isPopular: true,
     },
     {
-      id: "investment-trust-2026",
+      id: "investment-trust",
       type: "guide",
       title: "投資信託の仕組みと選び方：プロに任せる失敗しない資産運用",
       excerpt: "100円からプロにお任せ！「インデックス」と「アクティブ」の違いは？手数料で損しないための選び方とは？初心者におすすめのファンドも紹介。",

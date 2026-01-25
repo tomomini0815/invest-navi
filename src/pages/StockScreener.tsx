@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend, LineChart as RechartsLine, Line } from "recharts";
 import { TradingViewWidgetIframe } from "@/components/common/TradingViewWidgetIframe";
 import { StockAnalysisSection } from "@/components/financial/StockAnalysisSection";
+import SEO from "@/components/seo/SEO";
 
 // TradingViewウィジェットのタイプ定義
 type ScreenerType = "total" | "japan" | "crypto" | "forex" | "us" | "promising";
@@ -1958,6 +1959,11 @@ const StockScreener = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100">
+            <SEO
+                title="リアルタイム銘柄スクリーナー | 投資総合ガイド"
+                description="TradingViewのリアルタイムデータで投資銘柄を探す。S&P500、日経225、米国株、日本株、FX、暗号資産の価格をリアルタイムでチェック。"
+                path="/screener"
+            />
             {/* ティッカーテープ */}
             <div className="sticky top-0 z-50 shadow-md bg-white h-[78px] md:h-[46px] overflow-hidden">
                 <TradingViewWidgetIframe
