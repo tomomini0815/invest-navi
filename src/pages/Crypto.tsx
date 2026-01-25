@@ -142,7 +142,6 @@ const Crypto = () => {
             <li><a href="https://coin.z.com/jp/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">GMOコイン</a></li>
             <li><a href="https://www.liquid.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">liquid（旧Quoine）</a></li>
             <li><a href="https://bitpoint.co.jp/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">BITPOINT</a></li>
-            <li><a href="https://bitcoin.dmm.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">DMM Bitcoin</a></li>
             <li><a href="https://coincheck.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">コインチェック</a></li>
           </ul>
         </div>
@@ -733,7 +732,7 @@ const Crypto = () => {
         <meta name="description" content="暗号資産（ビットコイン・イーサリアムなど）の基本から購入方法、ウォレットの管理、リスクと注意点、成功事例と失敗事例まで徹底解説。安全な暗号資産投資を始めましょう。" />
         <meta name="keywords" content="暗号資産,ビットコイン,イーサリアム,ブロックチェーン,取引所,ウォレット,投資,リスク管理,DeFi,NFT,成功事例,失敗事例,税金,セキュリティ" />
         <link rel="canonical" href="https://www.toushi-navi.com/crypto" />
-        
+
         {/* Open Graph */}
         <meta property="og:title" content="暗号資産投資ガイド | ビットコイン・イーサリアムなどの基礎と取引方法" />
         <meta property="og:description" content="暗号資産（ビットコイン・イーサリアムなど）の基本から購入方法、ウォレットの管理、リスクと注意点、成功事例と失敗事例まで徹底解説。安全な暗号資産投資を始めましょう。" />
@@ -741,11 +740,11 @@ const Crypto = () => {
         <meta property="og:url" content="https://www.toushi-navi.com/crypto" />
         <meta property="og:site_name" content="投資総合ガイド" />
         <meta property="og:locale" content="ja_JP" />
-        
+
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@toushi_navi" />
-        
+
         {/* 構造化マークアップ */}
         <script type="application/ld+json">
           {JSON.stringify({
@@ -774,15 +773,15 @@ const Crypto = () => {
           })}
         </script>
       </Helmet>
-      
+
       <Header />
-      
+
       <main className="flex-grow">
         {/* Breadcrumb */}
         <div className="bg-gradient-to-r from-muted/50 to-muted/30 py-4 border-b">
           <div className="container mx-auto px-8">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors group"
             >
               <ArrowLeft className="h-4 w-4 mr-1 group-hover:-translate-x-1 transition-transform" />
@@ -825,8 +824,8 @@ const Crypto = () => {
                         <span className="bg-primary text-primary-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">
                           {index + 1}
                         </span>
-                        <a 
-                          href={`#${item.id}`} 
+                        <a
+                          href={`#${item.id}`}
                           className="text-base text-primary hover:text-secondary hover:underline transition-colors"
                         >
                           {item.title}
@@ -845,7 +844,7 @@ const Crypto = () => {
           <div className="container mx-auto px-8">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">暗号資産投資ガイド</h2>
-              
+
               {/* 記事1: 暗号資産の基本と仕組み */}
               <Card id="crypto-basics" className="mb-16 overflow-hidden border-2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-card/50">
                 <CardHeader>
@@ -855,10 +854,10 @@ const Crypto = () => {
                   <div className="prose max-w-none">
                     <h3 className="text-xl font-bold mb-4 mt-6">暗号資産とは？</h3>
                     <p className="mb-6 leading-relaxed">暗号資産とは、インターネット上で利用されるデジタルな通貨の総称です。中央銀行や政府などの機関に発行・管理されず、暗号技術によって発行・管理される金融資産です。</p>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">ブロックチェーン技術</h3>
                     <p className="mb-6 leading-relaxed">暗号資産の基盤となるのがブロックチェーン技術です。これは、取引記録を分散型ネットワークで管理する技術で、改ざんが困難で透明性が高いという特徴があります。</p>
-                    
+
                     <h4 className="font-bold text-lg mb-3 mt-6">ブロックチェーンの種類</h4>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                       <div className="border border-gray-200 rounded-xl p-6 hover:bg-gray-50/50 transition-all duration-300 shadow-sm hover:shadow-md">
@@ -874,7 +873,7 @@ const Crypto = () => {
                         <p className="text-sm text-muted-foreground">複数の組織が共同で運営するブロックチェーン。例：R3 Corda。</p>
                       </div>
                     </div>
-                    
+
                     <h4 className="font-bold text-lg mb-3 mt-6">コンセンサスアルゴリズム</h4>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                       <div className="border border-gray-200 rounded-xl p-6 hover:bg-gray-50/50 transition-all duration-300 shadow-sm hover:shadow-md">
@@ -890,7 +889,7 @@ const Crypto = () => {
                         <p className="text-sm text-muted-foreground">コイン保有者が代表者を選出し、その代表者がブロック生成を行う。例：EOS。</p>
                       </div>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">暗号資産の特徴</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                       <div className="bg-blue-50 p-6 rounded-xl hover:bg-blue-100/50 transition-all duration-300 shadow-sm hover:shadow-md">
@@ -914,7 +913,7 @@ const Crypto = () => {
                         </ul>
                       </div>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">主要な暗号資産</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                       <div className="border border-gray-200 rounded-xl p-6 hover:bg-gray-50/50 transition-all duration-300 shadow-sm hover:shadow-md">
@@ -950,7 +949,7 @@ const Crypto = () => {
                       <li>購入したい暗号資産を選択して注文</li>
                       <li>ウォレットに移動して安全に保管</li>
                     </ol>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">取引所の選び方</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                       <div className="bg-green-50 p-6 rounded-xl hover:bg-green-100/50 transition-all duration-300 shadow-sm hover:shadow-md">
@@ -974,7 +973,7 @@ const Crypto = () => {
                         </ul>
                       </div>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">注文方法</h3>
                     <div className="space-y-4 mb-8">
                       <div className="hover:bg-muted/50 transition-all duration-300 p-6 rounded-xl shadow-sm hover:shadow-md">
@@ -986,7 +985,7 @@ const Crypto = () => {
                         <p className="leading-relaxed">指定した価格で売買する注文方法。希望価格で約定するが、約定しないこともある。</p>
                       </div>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">注意点</h3>
                     <ul className="list-disc pl-5 space-y-2 mb-6">
                       <li>個人情報の取り扱いに注意</li>
@@ -995,7 +994,7 @@ const Crypto = () => {
                       <li>評判と口コミを調べる</li>
                       <li>サポート体制を確認</li>
                     </ul>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">最新の規制動向</h3>
                     <p className="mb-6 hover:bg-muted/50 transition-all duration-300 p-6 rounded-xl leading-relaxed shadow-sm hover:shadow-md">日本では2017年に暗号資産交換業者法が施行され、取引所の登録制が導入されました。また、2023年には仮想通貨の支払手段としての利用が全面的に禁止されました。規制は今後も変化していく可能性があるため、最新の情報を確認することが重要です。</p>
                   </div>
@@ -1011,7 +1010,7 @@ const Crypto = () => {
                   <div className="prose max-w-none">
                     <h3 className="text-xl font-bold mb-4 mt-6">ウォレットとは？</h3>
                     <p className="mb-6 leading-relaxed">ウォレットとは、暗号資産を保管・管理するためのデジタルツールです。実際の通貨ではなく、通貨を所有していることを証明する「秘密鍵」と「公開鍵」を管理します。</p>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">ウォレットの種類</h3>
                     <div className="overflow-x-auto mb-8">
                       <table className="min-w-full bg-white border border-gray-200 rounded-xl">
@@ -1039,13 +1038,13 @@ const Crypto = () => {
                         </tbody>
                       </table>
                     </div>
-                    
+
                     <h4 className="font-bold text-lg mb-3 mt-6">ホットウォレットの詳細</h4>
                     <p className="mb-4 leading-relaxed">ホットウォレットは、インターネットに常時接続されているため、取引が迅速に行えますが、セキュリティリスクが高くなります。主に日常的な取引や少額の暗号資産の保管に適しています。</p>
-                    
+
                     <h4 className="font-bold text-lg mb-3 mt-6">コールドウォレットの詳細</h4>
                     <p className="mb-4 leading-relaxed">コールドウォレットは、インターネットから物理的に隔離されているため、セキュリティが非常に高く、大口の暗号資産の保管に適しています。ハードウェアウォレットやペーパーウォレットが該当します。</p>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">安全な管理方法</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                       <div className="bg-purple-50 p-6 rounded-xl hover:bg-purple-100/50 transition-all duration-300 shadow-sm hover:shadow-md">
@@ -1067,14 +1066,14 @@ const Crypto = () => {
                         </ul>
                       </div>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">おすすめウォレット</h3>
                     <ul className="list-disc pl-5 space-y-2 mb-6">
                       <li>ハードウェアウォレット：Ledger、Trezor</li>
                       <li>ソフトウェアウォレット：Electrum、MyEtherWallet</li>
                       <li>モバイルウォレット：Coinomi、Edge</li>
                     </ul>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">ウォレットの最新トレンド</h3>
                     <p className="mb-6 hover:bg-muted/50 transition-all duration-300 p-6 rounded-xl leading-relaxed shadow-sm hover:shadow-md">最近では、DeFi（分散型金融）に対応したウォレットや、NFT（非代替性トークン）に対応したウォレットが増えてきています。また、ハードウェアウォレットのセキュリティ機能も向上しており、生体認証やマルチシグ機能などが搭載されるようになっています。</p>
                   </div>
@@ -1094,23 +1093,23 @@ const Crypto = () => {
                         <h4 className="font-bold text-red-700 mb-3 text-lg">1. 価格変動リスク</h4>
                         <p className="leading-relaxed">暗号資産は価格変動が非常に大きく、短期間で大きな損益が出る可能性があります。デリバティブ取引ではさらにリスクが高まります。</p>
                       </div>
-                      
+
                       <div className="border-l-4 border-orange-500 pl-6 hover:bg-orange-50/50 transition-all duration-300 p-6 rounded-r-xl shadow-sm hover:shadow-md">
                         <h4 className="font-bold text-orange-700 mb-3 text-lg">2. セキュリティリスク</h4>
                         <p className="leading-relaxed">ハッキング、フィッシング、マルウェアなどのセキュリティリスクがあります。ウォレットや取引所の管理が重要です。</p>
                       </div>
-                      
+
                       <div className="border-l-4 border-yellow-500 pl-6 hover:bg-yellow-50/50 transition-all duration-300 p-6 rounded-r-xl shadow-sm hover:shadow-md">
                         <h4 className="font-bold text-yellow-700 mb-3 text-lg">3. 規制リスク</h4>
                         <p className="leading-relaxed">政府の規制変更や法整備の遅れにより、価値が大きく変動する可能性があります。</p>
                       </div>
-                      
+
                       <div className="border-l-4 border-green-500 pl-6 hover:bg-green-50/50 transition-all duration-300 p-6 rounded-r-xl shadow-sm hover:shadow-md">
                         <h4 className="font-bold text-green-700 mb-3 text-lg">4. 流動性リスク</h4>
                         <p className="leading-relaxed">マイナーな暗号資産は売買の際に価格が大きく変動したり、売買が成立しないリスクがあります。</p>
                       </div>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">安全な投資のための注意点</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                       <div className="bg-red-50 p-6 rounded-xl hover:bg-red-100/50 transition-all duration-300 shadow-sm hover:shadow-md">
@@ -1132,7 +1131,7 @@ const Crypto = () => {
                         </ul>
                       </div>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">詐欺と不正取引の識別</h3>
                     <ul className="list-disc pl-5 space-y-2 mb-6">
                       <li>高すぎるリターンを約束するプロジェクト</li>
@@ -1141,7 +1140,7 @@ const Crypto = () => {
                       <li>過剰なマーケティングと宣伝</li>
                       <li>評判が極端に良いまたは悪い</li>
                     </ul>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">リスク管理戦略</h3>
                     <ul className="list-disc pl-5 space-y-2 mb-6">
                       <li>損切りラインを事前に設定</li>
@@ -1149,7 +1148,7 @@ const Crypto = () => {
                       <li>定期的なポートフォリオの見直し</li>
                       <li>投資額の記録と分析</li>
                     </ul>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">2024年の最新リスク動向</h3>
                     <p className="mb-6 hover:bg-muted/50 transition-all duration-300 p-6 rounded-xl leading-relaxed shadow-sm hover:shadow-md">最近では、AI関連の暗号資産への投資が増加していますが、その一方で詐欺プロジェクトも増加傾向にあります。また、各国の中央銀行がCBDC（中央銀行デジタル通貨）の導入を検討する中で、既存の暗号資産への規制が強化される可能性もあります。</p>
                   </div>
@@ -1165,7 +1164,7 @@ const Crypto = () => {
                   <div className="prose max-w-none">
                     <h3 className="text-xl font-bold mb-4 mt-6">暗号資産の将来性</h3>
                     <p className="mb-6 leading-relaxed">暗号資産は今後も成長が期待される分野です。特に、DeFi（分散型金融）、NFT（非代替性トークン）、GameFi（ゲーム×金融）などの新しい応用分野が広がっています。</p>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">最新トレンド</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                       <div className="bg-indigo-50 p-6 rounded-xl hover:bg-indigo-100/50 transition-all duration-300 shadow-sm hover:shadow-md">
@@ -1177,13 +1176,13 @@ const Crypto = () => {
                         <p className="leading-relaxed">デジタルアートやゲームアイテムなど、代替不可能なデジタル資産を表すトークンです。芸術、ゲーム、エンタメなどの分野で活用されています。</p>
                       </div>
                     </div>
-                    
+
                     <h4 className="font-bold text-lg mb-3 mt-6">Web3</h4>
                     <p className="mb-4 leading-relaxed">Web3は、ブロックチェーン技術を基盤とした次世代のインターネットの概念です。ユーザーが自分のデータを管理し、中央集権的なプラットフォームに依存しない分散型のネットワークを目指しています。</p>
-                    
+
                     <h4 className="font-bold text-lg mb-3 mt-6">メタバース</h4>
                     <p className="mb-4 leading-relaxed">メタバースは、仮想現実や拡張現実を活用した共有の仮想空間です。NFTや暗号資産がメタバース内での資産として利用されることが期待されています。</p>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">2024年の注目技術</h3>
                     <ul className="list-disc pl-5 space-y-2 mb-6">
                       <li>Layer2ソリューション（スケーラビリティ向上）</li>
@@ -1191,7 +1190,7 @@ const Crypto = () => {
                       <li>AIとブロックチェーンの融合</li>
                       <li>環境に配慮したコンセンサスメカニズム</li>
                     </ul>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">投資戦略</h3>
                     <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-xl hover:from-purple-100/50 hover:to-pink-100/50 transition-all duration-300 shadow-sm hover:shadow-md mb-6">
                       <h4 className="font-bold text-purple-800 mb-3 text-lg">長期的な視点で投資</h4>
@@ -1210,7 +1209,7 @@ const Crypto = () => {
                   <div className="prose max-w-none">
                     <h3 className="text-xl font-bold mb-4 mt-6">なぜ今注目されるのか？</h3>
                     <p className="mb-6 leading-relaxed">暗号資産市場は常に進化しており、新しい技術やユースケースを持つプロジェクトが次々と登場しています。ここでは、将来性が高く、市場で注目を集めている新興暗号資産をいくつか紹介します。</p>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">注目の新興暗号資産</h3>
                     <div className="space-y-8 mb-8">
                       <div className="border-l-4 border-blue-500 pl-6 hover:bg-blue-50/50 transition-all duration-300 p-6 rounded-r-xl shadow-sm hover:shadow-md">
@@ -1218,26 +1217,26 @@ const Crypto = () => {
                         <p className="leading-relaxed mb-3"><strong>特徴:</strong> Moveプログラミング言語を使用し、並列処理により高速で低コストなトランザクションを実現。オブジェクトモデルにより開発者がより柔軟にアプリケーションを構築できる。</p>
                         <p className="leading-relaxed"><strong>将来性:</strong> Meta（旧Facebook）のDiemプロジェクトの影響を受けており、Metaが保有するWhatsAppやInstagramなどの巨大ユーザー基盤との連携が期待される。Web3の普及に貢献する可能性が高い。</p>
                       </div>
-                      
+
                       <div className="border-l-4 border-green-500 pl-6 hover:bg-green-50/50 transition-all duration-300 p-6 rounded-r-xl shadow-sm hover:shadow-md">
                         <h4 className="font-bold text-green-700 mb-3 text-lg">APT (Aptos)</h4>
                         <p className="leading-relaxed mb-3"><strong>特徴:</strong> Diemプロジェクトの元開発者によって構築されたLayer1ブロックチェーン。Move言語を使用し、安全性とパフォーマンスに優れている。並列実行エンジンにより高速なトランザクション処理が可能。</p>
                         <p className="leading-relaxed"><strong>将来性:</strong> Metaの支援を受け、Facebookの巨大なユーザー基盤との連携が期待される。Web3の普及に貢献する可能性が高い。</p>
                       </div>
-                      
+
                       <div className="border-l-4 border-purple-500 pl-6 hover:bg-purple-50/50 transition-all duration-300 p-6 rounded-r-xl shadow-sm hover:shadow-md">
                         <h4 className="font-bold text-purple-700 mb-3 text-lg">ARB (Arbitrum)</h4>
                         <p className="leading-relaxed mb-3"><strong>特徴:</strong> EthereumのLayer2スケーリングソリューション。Optimistic Rollup技術を使用し、Ethereumのセキュリティを維持しながら高速で低コストなトランザクションを実現。</p>
                         <p className="leading-relaxed"><strong>将来性:</strong> Ethereumエコシステムの重要な一部として位置づけられており、DeFiやNFTの分野での利用が拡大中。Ethereumのスケーラビリティ問題の解決に貢献。</p>
                       </div>
-                      
+
                       <div className="border-l-4 border-yellow-500 pl-6 hover:bg-yellow-50/50 transition-all duration-300 p-6 rounded-r-xl shadow-sm hover:shadow-md">
                         <h4 className="font-bold text-yellow-700 mb-3 text-lg">OP (Optimism)</h4>
                         <p className="leading-relaxed mb-3"><strong>特徴:</strong> EthereumのLayer2スケーリングソリューション。Optimistic Rollup技術を使用し、Ethereumのセキュリティを維持しながら高速で低コストなトランザクションを実現。</p>
                         <p className="leading-relaxed"><strong>将来性:</strong> Ethereumエコシステムの重要な一部として位置づけられており、DeFiやNFTの分野での利用が拡大中。Ethereumのスケーラビリティ問題の解決に貢献。</p>
                       </div>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold mb-4 mt-8">投資ポイントと注意点</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                       <div className="bg-indigo-50 p-6 rounded-xl hover:bg-indigo-100/50 transition-all duration-300 shadow-sm hover:shadow-md">

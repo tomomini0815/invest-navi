@@ -75,7 +75,6 @@ import { default as RakutenSecuritiesDetailPro } from "./pages/RakutenSecurities
 import { default as MonexSecuritiesDetailPro } from "./pages/MonexSecuritiesDetailPro";
 // 暗号資産取引所詳細ページのインポート
 import GmoCoinDetailed from "./pages/GmoCoinDetailed";
-import DmmBitcoinDetailed from "./pages/DmmBitcoinDetailed";
 import BitflyerDetailed from "./pages/BitflyerDetailed";
 import CoincheckDetailed from "./pages/CoincheckDetailed";
 import LiquidByQuoineDetailed from "./pages/LiquidByQuoineDetailed";
@@ -167,7 +166,6 @@ const App = () => (
           <Route path="/securities/monex-pro" element={<MonexSecuritiesDetailPro />} />
           {/* 暗号資産取引所詳細ページのルート */}
           <Route path="/crypto/gmo-coin" element={<GmoCoinDetailed />} />
-          <Route path="/crypto/dmm-bitcoin" element={<DmmBitcoinDetailed />} />
           <Route path="/crypto/bitflyer" element={<BitflyerDetailed />} />
           <Route path="/crypto/coincheck" element={<CoincheckDetailed />} />
           <Route path="/crypto/liquid-by-quoine" element={<LiquidByQuoineDetailed />} />

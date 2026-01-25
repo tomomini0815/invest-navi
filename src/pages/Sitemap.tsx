@@ -103,7 +103,6 @@ const Sitemap = () => {
         { name: "GMOコイン 詳細", href: "/crypto/gmo-coin" },
         { name: "bitFlyer 詳細", href: "/crypto/bitflyer" },
         { name: "Coincheck 詳細", href: "/crypto/coincheck" },
-        { name: "DMM Bitcoin 詳細", href: "/crypto/dmm-bitcoin" },
         { name: "SBI VCトレード 詳細", href: "/crypto/sbi-vc-trade" },
       ]
     },
