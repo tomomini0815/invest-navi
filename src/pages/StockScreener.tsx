@@ -1675,7 +1675,7 @@ const StockScreener = () => {
         },
         "1942": {
             currency: "JPY_Oku",
-            priceHistory: generateMockHistory(1400, 1800),
+            priceHistory: generateMockHistory(1500, 5740),
             revenue: [
                 { quarter: "23.3", value: 1600 }, { quarter: "23.6", value: 1650 },
                 { quarter: "23.9", value: 1700 }, { quarter: "23.12", value: 1800 },
@@ -2118,6 +2118,7 @@ const StockScreener = () => {
                                                 { symbol: "9984", name: "ソフトバンクG" },
                                                 { symbol: "7974", name: "任天堂" },
                                                 { symbol: "6861", name: "キーエンス" },
+                                                { symbol: "1942", name: "関電工" },
                                                 { symbol: "TSE:9983", name: "ファストリ" },
                                                 { symbol: "TSE:8306", name: "三菱UFJ" },
                                                 { symbol: "TSE:8035", name: "東京エレク" },

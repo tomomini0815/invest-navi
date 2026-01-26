@@ -68,7 +68,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
             "5805": `OTC:SWCPF*${usdJpy}`,       // SWCC (Pink)
             "3778": `OTC:SKURF*${usdJpy}`,       // さくらインターネット (Pink)
             "5595": "TSE:464A",                  // QPS研究所 (Ticker Change)
-            "1942": `FWB:5EY*FX_IDC:EURJPY`,     // 関電工 (Frankfurt as fallback)
+            "1942": "TSE:1942",                  // 関電工 (Data Center / Electrical)
             "6506": `OTC:YASKY*${usdJpy}`,       // 安川電機 (ADR)
             "6965": `OTC:HPHTY*${usdJpy}`,       // 浜松ホトニクス (ADR)
             "5253": `OTC:COVCF*${usdJpy}`,       // カバー (Pink)
@@ -126,7 +126,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
             "5805": "OTC:SWCPF",  // SWCC
             "3778": "OTC:SKURF",  // さくらインターネット
             "5595": "TSE:464A",   // QPS研究所 (Ticker Change)
-            "1942": "FWB:5EY",    // 関電工 (Frankfurt as fallback)
+            "1942": "TSE:1942",                  // 関電工
             "6506": "OTC:YASKY",  // 安川電機
             "6965": "OTC:HPHTY",  // 浜松ホトニクス
             "5253": "OTC:COVCF",  // カバー
