@@ -742,13 +742,13 @@ const Articles = () => {
         <title>投資記事一覧 | 投資総合ナビ</title>
         <meta name="description" content="最新の投資ニュース、テクニカル分析、投資戦略に関する記事を掲載しています。" />
         <meta name="keywords" content="投資,資産運用,株式投資,NISA,暗号資産,FX,投資信託,投資戦略" />
-        <link rel="canonical" href="https://www.toushi-navi.com/articles" />
+        <link rel="canonical" href="https://www.invest-navi.com/articles" />
 
         {/* Open Graph */}
         <meta property="og:title" content="投資記事一覧 | 投資総合ナビ" />
         <meta property="og:description" content="最新の投資ニュース、テクニカル分析、投資戦略に関する記事を掲載しています。" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.toushi-navi.com/articles" />
+        <meta property="og:url" content="https://www.invest-navi.com/articles" />
         <meta property="og:site_name" content="投資総合ナビ" />
         <meta property="og:locale" content="ja_JP" />
 

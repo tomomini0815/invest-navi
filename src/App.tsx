@@ -44,15 +44,6 @@ import ArticleDetail from "./pages/ArticleDetail";
 // Sitemapページのインポート
 import Sitemap from "./pages/Sitemap";
 import FinancialGuide from "./pages/FinancialGuide";
-// DMM株詳細ページのインポート
-import DmmStockDetail from "./pages/DmmStockDetail";
-import GmoClickFxDetailed from "./pages/GmoClickFxDetailed";
-import MinFxDetailed from "./pages/MinFxDetailed";
-import HiroseFxDetailed from "./pages/HiroseFxDetailed";
-import GmoGaikaDetailed from "./pages/GmoGaikaDetailed";
-import MufgESmartFxDetailed from "./pages/MufgESmartFxDetailed";
-import IgSecuritiesDetail from "./pages/IgSecuritiesDetail";
-import AuKabucomSecuritiesDetail from "./pages/AuKabucomSecuritiesDetail";
 // 新しい証券会社詳細ページ（プロフェッショナル版）のインポート
 import { default as SbiSecuritiesDetailPro } from "./pages/SbiSecuritiesDetailPro";
 import { default as RakutenSecuritiesDetailPro } from "./pages/RakutenSecuritiesDetailPro";
@@ -120,15 +111,7 @@ const App = () => (
           <Route path="/comparison" element={<Comparison />} />
           <Route path="/crypto-comparison" element={<CryptoComparison />} />
           <Route path="/fx-comparison" element={<FXComparison />} />
-          <Route path="/stocks/dmm-stock" element={<DmmStockDetail />} />
-          <Route path="/fx/gmo-click" element={<GmoClickFxDetailed />} />
-          <Route path="/fx/min-fx" element={<MinFxDetailed />} />
-          <Route path="/fx/hirose" element={<HiroseFxDetailed />} />
-          <Route path="/fx/gmo-gaika" element={<GmoGaikaDetailed />} />
-          <Route path="/fx/mufg-e-smart" element={<MufgESmartFxDetailed />} />
           <Route path="/securities-comparison" element={<SecuritiesComparison />} />
-          <Route path="/securities/ig" element={<IgSecuritiesDetail />} />
-          <Route path="/securities/au-kabucom" element={<AuKabucomSecuritiesDetail />} />
           {/* 新しい証券会社詳細ページ（プロフェッショナル版）のルート */}
           <Route path="/securities/sbi-pro" element={<SbiSecuritiesDetailPro />} />
           <Route path="/securities/rakuten-pro" element={<RakutenSecuritiesDetailPro />} />

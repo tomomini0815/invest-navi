@@ -6,17 +6,6 @@ interface SecuritiesComparisonTableProps {
     data: Company[];
 }
 
-const getDetailUrl = (name: string) => {
-    if (name.includes("SBI証券")) return "/securities/sbi";
-    if (name.includes("楽天")) return "/securities/rakuten";
-    if (name.includes("マネックス")) return "/securities/monex";
-    if (name.includes("松井")) return "/securities/matsui";
-    if (name.includes("auカブコム")) return "/securities/au-kabucom";
-    if (name.includes("DMM")) return "https://h.accesstrade.net/sp/cc?rk=0100kz3n00ol0m";
-    if (name.includes("GMOクリック")) return "/securities/gmo-click";
-    if (name.includes("IG")) return "/securities/ig";
-    return "#";
-};
 
 export const SecuritiesComparisonTable = ({ data }: SecuritiesComparisonTableProps) => {
     return (

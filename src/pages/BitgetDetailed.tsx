@@ -91,13 +91,13 @@ const BitgetDetailed = () => {
         <title>Bitget詳細 | 暗号資産取引所比較 | 投資総合ナビ</title>
         <meta name="description" content="Bitgetの詳細情報。Copy Trading機能、多様なアルトコイン、日本語対応、高機能な取引ツールを提供。" />
         <meta name="keywords" content="Bitget, 暗号資産取引所, 暗号資産比較, 手数料, 取引ツール" />
-        <link rel="canonical" href="https://www.toushi-navi.com/crypto/bitget" />
+        <link rel="canonical" href="https://www.invest-navi.com/crypto/bitget" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Bitget詳細 | 暗号資産取引所比較 | 投資総合ナビ" />
         <meta property="og:description" content="Bitgetの詳細情報。Copy Trading機能、多様なアルトコイン、日本語対応、高機能な取引ツールを提供。" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://www.toushi-navi.com/crypto/bitget" />
+        <meta property="og:url" content="https://www.invest-navi.com/crypto/bitget" />
         <meta property="og:site_name" content="投資総合ナビ" />
         <meta property="og:locale" content="ja_JP" />
         

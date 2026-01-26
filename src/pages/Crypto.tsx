@@ -731,13 +731,13 @@ const Crypto = () => {
         <title>暗号資産投資ガイド | ビットコイン・イーサリアムなどの基礎と取引方法</title>
         <meta name="description" content="暗号資産（ビットコイン・イーサリアムなど）の基本から購入方法、ウォレットの管理、リスクと注意点、成功事例と失敗事例まで徹底解説。安全な暗号資産投資を始めましょう。" />
         <meta name="keywords" content="暗号資産,ビットコイン,イーサリアム,ブロックチェーン,取引所,ウォレット,投資,リスク管理,DeFi,NFT,成功事例,失敗事例,税金,セキュリティ" />
-        <link rel="canonical" href="https://www.toushi-navi.com/crypto" />
+        <link rel="canonical" href="https://www.invest-navi.com/crypto" />
 
         {/* Open Graph */}
         <meta property="og:title" content="暗号資産投資ガイド | ビットコイン・イーサリアムなどの基礎と取引方法" />
         <meta property="og:description" content="暗号資産（ビットコイン・イーサリアムなど）の基本から購入方法、ウォレットの管理、リスクと注意点、成功事例と失敗事例まで徹底解説。安全な暗号資産投資を始めましょう。" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://www.toushi-navi.com/crypto" />
+        <meta property="og:url" content="https://www.invest-navi.com/crypto" />
         <meta property="og:site_name" content="投資総合ガイド" />
         <meta property="og:locale" content="ja_JP" />
 
@@ -761,14 +761,14 @@ const Crypto = () => {
               "name": "投資総合ガイド",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://www.toushi-navi.com/logo.png"
+                "url": "https://www.invest-navi.com/logo.png"
               }
             },
             "datePublished": "2024-10-30",
             "dateModified": "2024-10-30",
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": "https://www.toushi-navi.com/crypto"
+              "@id": "https://www.invest-navi.com/crypto"
             }
           })}
         </script>

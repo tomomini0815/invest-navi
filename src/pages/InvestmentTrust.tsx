@@ -244,13 +244,13 @@ const InvestmentTrust = () => {
         <title>投資信託投資ガイド | プロに任せる資産運用の基本と選び方</title>
         <meta name="description" content="投資信託の基本からプロの運用者に任せる資産運用方法まで徹底解説。初心者でも安心のインデックス型・アクティブ型投資信託の選び方と活用法を学びましょう。" />
         <meta name="keywords" content="投資信託,インデックス型,アクティブ型,資産運用,プロ運用,分散投資,ドルコスト平均法,NISA,iDeCo" />
-        <link rel="canonical" href="https://www.toushi-navi.com/investment-trust" />
+        <link rel="canonical" href="https://www.invest-navi.com/investment-trust" />
         
         {/* Open Graph */}
         <meta property="og:title" content="投資信託投資ガイド | プロに任せる資産運用の基本と選び方" />
         <meta property="og:description" content="投資信託の基本からプロの運用者に任せる資産運用方法まで徹底解説。初心者でも安心のインデックス型・アクティブ型投資信託の選び方と活用法を学びましょう。" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://www.toushi-navi.com/investment-trust" />
+        <meta property="og:url" content="https://www.invest-navi.com/investment-trust" />
         <meta property="og:site_name" content="投資総合ガイド" />
         <meta property="og:locale" content="ja_JP" />
         

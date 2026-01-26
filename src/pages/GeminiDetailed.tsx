@@ -85,13 +85,13 @@ const GeminiDetailed = () => {
         <title>Gemini詳細 | 暗号資産取引所比較 | 投資総合ナビ</title>
         <meta name="description" content="Geminiの詳細情報。米国で厳格な規制を満たすセキュリティ、信頼性の高い取引所、初心者に最適を提供。" />
         <meta name="keywords" content="Gemini, 暗号資産取引所, 暗号資産比較, 手数料, 取引ツール" />
-        <link rel="canonical" href="https://www.toushi-navi.com/crypto/gemini" />
+        <link rel="canonical" href="https://www.invest-navi.com/crypto/gemini" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Gemini詳細 | 暗号資産取引所比較 | 投資総合ナビ" />
         <meta property="og:description" content="Geminiの詳細情報。米国で厳格な規制を満たすセキュリティ、信頼性の高い取引所、初心者に最適を提供。" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://www.toushi-navi.com/crypto/gemini" />
+        <meta property="og:url" content="https://www.invest-navi.com/crypto/gemini" />
         <meta property="og:site_name" content="投資総合ナビ" />
         <meta property="og:locale" content="ja_JP" />
         

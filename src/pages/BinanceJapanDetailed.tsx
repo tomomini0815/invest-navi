@@ -88,13 +88,13 @@ const BinanceJapanDetailed = () => {
         <title>Binance Japan詳細 | 暗号資産取引所比較 | 投資総合ナビ</title>
         <meta name="description" content="Binance Japanの詳細情報。業界標準のセキュリティ、世界最大手グループ国内取引所、国内取引所の中でも最多クラスの銘柄数を提供。" />
         <meta name="keywords" content="Binance Japan, 暗号資産取引所, 暗号資産比較, 手数料, 取引ツール" />
-        <link rel="canonical" href="https://www.toushi-navi.com/crypto/binance-japan" />
+        <link rel="canonical" href="https://www.invest-navi.com/crypto/binance-japan" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Binance Japan詳細 | 暗号資産取引所比較 | 投資総合ナビ" />
         <meta property="og:description" content="Binance Japanの詳細情報。業界標準のセキュリティ、世界最大手グループ国内取引所、国内取引所の中でも最多クラスの銘柄数を提供。" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://www.toushi-navi.com/crypto/binance-japan" />
+        <meta property="og:url" content="https://www.invest-navi.com/crypto/binance-japan" />
         <meta property="og:site_name" content="投資総合ナビ" />
         <meta property="og:locale" content="ja_JP" />
         

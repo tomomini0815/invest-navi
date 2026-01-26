@@ -75,29 +75,44 @@ const Sitemap = () => {
       category: "証券会社詳細",
       icon: FileText,
       items: [
-        { name: "DMM株 詳細", href: "https://h.accesstrade.net/sp/cc?rk=0100mjw300ol0m" },
+        { name: "SBI証券", href: "https://www.sbisec.co.jp/" },
+        { name: "楽天証券", href: "https://www.rakuten-sec.co.jp/" },
+        { name: "マネックス証券", href: "https://h.accesstrade.net/sp/cc?rk=0100q1bu00ol0m" },
+        { name: "松井証券", href: "https://www.matsui.co.jp/" },
+        { name: "auカブコム証券", href: "https://kabu.com/" },
+        { name: "GMOクリック証券", href: "https://www.click-sec.com/" },
+        { name: "DMM株", href: "https://h.accesstrade.net/sp/cc?rk=0100kz3n00ol0m" },
+        { name: "IG証券", href: "https://www.ig.com/jp" },
+        { name: "moomoo証券", href: "https://www.moomoo.com/jp" },
+        { name: "PayPay証券", href: "https://www.paypay-sec.co.jp/" },
       ]
     },
     {
       category: "FX業者詳細",
       icon: LineChart,
       items: [
-        { name: "DMM FX 詳細", href: "https://h.accesstrade.net/sp/cc?rk=01004jqz00ol0m" },
-        { name: "SBI FXトレード 詳細", href: "https://www.sbifxt.co.jp/" },
-        { name: "外為どっとコム 詳細", href: "https://www.gaitame.com/" },
-        { name: "IG証券 FX 詳細", href: "https://www.ig.com/jp" },
-        { name: "楽天FX 詳細", href: "https://www.rakuten-sec.co.jp/" },
-        { name: "松井証券 FX 詳細", href: "https://h.accesstrade.net/sp/cc?rk=0100ohhx00ol0m" },
+        { name: "GMOクリック証券 FXネオ", href: "https://www.click-sec.com/corp/guide/fxneo/" },
+        { name: "DMM FX", href: "https://h.accesstrade.net/sp/cc?rk=01004jqz00ol0m" },
+        { name: "SBI FXトレード", href: "https://www.sbifxt.co.jp/" },
+        { name: "外為どっとコム", href: "https://www.gaitame.com/" },
+        { name: "松井証券 MATSUI FX", href: "https://h.accesstrade.net/sp/cc?rk=0100ohhx00ol0m" },
+        { name: "ヒロセ通商 LION FX", href: "https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T" },
+        { name: "LINE FX", href: "https://line-fx.com/" },
+        { name: "IG証券 FX", href: "https://www.ig.com/jp" },
+        { name: "みんなのFX", href: "https://min-fx.jp/" },
+        { name: "LIGHT FX", href: "https://lightfx.jp/" },
+        { name: "トライオートFX", href: "https://www.invast.jp/triauto/" },
+        { name: "auカブコム証券 FX", href: "https://kabu.com/" },
       ]
     },
     {
       category: "暗号資産詳細",
       icon: Coins,
       items: [
-        { name: "GMOコイン 詳細", href: "/crypto/gmo-coin" },
-        { name: "bitFlyer 詳細", href: "/crypto/bitflyer" },
-        { name: "Coincheck 詳細", href: "/crypto/coincheck" },
-        { name: "SBI VCトレード 詳細", href: "/crypto/sbi-vc-trade" },
+        { name: "GMOコイン", href: "https://coin.z.com/jp/" },
+        { name: "Coincheck", href: "https://coincheck.com/ja/" },
+        { name: "bitFlyer", href: "https://bitflyer.com/ja-jp/" },
+        { name: "SBI VCトレード", href: "https://www.sbivc.co.jp/" },
       ]
     },
     {
@@ -158,13 +173,25 @@ const Sitemap = () => {
                   <ul className="space-y-3">
                     {section.items.map((item, itemIndex) => (
                       <li key={itemIndex}>
-                        <Link
-                          to={item.href}
-                          className="text-slate-600 hover:text-primary transition-colors flex items-center py-1 group/item"
-                        >
-                          <span className="w-1.5 h-1.5 bg-slate-300 group-hover/item:bg-primary rounded-full mr-3 shrink-0 transition-colors"></span>
-                          <span className="text-[15px] font-medium leading-relaxed">{item.name}</span>
-                        </Link>
+                        {item.href.startsWith("http") ? (
+                          <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-slate-600 hover:text-primary transition-colors flex items-center py-1 group/item"
+                          >
+                            <span className="w-1.5 h-1.5 bg-slate-300 group-hover/item:bg-primary rounded-full mr-3 shrink-0 transition-colors"></span>
+                            <span className="text-[15px] font-medium leading-relaxed">{item.name}</span>
+                          </a>
+                        ) : (
+                          <Link
+                            to={item.href}
+                            className="text-slate-600 hover:text-primary transition-colors flex items-center py-1 group/item"
+                          >
+                            <span className="w-1.5 h-1.5 bg-slate-300 group-hover/item:bg-primary rounded-full mr-3 shrink-0 transition-colors"></span>
+                            <span className="text-[15px] font-medium leading-relaxed">{item.name}</span>
+                          </Link>
+                        )}
                       </li>
                     ))}
                   </ul>

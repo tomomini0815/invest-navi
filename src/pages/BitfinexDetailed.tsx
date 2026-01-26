@@ -75,13 +75,13 @@ const BitfinexDetailed = () => {
         <title>Bitfinex詳細 | 暗号資産取引所比較 | 投資総合ナビ</title>
         <meta name="description" content="Bitfinexの詳細情報。高機能な取引ツール、多様な暗号資産の取扱、プロフェッショナル向けを提供。" />
         <meta name="keywords" content="Bitfinex, 暗号資産取引所, 暗号資産比較, 手数料, 取引ツール" />
-        <link rel="canonical" href="https://www.toushi-navi.com/crypto/bitfinex" />
+        <link rel="canonical" href="https://www.invest-navi.com/crypto/bitfinex" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Bitfinex詳細 | 暗号資産取引所比較 | 投資総合ナビ" />
         <meta property="og:description" content="Bitfinexの詳細情報。高機能な取引ツール、多様な暗号資産の取扱、プロフェッショナル向けを提供。" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://www.toushi-navi.com/crypto/bitfinex" />
+        <meta property="og:url" content="https://www.invest-navi.com/crypto/bitfinex" />
         <meta property="og:site_name" content="投資総合ナビ" />
         <meta property="og:locale" content="ja_JP" />
         

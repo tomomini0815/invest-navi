@@ -75,13 +75,13 @@ const FtxDetailed = () => {
         <title>FTX詳細 | 暗号資産取引所比較 | 投資総合ナビ</title>
         <meta name="description" content="FTXの詳細情報。先物・デリバティブ取引の手数料が安い、多様な暗号資産の取扱、高機能な取引ツールを提供。" />
         <meta name="keywords" content="FTX, 暗号資産取引所, 暗号資産比較, 手数料, 取引ツール" />
-        <link rel="canonical" href="https://www.toushi-navi.com/crypto/ftx" />
+        <link rel="canonical" href="https://www.invest-navi.com/crypto/ftx" />
         
         {/* Open Graph */}
         <meta property="og:title" content="FTX詳細 | 暗号資産取引所比較 | 投資総合ナビ" />
         <meta property="og:description" content="FTXの詳細情報。先物・デリバティブ取引の手数料が安い、多様な暗号資産の取扱、高機能な取引ツールを提供。" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://www.toushi-navi.com/crypto/ftx" />
+        <meta property="og:url" content="https://www.invest-navi.com/crypto/ftx" />
         <meta property="og:site_name" content="投資総合ナビ" />
         <meta property="og:locale" content="ja_JP" />
         

@@ -75,13 +75,13 @@ const CoinbaseDetailed = () => {
         <title>Coinbase詳細 | 暗号資産取引所比較 | 投資総合ナビ</title>
         <meta name="description" content="Coinbaseの詳細情報。初心者に最適、米国で厳格な規制を満たすセキュリティ、シンプルなインターフェースを提供。" />
         <meta name="keywords" content="Coinbase, 暗号資産取引所, 暗号資産比較, 手数料, 取引ツール" />
-        <link rel="canonical" href="https://www.toushi-navi.com/crypto/coinbase" />
+        <link rel="canonical" href="https://www.invest-navi.com/crypto/coinbase" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Coinbase詳細 | 暗号資産取引所比較 | 投資総合ナビ" />
         <meta property="og:description" content="Coinbaseの詳細情報。初心者に最適、米国で厳格な規制を満たすセキュリティ、シンプルなインターフェースを提供。" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://www.toushi-navi.com/crypto/coinbase" />
+        <meta property="og:url" content="https://www.invest-navi.com/crypto/coinbase" />
         <meta property="og:site_name" content="投資総合ナビ" />
         <meta property="og:locale" content="ja_JP" />
         

@@ -75,13 +75,13 @@ const KrakenDetailed = () => {
         <title>Kraken詳細 | 暗号資産取引所比較 | 投資総合ナビ</title>
         <meta name="description" content="Krakenの詳細情報。業界トップクラスのセキュリティ、多様な暗号資産の取扱、信頼性の高い取引所を提供。" />
         <meta name="keywords" content="Kraken, 暗号資産取引所, 暗号資産比較, 手数料, 取引ツール" />
-        <link rel="canonical" href="https://www.toushi-navi.com/crypto/kraken" />
+        <link rel="canonical" href="https://www.invest-navi.com/crypto/kraken" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Kraken詳細 | 暗号資産取引所比較 | 投資総合ナビ" />
         <meta property="og:description" content="Krakenの詳細情報。業界トップクラスのセキュリティ、多様な暗号資産の取扱、信頼性の高い取引所を提供。" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://www.toushi-navi.com/crypto/kraken" />
+        <meta property="og:url" content="https://www.invest-navi.com/crypto/kraken" />
         <meta property="og:site_name" content="投資総合ナビ" />
         <meta property="og:locale" content="ja_JP" />
         

@@ -88,13 +88,13 @@ const BitpointDetailed = () => {
         <title>BITPOINT詳細 | 暗号資産取引所比較 | 投資総合ナビ</title>
         <meta name="description" content="BITPOINTの詳細情報。SBIグループ傘下、信頼性の高いセキュリティ体制、ステーキング報酬年率国内No.1を提供。" />
         <meta name="keywords" content="BITPOINT, 暗号資産取引所, 暗号資産比較, 手数料, 取引ツール" />
-        <link rel="canonical" href="https://www.toushi-navi.com/crypto/bitpoint" />
+        <link rel="canonical" href="https://www.invest-navi.com/crypto/bitpoint" />
         
         {/* Open Graph */}
         <meta property="og:title" content="BITPOINT詳細 | 暗号資産取引所比較 | 投資総合ナビ" />
         <meta property="og:description" content="BITPOINTの詳細情報。SBIグループ傘下、信頼性の高いセキュリティ体制、ステーキング報酬年率国内No.1を提供。" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://www.toushi-navi.com/crypto/bitpoint" />
+        <meta property="og:url" content="https://www.invest-navi.com/crypto/bitpoint" />
         <meta property="og:site_name" content="投資総合ナビ" />
         <meta property="og:locale" content="ja_JP" />
         

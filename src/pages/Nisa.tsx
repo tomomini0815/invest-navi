@@ -88,13 +88,13 @@ const Nisa = () => {
         <title>NISA・つみたてNISA投資ガイド | 非課税制度を活用した資産運用</title>
         <meta name="description" content="NISA・つみたてNISAの基本から投資戦略、おすすめ商品まで徹底解説。非課税制度を活用して効率的な資産運用を始めましょう。" />
         <meta name="keywords" content="NISA,つみたてNISA,投資,資産運用,非課税制度,投資信託,積立投資" />
-        <link rel="canonical" href="https://www.toushi-navi.com/nisa" />
+        <link rel="canonical" href="https://www.invest-navi.com/nisa" />
 
         {/* Open Graph */}
         <meta property="og:title" content="NISA・つみたてNISA投資ガイド | 非課税制度を活用した資産運用" />
         <meta property="og:description" content="NISA・つみたてNISAの基本から投資戦略、おすすめ商品まで徹底解説。非課税制度を活用して効率的な資産運用を始めましょう。" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://www.toushi-navi.com/nisa" />
+        <meta property="og:url" content="https://www.invest-navi.com/nisa" />
         <meta property="og:site_name" content="投資総合ガイド" />
         <meta property="og:locale" content="ja_JP" />
 
@@ -118,14 +118,14 @@ const Nisa = () => {
               "name": "投資総合ガイド",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://www.toushi-navi.com/logo.png"
+                "url": "https://www.invest-navi.com/logo.png"
               }
             },
             "datePublished": "2024-10-30",
             "dateModified": "2024-10-30",
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": "https://www.toushi-navi.com/nisa"
+              "@id": "https://www.invest-navi.com/nisa"
             }
           })}
         </script>

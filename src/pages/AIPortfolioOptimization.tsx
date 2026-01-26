@@ -260,13 +260,13 @@ def risk_parity_weights(cov_matrix, max_iter=100, tolerance=1e-6):
         <title>{article.title} | 投資総合ナビ</title>
         <meta name="description" content={article.excerpt} />
         <meta name="keywords" content="投資AI, ポートフォリオ最適化, 機械学習, リスク管理, 資産運用" />
-        <link rel="canonical" href={`https://www.toushi-navi.com/articles/${article.id}`} />
+        <link rel="canonical" href={`https://www.invest-navi.com/articles/${article.id}`} />
 
         {/* Open Graph */}
         <meta property="og:title" content={`${article.title} | 投資総合ナビ`} />
         <meta property="og:description" content={article.excerpt} />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://www.toushi-navi.com/articles/${article.id}`} />
+        <meta property="og:url" content={`https://www.invest-navi.com/articles/${article.id}`} />
         <meta property="og:site_name" content="投資総合ナビ" />
         <meta property="og:locale" content="ja_JP" />
 

@@ -88,13 +88,13 @@ const LineBitmaxDetailed = () => {
         <title>LINE BITMAX詳細 | 暗号資産取引所比較 | 投資総合ナビ</title>
         <meta name="description" content="LINE BITMAXの詳細情報。LINEグループの信頼性、コールドウォレット管理、1円から投資可能を提供。" />
         <meta name="keywords" content="LINE BITMAX, 暗号資産取引所, 暗号資産比較, 手数料, 取引ツール" />
-        <link rel="canonical" href="https://www.toushi-navi.com/crypto/line-bitmax" />
+        <link rel="canonical" href="https://www.invest-navi.com/crypto/line-bitmax" />
         
         {/* Open Graph */}
         <meta property="og:title" content="LINE BITMAX詳細 | 暗号資産取引所比較 | 投資総合ナビ" />
         <meta property="og:description" content="LINE BITMAXの詳細情報。LINEグループの信頼性、コールドウォレット管理、1円から投資可能を提供。" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://www.toushi-navi.com/crypto/line-bitmax" />
+        <meta property="og:url" content="https://www.invest-navi.com/crypto/line-bitmax" />
         <meta property="og:site_name" content="投資総合ナビ" />
         <meta property="og:locale" content="ja_JP" />
         

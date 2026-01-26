@@ -188,13 +188,13 @@ model.fit(X_train, y_train, batch_size=1, epochs=1)
         <title>{article.title} | 投資総合ナビ</title>
         <meta name="description" content={article.excerpt} />
         <meta name="keywords" content="投資AI, 機械学習, 株式予測, Python, 投資戦略" />
-        <link rel="canonical" href={`https://www.toushi-navi.com/articles/${article.id}`} />
+        <link rel="canonical" href={`https://www.invest-navi.com/articles/${article.id}`} />
 
         {/* Open Graph */}
         <meta property="og:title" content={`${article.title} | 投資総合ナビ`} />
         <meta property="og:description" content={article.excerpt} />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://www.toushi-navi.com/articles/${article.id}`} />
+        <meta property="og:url" content={`https://www.invest-navi.com/articles/${article.id}`} />
         <meta property="og:site_name" content="投資総合ナビ" />
         <meta property="og:locale" content="ja_JP" />
 

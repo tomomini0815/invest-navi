@@ -316,7 +316,7 @@ const FXComparisonTable = () => {
   const companies = showDomestic ? domesticBrokers : foreignBrokers;
 
   // 表示するFX業者をフィルタリング
-  const filteredCompanies = companies.filter(company => 
+  const filteredCompanies = companies.filter(company =>
     showDomestic ? company.isDomestic : !company.isDomestic
   );
 
@@ -337,14 +337,14 @@ const FXComparisonTable = () => {
       }
       return 0;
     }
-    
+
     const aValue = a[sortBy];
     const bValue = b[sortBy];
-    
+
     if (typeof aValue === "number" && typeof bValue === "number") {
       return sortOrder === "asc" ? aValue - bValue : bValue - aValue;
     }
-    
+
     return 0;
   });
 
@@ -379,41 +379,20 @@ const FXComparisonTable = () => {
         )}
       </CardHeader>
       {/* 詳細情報ボタンを会社名下に配置 */}
-      <div className="px-6 pb-2">
-        {company.name === "DMM FX" || company.name === "松井証券 MATSUI FX" || company.name === "SBI FXトレード" || company.name === "外為どっとコム（外貨ネクストネオ）" || company.name === "IG証券FX" || company.name === "楽天証券（楽天FX）" || company.name === "GMOクリック証券（FXネオ）" || company.name === "みんなのFX（トレイダーズ証券）" || company.name === "ヒロセ通商（LION FX）" || company.name === "GMO外貨（外貨ex）" || company.name === "三菱UFJ eスマート証券 FX" ? (
-          <Button 
-            size="sm" 
-            className="text-xs py-2 bg-blue-100 text-primary hover:bg-blue-200 shadow-md hover:shadow-lg transition-all duration-300 justify-between"
-            asChild
-          >
-            <Link to={
-              company.name === "DMM FX" ? "/fx/dmm-fx" : 
-              company.name === "松井証券 MATSUI FX" ? "/fx/matsui-fx" : 
-              company.name === "SBI FXトレード" ? "/fx/sbi-fx" : 
-              company.name === "外為どっとコム（外貨ネクストネオ）" ? "/fx/gaitame" : 
-              company.name === "IG証券FX" ? "/fx/ig" : 
-              company.name === "楽天証券（楽天FX）" ? "/fx/rakuten" : 
-              company.name === "GMOクリック証券（FXネオ）" ? "/fx/gmo-click" : 
-              company.name === "みんなのFX（トレイダーズ証券）" ? "/fx/min-fx" : 
-              company.name === "ヒロセ通商（LION FX）" ? "/fx/hirose" : 
-              company.name === "GMO外貨（外貨ex）" ? "/fx/gmo-gaika" : 
-              "/fx/mufg-e-smart"
-            }>
-              詳細情報
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
-        ) : (
-          <Button 
-            size="sm" 
-            className="text-xs py-2 bg-blue-100 text-primary hover:bg-blue-200 shadow-md hover:shadow-lg transition-all duration-300 justify-between opacity-50 cursor-not-allowed"
-            disabled
-          >
-            詳細情報
-            <ArrowRight className="h-4 w-4" />
-          </Button>
-        )}
-      </div>
+      <Button
+        size="sm"
+        className="text-xs py-2 bg-blue-100 text-primary hover:bg-blue-200 shadow-md hover:shadow-lg transition-all duration-300 justify-between"
+        asChild
+      >
+        <a
+          href={company.affiliateUrl || "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          詳細情報
+          <ArrowRight className="h-4 w-4" />
+        </a>
+      </Button>
       <CardContent className="space-y-3">
         <div className="grid grid-cols-2 gap-3 text-sm">
           <div>
@@ -425,12 +404,12 @@ const FXComparisonTable = () => {
             <p className="font-semibold">{company.minTradeUnit}</p>
           </div>
         </div>
-        
+
         <div className="flex items-center gap-2">
           <span className="text-muted-foreground text-xs">スキャルピング</span>
           <div className="text-xs">{company.scalping}</div>
         </div>
-        
+
         {/* 国内業者の場合、古いスワップポイント表示を削除 */}
         {/* {company.isDomestic && (
           <div className="grid grid-cols-2 gap-3">
@@ -440,26 +419,26 @@ const FXComparisonTable = () => {
             </div>
           </div>
         )} */}
-        
+
         <div>
           <p className="text-muted-foreground text-xs mb-1">評価</p>
           <RatingStars rating={company.rating} />
         </div>
-        
+
         {/* 特徴を追加 */}
         <div>
           <p className="text-muted-foreground text-xs mb-1">特徴</p>
           <p className="text-sm">{company.features}</p>
         </div>
-        
-        <Button 
-          size="sm" 
+
+        <Button
+          size="sm"
           className="w-full text-xs py-2 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white shadow-md hover:shadow-lg transition-all duration-300 justify-center"
           asChild
         >
-          <a 
-            href={company.name === "DMM FX" ? "https://h.accesstrade.net/sp/cc?rk=01004ixl00ol0m" : company.affiliateUrl} 
-            target="_blank" 
+          <a
+            href={company.name === "DMM FX" ? "https://h.accesstrade.net/sp/cc?rk=01004ixl00ol0m" : company.affiliateUrl}
+            target="_blank"
             rel={company.name === "DMM FX" ? "nofollow noopener" : "noopener noreferrer"}
             referrerPolicy={company.name === "DMM FX" ? "no-referrer-when-downgrade" : undefined}
           >
@@ -490,15 +469,15 @@ const FXComparisonTable = () => {
         </p>
         {/* 国内/国外切り替えボタン */}
         <div className="flex justify-center mt-8 space-x-4">
-          <Button 
-            variant={showDomestic ? "default" : "outline"} 
+          <Button
+            variant={showDomestic ? "default" : "outline"}
             onClick={() => setShowDomestic(true)}
             className="px-6 py-2"
           >
             国内FX業者
           </Button>
-          <Button 
-            variant={!showDomestic ? "default" : "outline"} 
+          <Button
+            variant={!showDomestic ? "default" : "outline"}
             onClick={() => setShowDomestic(false)}
             className="px-6 py-2"
           >
@@ -513,7 +492,7 @@ const FXComparisonTable = () => {
             <MobileCompanyCard key={company.name} company={company} />
           ))}
         </div>
-        
+
         {/* デスクトップ向け表示 - 768px以上で表示 */}
         <div className="hidden md:block overflow-x-auto -mx-4 sm:mx-0">
           <div className="inline-block min-w-full align-middle">
@@ -524,7 +503,7 @@ const FXComparisonTable = () => {
                     <TableHead className="min-w-[120px] text-xs sm:text-sm font-bold text-primary whitespace-nowrap">FX業者</TableHead>
                     <TableHead className="min-w-[180px] text-xs sm:text-sm font-bold text-primary whitespace-nowrap">スプレッド</TableHead>
                     <TableHead className="min-w-[80px] text-xs sm:text-sm font-bold text-primary whitespace-nowrap">最低取引単位</TableHead>
-                    <TableHead 
+                    <TableHead
                       className="cursor-pointer hover:bg-muted/50 min-w-[80px] text-xs sm:text-sm font-bold text-primary whitespace-nowrap"
                       onClick={() => handleSort("currencyPairs")}
                     >
@@ -542,50 +521,31 @@ const FXComparisonTable = () => {
                 </TableHeader>
                 <TableBody>
                   {sortedCompanies.map((company) => (
-                    <TableRow 
-                      key={company.name} 
+                    <TableRow
+                      key={company.name}
                       className="hover:bg-primary/5 transition-colors duration-200 border-b border-muted"
                     >
                       <TableCell className="font-semibold text-xs sm:text-sm py-3">
                         {company.name}
                         {/* 詳細情報ボタンを追加 */}
-                        <div className="mt-2">
-                          {company.name === "DMM FX" || company.name === "松井証券 MATSUI FX" || company.name === "SBI FXトレード" || company.name === "外為どっとコム（外貨ネクストネオ）" || company.name === "IG証券FX" || company.name === "楽天証券（楽天FX）" || company.name === "GMOクリック証券（FXネオ）" || company.name === "みんなのFX（トレイダーズ証券）" || company.name === "ヒロセ通商（LION FX）" || company.name === "GMO外貨（外貨ex）" || company.name === "三菱UFJ eスマート証券 FX" ? (
-                            <Button 
-                              size="sm" 
-                              className="w-full text-xs py-2 bg-blue-100 text-primary hover:bg-blue-200 shadow-md hover:shadow-lg transition-all duration-300 justify-between"
-                              asChild
-                            >
-                              <Link to={
-                                company.name === "DMM FX" ? "/fx/dmm-fx" : 
-                                company.name === "松井証券 MATSUI FX" ? "/fx/matsui-fx" : 
-                                company.name === "SBI FXトレード" ? "/fx/sbi-fx" : 
-                                company.name === "外為どっとコム（外貨ネクストネオ）" ? "/fx/gaitame" : 
-                                company.name === "IG証券FX" ? "/fx/ig" : 
-                                company.name === "楽天証券（楽天FX）" ? "/fx/rakuten" : 
-                                company.name === "GMOクリック証券（FXネオ）" ? "/fx/gmo-click" : 
-                                company.name === "みんなのFX（トレイダーズ証券）" ? "/fx/min-fx" : 
-                                company.name === "ヒロセ通商（LION FX）" ? "/fx/hirose" : 
-                                company.name === "GMO外貨（外貨ex）" ? "/fx/gmo-gaika" : 
-                                "/fx/mufg-e-smart"
-                              }>
-                                詳細情報
-                                <ArrowRight className="h-4 w-4" />
-                              </Link>
-                            </Button>
-                          ) : (
-                            <Button 
-                              size="sm" 
-                              className="w-full text-xs py-2 bg-blue-100 text-primary hover:bg-blue-200 shadow-md hover:shadow-lg transition-all duration-300 justify-between opacity-50 cursor-not-allowed"
-                              disabled
+                        <div className="mt-2 text-center">
+                          <Button
+                            size="sm"
+                            className="w-full text-xs py-2 bg-blue-100 text-primary hover:bg-blue-200 shadow-md hover:shadow-lg transition-all duration-300 justify-between"
+                            asChild
+                          >
+                            <a
+                              href={company.affiliateUrl || "#"}
+                              target="_blank"
+                              rel="noopener noreferrer"
                             >
                               詳細情報
                               <ArrowRight className="h-4 w-4" />
-                            </Button>
-                          )}
+                            </a>
+                          </Button>
                         </div>
                       </TableCell>
-                      <TableCell className="text-xs sm:text-sm py-3 whitespace-pre-line" dangerouslySetInnerHTML={{ 
+                      <TableCell className="text-xs sm:text-sm py-3 whitespace-pre-line" dangerouslySetInnerHTML={{
                         __html: company.spread
                           .replace(/([\d.]+)(pips)/g, '<span class="font-semibold">$1</span>$2')
                           .replace(/([\d.]+)(銭)/g, '<span class="font-semibold">$1</span>$2')
@@ -610,26 +570,26 @@ const FXComparisonTable = () => {
                               '楽天ポイントが貯まる',
                               'Pontaポイント付与', '株式との連携'
                             ];
-                            
+
                             // 業界標準クラスのキーワードを定義
                             const industryStandardKeywords = ['最大', '最多', '最狭', '高機能', '高性能', '業界', 'クラス'];
-                            
+
                             // マーカーを適用する特徴のリスト
                             const highlightedFeatures = [];
-                            
+
                             // 既存の重要な特徴にマーカーをつける（業界標準クラスを除く）
                             features.forEach((feature, index) => {
                               const isIndustryStandard = industryStandardKeywords.some(keyword => feature.includes(keyword));
                               const hasImportantKeyword = (
-                                feature.includes('最大') || feature.includes('最多') || feature.includes('最狭') || 
-                                feature.includes('高機能') || feature.includes('高性能') || feature.includes('業界') || 
+                                feature.includes('最大') || feature.includes('最多') || feature.includes('最狭') ||
+                                feature.includes('高機能') || feature.includes('高性能') || feature.includes('業界') ||
                                 feature.includes('クラス')
                               );
                               const shouldHighlightExisting = hasImportantKeyword && !isIndustryStandard;
-                              
+
                               // 指定された特徴にマーカーをつける
                               const shouldHighlightAdditional = additionalHighlightedKeywords.some(keyword => feature.includes(keyword));
-                              
+
                               // どちらかの条件に該当する場合にマーカーをつける
                               if (shouldHighlightExisting || shouldHighlightAdditional) {
                                 highlightedFeatures.push({ index, feature, highlighted: true });
@@ -637,26 +597,26 @@ const FXComparisonTable = () => {
                                 highlightedFeatures.push({ index, feature, highlighted: false });
                               }
                             });
-                            
+
                             // 最低1つ〜2つまで重要ポイントにマーカーをつける
                             let highlightCount = 0;
                             const maxHighlights = 2;
-                            
+
                             return features.map((feature, index) => {
                               let shouldHighlight = false;
-                              
+
                               // 既存のロジックでマーカーをつけるべき特徴
                               const isIndustryStandard = industryStandardKeywords.some(keyword => feature.includes(keyword));
                               const hasImportantKeyword = (
-                                feature.includes('最大') || feature.includes('最多') || feature.includes('最狭') || 
-                                feature.includes('高機能') || feature.includes('高性能') || feature.includes('業界') || 
+                                feature.includes('最大') || feature.includes('最多') || feature.includes('最狭') ||
+                                feature.includes('高機能') || feature.includes('高性能') || feature.includes('業界') ||
                                 feature.includes('クラス')
                               );
                               const shouldHighlightExisting = hasImportantKeyword && !isIndustryStandard;
-                              
+
                               // 指定された特徴にマーカーをつける
                               const shouldHighlightAdditional = additionalHighlightedKeywords.some(keyword => feature.includes(keyword));
-                              
+
                               // どちらかの条件に該当する場合にマーカーをつける
                               if (shouldHighlightExisting || shouldHighlightAdditional) {
                                 shouldHighlight = true;
@@ -666,24 +626,24 @@ const FXComparisonTable = () => {
                                 shouldHighlight = true;
                                 highlightCount++;
                               }
-                              
+
                               return (
                                 <div key={index} className="flex items-start">
-                                  <span className={shouldHighlight || (index > 0 && features[index-1] && (() => {
+                                  <span className={shouldHighlight || (index > 0 && features[index - 1] && (() => {
                                     // 前の要素がハイライトされているかチェック
-                                    const prevFeature = features[index-1];
+                                    const prevFeature = features[index - 1];
                                     const isPrevIndustryStandard = industryStandardKeywords.some(keyword => prevFeature.includes(keyword));
                                     const hasPrevImportantKeyword = (
-                                      prevFeature.includes('最大') || prevFeature.includes('最多') || prevFeature.includes('最狭') || 
-                                      prevFeature.includes('高機能') || prevFeature.includes('高性能') || prevFeature.includes('業界') || 
+                                      prevFeature.includes('最大') || prevFeature.includes('最多') || prevFeature.includes('最狭') ||
+                                      prevFeature.includes('高機能') || prevFeature.includes('高性能') || prevFeature.includes('業界') ||
                                       prevFeature.includes('クラス')
                                     );
                                     const shouldHighlightPrevExisting = hasPrevImportantKeyword && !isPrevIndustryStandard;
                                     const shouldHighlightPrevAdditional = additionalHighlightedKeywords.some(keyword => prevFeature.includes(keyword));
                                     return shouldHighlightPrevExisting || shouldHighlightPrevAdditional;
                                   })()) ? "bg-yellow-200 dark:bg-yellow-600 px-1 mr-1" : "mr-1"}>
-                                    {shouldHighlight ? 
-                                      <span className="bg-yellow-200 dark:bg-yellow-600 px-1">{feature}</span> : 
+                                    {shouldHighlight ?
+                                      <span className="bg-yellow-200 dark:bg-yellow-600 px-1">{feature}</span> :
                                       feature
                                     }
                                   </span>
@@ -694,14 +654,14 @@ const FXComparisonTable = () => {
                         </div>
                       </TableCell>
                       <TableCell className="text-center py-3">
-                        <Button 
-                          size="sm" 
+                        <Button
+                          size="sm"
                           className="whitespace-nowrap text-xs px-3 py-2 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white shadow-md hover:shadow-lg transition-all duration-300 min-w-[130px]"
                           asChild
                         >
-                          <a 
-                            href={company.name === "DMM FX" ? "https://h.accesstrade.net/sp/cc?rk=0100kz3n00ol0m" : company.affiliateUrl} 
-                            target="_blank" 
+                          <a
+                            href={company.name === "DMM FX" ? "https://h.accesstrade.net/sp/cc?rk=0100kz3n00ol0m" : company.affiliateUrl}
+                            target="_blank"
                             rel={company.name === "DMM FX" ? "nofollow noopener" : "noopener noreferrer"}
                             referrerPolicy={company.name === "DMM FX" ? "no-referrer-when-downgrade" : undefined}
                           >

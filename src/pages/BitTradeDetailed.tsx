@@ -88,13 +88,13 @@ const BitTradeDetailed = () => {
         <title>BitTrade詳細 | 暗号資産取引所比較 | 投資総合ナビ</title>
         <meta name="description" content="BitTradeの詳細情報。業界標準のセキュリティ、100%コールドウォレット管理、取扱仮想通貨数が国内トップクラスを提供。" />
         <meta name="keywords" content="BitTrade, 暗号資産取引所, 暗号資産比較, 手数料, 取引ツール" />
-        <link rel="canonical" href="https://www.toushi-navi.com/crypto/bittrade" />
+        <link rel="canonical" href="https://www.invest-navi.com/crypto/bittrade" />
         
         {/* Open Graph */}
         <meta property="og:title" content="BitTrade詳細 | 暗号資産取引所比較 | 投資総合ナビ" />
         <meta property="og:description" content="BitTradeの詳細情報。業界標準のセキュリティ、100%コールドウォレット管理、取扱仮想通貨数が国内トップクラスを提供。" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://www.toushi-navi.com/crypto/bittrade" />
+        <meta property="og:url" content="https://www.invest-navi.com/crypto/bittrade" />
         <meta property="og:site_name" content="投資総合ナビ" />
         <meta property="og:locale" content="ja_JP" />
         

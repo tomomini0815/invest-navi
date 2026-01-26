@@ -75,13 +75,13 @@ const LiquidByQuoineDetailed = () => {
         <title>liquid by QUOINE詳細 | 暗号資産取引所比較 | 投資総合ナビ</title>
         <meta name="description" content="liquid by QUOINEの詳細情報。国内トップクラスのセキュリティ、マイナーな暗号資産も取扱、国内最大級の取引高を提供。" />
         <meta name="keywords" content="liquid by QUOINE, 暗号資産取引所, 暗号資産比較, 手数料, 取引ツール" />
-        <link rel="canonical" href="https://www.toushi-navi.com/crypto/liquid-by-quoine" />
+        <link rel="canonical" href="https://www.invest-navi.com/crypto/liquid-by-quoine" />
         
         {/* Open Graph */}
         <meta property="og:title" content="liquid by QUOINE詳細 | 暗号資産取引所比較 | 投資総合ナビ" />
         <meta property="og:description" content="liquid by QUOINEの詳細情報。国内トップクラスのセキュリティ、マイナーな暗号資産も取扱、国内最大級の取引高を提供。" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://www.toushi-navi.com/crypto/liquid-by-quoine" />
+        <meta property="og:url" content="https://www.invest-navi.com/crypto/liquid-by-quoine" />
         <meta property="og:site_name" content="投資総合ナビ" />
         <meta property="og:locale" content="ja_JP" />
         
