@@ -208,9 +208,12 @@ const SecuritiesComparison = () => {
             heroSection={<SecuritiesHeroSection />}
             rankingList={securitiesRankingList}
             renderRankingCard={(item, index) => {
-                // Create rich accordion data based on specific company
-                let accordionData;
+                // Since we removed internal detailed pages, ensure all navigation goes to affiliate links
                 const name = item.name;
+
+                // Keep the accordion logic but ensure detailUrl is correct
+                const detailUrl = item.affiliateUrl;
+                let accordionData;
 
                 if (name.includes("SBI証券")) {
                     accordionData = {

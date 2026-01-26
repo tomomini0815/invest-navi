@@ -27,7 +27,7 @@ export const fxRankingList = [
     ],
     campaignText: "【期間限定】最大550,000円キャッシュバックキャンペーン実施中！",
     affiliateUrl: "https://www.click-sec.com/corp/guide/fxneo/",
-    detailUrl: "/fx/gmo-click",
+    detailUrl: "https://www.click-sec.com/corp/guide/fxneo/",
     badgeText: "総合力No.1！迷ったらコレ"
   },
   {
@@ -69,7 +69,7 @@ export const fxRankingList = [
     ],
     campaignText: "最大100万円キャッシュバック！",
     affiliateUrl: "https://www.sbifxt.co.jp/",
-    detailUrl: "/fx/sbi-fx",
+    detailUrl: "https://www.sbifxt.co.jp/",
     badgeText: "少額取引・積立なら最強"
   },
   {
@@ -270,7 +270,7 @@ const FXComparison = () => {
       id: "gmo",
       name: "GMOクリック証券",
       logoText: "GMOクリック証券",
-      detailUrl: "/fx/gmo-click",
+      detailUrl: "https://www.click-sec.com/corp/guide/fxneo/",
       affiliateUrl: "https://www.click-sec.com/corp/guide/fxneo/",
       overallRating: 5,
       overallRatingText: "経験者向け",
@@ -364,7 +364,7 @@ const FXComparison = () => {
       id: "sbi",
       name: "SBI FXトレード",
       logoText: "SBI FXトレード",
-      detailUrl: "/fx/sbi-fx",
+      detailUrl: "https://www.sbifxt.co.jp/",
       affiliateUrl: "https://www.sbifxt.co.jp/",
       overallRating: 4,
       overallRatingText: "積立向け",

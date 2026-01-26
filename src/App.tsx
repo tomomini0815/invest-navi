@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Index from "./pages/Index";
-import Index2 from "./pages/Index2";
 import Comparison from "./pages/Comparison";
 import CryptoComparison from "./pages/CryptoComparison";
 import FXComparison from "./pages/FXComparison";
@@ -45,30 +44,15 @@ import ArticleDetail from "./pages/ArticleDetail";
 // Sitemapページのインポート
 import Sitemap from "./pages/Sitemap";
 import FinancialGuide from "./pages/FinancialGuide";
-// DMM FX詳細ページのインポート
-import DmmFxDetail from "./pages/DmmFxDetailed";
 // DMM株詳細ページのインポート
 import DmmStockDetail from "./pages/DmmStockDetail";
-import MatsuiFxDetail from "./pages/MatsuiFxDetailed";
-// 新しいFX業者詳細ページのインポート
-import SbiFxDetailed from "./pages/SbiFxDetailed";
-import GaitameFxDetailed from "./pages/GaitameFxDetailed";
-import IgFxDetailed from "./pages/IgFxDetailed";
-import RakutenFxDetailed from "./pages/RakutenFxDetailed";
 import GmoClickFxDetailed from "./pages/GmoClickFxDetailed";
 import MinFxDetailed from "./pages/MinFxDetailed";
 import HiroseFxDetailed from "./pages/HiroseFxDetailed";
 import GmoGaikaDetailed from "./pages/GmoGaikaDetailed";
 import MufgESmartFxDetailed from "./pages/MufgESmartFxDetailed";
-// 新しい証券会社詳細ページのインポート
-import { default as SbiSecuritiesDetail } from "./pages/SbiSecuritiesDetail";
-import { default as RakutenSecuritiesDetail } from "./pages/RakutenSecuritiesDetail";
-import { default as MonexSecuritiesDetail } from "./pages/MonexSecuritiesDetail";
 import IgSecuritiesDetail from "./pages/IgSecuritiesDetail";
-import MatsuiSecuritiesDetail from "./pages/MatsuiSecuritiesDetail";
-import DmmSecuritiesDetail from "./pages/DmmSecuritiesDetail";
 import AuKabucomSecuritiesDetail from "./pages/AuKabucomSecuritiesDetail";
-import GmoClickSecuritiesDetail from "./pages/GmoClickSecuritiesDetail";
 // 新しい証券会社詳細ページ（プロフェッショナル版）のインポート
 import { default as SbiSecuritiesDetailPro } from "./pages/SbiSecuritiesDetailPro";
 import { default as RakutenSecuritiesDetailPro } from "./pages/RakutenSecuritiesDetailPro";
@@ -127,7 +111,6 @@ const App = () => (
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/top2" element={<Index2 />} />
           <Route path="/basics" element={<Basics />} />
           <Route path="/stocks" element={<Stocks />} />
           <Route path="/nisa" element={<Nisa />} />
@@ -137,29 +120,15 @@ const App = () => (
           <Route path="/comparison" element={<Comparison />} />
           <Route path="/crypto-comparison" element={<CryptoComparison />} />
           <Route path="/fx-comparison" element={<FXComparison />} />
-          <Route path="/securities-comparison" element={<SecuritiesComparison />} />
-          <Route path="/fx/dmm-fx" element={<DmmFxDetail />} />
           <Route path="/stocks/dmm-stock" element={<DmmStockDetail />} />
-          <Route path="/fx/matsui-fx" element={<MatsuiFxDetail />} />
-          {/* FX業者詳細ページのルート */}
-          <Route path="/fx/sbi-fx" element={<SbiFxDetailed />} />
-          <Route path="/fx/gaitame" element={<GaitameFxDetailed />} />
-          <Route path="/fx/ig" element={<IgFxDetailed />} />
-          <Route path="/fx/rakuten" element={<RakutenFxDetailed />} />
           <Route path="/fx/gmo-click" element={<GmoClickFxDetailed />} />
           <Route path="/fx/min-fx" element={<MinFxDetailed />} />
           <Route path="/fx/hirose" element={<HiroseFxDetailed />} />
           <Route path="/fx/gmo-gaika" element={<GmoGaikaDetailed />} />
           <Route path="/fx/mufg-e-smart" element={<MufgESmartFxDetailed />} />
-          {/* 証券会社詳細ページのルート */}
-          <Route path="/securities/sbi" element={<SbiSecuritiesDetail />} />
-          <Route path="/securities/rakuten" element={<RakutenSecuritiesDetail />} />
-          <Route path="/securities/monex" element={<MonexSecuritiesDetail />} />
+          <Route path="/securities-comparison" element={<SecuritiesComparison />} />
           <Route path="/securities/ig" element={<IgSecuritiesDetail />} />
-          <Route path="/securities/matsui" element={<MatsuiSecuritiesDetail />} />
-          <Route path="/securities/dmm" element={<DmmSecuritiesDetail />} />
           <Route path="/securities/au-kabucom" element={<AuKabucomSecuritiesDetail />} />
-          <Route path="/securities/gmo-click" element={<GmoClickSecuritiesDetail />} />
           {/* 新しい証券会社詳細ページ（プロフェッショナル版）のルート */}
           <Route path="/securities/sbi-pro" element={<SbiSecuritiesDetailPro />} />
           <Route path="/securities/rakuten-pro" element={<RakutenSecuritiesDetailPro />} />

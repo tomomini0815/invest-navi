@@ -9,7 +9,6 @@ const Sitemap = () => {
       icon: Home,
       items: [
         { name: "ホーム", href: "/" },
-        { name: "ホーム (Version 2)", href: "/top2" },
       ]
     },
     {
@@ -76,24 +75,19 @@ const Sitemap = () => {
       category: "証券会社詳細",
       icon: FileText,
       items: [
-        { name: "SBI証券 詳細", href: "/securities/sbi" },
-        { name: "楽天証券 詳細", href: "/securities/rakuten" },
-        { name: "マネックス証券 詳細", href: "/securities/monex" },
-        { name: "GMOクリック証券 詳細", href: "/securities/gmo-click" },
-        { name: "松井証券 詳細", href: "/securities/matsui" },
-        { name: "DMM株 詳細", href: "/securities/dmm" },
+        { name: "DMM株 詳細", href: "https://h.accesstrade.net/sp/cc?rk=0100mjw300ol0m" },
       ]
     },
     {
       category: "FX業者詳細",
       icon: LineChart,
       items: [
-        { name: "DMM FX 詳細", href: "/fx/dmm-fx" },
-        { name: "SBI FXトレード 詳細", href: "/fx/sbi-fx" },
-        { name: "外為どっとコム 詳細", href: "/fx/gaitame" },
-        { name: "IG証券 FX 詳細", href: "/fx/ig" },
-        { name: "楽天FX 詳細", href: "/fx/rakuten" },
-        { name: "松井証券 FX 詳細", href: "/fx/matsui-fx" },
+        { name: "DMM FX 詳細", href: "https://h.accesstrade.net/sp/cc?rk=01004jqz00ol0m" },
+        { name: "SBI FXトレード 詳細", href: "https://www.sbifxt.co.jp/" },
+        { name: "外為どっとコム 詳細", href: "https://www.gaitame.com/" },
+        { name: "IG証券 FX 詳細", href: "https://www.ig.com/jp" },
+        { name: "楽天FX 詳細", href: "https://www.rakuten-sec.co.jp/" },
+        { name: "松井証券 FX 詳細", href: "https://h.accesstrade.net/sp/cc?rk=0100ohhx00ol0m" },
       ]
     },
     {
