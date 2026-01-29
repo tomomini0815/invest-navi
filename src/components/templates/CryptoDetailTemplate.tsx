@@ -83,7 +83,7 @@ const CryptoDetailTemplate = ({ company }: CryptoDetailTemplateProps) => {
                         </div>
 
                         <div className="mt-8">
-                            <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-lg px-8 py-6 rounded-full shadow-[0_0_20px_rgba(234,179,8,0.4)] animate-pulse"
+                            <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-sm sm:text-base md:text-lg whitespace-nowrap px-8 py-6 rounded-full shadow-[0_0_20px_rgba(234,179,8,0.4)] animate-pulse"
                                 onClick={() => window.open(affiliateUrl, '_blank')}>
                                 公式サイトを見る <ExternalLink className="ml-2 w-5 h-5" />
                             </Button>
@@ -197,7 +197,7 @@ const CryptoDetailTemplate = ({ company }: CryptoDetailTemplateProps) => {
                             </div>
 
                             <div className="mt-12 text-center">
-                                <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold h-14 px-12 text-lg rounded-full shadow-lg transition-transform hover:scale-105"
+                                <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold h-14 px-12 text-sm sm:text-base md:text-lg whitespace-nowrap rounded-full shadow-lg transition-transform hover:scale-105"
                                     onClick={() => window.open(affiliateUrl, '_blank')}>
                                     口座開設を申し込む <ExternalLink className="ml-2 w-5 h-5" />
                                 </Button>

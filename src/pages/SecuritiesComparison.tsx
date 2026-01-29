@@ -21,7 +21,21 @@ export const securitiesRankingList: Company[] = [
             { label: "ツール", value: "HYPER SBI 2" }
         ],
         badgeText: "総合力No.1！迷ったらコレ",
-        affiliateUrl: "https://www.sbisec.co.jp/"
+        affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100m8v500ol0m",
+        customAffiliateButton: (
+            <div className="relative w-full">
+                <a
+                    href="https://h.accesstrade.net/sp/cc?rk=0100m8v500ol0m"
+                    rel="nofollow"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
+                    target="_blank"
+                >
+                    公式サイトはこちら <ExternalLink className="ml-2 w-4 h-4" />
+                    <img src="https://h.accesstrade.net/sp/rr?rk=0100m8v500ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
+                </a>
+            </div>
+        )
     },
     {
         id: "rakuten",
@@ -37,7 +51,21 @@ export const securitiesRankingList: Company[] = [
             { label: "ツール", value: "MARKET SPEED II" }
         ],
         badgeText: "ポイント投資ならコレ！楽天経済圏",
-        affiliateUrl: "https://www.rakuten-sec.co.jp/"
+        affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100p6nz00ol0m",
+        customAffiliateButton: (
+            <div className="relative w-full">
+                <a
+                    href="https://h.accesstrade.net/sp/cc?rk=0100p6nz00ol0m"
+                    rel="nofollow"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
+                    target="_blank"
+                >
+                    公式サイトはこちら <ExternalLink className="ml-2 w-4 h-4" />
+                    <img src="https://h.accesstrade.net/sp/rr?rk=0100p6nz00ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
+                </a>
+            </div>
+        )
     },
     {
         id: "monex",
@@ -53,7 +81,7 @@ export const securitiesRankingList: Company[] = [
             { label: "ツール", value: "銘柄スカウター", isHighlight: true }
         ],
         badgeText: "外国株・IPO投資に強い",
-        affiliateUrl: "https://www.monex.co.jp/",
+        affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100q1bu00ol0m",
         customLogo: (
             <a href="https://h.accesstrade.net/sp/cc?rk=0100n99e00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
                 <img src="https://h.accesstrade.net/sp/rr?rk=0100n99e00ol0m" alt="株・投資信託ならネット証券のマネックス" style={{ border: 0 }} />
@@ -65,7 +93,7 @@ export const securitiesRankingList: Company[] = [
                     href="https://h.accesstrade.net/sp/cc?rk=0100q1bu00ol0m"
                     rel="nofollow"
                     referrerPolicy="no-referrer-when-downgrade"
-                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-sm shadow-sm transition-colors flex items-center justify-center rounded-md"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
                     target="_blank"
                 >
                     公式サイト <ExternalLink className="ml-2 w-4 h-4" />
@@ -93,7 +121,21 @@ export const securitiesRankingList: Company[] = [
             { label: "ツール", value: "ネットストックHS" }
         ],
         badgeText: "老舗の安心感・サポート充実",
-        affiliateUrl: "https://www.matsui.co.jp/"
+        affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100ojjt00ol0m",
+        customAffiliateButton: (
+            <div className="relative w-full">
+                <a
+                    href="https://h.accesstrade.net/sp/cc?rk=0100ojjt00ol0m"
+                    rel="nofollow"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
+                    target="_blank"
+                >
+                    公式サイトはこちら <ExternalLink className="ml-2 w-4 h-4" />
+                    <img src="https://h.accesstrade.net/sp/rr?rk=0100ojjt00ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
+                </a>
+            </div>
+        )
     },
     {
         id: "au",
@@ -109,7 +151,21 @@ export const securitiesRankingList: Company[] = [
             { label: "ツール", value: "kabuステーション" }
         ],
         badgeText: "三菱UFJグループの安心感",
-        affiliateUrl: "https://kabu.com/"
+        affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100p6o200ol0m",
+        customAffiliateButton: (
+            <div className="relative w-full">
+                <a
+                    href="https://h.accesstrade.net/sp/cc?rk=0100p6o200ol0m"
+                    rel="nofollow"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
+                    target="_blank"
+                >
+                    公式サイトはこちら <ExternalLink className="ml-2 w-4 h-4" />
+                    <img src="https://h.accesstrade.net/sp/rr?rk=0100p6o200ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
+                </a>
+            </div>
+        )
     },
     {
         id: "gmo",
@@ -554,7 +610,7 @@ const SecuritiesComparison = () => {
                     id: item.name,
                     name: item.name,
                     logoText: item.name,
-                    detailUrl: "#",
+                    detailUrl: item.affiliateUrl,
                     affiliateUrl: item.affiliateUrl,
                     // Minimal fillers to satisfy types if needed, simplified because we rely on accordionData
                     features: item.points.join(" / "),
@@ -566,6 +622,7 @@ const SecuritiesComparison = () => {
 
                 let customLogo = item.customLogo;
                 let promotionBanner = item.promotionBanner;
+                let customAffiliateButton = item.customAffiliateButton;
 
                 if (item.id === "dmm") {
                     promotionBanner = (
@@ -582,12 +639,18 @@ const SecuritiesComparison = () => {
                         id={item.id}
                         rating={4.5} // Placeholder
                         affiliateUrl={item.affiliateUrl}
-                        detailUrl={item.affiliateUrl} // Direct to affiliate for now or generic detail
+                        detailUrl={
+                            item.id === "sbi" ? "/securities/sbi-pro" :
+                                item.id === "rakuten" ? "/securities/rakuten-pro" :
+                                    item.id === "monex" ? "/securities/monex-pro" :
+                                        item.affiliateUrl
+                        } // Use internal pro pages for top 3, otherwise affiliate link
                         detailedSpecs={mockDetailedSpecs}
                         accordionData={accordionData}
                         rank={index + 1}
                         customLogo={customLogo}
                         promotionBanner={promotionBanner}
+                        customAffiliateButton={customAffiliateButton}
                     />
                 );
             }}

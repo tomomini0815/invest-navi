@@ -5,6 +5,7 @@ import SurveyDiagnostic, { Company } from "@/components/features/SurveyDiagnosti
 import RankingCardV2 from "@/components/features/RankingCardV2";
 import ComparisonTable from "@/components/features/ComparisonTable";
 import Footer from "@/components/layout/Footer";
+import { ExternalLink } from "lucide-react";
 import { ComparisonPageTemplate } from "@/components/templates/ComparisonPageTemplate";
 import { useState } from "react";
 
@@ -26,9 +27,23 @@ export const fxRankingList = [
       { label: "最小取引単位", value: "1,000通貨" },
     ],
     campaignText: "【期間限定】最大550,000円キャッシュバックキャンペーン実施中！",
-    affiliateUrl: "https://www.click-sec.com/corp/guide/fxneo/",
+    affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100m8v500ol0m", // GMO typically 
     detailUrl: "https://www.click-sec.com/corp/guide/fxneo/",
-    badgeText: "総合力No.1！迷ったらコレ"
+    badgeText: "総合力No.1！迷ったらコレ",
+    customAffiliateButton: (
+      <div className="relative w-full">
+        <a
+          href="https://h.accesstrade.net/sp/cc?rk=0100m8v500ol0m"
+          rel="nofollow"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
+          target="_blank"
+        >
+          公式サイトはこちら <ExternalLink className="ml-2 w-4 h-4" />
+          <img src="https://h.accesstrade.net/sp/rr?rk=0100m8v500ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
+        </a>
+      </div>
+    )
   },
   {
     id: "dmm",
@@ -47,9 +62,22 @@ export const fxRankingList = [
       { label: "最小取引単位", value: "10,000通貨" },
     ],
     campaignText: "最大300,000円キャッシュバック！",
+    badgeText: "安心の国内口座数No.1",
     affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=01004jqz00ol0m",
-    detailUrl: "https://h.accesstrade.net/sp/cc?rk=01004jqz00ol0m",
-    badgeText: "安心の国内口座数No.1"
+    customAffiliateButton: (
+      <div className="relative w-full">
+        <a
+          href="https://h.accesstrade.net/sp/cc?rk=01004jqz00ol0m"
+          rel="nofollow"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
+          target="_blank"
+        >
+          公式サイトはこちら <ExternalLink className="ml-2 w-4 h-4" />
+          <img src="https://h.accesstrade.net/sp/rr?rk=01004jqz00ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
+        </a>
+      </div>
+    )
   },
   {
     id: "sbi",
@@ -70,7 +98,14 @@ export const fxRankingList = [
     campaignText: "最大100万円キャッシュバック！",
     affiliateUrl: "https://www.sbifxt.co.jp/",
     detailUrl: "https://www.sbifxt.co.jp/",
-    badgeText: "少額取引・積立なら最強"
+    badgeText: "少額取引・積立なら最強",
+    customAffiliateButton: (
+      <div className="relative w-full">
+        <a href="https://www.sbifxt.co.jp/" target="_blank" className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md">
+          公式サイトはこちら <ExternalLink className="ml-2 w-4 h-4" />
+        </a>
+      </div>
+    )
   },
   {
     id: "gaitame",
@@ -89,9 +124,16 @@ export const fxRankingList = [
       { label: "最小取引単位", value: "1,000通貨" },
     ],
     campaignText: "最大100万円キャッシュバックキャンペーン",
-    affiliateUrl: "#",
-    detailUrl: "#",
-    badgeText: "情報力・学びやすさNo.1"
+    affiliateUrl: "https://www.gaitame.com/",
+    detailUrl: "https://www.gaitame.com/",
+    badgeText: "情報力・学びやすさNo.1",
+    customAffiliateButton: (
+      <div className="relative w-full">
+        <a href="https://www.gaitame.com/" target="_blank" className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md">
+          公式サイトはこちら <ExternalLink className="ml-2 w-4 h-4" />
+        </a>
+      </div>
+    )
   },
   {
     id: "matsui",
@@ -131,9 +173,22 @@ export const fxRankingList = [
       { label: "最小取引単位", value: "1,000通貨" },
     ],
     campaignText: "最大100万円+豪華食品プレゼント！",
-    affiliateUrl: "#",
-    detailUrl: "#",
-    badgeText: "食品CP＆スキャル公認"
+    affiliateUrl: "https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T",
+    detailUrl: "https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T",
+    badgeText: "食品CP＆スキャル公認",
+    customAffiliateButton: (
+      <div className="relative w-full">
+        <a
+          href="https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T"
+          rel="nofollow"
+          target="_blank"
+          className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
+        >
+          公式サイトはこちら <ExternalLink className="ml-2 w-4 h-4" />
+          <img src="https://www18.a8.net/0.gif?a8mat=45I5TK+6AU69E+1FOU+6BU5T" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
+        </a>
+      </div>
+    )
   },
   {
     id: "line",
@@ -152,8 +207,8 @@ export const fxRankingList = [
       { label: "最小取引単位", value: "1,000通貨" },
     ],
     campaignText: "口座開設+取引で最大305,000円！",
-    affiliateUrl: "#",
-    detailUrl: "#",
+    affiliateUrl: "https://line-fx.com/",
+    detailUrl: "https://line-fx.com/",
     badgeText: "スマホ通知・手軽さNo.1"
   },
   {
@@ -173,14 +228,14 @@ export const fxRankingList = [
       { label: "最小取引単位", value: "1万通貨" },
     ],
     campaignText: "最大50,000円キャッシュバック",
-    affiliateUrl: "#",
-    detailUrl: "#",
+    affiliateUrl: "https://www.ig.com/jp",
+    detailUrl: "https://www.ig.com/jp",
     badgeText: "通貨ペア数No.1"
   },
   {
     id: "minna",
     rank: 9,
-    name: "トレイダーズ証券 みんなのFX",
+    name: "みんなのFX",
     rating: 4.1,
     points: [
       "高水準のスワップポイント",
@@ -194,14 +249,14 @@ export const fxRankingList = [
       { label: "最小取引単位", value: "1,000通貨" },
     ],
     campaignText: "最大100万円キャッシュバック！",
-    affiliateUrl: "#",
-    detailUrl: "#",
+    affiliateUrl: "https://min-fx.jp/",
+    detailUrl: "https://min-fx.jp/",
     badgeText: "TradingView x 高スワップ"
   },
   {
     id: "light",
     rank: 10,
-    name: "トレイダーズ証券 LIGHT FX",
+    name: "LIGHT FX",
     rating: 4.0,
     points: [
       "スワップ運用に特化したLIGHTペア",
@@ -215,8 +270,8 @@ export const fxRankingList = [
       { label: "最小取引単位", value: "1,000通貨" },
     ],
     campaignText: "最大100万円キャッシュバック",
-    affiliateUrl: "#",
-    detailUrl: "#",
+    affiliateUrl: "https://lightfx.jp/",
+    detailUrl: "https://lightfx.jp/",
     badgeText: "スワップ運用ならココ"
   },
   {
@@ -236,8 +291,8 @@ export const fxRankingList = [
       { label: "最小取引単位", value: "1,000通貨" },
     ],
     campaignText: "新規口座開設で最大70,000円",
-    affiliateUrl: "#",
-    detailUrl: "#",
+    affiliateUrl: "https://www.invast.jp/triauto/",
+    detailUrl: "https://www.invast.jp/triauto/",
     badgeText: "選ぶだけの自動売買"
   },
   {
@@ -257,8 +312,8 @@ export const fxRankingList = [
       { label: "最小取引単位", value: "1,000通貨" },
     ],
     campaignText: "最大100万円キャッシュバック",
-    affiliateUrl: "#",
-    detailUrl: "#",
+    affiliateUrl: "https://kabu.com/",
+    detailUrl: "https://kabu.com/",
     badgeText: "メガバンクグループの安心感"
   }
 ];
@@ -410,7 +465,7 @@ const FXComparison = () => {
       id: "gaitame",
       name: "外為どっとコム",
       logoText: "外為どっとコム",
-      detailUrl: "#",
+      detailUrl: "https://www.gaitame.com/",
       affiliateUrl: "https://www.gaitame.com/",
       overallRating: 4,
       overallRatingText: "情報豊富",
@@ -502,7 +557,7 @@ const FXComparison = () => {
       id: "hirose",
       name: "ヒロセ通商",
       logoText: "ヒロセ通商",
-      detailUrl: "#",
+      detailUrl: "https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T",
       customLogo: (
         <div className="w-full h-full flex items-center justify-center relative">
           <a href="https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T" rel="nofollow" target="_blank" className="w-full h-full flex items-center justify-center">
@@ -521,13 +576,13 @@ const FXComparison = () => {
       ),
       customAffiliateButton: (
         <div className="relative">
-          <a href="https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T" rel="nofollow" target="_blank" className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-sm shadow-sm transition-colors flex items-center justify-center rounded-md">
+          <a href="https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T" rel="nofollow" target="_blank" className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md">
             公式サイト
           </a>
           <img style={{ border: 'none', position: 'absolute', width: 1, height: 1, opacity: 0 }} src="https://www18.a8.net/0.gif?a8mat=45I5TK+6AU69E+1FOU+6BU5T" alt="" />
         </div>
       ),
-      affiliateUrl: "https://hirose-fx.co.jp/",
+      affiliateUrl: "https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T",
       overallRating: 4,
       overallRatingText: "スキャル",
       transactionUnit: 1000,
@@ -572,7 +627,7 @@ const FXComparison = () => {
       id: "line",
       name: "LINE FX",
       logoText: "LINE FX",
-      detailUrl: "#",
+      detailUrl: "https://line-fx.com/",
       affiliateUrl: "https://line-fx.com/",
       overallRating: 3,
       overallRatingText: "普通",
@@ -618,7 +673,7 @@ const FXComparison = () => {
       id: "ig",
       name: "IG証券",
       logoText: "IG証券",
-      detailUrl: "#",
+      detailUrl: "https://www.ig.com/jp",
       affiliateUrl: "https://www.ig.com/jp",
       overallRating: 4,
       overallRatingText: "プロ向け",
@@ -664,7 +719,7 @@ const FXComparison = () => {
       id: "minna",
       name: "みんなのFX",
       logoText: "みんなのFX",
-      detailUrl: "#",
+      detailUrl: "https://min-fx.jp/",
       affiliateUrl: "https://min-fx.jp/",
       overallRating: 4,
       overallRatingText: "普通",
@@ -676,13 +731,13 @@ const FXComparison = () => {
       cashback: 1000000,
       cashbackText: "最大100万",
       tableFeatures: "約定力99.9%の実績で注文ミスが少ない点が◎",
-      features: "みんなのFXは、高水準のスワップポイントと優れた約定力が特徴のFX会社です。99.9%という高い約定力で、注文が思い通りの価格で約定され、ストレスなく取引できます。スワップポイントは業界最高水準で、長期保有による金利収入を狙いやすいのが大きな魅力。TradingViewが無料で使えるため、世界中のトレーダーが使う高機能チャートで本格的なテクニカル分析が可能。スプレッドも業界最狭水準で、コストを抑えた取引ができます。トレイダーズ証券が運営する信頼性の高いFXサービスです。",
+      features: "みんなのFXは、高水準のスワップポイントと優れた約定力が特徴のFX会社です。99.9%という高い約定力で、注文が思い通りの価格で約定され、ストレスなく取引できます。スワップポイントは業界最高水準で、長期保有による金利収入を狙いやすいのが大きな魅力。TradingViewが無料で使えるため、世界中のトレーダーが使う高機能チャートで本格的なテクニカル分析が可能。スプレッドも業界最狭水準で、コストを抑えた取引ができます。信頼性の高いFXサービスです。",
       goodPoints: [
         "スワップポイントが業界最高水準で、長期保有による金利収入を狙いやすい",
         "TradingViewが無料で使え、世界中のトレーダーが使う高機能チャートで分析可能",
         "99.9%という高い約定力で、注文が思い通りの価格で約定されストレスフリー",
         "スプレッドは業界最狭水準で、取引コストを最小限に抑えられる",
-        "トレイダーズ証券が運営する信頼性の高いFXサービスで安心して取引できる"
+        "信頼性の高いFXサービスで安心して取引できる"
       ],
       startGuideSteps: [
         {
@@ -710,7 +765,7 @@ const FXComparison = () => {
       id: "light",
       name: "LIGHT FX",
       logoText: "LIGHT FX",
-      detailUrl: "#",
+      detailUrl: "https://lightfx.jp/",
       affiliateUrl: "https://lightfx.jp/",
       overallRating: 3,
       overallRatingText: "スワップ",
@@ -722,18 +777,18 @@ const FXComparison = () => {
       cashback: 1000000,
       cashbackText: "最大100万",
       tableFeatures: "スワップ20%増額キャンペーン実施中！スプレッドは広め△",
-      features: "LIGHT FXは、スワップポイント運用に特化したFX会社です。「LIGHTペア」というスワップポイント優遇通貨ペアを提供し、高金利通貨での長期運用に最適。トレイダーズ証券が運営する「みんなのFX」の姉妹サービスで、同様にTradingViewが無料で使えるため、高機能チャートで分析しながらスワップ運用ができます。スプレッドも業界最狭水準で、コストを抑えた取引が可能。長期保有でコツコツと金利収入を積み上げたい方に最適なFX会社です。",
+      features: "LIGHT FXは、スワップポイント運用に特化したFX会社です。「LIGHTペア」というスワップポイント優遇通貨ペアを提供し、高金利通貨での長期運用に最適。TradingViewが無料で使えるため、高機能チャートで分析しながらスワップ運用ができます。スプレッドも業界最狭水準で、コストを抑えた取引が可能。長期保有でコツコツと金利収入を積み上げたい方に最適なFX会社です。",
       goodPoints: [
         "「LIGHTペア」でスワップポイントが優遇され、高金利通貨での長期運用に最適",
         "取引単位が1,000通貨からで手軽に始められ、少額からスワップ運用が可能",
         "みんなのFXと同様にTradingViewが無料で使え、高機能チャートで分析可能",
-        "トレイダーズ証券が運営する信頼性の高いサービスで安心して長期運用できる",
+        "信頼性の高いサービスで安心して長期運用できる",
         "スプレッドは業界最狭水準で、取引コストを抑えられる"
       ],
       startGuideSteps: [
         {
           title: "最短即日で開設",
-          description: <>トレイダーズ証券が運営。<br />申し込みから最短即日で開設完了。</>
+          description: <>申し込みから最短即日で開設完了。</>
         },
         {
           title: "入金",
@@ -756,7 +811,7 @@ const FXComparison = () => {
       id: "triauto",
       name: "トライオートFX",
       logoText: "トライオートFX",
-      detailUrl: "#",
+      detailUrl: "https://www.invast.jp/triauto/",
       affiliateUrl: "https://www.invast.jp/triauto/",
       overallRating: 3,
       overallRatingText: "普通",
@@ -802,7 +857,7 @@ const FXComparison = () => {
       id: "au",
       name: "auカブコム証券",
       logoText: "auカブコム証券",
-      detailUrl: "#",
+      detailUrl: "https://kabu.com/",
       affiliateUrl: "https://kabu.com/",
       overallRating: 3,
       overallRatingText: "普通",
@@ -901,7 +956,7 @@ const FXComparison = () => {
           );
           customAffiliateButton = (
             <div className="relative">
-              <a href="https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T" rel="nofollow" target="_blank" className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-sm shadow-sm transition-colors flex items-center justify-center rounded-md">
+              <a href="https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T" rel="nofollow" target="_blank" className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md">
                 公式サイト
               </a>
               <img style={{ border: 'none', position: 'absolute', width: 1, height: 1, opacity: 0 }} src="https://www18.a8.net/0.gif?a8mat=45I5TK+6AU69E+1FOU+6BU5T" alt="" />
@@ -918,6 +973,7 @@ const FXComparison = () => {
             customLogo={customLogo}
             promotionBanner={promotionBanner}
             customAffiliateButton={customAffiliateButton}
+            detailUrl={item.detailUrl || item.affiliateUrl}
           />
         );
       }}

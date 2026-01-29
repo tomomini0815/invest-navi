@@ -67,7 +67,7 @@ export const ComparisonPageTemplate = <T extends Company>({
                     {!hasSearched ? (
                         /* Default Header */
                         <div className="text-center mb-8 sm:mb-12 overflow-hidden">
-                            <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold mb-4 text-gray-800 whitespace-nowrap">
+                            <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold mb-4 text-gray-800 whitespace-nowrap">
                                 <span className="text-orange-500">厳選</span> <span>{categoryName}一覧</span>
                             </h2>
                             <p className="text-gray-500">
@@ -86,7 +86,7 @@ export const ComparisonPageTemplate = <T extends Company>({
                                     診断結果
                                 </div>
 
-                                <h2 className="text-2xl sm:text-3xl md:text-3xl font-bold text-gray-800 leading-snug mb-3">
+                                <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold text-gray-800 leading-snug mb-3">
                                     <span className="inline-block relative z-10">
                                         あなたの条件に
                                     </span>

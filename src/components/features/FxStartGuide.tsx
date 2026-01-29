@@ -13,6 +13,7 @@ interface FxStartGuideProps {
     steps?: StepData[];
     guideTitle?: string;
     guideDescription?: string;
+    customAffiliateButton?: React.ReactNode;
 }
 
 export const FxStartGuide = ({
@@ -20,7 +21,8 @@ export const FxStartGuide = ({
     affiliateUrl = "https://www.click-sec.com/corp/guide/fxneo/",
     steps,
     guideTitle,
-    guideDescription
+    guideDescription,
+    customAffiliateButton
 }: FxStartGuideProps) => {
 
     // ... defaultSteps definition ... (unchanged)
@@ -116,12 +118,18 @@ export const FxStartGuide = ({
                         {guideDescription || "初心者にも使いやすく、コストも安いので安心です。"}
                     </p>
                 </div>
-                <Button
-                    onClick={() => window.open(affiliateUrl, '_blank')}
-                    className="bg-emerald-600 text-white font-bold py-6 px-10 rounded-full shadow-lg hover:bg-emerald-500 transition-all transform hover:-translate-y-1 text-lg"
-                >
-                    {companyName}を見る
-                </Button>
+                {customAffiliateButton ? (
+                    <div className="w-full md:w-auto [&_a]:py-3 [&_a]:px-6 sm:[&_a]:py-4 sm:[&_a]:px-10 [&_a]:rounded-full [&_a]:text-sm sm:[&_a]:text-base md:[&_a]:text-lg [&_a]:h-auto [&_a]:whitespace-nowrap [&_a]:flex [&_a]:items-center [&_a]:justify-center [&_a]:bg-emerald-600 [&_a]:text-white [&_a]:font-bold [&_a]:shadow-lg hover:[&_a]:bg-emerald-500 [&_a]:transition-all [&_a]:transform hover:[&_a]:-translate-y-1">
+                        {customAffiliateButton}
+                    </div>
+                ) : (
+                    <Button
+                        onClick={() => window.open(affiliateUrl, '_blank')}
+                        className="bg-emerald-600 text-white font-bold py-4 px-6 sm:py-6 sm:px-10 rounded-full shadow-lg hover:bg-emerald-500 transition-all transform hover:-translate-y-1 text-sm sm:text-base md:text-lg whitespace-nowrap"
+                    >
+                        {companyName}を見る
+                    </Button>
+                )}
             </div>
         </section>
     );

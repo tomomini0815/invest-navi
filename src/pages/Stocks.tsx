@@ -628,7 +628,7 @@ const Stocks = () => {
         <meta name="description" content="株式投資の基本から実践的なテクニックまで、初心者から中級者まで幅広く対応した株式投資ガイド。企業分析、配当金投資、銘柄選びの方法を詳しく解説します。" />
         <meta name="keywords" content="株式投資,企業分析,配当金投資,銘柄選び,投資総合ナビ,株式,証券会社,投資ガイド,長期投資,リスク管理" />
         <link rel="canonical" href="https://www.invest-navi.com/stocks" />
-        
+
         {/* Open Graph */}
         <meta property="og:title" content="株式投資ガイド | 投資総合ナビ" />
         <meta property="og:description" content="株式投資の基本から実践的なテクニックまで、初心者から中級者まで幅広く対応した株式投資ガイド。企業分析、配当金投資、銘柄選びの方法を詳しく解説します。" />
@@ -636,20 +636,20 @@ const Stocks = () => {
         <meta property="og:url" content="https://www.invest-navi.com/stocks" />
         <meta property="og:site_name" content="投資総合ナビ" />
         <meta property="og:locale" content="ja_JP" />
-        
+
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@toushi_navi" />
       </Helmet>
-      
+
       <Header />
-      
+
       <main className="flex-1">
         {/* Breadcrumb */}
         <div className="bg-gradient-to-r from-muted/50 to-muted/30 py-4 border-b">
           <div className="container mx-auto px-4">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors group"
             >
               <ArrowLeft className="h-4 w-4 mr-1 group-hover:-translate-x-1 transition-transform" />
@@ -744,7 +744,7 @@ const Stocks = () => {
                 株式投資の基本から応用まで、段階的に学ぶための記事です。
               </p>
             </div>
-            
+
             <div className="space-y-8">
               {articles.map((article, index) => (
                 <Card key={article.id} id={article.id} className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border-2 bg-gradient-to-br from-card to-card/80 hover:border-secondary/30">
@@ -755,7 +755,7 @@ const Stocks = () => {
                       </Badge>
                       <h3 className="text-2xl font-bold group-hover:text-secondary transition-colors">{article.title}</h3>
                     </div>
-                    <div 
+                    <div
                       className="article-content mb-4"
                       dangerouslySetInnerHTML={{ __html: article.content }}
                     />
@@ -776,7 +776,7 @@ const Stocks = () => {
                   株式投資を実践するための便利なツールをご紹介します。
                 </p>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {tools.map((tool, index) => (
                   <Card key={tool.title} className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 bg-gradient-to-br from-card to-card/80 hover:border-secondary/30 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
@@ -818,12 +818,12 @@ const Stocks = () => {
                     株式投資の基本を学んだら、次は実際に取引するための証券会社を選びましょう。
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button asChild size="lg" className="text-lg px-8 hover:scale-105 transition-transform">
+                    <Button asChild size="lg" className="text-sm sm:text-base md:text-lg whitespace-nowrap px-8 hover:scale-105 transition-transform">
                       <Link to="/comparison">
                         証券会社を比較する →
                       </Link>
                     </Button>
-                    <Button asChild variant="outline" size="lg" className="text-lg px-8 hover:scale-105 transition-transform">
+                    <Button asChild variant="outline" size="lg" className="text-sm sm:text-base md:text-lg whitespace-nowrap px-8 hover:scale-105 transition-transform">
                       <Link to="/#診断">
                         投資診断を始める
                       </Link>

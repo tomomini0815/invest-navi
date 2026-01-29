@@ -631,11 +631,11 @@ const InvestmentDiagnostic = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3">
-                <Button variant="outline" onClick={handleReset} className="flex-1 w-full py-6 text-base">
+                <Button variant="outline" onClick={handleReset} className="flex-1 w-full py-6 text-xs xs:text-sm sm:text-base whitespace-nowrap">
                   <RotateCcw className="mr-2 h-5 w-5" />
                   もう一度診断する
                 </Button>
-                <Button className="flex-1 w-full py-6 text-base bg-[#10b77f] hover:bg-[#0ea66e] text-white" asChild>
+                <Button className="flex-1 w-full py-6 text-xs xs:text-sm sm:text-base bg-[#10b77f] hover:bg-[#0ea66e] text-white whitespace-nowrap" asChild>
                   <a href="/tools/risk-assessment#diagnostic-tool">
                     総合診断ツール
                     <ArrowRight className="ml-2 h-5 w-5" />

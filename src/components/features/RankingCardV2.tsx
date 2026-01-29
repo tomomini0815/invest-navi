@@ -100,14 +100,16 @@ const RankingCardV2 = ({
                 <div className={`flex-1 p-3 sm:p-4 pt-3 sm:pt-10 flex flex-row-reverse items-start gap-3 sm:gap-4 overflow-hidden`}>
                     {/* Logo & Banner Box */}
                     <div className="flex flex-col items-end gap-3 shrink-0 w-[120px] sm:w-auto sm:min-w-[140px]">
-                        {customLogo ? (
-                            <div className="flex items-center justify-center w-14 h-14 shrink-0 [&_img]:max-w-full [&_img]:h-auto">
-                                {customLogo}
-                            </div>
-                        ) : (
-                            <div className="flex items-center justify-center w-14 h-14 rounded-lg bg-gray-50 border border-gray-100 text-xs text-gray-400 shrink-0 font-bold">
-                                {detailedSpecs?.logoText || "LOGO"}
-                            </div>
+                        {!promotionBanner && (
+                            customLogo ? (
+                                <div className="flex items-center justify-center w-14 h-14 shrink-0 [&_img]:max-w-full [&_img]:h-auto">
+                                    {customLogo}
+                                </div>
+                            ) : (
+                                <div className="flex items-center justify-center w-14 h-14 rounded-lg bg-gray-50 border border-gray-100 text-xs text-gray-400 shrink-0 font-bold">
+                                    {detailedSpecs?.logoText || "LOGO"}
+                                </div>
+                            )
                         )}
 
                         {promotionBanner && (
@@ -168,7 +170,7 @@ const RankingCardV2 = ({
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => setIsOpen(!isOpen)}
-                                className="w-full text-sm font-bold text-gray-500 hover:text-emerald-600 hover:bg-emerald-50 transition-colors flex items-center justify-center gap-1 h-10 border border-gray-200"
+                                className="w-full text-xs xs:text-sm font-bold text-gray-500 hover:text-emerald-600 hover:bg-emerald-50 transition-colors flex items-center justify-center gap-1 h-10 border border-gray-200 whitespace-nowrap"
                             >
                                 {isOpen ? "閉じる" : "詳細を見る"}
                                 {isOpen ? <ChevronUp className="w-3 h-3" strokeWidth={3} /> : <ChevronDown className="w-3 h-3" strokeWidth={3} />}
@@ -278,14 +280,31 @@ const RankingCardV2 = ({
                                     steps={accordionData?.startGuide?.steps || detailedSpecs?.startGuideSteps || []}
                                     guideTitle={accordionData?.startGuide?.title || detailedSpecs?.guideTitle}
                                     guideDescription={accordionData?.startGuide?.description || detailedSpecs?.guideDescription}
+                                    customAffiliateButton={customAffiliateButton}
                                 />
                             </div>
                         )}
 
-                        <div className="text-center mt-4">
+                        <div className="text-center mt-8 pt-6 border-t border-gray-100 flex flex-col items-center gap-4">
+                            {!(accordionData?.startGuide || detailedSpecs?.startGuideSteps) && (
+                                <div className="w-full max-w-sm px-4">
+                                    {customAffiliateButton ? (
+                                        <div className="[&_a]:h-12 [&_a]:text-base">
+                                            {customAffiliateButton}
+                                        </div>
+                                    ) : (
+                                        <Button
+                                            onClick={() => window.open(affiliateUrl, '_blank')}
+                                            className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-12 text-base shadow-lg transition-all transform hover:-translate-y-0.5"
+                                        >
+                                            公式サイトはこちら <ExternalLink className="ml-2 w-4 h-4" />
+                                        </Button>
+                                    )}
+                                </div>
+                            )}
                             <button
                                 onClick={() => setIsOpen(false)}
-                                className="text-gray-400 hover:text-gray-600 text-sm flex items-center justify-center mx-auto gap-1"
+                                className="text-gray-400 hover:text-gray-600 text-sm flex items-center justify-center gap-1 transition-colors"
                             >
                                 <ChevronUp className="w-4 h-4" /> 閉じる
                             </button>

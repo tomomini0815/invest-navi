@@ -192,12 +192,12 @@ const Tools = () => {
                     より良い投資判断を行いましょう。
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button asChild size="lg" className="text-lg px-8 hover:scale-105 transition-transform">
+                    <Button asChild size="lg" className="text-sm sm:text-base md:text-lg whitespace-nowrap px-8 hover:scale-105 transition-transform">
                       <Link to="/tools">
                         すべてのツールを見る →
                       </Link>
                     </Button>
-                    <Button asChild variant="outline" size="lg" className="text-lg px-8 hover:scale-105 transition-transform">
+                    <Button asChild variant="outline" size="lg" className="text-sm sm:text-base md:text-lg whitespace-nowrap px-8 hover:scale-105 transition-transform">
                       <Link to="/#診断">
                         投資診断を始める
                       </Link>

@@ -64,7 +64,7 @@ const HeroSection = () => {
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-8 md:mb-12">
             <Button
               size="lg"
-              className="bg-accent hover:bg-accent-hover text-white text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 shadow-xl w-full sm:w-auto"
+              className="bg-accent hover:bg-accent-hover text-white text-xs xs:text-sm sm:text-base md:text-lg px-6 sm:px-8 py-5 sm:py-6 shadow-xl w-full sm:w-auto whitespace-nowrap"
               onClick={scrollToDiagnostic}
             >
               投資診断を始める
@@ -73,7 +73,7 @@ const HeroSection = () => {
             <Button
               size="lg"
               variant="outline"
-              className="bg-white/10 text-white border-white/30 hover:bg-white/20 backdrop-blur-sm text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 w-full sm:w-auto"
+              className="bg-white/10 text-white border-white/30 hover:bg-white/20 backdrop-blur-sm text-xs xs:text-sm sm:text-base md:text-lg px-6 sm:px-8 py-5 sm:py-6 w-full sm:w-auto whitespace-nowrap"
               asChild
             >
               <Link to="/comparison">証券会社を比較する</Link>

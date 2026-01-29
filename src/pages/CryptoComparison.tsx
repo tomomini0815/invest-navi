@@ -271,17 +271,12 @@ const CryptoComparison = () => {
       renderRankingCard={(item, index) => (
         <RankingCardV2
           key={item.id}
+          {...item}
           id={item.id}
           rank={index + 1}
-          name={item.name}
           rating={item.rating || 0}
-          points={item.points}
-          specs={item.specs}
-          campaignText={item.campaignText}
-          badgeText={item.badgeText}
           affiliateUrl={item.affiliateUrl || "#"}
           detailUrl={item.detailUrl || "#"}
-          accordionData={item.accordionData}
         />
       )}
       renderComparisonTable={() => (
