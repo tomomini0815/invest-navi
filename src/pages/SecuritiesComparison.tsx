@@ -22,20 +22,6 @@ export const securitiesRankingList: Company[] = [
         ],
         badgeText: "総合力No.1！迷ったらコレ",
         affiliateUrl: "https://www.sbisec.co.jp/",
-        customAffiliateButton: (
-            <div className="relative w-full">
-                <a
-                    href="https://www.sbisec.co.jp/"
-                    rel="nofollow"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
-                    target="_blank"
-                >
-                    公式サイトはこちら <ExternalLink className="ml-2 w-4 h-4" />
-                    <img src="https://h.accesstrade.net/sp/rr?rk=0100m8v500ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
-                </a>
-            </div>
-        )
     },
     {
         id: "rakuten",
@@ -52,20 +38,6 @@ export const securitiesRankingList: Company[] = [
         ],
         badgeText: "ポイント投資ならコレ！楽天経済圏",
         affiliateUrl: "https://www.rakuten-sec.co.jp/",
-        customAffiliateButton: (
-            <div className="relative w-full">
-                <a
-                    href="https://www.rakuten-sec.co.jp/"
-                    rel="nofollow"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
-                    target="_blank"
-                >
-                    公式サイトはこちら <ExternalLink className="ml-2 w-4 h-4" />
-                    <img src="https://h.accesstrade.net/sp/rr?rk=0100p6nz00ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
-                </a>
-            </div>
-        )
     },
     {
         id: "monex",
@@ -81,16 +53,16 @@ export const securitiesRankingList: Company[] = [
             { label: "ツール", value: "銘柄スカウター", isHighlight: true }
         ],
         badgeText: "外国株・IPO投資に強い",
-        affiliateUrl: "https://www.monex.co.jp/",
+        affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100q1bu00ol0m",
         customLogo: (
-            <a href="https://www.monex.co.jp/" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
+            <a href="https://h.accesstrade.net/sp/cc?rk=0100n99e00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
                 <img src="https://h.accesstrade.net/sp/rr?rk=0100n99e00ol0m" alt="株・投資信託ならネット証券のマネックス" style={{ border: 0 }} />
             </a>
         ),
         customAffiliateButton: (
             <div className="relative w-full">
                 <a
-                    href="https://www.monex.co.jp/"
+                    href="https://h.accesstrade.net/sp/cc?rk=0100q1bu00ol0m"
                     rel="nofollow"
                     referrerPolicy="no-referrer-when-downgrade"
                     className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
@@ -102,7 +74,7 @@ export const securitiesRankingList: Company[] = [
             </div>
         ),
         promotionBanner: (
-            <a href="https://www.monex.co.jp/" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
+            <a href="https://h.accesstrade.net/sp/cc?rk=0100p6oa00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
                 <img src="https://h.accesstrade.net/sp/rr?rk=0100p6oa00ol0m" alt="マネックス証券" style={{ border: 0 }} />
             </a>
         )
@@ -122,20 +94,6 @@ export const securitiesRankingList: Company[] = [
         ],
         badgeText: "老舗の安心感・サポート充実",
         affiliateUrl: "https://www.matsui.co.jp/",
-        customAffiliateButton: (
-            <div className="relative w-full">
-                <a
-                    href="https://www.matsui.co.jp/"
-                    rel="nofollow"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
-                    target="_blank"
-                >
-                    公式サイトはこちら <ExternalLink className="ml-2 w-4 h-4" />
-                    <img src="https://h.accesstrade.net/sp/rr?rk=0100ojjt00ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
-                </a>
-            </div>
-        )
     },
     {
         id: "au",
@@ -152,20 +110,6 @@ export const securitiesRankingList: Company[] = [
         ],
         badgeText: "三菱UFJグループの安心感",
         affiliateUrl: "https://kabu.com/",
-        customAffiliateButton: (
-            <div className="relative w-full">
-                <a
-                    href="https://kabu.com/"
-                    rel="nofollow"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
-                    target="_blank"
-                >
-                    公式サイトはこちら <ExternalLink className="ml-2 w-4 h-4" />
-                    <img src="https://h.accesstrade.net/sp/rr?rk=0100p6o200ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
-                </a>
-            </div>
-        )
     },
     {
         id: "gmo",
@@ -197,9 +141,9 @@ export const securitiesRankingList: Company[] = [
             { label: "ツール", value: "DMM株 PRO" }
         ],
         badgeText: "米国株の取引手数料0円！",
-        affiliateUrl: "https://kabu.dmm.com/",
+        affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100kz3n00ol0m",
         customLogo: (
-            <a href="https://kabu.dmm.com/" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
+            <a href="https://h.accesstrade.net/sp/cc?rk=0100mjw300ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
                 <img src="https://h.accesstrade.net/sp/rr?rk=0100mjw300ol0m" alt="【DMM 株】口座開設" style={{ border: 0 }} />
             </a>
         )
