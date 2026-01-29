@@ -141,11 +141,25 @@ export const securitiesRankingList: Company[] = [
             { label: "ツール", value: "DMM株 PRO" }
         ],
         badgeText: "米国株の取引手数料0円！",
-        affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100kz3n00ol0m",
+        affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100mkk300ol0m",
         customLogo: (
             <a href="https://h.accesstrade.net/sp/cc?rk=0100mjw300ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
                 <img src="https://h.accesstrade.net/sp/rr?rk=0100mjw300ol0m" alt="【DMM 株】口座開設" style={{ border: 0 }} />
             </a>
+        ),
+        customAffiliateButton: (
+            <div className="relative w-full">
+                <a
+                    href="https://h.accesstrade.net/sp/cc?rk=0100mkk300ol0m"
+                    rel="nofollow"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
+                    target="_blank"
+                >
+                    公式サイトはこちら <ExternalLink className="ml-2 w-4 h-4" />
+                    <img src="https://h.accesstrade.net/sp/rr?rk=0100mkk300ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
+                </a>
+            </div>
         )
     },
     {
