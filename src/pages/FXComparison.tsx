@@ -27,20 +27,18 @@ export const fxRankingList = [
       { label: "最小取引単位", value: "1,000通貨" },
     ],
     campaignText: "【期間限定】最大550,000円キャッシュバックキャンペーン実施中！",
-    affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100m8v500ol0m", // GMO typically 
+    affiliateUrl: "https://www.click-sec.com/corp/guide/fxneo/", // GMO typically 
     detailUrl: "https://www.click-sec.com/corp/guide/fxneo/",
     badgeText: "総合力No.1！迷ったらコレ",
     customAffiliateButton: (
       <div className="relative w-full">
         <a
-          href="https://h.accesstrade.net/sp/cc?rk=0100m8v500ol0m"
-          rel="nofollow"
-          referrerPolicy="no-referrer-when-downgrade"
-          className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
+          href="https://www.click-sec.com/corp/guide/fxneo/"
           target="_blank"
+          rel="noopener noreferrer"
+          className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
         >
           公式サイトはこちら <ExternalLink className="ml-2 w-4 h-4" />
-          <img src="https://h.accesstrade.net/sp/rr?rk=0100m8v500ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
         </a>
       </div>
     )
@@ -63,21 +61,8 @@ export const fxRankingList = [
     ],
     campaignText: "最大300,000円キャッシュバック！",
     badgeText: "安心の国内口座数No.1",
-    affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=01004jqz00ol0m",
-    customAffiliateButton: (
-      <div className="relative w-full">
-        <a
-          href="https://h.accesstrade.net/sp/cc?rk=01004jqz00ol0m"
-          rel="nofollow"
-          referrerPolicy="no-referrer-when-downgrade"
-          className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
-          target="_blank"
-        >
-          公式サイトはこちら <ExternalLink className="ml-2 w-4 h-4" />
-          <img src="https://h.accesstrade.net/sp/rr?rk=01004jqz00ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
-        </a>
-      </div>
-    )
+    affiliateUrl: "https://fx.dmm.com/",
+    customAffiliateButton: undefined
   },
   {
     id: "sbi",
@@ -152,8 +137,8 @@ export const fxRankingList = [
       { label: "最小取引単位", value: "1通貨", isHighlight: true },
     ],
     campaignText: "最大100万円キャッシュバック実施中",
-    affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100ohhx00ol0m",
-    detailUrl: "https://h.accesstrade.net/sp/cc?rk=0100ohhx00ol0m",
+    affiliateUrl: "https://www.matsui.co.jp/fx",
+    detailUrl: "https://www.matsui.co.jp/fx",
     badgeText: "100円から始める自動売買"
   },
   {
@@ -173,22 +158,10 @@ export const fxRankingList = [
       { label: "最小取引単位", value: "1,000通貨" },
     ],
     campaignText: "最大100万円+豪華食品プレゼント！",
-    affiliateUrl: "https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T",
-    detailUrl: "https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T",
+    affiliateUrl: "https://hirose-fx.co.jp/",
+    detailUrl: "https://hirose-fx.co.jp/",
     badgeText: "食品CP＆スキャル公認",
-    customAffiliateButton: (
-      <div className="relative w-full">
-        <a
-          href="https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T"
-          rel="nofollow"
-          target="_blank"
-          className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
-        >
-          公式サイトはこちら <ExternalLink className="ml-2 w-4 h-4" />
-          <img src="https://www18.a8.net/0.gif?a8mat=45I5TK+6AU69E+1FOU+6BU5T" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
-        </a>
-      </div>
-    )
+    customAffiliateButton: undefined
   },
   {
     id: "line",
@@ -915,54 +888,8 @@ const FXComparison = () => {
         let promotionBanner = (item as any).promotionBanner;
         let customAffiliateButton = (item as any).customAffiliateButton;
 
-        if (item.id === "dmm") {
-          customLogo = (
-            <a href="https://h.accesstrade.net/sp/cc?rk=01004iwt00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
-              <img src="https://h.accesstrade.net/sp/rr?rk=01004iwt00ol0m" alt="【DMM FX】入金" style={{ border: 0 }} />
-            </a>
-          );
-          promotionBanner = (
-            <a href="https://h.accesstrade.net/sp/cc?rk=010072t900ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
-              <img src="https://h.accesstrade.net/sp/rr?rk=010072t900ol0m" alt="【DMM FX】入金" style={{ border: 0 }} />
-            </a>
-          );
-        } else if (item.id === "matsui") {
-          customLogo = (
-            <a href="https://h.accesstrade.net/sp/cc?rk=0100ohhu00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
-              <img src="https://h.accesstrade.net/sp/rr?rk=0100ohhu00ol0m" alt="松井証券FX　新規口座開設獲得プロモーション" style={{ border: 0 }} />
-            </a>
-          );
-          promotionBanner = (
-            <a href="https://h.accesstrade.net/sp/cc?rk=0100ohhq00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
-              <img src="https://h.accesstrade.net/sp/rr?rk=0100ohhq00ol0m" alt="松井証券FX　新規口座開設獲得プロモーション" style={{ border: 0 }} />
-            </a>
-          );
-        } else if (item.id === "hirose") {
-          customLogo = (
-            <div className="w-full h-full flex items-center justify-center relative">
-              <a href="https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T" rel="nofollow" target="_blank" className="w-full h-full flex items-center justify-center">
-                <img style={{ border: 'none', objectFit: 'contain', maxWidth: '100%', maxHeight: '100%' }} width="125" height="125" alt="" src="https://www23.a8.net/svt/bgt?aid=251110136381&wid=001&eno=01&mid=s00000006699001027000&mc=1" />
-              </a>
-              <img style={{ border: 'none', position: 'absolute', width: 1, height: 1, opacity: 0 }} src="https://www18.a8.net/0.gif?a8mat=45I5TK+6AU69E+1FOU+6BU5T" alt="" />
-            </div>
-          );
-          promotionBanner = (
-            <div className="relative">
-              <a href="https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T" rel="nofollow" target="_blank">
-                <img style={{ border: 'none' }} width="300" height="250" alt="" src="https://www28.a8.net/svt/bgt?aid=251110136381&wid=001&eno=01&mid=s00000006699001063000&mc=1" />
-              </a>
-              <img style={{ border: 'none', position: 'absolute', width: 1, height: 1, opacity: 0 }} src="https://www18.a8.net/0.gif?a8mat=45I5TK+6AU69E+1FOU+6BU5T" alt="" />
-            </div>
-          );
-          customAffiliateButton = (
-            <div className="relative">
-              <a href="https://px.a8.net/svt/ejp?a8mat=45I5TK+6AU69E+1FOU+6BU5T" rel="nofollow" target="_blank" className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md">
-                公式サイト
-              </a>
-              <img style={{ border: 'none', position: 'absolute', width: 1, height: 1, opacity: 0 }} src="https://www18.a8.net/0.gif?a8mat=45I5TK+6AU69E+1FOU+6BU5T" alt="" />
-            </div>
-          );
-        }
+        // Custom logic for banners removed as per user request to use official links only
+
 
         return (
           <RankingCardV2
