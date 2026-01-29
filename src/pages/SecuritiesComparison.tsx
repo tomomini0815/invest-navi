@@ -143,8 +143,8 @@ export const securitiesRankingList: Company[] = [
         badgeText: "米国株の取引手数料0円！",
         affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100mkk300ol0m",
         customLogo: (
-            <a href="https://h.accesstrade.net/sp/cc?rk=0100mjw300ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
-                <img src="https://h.accesstrade.net/sp/rr?rk=0100mjw300ol0m" alt="【DMM 株】口座開設" style={{ border: 0 }} />
+            <a href="https://h.accesstrade.net/sp/cc?rk=0100mkjo00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
+                <img src="https://h.accesstrade.net/sp/rr?rk=0100mkjo00ol0m" alt="【DMM 株】口座開設" style={{ border: 0 }} />
             </a>
         ),
         customAffiliateButton: (
