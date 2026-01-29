@@ -325,14 +325,35 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialTab, set
                                                     return `$${value}B`;
                                                 }} />
                                                 <Tooltip formatter={(value: number, name) => {
-                                                    const label = name === 'operating' ? '営業利益' : '純利益';
+                                                    const label = name;
                                                     const currency = financialDataMap[symbol || ""]?.currency;
+
+                                                    const formatJpy = (val: number, isOku: boolean) => {
+                                                        const isNegative = val < 0;
+                                                        const absVal = Math.abs(val);
+
+                                                        if (absVal === 0) return "¥0";
+
+                                                        let totalYen = absVal * (isOku ? 100000000 : 1000000000000);
+                                                        const trillions = Math.floor(totalYen / 1000000000000);
+                                                        const billions = Math.floor((totalYen % 1000000000000) / 100000000);
+                                                        const manYen = Math.floor((totalYen % 100000000) / 10000);
+
+                                                        let parts = [];
+                                                        if (trillions > 0) parts.push(`${trillions}兆`);
+                                                        if (billions > 0) parts.push(`${billions.toLocaleString()}億`);
+                                                        if (manYen > 0) parts.push(`${manYen.toLocaleString()}万`);
+
+                                                        return `${isNegative ? "-" : ""}¥${parts.join("")}`;
+                                                    };
+
                                                     if (currency === "JPY") {
-                                                        return [`¥${value}兆円`, label];
+                                                        return [`${formatJpy(value, false)}円`, label];
                                                     }
                                                     if (currency === "JPY_Oku") {
-                                                        return [`¥${value.toLocaleString()}億円`, label];
+                                                        return [`${formatJpy(value, true)}円`, label];
                                                     }
+
                                                     const jpyBillion = Number(value) * 155;
                                                     const trillion = Math.floor(jpyBillion / 1000);
                                                     const billion = Math.round(jpyBillion % 1000);

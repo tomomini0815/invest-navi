@@ -12,9 +12,11 @@ export const SecuritiesComparisonTable = ({ data }: SecuritiesComparisonTablePro
         <div className="w-full">
             <div className="text-center mb-6">
                 {/* Design Match: Header Title like ComparisonTable */}
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 tracking-wide flex items-center justify-center gap-2 mb-2">
-                    <Scale className="w-8 h-8 text-emerald-600" />
-                    ネット証券<span className="text-emerald-600 text-5xl font-extrabold -mt-2 mx-1">{data.length}</span>社を徹底比較
+                <h2 className="text-lg xs:text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 tracking-tight sm:tracking-wide flex items-center justify-center gap-1 sm:gap-2 mb-2 whitespace-nowrap overflow-hidden">
+                    <Scale className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-600 shrink-0" />
+                    <span>ネット証券</span>
+                    <span className="text-emerald-600 text-3xl sm:text-5xl font-extrabold sm:-mt-2 mx-0.5">{data.length}</span>
+                    <span>社を徹底比較</span>
                 </h2>
 
             </div>

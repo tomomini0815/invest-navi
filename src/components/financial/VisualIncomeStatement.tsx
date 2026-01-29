@@ -38,11 +38,15 @@ export const VisualIncomeStatement: React.FC<VisualIncomeStatementProps> = ({
 
         const trillions = Math.floor(totalYen / 1000000000000);
         const billions = Math.floor((totalYen % 1000000000000) / 100000000);
+        const manYen = Math.floor((totalYen % 100000000) / 10000);
 
         let parts = [];
         if (trillions > 0) parts.push(`${trillions}兆`);
-        if (billions > 0 || parts.length === 0) parts.push(`${billions.toLocaleString()}億円`);
-        else parts.push("円");
+        if (billions > 0) parts.push(`${billions.toLocaleString()}億`);
+        if (manYen > 0) parts.push(`${manYen.toLocaleString()}万`);
+
+        if (parts.length === 0) return "0円";
+        parts.push("円");
 
         return parts.join("");
     };

@@ -66,9 +66,9 @@ export const ComparisonPageTemplate = <T extends Company>({
                     {/* Header Switching Logic */}
                     {!hasSearched ? (
                         /* Default Header */
-                        <div className="text-center mb-12">
-                            <h2 className="text-3xl font-bold mb-4 text-gray-800">
-                                <span className="text-orange-500">厳選</span> {categoryName}一覧
+                        <div className="text-center mb-8 sm:mb-12 overflow-hidden">
+                            <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold mb-4 text-gray-800 whitespace-nowrap">
+                                <span className="text-orange-500">厳選</span> <span>{categoryName}一覧</span>
                             </h2>
                             <p className="text-gray-500">
                                 初心者でも安心して使える、失敗しない{categoryName}をプロが厳選しました。

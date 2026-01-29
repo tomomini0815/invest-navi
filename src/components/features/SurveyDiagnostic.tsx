@@ -471,7 +471,7 @@ export const SurveyDiagnostic = ({ data, onSearch, type = "fx" }: SurveyDiagnost
                                 variant="outline"
                                 size="lg"
                                 onClick={() => setStep(step - 1)}
-                                className="flex-1 sm:flex-none border-2 border-gray-300 text-gray-500 hover:text-emerald-700 hover:border-emerald-500 font-bold px-6 py-6 rounded-full"
+                                className="flex-1 sm:flex-none border-2 border-gray-300 text-gray-500 hover:text-emerald-700 hover:border-emerald-500 font-bold px-4 sm:px-6 py-6 rounded-full text-sm sm:text-base"
                             >
                                 戻る
                             </Button>
@@ -479,10 +479,10 @@ export const SurveyDiagnostic = ({ data, onSearch, type = "fx" }: SurveyDiagnost
                         <Button
                             size="lg"
                             onClick={handleSearchClick}
-                            className={`flex-1 sm:flex-none ${searchButtonBg} text-white font-bold px-8 py-6 rounded-full text-lg shadow-lg shadow-emerald-900/20 transition-all transform hover:-translate-y-1 border-2 border-transparent`}
+                            className={`flex-[2] sm:flex-none ${searchButtonBg} text-white font-bold px-4 sm:px-8 py-6 rounded-full text-base sm:text-lg shadow-lg shadow-emerald-900/20 transition-all transform hover:-translate-y-1 border-2 border-transparent whitespace-nowrap`}
                         >
                             この条件で検索する
-                            <ArrowRight className="ml-2 w-5 h-5" />
+                            <ArrowRight className="ml-1 sm:ml-2 w-4 h-4 sm:w-5 h-5" />
                         </Button>
                     </div>
                 </div>

@@ -21,8 +21,10 @@ export const CryptoComparisonTable = ({ data }: CryptoComparisonTableProps) => {
   return (
     <div className="w-full">
       <div className="text-center mb-6">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 tracking-wide flex items-center justify-center gap-2 mb-2">
-          主要取引所<span className="text-emerald-600 font-bold">{data.length}</span>社を徹底比較
+        <h2 className="text-lg xs:text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 tracking-tight sm:tracking-wide flex items-center justify-center gap-1 sm:gap-2 mb-2 whitespace-nowrap overflow-hidden">
+          <span>主要取引所</span>
+          <span className="text-emerald-600 text-3xl sm:text-5xl font-extrabold sm:-mt-2 mx-0.5">{data.length}</span>
+          <span>社を徹底比較</span>
         </h2>
 
       </div>

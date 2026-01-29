@@ -1645,7 +1645,7 @@ const StockScreener = () => {
                 { quarter: "23.11", operating: -1.5, net: -0.7 }, { quarter: "24.2", operating: -1.2, net: -0.5 },
                 { quarter: "24.5", operating: 2.89, net: 2.5 }, { quarter: "24.8", operating: -0.5, net: -0.2 },
                 { quarter: "24.11", operating: -9.03, net: -2.27 }, { quarter: "25.2", operating: 0.1, net: 0.05 },
-                { quarter: "25.5", operating: 0.0, net: 0.0 }, { quarter: "25.8", operating: -2.0, net: -0.8 }
+                { quarter: "25.5", operating: 0.15, net: 0.08 }, { quarter: "25.8", operating: -2.0, net: -0.8 }
             ],
             segments: [
                 { name: "SAR衛星データ販売", value: 90, color: "#3b82f6" },
@@ -1916,6 +1916,11 @@ const StockScreener = () => {
             icon: <BarChart2 className="w-4 h-4 md:w-5 md:h-5" />,
             description: "NYSE/NASDAQ上場銘柄"
         },
+        promising: {
+            title: "注目銘柄",
+            icon: <LineChart className="w-4 h-4 md:w-5 md:h-5" />,
+            description: "2026年注目！テンバガー候補・話題の10銘柄"
+        },
         forex: {
             title: "為替(FX)",
             icon: <Globe className="w-4 h-4 md:w-5 md:h-5" />,
@@ -1925,11 +1930,6 @@ const StockScreener = () => {
             title: "暗号資産",
             icon: <Zap className="w-4 h-4 md:w-5 md:h-5" />,
             description: "主要暗号資産のリアルタイム価格"
-        },
-        promising: {
-            title: "注目銘柄",
-            icon: <LineChart className="w-4 h-4 md:w-5 md:h-5" />,
-            description: "2026年注目！テンバガー候補・話題の10銘柄"
         }
     };
 

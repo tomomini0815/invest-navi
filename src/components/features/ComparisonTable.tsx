@@ -103,9 +103,11 @@ const ComparisonTable = ({ data }: ComparisonTableProps) => {
   return (
     <div className="w-full">
       <div className="text-center mb-6">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 tracking-wide flex items-center justify-center gap-2 mb-2">
-          <Scale className="w-8 h-8 text-emerald-600" />
-          FX口座<span className="text-emerald-600 text-5xl font-extrabold -mt-2 mx-1">12</span>社を徹底比較
+        <h2 className="text-lg xs:text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 tracking-tight sm:tracking-wide flex items-center justify-center gap-1 sm:gap-2 mb-2 whitespace-nowrap overflow-hidden">
+          <Scale className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-600 shrink-0" />
+          <span>FX口座</span>
+          <span className="text-emerald-600 text-3xl sm:text-5xl font-extrabold sm:-mt-2 mx-0.5">12</span>
+          <span>社を徹底比較</span>
         </h2>
         <p className="text-sm text-gray-500 flex items-center justify-center gap-1">
           <span>▼</span> 項目名をクリックすると並び替えができます
