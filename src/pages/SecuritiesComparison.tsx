@@ -93,7 +93,26 @@ export const securitiesRankingList: Company[] = [
             { label: "ツール", value: "ネットストックHS" }
         ],
         badgeText: "老舗の安心感・サポート充実",
-        affiliateUrl: "https://www.matsui.co.jp/",
+        affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=01000t2p00ol0m",
+        customAffiliateButton: (
+            <div className="relative w-full">
+                <a
+                    href="https://h.accesstrade.net/sp/cc?rk=01000t2p00ol0m"
+                    rel="nofollow"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
+                    target="_blank"
+                >
+                    公式サイト <ExternalLink className="ml-2 w-4 h-4" />
+                    <img src="https://h.accesstrade.net/sp/rr?rk=01000t2p00ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
+                </a>
+            </div>
+        ),
+        promotionBanner: (
+            <a href="https://h.accesstrade.net/sp/cc?rk=010029jo00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
+                <img src="https://h.accesstrade.net/sp/rr?rk=010029jo00ol0m" alt="松井証券" style={{ border: 0 }} />
+            </a>
+        )
     },
     {
         id: "au",
@@ -192,7 +211,26 @@ export const securitiesRankingList: Company[] = [
             { label: "ツール", value: "moomooアプリ" }
         ],
         badgeText: "最先端ツール＆手数料革命",
-        affiliateUrl: "https://www.moomoo.com/jp"
+        affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100pd0z00ol0m",
+        customAffiliateButton: (
+            <div className="relative w-full">
+                <a
+                    href="https://h.accesstrade.net/sp/cc?rk=0100pd0z00ol0m"
+                    rel="nofollow"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
+                    target="_blank"
+                >
+                    公式サイト <ExternalLink className="ml-2 w-4 h-4" />
+                    <img src="https://h.accesstrade.net/sp/rr?rk=0100pd0z00ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
+                </a>
+            </div>
+        ),
+        promotionBanner: (
+            <a href="https://h.accesstrade.net/sp/cc?rk=0100pnl200ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
+                <img src="https://h.accesstrade.net/sp/rr?rk=0100pnl200ol0m" alt="moomoo証券【WEB】" style={{ border: 0 }} />
+            </a>
+        )
     },
     {
         id: "paypay",
