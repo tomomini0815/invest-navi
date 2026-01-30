@@ -14,6 +14,7 @@ export interface IncomeStatementData {
     preTaxIncome?: number;
     incomeTax: number;
     netIncome: number;
+    analysis?: string;
 }
 
 interface HorizontalWaterfallChartProps {

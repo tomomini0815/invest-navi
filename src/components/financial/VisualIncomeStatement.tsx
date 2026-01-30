@@ -13,6 +13,7 @@ interface VisualIncomeStatementProps {
     unit?: string;
     exchangeRate?: number;
     isCompact?: boolean;
+    analysis?: string;
     className?: string;
 }
 
@@ -24,6 +25,7 @@ export const VisualIncomeStatement: React.FC<VisualIncomeStatementProps> = ({
     unit = "",
     exchangeRate,
     isCompact = false,
+    analysis,
     className = ""
 }) => {
     // 日本語の金額表記フォーマット（万単位まで含める）
@@ -152,6 +154,17 @@ export const VisualIncomeStatement: React.FC<VisualIncomeStatementProps> = ({
                         </div>
                     </div>
 
+                    {analysis && (
+                        <div className="mt-6 p-4 bg-amber-50 rounded-xl border border-amber-100 flex items-start gap-3">
+                            <Sparkles className="w-5 h-5 text-amber-500 mt-1" />
+                            <div>
+                                <div className="text-sm font-bold text-amber-900">収益性の分析</div>
+                                <p className="text-xs text-amber-700 leading-relaxed mt-1">
+                                    {analysis}
+                                </p>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </CardContent>
         </Card>

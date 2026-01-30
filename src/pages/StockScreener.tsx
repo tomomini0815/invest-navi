@@ -1,4 +1,5 @@
-import { VisualIncomeStatement, IncomeStatementData } from "@/components/financial/VisualIncomeStatement";
+import { VisualIncomeStatement } from "@/components/financial/VisualIncomeStatement";
+import { IncomeStatementData } from "@/components/financial/HorizontalWaterfallChart";
 import { sp500Stocks, nikkei225Stocks, promisingStocks2026 } from "@/data/stockLists";
 import { useEffect, useState, useRef, memo } from "react";
 import { Button } from "@/components/ui/button";
@@ -86,7 +87,6 @@ const StockScreener = () => {
     const navigate = useNavigate();
     const [activeScreener, setActiveScreener] = useState<ScreenerType>("total");
     const [showList, setShowList] = useState(false);
-    const [financialTab, setFinancialTab] = useState<"overview" | "chart">("chart");
     const [selectedChart, setSelectedChart] = useState<string>("FOREXCOM:SPXUSD"); // Default to S&P 500
     const [heatmapSource, setHeatmapSource] = useState<"SPX500" | "Japan">("SPX500");
     const chartContainerRef = useRef<HTMLDivElement>(null);
@@ -122,6 +122,11 @@ const StockScreener = () => {
         cashFlow?: any;
         currency?: "USD" | "JPY" | "JPY_Oku";
         priceHistory?: { date: string; close: number }[];
+        historicalPerformance?: {
+            tableTitle: string;
+            headers: string[];
+            rows: (string | number)[][];
+        };
     }> = {
         "NASDAQ:AAPL": {
             revenue: [
@@ -565,43 +570,28 @@ const StockScreener = () => {
             }
         },
         // 日本株データの追加 (単位: 兆円/億円, currency: "JPY")
-        "7203": { // トヨタ自動車
-            currency: "JPY",
-            revenue: [
-                { quarter: "23年1Q", value: 10.5 }, { quarter: "23年2Q", value: 11.4 },
-                { quarter: "23年3Q", value: 12.0 }, { quarter: "23年4Q", value: 11.1 },
-                { quarter: "24年1Q", value: 11.8 }, { quarter: "24年2Q", value: 12.0 },
-                { quarter: "24年3Q", value: 12.6 }, { quarter: "24年4Q", value: 11.5 },
-                { quarter: "25年1Q", value: 12.2 }, { quarter: "25年2Q", value: 12.8 }
-            ],
-            profit: [
-                { quarter: "23年1Q", operating: 1.1, net: 1.3 }, { quarter: "23年2Q", operating: 1.4, net: 1.2 },
-                { quarter: "23年3Q", operating: 1.6, net: 1.3 }, { quarter: "23年4Q", operating: 1.1, net: 1.0 },
-                { quarter: "24年1Q", operating: 1.3, net: 1.3 }, { quarter: "24年2Q", operating: 1.4, net: 1.2 },
-                { quarter: "24年3Q", operating: 1.6, net: 1.3 }, { quarter: "24年4Q", operating: 1.1, net: 0.9 },
-                { quarter: "25年1Q", operating: 1.1, net: 0.8 }, { quarter: "25年2Q", operating: 1.3, net: 1.0 }
-            ],
-            segments: [
-                { name: "自動車", value: 90, color: "#3b82f6" },
-                { name: "金融", value: 7, color: "#10b981" },
-                { name: "その他", value: 3, color: "#f59e0b" }
-            ],
+        "7203": { // Toyota
+            currency: "JPY_Oku",
+
+            revenue: [{ quarter: "25.3", value: 485000 }],
+            profit: [{ quarter: "25.3", operating: 38000, net: 31000 }],
+            segments: [{ name: "自動車", value: 90, color: "#ef4444" }, { name: "金融", value: 10, color: "#3b82f6" }],
             metrics: [
-                { name: "PER（株価収益率）", value: "10.11倍" }, { name: "PBR（株価純資産倍率）", value: "1.25倍" },
-                { name: "ROE（自己資本利益率）", value: "12.89%" }, { name: "PSR（株価売上高倍率）", value: "0.95倍" }
+                { name: "PER", value: "9.5倍" }, { name: "PBR", value: "1.1倍" },
+                { name: "ROE", value: "12.0%" }
             ],
             incomeStatement: {
-                revenue: 493900, // TTM 49.39T
-                costOfGoodsSold: 405100, // 493900 - 88800
-                grossProfit: 88800, // 8.88T
-                sellingGeneralAdmin: 45400, // 88800 - 43400
-                operatingIncome: 43400, // 4.34T
-                nonOperatingIncome: 12200, // 55600 - 43400 (Estimated from margin)
-                ordinaryIncome: 55600, // 493900 * 0.1126
+                revenue: 485000, // 48.5兆 (予想)
+                costOfGoodsSold: 390000,
+                grossProfit: 95000,
+                sellingGeneralAdmin: 57000,
+                operatingIncome: 38000, // 3.8兆
+                nonOperatingIncome: 5000,
+                ordinaryIncome: 43000,
                 specialIncome: 0,
-                preTaxIncome: 55600,
-                incomeTax: 9300, // 55600 - 46300
-                netIncome: 46300 // 4.63T
+                preTaxIncome: 43000,
+                incomeTax: 12000,
+                netIncome: 31000
             },
             balanceSheet: {
                 totalAssets: 975700, // 97.57T
@@ -616,45 +606,25 @@ const StockScreener = () => {
                 freeCashFlow: 3496 // 349.63B
             }
         },
-        "NYSE:SONY": { // ソニーグループ (円ベース)
-            currency: "JPY",
-            revenue: [
-                { quarter: "23年1Q", value: 2.9 }, { quarter: "23年2Q", value: 2.8 },
-                { quarter: "23年3Q", value: 3.7 }, { quarter: "23年4Q", value: 3.5 },
-                { quarter: "24年1Q", value: 3.0 }, { quarter: "24年2Q", value: 2.9 },
-                { quarter: "24年3Q", value: 3.2 }, { quarter: "24年4Q", value: 2.8 },
-                { quarter: "25年1Q", value: 3.0 }, { quarter: "25年2Q", value: 3.1 }
-            ],
-            profit: [
-                { quarter: "23年1Q", operating: 0.25, net: 0.21 }, { quarter: "23年2Q", operating: 0.26, net: 0.20 },
-                { quarter: "23年3Q", operating: 0.46, net: 0.36 }, { quarter: "23年4Q", operating: 0.23, net: 0.19 },
-                { quarter: "24年1Q", operating: 0.27, net: 0.23 }, { quarter: "24年2Q", operating: 0.34, net: 0.29 },
-                { quarter: "24年3Q", operating: 0.45, net: 0.37 }, { quarter: "24年4Q", operating: 0.22, net: 0.18 },
-                { quarter: "25年1Q", operating: 0.28, net: 0.25 }, { quarter: "25年2Q", operating: 0.42, net: 0.34 }
-            ],
-            segments: [
-                { name: "G&NS(ゲーム)", value: 30, color: "#3b82f6" },
-                { name: "音楽・映画", value: 25, color: "#ef4444" },
-                { name: "ET&S(エレキ)", value: 20, color: "#10b981" },
-                { name: "I&SS(半導体)", value: 15, color: "#f59e0b" },
-                { name: "金融", value: 10, color: "#8b5cf6" }
-            ],
-            metrics: [
-                { name: "PER（株価収益率）", value: "17.69倍" }, { name: "PBR（株価純資産倍率）", value: "2.64倍" },
-                { name: "ROE（自己資本利益率）", value: "14.45%" }, { name: "PSR（株価売上高倍率）", value: "1.62倍" }
-            ],
+        "6758": { // Sony Group
+            currency: "JPY_Oku",
+
+            revenue: [{ quarter: "25.3", value: 120000 }],
+            profit: [{ quarter: "25.3", operating: 14000, net: 14000 }],
+            segments: [{ name: "G&NS", value: 30, color: "#3b82f6" }, { name: "音楽", value: 15, color: "#ef4444" }],
+            metrics: [{ name: "PER", value: "15.0倍" }, { name: "ROE", value: "14.5%" }],
             incomeStatement: {
-                revenue: 131530, // Updated TTM 13.153T (85.41B USD * 154)
-                costOfGoodsSold: 93200, // 131530 - 38330 (Gross Profit)
-                grossProfit: 38330, // 24.89B USD * 154
-                sellingGeneralAdmin: 23150, // 38330 - 15180 (Operating Income)
-                operatingIncome: 15180, // 9.86B USD * 154
-                nonOperatingIncome: 300,
-                ordinaryIncome: 15480,
+                revenue: 120000, // 12.0兆 (予想)
+                costOfGoodsSold: 80000,
+                grossProfit: 40000,
+                sellingGeneralAdmin: 26000,
+                operatingIncome: 14000, // 1.4兆
+                nonOperatingIncome: 1000,
+                ordinaryIncome: 15000,
                 specialIncome: 0,
-                preTaxIncome: 15480,
-                incomeTax: 3410,
-                netIncome: 12070 // 7.84B USD * 154
+                preTaxIncome: 15000,
+                incomeTax: 1000,
+                netIncome: 14000
             },
             balanceSheet: {
                 totalAssets: 376730, // 244.63B USD * 154
@@ -667,44 +637,38 @@ const StockScreener = () => {
                 investingCashFlow: -7130, // 4.63B USD * 154
                 financingCashFlow: -5840, // 3.79B USD * 154
                 freeCashFlow: 25250 // 16.40B USD * 154
+            },
+            historicalPerformance: {
+                tableTitle: "業績推移",
+                headers: ["決算期", "売上高(兆円)", "営業利益(兆円)", "純利益(兆円)", "備考"],
+                rows: [
+                    ["2022年3月期", "9.9", "1.2", "1.2", "過去最高水準"],
+                    ["2023年3月期", "11.5", "1.3", "1.3", "増収増益"],
+                    ["2024年3月期", "13.0", "1.2", "1.2", "減益"],
+                    ["2025年3月期", "12.0", "1.3", "1.3", "回復"],
+                    ["2026年3月期(予想)", "12.0", "1.4", "1.4", "増益予想"]
+                ]
             }
         },
-        "9984": { // ソフトバンクグループ
-            currency: "JPY",
-            revenue: [
-                { quarter: "23年1Q", value: 1.5 }, { quarter: "23年2Q", value: 1.6 },
-                { quarter: "23年3Q", value: 1.7 }, { quarter: "23年4Q", value: 1.7 },
-                { quarter: "24年1Q", value: 1.6 }, { quarter: "24年2Q", value: 1.7 },
-                { quarter: "24年3Q", value: 1.8 }, { quarter: "24年4Q", value: 1.8 }
-            ],
-            profit: [
-                { quarter: "23年1Q", operating: -0.1, net: -0.5 }, { quarter: "23年2Q", operating: 0.1, net: -0.9 },
-                { quarter: "23年3Q", operating: 0.0, net: 0.9 }, { quarter: "23年4Q", operating: -0.2, net: 0.2 },
-                { quarter: "24年1Q", operating: 0.1, net: 0.0 }, { quarter: "24年2Q", operating: 0.3, net: 1.0 },
-                { quarter: "24年3Q", operating: 0.5, net: 1.2 }, { quarter: "24年4Q", operating: 0.2, net: 0.4 }
-            ],
-            segments: [
-                { name: "SVF(投資)", value: 50, color: "#ef4444" },
-                { name: "ソフトバンク", value: 30, color: "#3b82f6" },
-                { name: "Arm", value: 15, color: "#10b981" },
-                { name: "その他", value: 5, color: "#f59e0b" }
-            ],
-            metrics: [
-                { name: "PER（株価収益率）", value: "8.10倍" }, { name: "PBR（株価純資産倍率）", value: "1.75倍" },
-                { name: "ROE（自己資本利益率）", value: "24.78%" }, { name: "PSR（株価売上高倍率）", value: "3.29倍" }
-            ],
+        "9984": { // SoftBank Group
+            currency: "JPY_Oku",
+
+            revenue: [{ quarter: "25.3", value: 74000 }],
+            profit: [{ quarter: "25.3", operating: 72000, net: 12000 }],
+            segments: [{ name: "投資事業", value: 100, color: "#f59e0b" }],
+            metrics: [{ name: "PBR", value: "0.9倍" }, { name: "NAV", value: "High" }],
             incomeStatement: {
-                revenue: 75100, // TTM 7.51T
-                costOfGoodsSold: 36500, // 75100 - 38600
-                grossProfit: 38600, // 3.86T
-                sellingGeneralAdmin: 32049, // 38600 - 6551
-                operatingIncome: 6551, // 655.10B
-                nonOperatingIncome: 32914, // 39465 - 6551
-                ordinaryIncome: 39465, // 75100 * 0.5255
+                revenue: 74000, // 7.4兆
+                costOfGoodsSold: 1000, // 投資会社のため原価は少ない
+                grossProfit: 73000,
+                sellingGeneralAdmin: 1000,
+                operatingIncome: 72000, // 7.2兆 (投資損益含む)
+                nonOperatingIncome: -55000, // 金融費用等、大幅な支払利息
+                ordinaryIncome: 17000,
                 specialIncome: 0,
-                preTaxIncome: 39465,
-                incomeTax: 8965, // 39465 - 30500
-                netIncome: 30500 // 3.05T
+                preTaxIncome: 17000,
+                incomeTax: 5000,
+                netIncome: 12000
             },
             balanceSheet: {
                 totalAssets: 491600, // 49.16T
@@ -719,151 +683,106 @@ const StockScreener = () => {
                 freeCashFlow: -5044 // -504.45B
             }
         },
-        "6861": { // キーエンス
-            currency: "JPY",
-            revenue: [
-                { quarter: "23年1Q", value: 0.23 }, { quarter: "23年2Q", value: 0.25 },
-                { quarter: "23年3Q", value: 0.26 }, { quarter: "23年4Q", value: 0.24 },
-                { quarter: "24年1Q", value: 0.25 }, { quarter: "24年2Q", value: 0.27 },
-                { quarter: "24年3Q", value: 0.26 }, { quarter: "24年4Q", value: 0.25 },
-                { quarter: "25年1Q", value: 0.28 }, { quarter: "25年2Q", value: 0.29 }
-            ],
-            profit: [
-                { quarter: "23年1Q", operating: 0.11, net: 0.08 }, { quarter: "23年2Q", operating: 0.13, net: 0.09 },
-                { quarter: "23年3Q", operating: 0.13, net: 0.10 }, { quarter: "23年4Q", operating: 0.12, net: 0.09 },
-                { quarter: "24年1Q", operating: 0.13, net: 0.09 }, { quarter: "24年2Q", operating: 0.14, net: 0.10 },
-                { quarter: "24年3Q", operating: 0.13, net: 0.10 }, { quarter: "24年4Q", operating: 0.12, net: 0.09 },
-                { quarter: "25年1Q", operating: 0.14, net: 0.11 }, { quarter: "25年2Q", operating: 0.15, net: 0.12 }
-            ],
-            segments: [
-                { name: "センサー", value: 70, color: "#3b82f6" },
-                { name: "測定器", value: 20, color: "#10b981" },
-                { name: "その他", value: 10, color: "#f59e0b" }
-            ],
-            metrics: [
-                { name: "PER（株価収益率）", value: "35.18倍" }, { name: "PBR（株価純資産倍率）", value: "4.39倍" },
-                { name: "ROE（自己資本利益率）", value: "13.14%" }, { name: "PSR（株価売上高倍率）", value: "13.21倍" }
-            ],
+        "6861": { // Keyence
+            currency: "JPY_Oku",
+
+            revenue: [{ quarter: "25.3", value: 9500 }],
+            profit: [{ quarter: "25.3", operating: 5800, net: 4200 }],
+            segments: [{ name: "国内", value: 40, color: "#3b82f6" }, { name: "海外", value: 60, color: "#10b981" }],
+            metrics: [{ name: "営業利益率", value: "61%" }, { name: "ROE", value: "15.0%" }],
             incomeStatement: {
-                revenue: 10900, // TTM 1.09T
-                costOfGoodsSold: 1847, // 10900 - 9053
-                grossProfit: 9053, // 905.33B
-                sellingGeneralAdmin: 3473, // 9053 - 5580
-                operatingIncome: 5580, // 557.99B
-                nonOperatingIncome: 228, // 5808 - 5580
-                ordinaryIncome: 5808, // 10900 * 0.5329
+                revenue: 9500,
+                costOfGoodsSold: 1700, // 高利益率モデル
+                grossProfit: 7800,
+                sellingGeneralAdmin: 2000,
+                operatingIncome: 5800,
+                nonOperatingIncome: 200,
+                ordinaryIncome: 6000,
                 specialIncome: 0,
-                preTaxIncome: 5808,
-                incomeTax: 1719, // 5808 - 4089
-                netIncome: 4089 // 408.89B
+                preTaxIncome: 6000,
+                incomeTax: 1800,
+                netIncome: 4200
             },
             balanceSheet: {
-                totalAssets: 34500, // 3.45T
-                totalLiabilities: 1718, // 171.79B
-                totalEquity: 32800, // 3.28T
+                totalAssets: 34500,
+                totalLiabilities: 1718,
+                totalEquity: 32800,
                 totalDebt: 0
             }
         },
-        "7974": { // 任天堂
-            currency: "JPY",
-            revenue: [
-                { quarter: "23年1Q", value: 0.30 }, { quarter: "23年2Q", value: 0.35 },
-                { quarter: "23年3Q", value: 0.60 }, { quarter: "23年4Q", value: 0.35 },
-                { quarter: "24年1Q", value: 0.45 }, { quarter: "24年2Q", value: 0.33 },
-                { quarter: "24年3Q", value: 0.58 }, { quarter: "24年4Q", value: 0.30 },
-                { quarter: "25年1Q", value: 0.25 }, { quarter: "25年2Q", value: 0.28 }
-            ],
-            profit: [
-                { quarter: "23年1Q", operating: 0.10, net: 0.11 }, { quarter: "23年2Q", operating: 0.11, net: 0.09 },
-                { quarter: "23年3Q", operating: 0.19, net: 0.13 }, { quarter: "23年4Q", operating: 0.08, net: 0.07 },
-                { quarter: "24年1Q", operating: 0.18, net: 0.18 }, { quarter: "24年2Q", operating: 0.10, net: 0.08 },
-                { quarter: "24年3Q", operating: 0.20, net: 0.15 }, { quarter: "24年4Q", operating: 0.06, net: 0.05 },
-                { quarter: "25年1Q", operating: 0.05, net: 0.08 }, { quarter: "25年2Q", operating: 0.07, net: 0.06 }
-            ],
-            segments: [
-                { name: "ゲーム専用機", value: 95, color: "#ef4444" },
-                { name: "モバイル・IP", value: 4, color: "#3b82f6" },
-                { name: "トランプ他", value: 1, color: "#10b981" }
-            ],
-            metrics: [
-                { name: "PER（株価収益率）", value: "31.39倍" }, { name: "PBR（株価純資産倍率）", value: "4.11倍" },
-                { name: "ROE（自己資本利益率）", value: "13.78%" }, { name: "PSR（株価売上高倍率）", value: "6.65倍" }
-            ],
+        "7974": { // Nintendo
+            currency: "JPY_Oku",
+
+            revenue: [{ quarter: "25.3", value: 14000 }],
+            profit: [{ quarter: "25.3", operating: 4000, net: 4000 }],
+            segments: [{ name: "ゲーム専用機", value: 95, color: "#ef4444" }],
+            metrics: [{ name: "PER", value: "18.0倍" }, { name: "ROE", value: "13.0%" }],
             incomeStatement: {
-                revenue: 17400, // TTM 1.74T
-                costOfGoodsSold: 9493, // 17400 - 7907
-                grossProfit: 7907, // 790.7B
-                sellingGeneralAdmin: 4845, // 7907 - 3062
-                operatingIncome: 3062, // 306.2B
-                nonOperatingIncome: 1869, // 4931 - 3062
-                ordinaryIncome: 4931, // 17400 * 0.2834 (Estimated from pre-tax margin)
+                revenue: 14000, // 1.4兆 (予想)
+                costOfGoodsSold: 6000,
+                grossProfit: 8000,
+                sellingGeneralAdmin: 4000,
+                operatingIncome: 4000, // 0.4兆
+                nonOperatingIncome: 1000,
+                ordinaryIncome: 5000,
                 specialIncome: 0,
-                preTaxIncome: 4931,
-                incomeTax: 1240, // 4931 - 3691
-                netIncome: 3691 // 369.1B
+                preTaxIncome: 5000,
+                incomeTax: 1000,
+                netIncome: 4000
             },
             balanceSheet: {
-                totalAssets: 36400, // 3.64T
-                totalLiabilities: 8178, // 817.79B
-                totalEquity: 28200, // 2.82T
-                totalDebt: 513 // 51.31B
+                totalAssets: 36400,
+                totalLiabilities: 8178,
+                totalEquity: 28200,
+                totalDebt: 513
             }
         },
-        "9983": { // ファーストリテイリング
-            currency: "JPY",
-            revenue: [
-                { quarter: "23年1Q", value: 0.81 }, { quarter: "23年2Q", value: 0.76 },
-                { quarter: "23年3Q", value: 0.75 }, { quarter: "23年4Q", value: 0.72 },
-                { quarter: "24年1Q", value: 0.90 }, { quarter: "24年2Q", value: 0.82 },
-                { quarter: "24年3Q", value: 0.85 }, { quarter: "24年4Q", value: 0.80 },
-                { quarter: "25年1Q", value: 1.02 }, { quarter: "25年2Q", value: 0.95 }
-            ],
-            profit: [
-                { quarter: "23年1Q", operating: 0.11, net: 0.08 }, { quarter: "23年2Q", operating: 0.10, net: 0.07 },
-                { quarter: "23年3Q", operating: 0.11, net: 0.08 }, { quarter: "23年4Q", operating: 0.09, net: 0.06 },
-                { quarter: "24年1Q", operating: 0.14, net: 0.10 }, { quarter: "24年2Q", operating: 0.12, net: 0.09 },
-                { quarter: "24年3Q", operating: 0.13, net: 0.10 }, { quarter: "24年4Q", operating: 0.11, net: 0.08 },
-                { quarter: "25年1Q", operating: 0.16, net: 0.12 }, { quarter: "25年2Q", operating: 0.14, net: 0.11 }
-            ],
-            segments: [
-                { name: "海外ユニクロ", value: 55, color: "#3b82f6" },
-                { name: "国内ユニクロ", value: 30, color: "#ef4444" },
-                { name: "ジーユー", value: 10, color: "#10b981" },
-                { name: "Global Brands", value: 5, color: "#f59e0b" }
-            ],
-            metrics: [
-                { name: "PER（株価収益率）", value: "41.69倍" }, { name: "PBR（株価純資産倍率）", value: "7.46倍" },
-                { name: "ROE（自己資本利益率）", value: "19.32%" }, { name: "PSR（株価売上高倍率）", value: "5.29倍" }
-            ],
+        "9983": { // Fast Retailing
+            currency: "JPY_Oku",
+
+            revenue: [{ quarter: "25.8", value: 35000 }],
+            profit: [{ quarter: "25.8", operating: 6000, net: 5200 }],
+            segments: [{ name: "ユニクロ海外", value: 55, color: "#ef4444" }, { name: "ユニクロ国内", value: 30, color: "#3b82f6" }],
+            metrics: [{ name: "PER", value: "35.0倍" }, { name: "ROE", value: "18.0%" }],
             incomeStatement: {
-                revenue: 35300, // TTM 3.53T
-                costOfGoodsSold: 18400, // 35300 - 16900
-                grossProfit: 16900, // 1.69T
-                sellingGeneralAdmin: 10902, // 16900 - 5998
-                operatingIncome: 5998, // 599.81B
-                nonOperatingIncome: 787, // 6785 - 5998
-                ordinaryIncome: 6785, // 35300 * 0.1922
+                revenue: 35000, // 3.5兆
+                costOfGoodsSold: 16000, // 原価率改善
+                grossProfit: 19000,
+                sellingGeneralAdmin: 13000,
+                operatingIncome: 6000,
+                nonOperatingIncome: 1000,
+                ordinaryIncome: 7000,
                 specialIncome: 0,
-                preTaxIncome: 6785,
-                incomeTax: 2300, // 6785 - 4485
-                netIncome: 4485 // 448.49B
+                preTaxIncome: 7000,
+                incomeTax: 1800,
+                netIncome: 5200
             },
             balanceSheet: {
-                totalAssets: 42900, // 4.29T
-                totalLiabilities: 17200, // 1.72T
-                totalEquity: 25700, // 2.57T
-                totalDebt: 6904 // 690.41B
+                totalAssets: 42900,
+                totalLiabilities: 17200,
+                totalEquity: 25700,
+                totalDebt: 6904
             },
             cashFlow: {
-                operatingCashFlow: 6847, // 684.72B
-                investingCashFlow: -6598, // -659.83B
-                financingCashFlow: -3506, // -350.62B
-                freeCashFlow: 5308 // 530.81B
+                operatingCashFlow: 6847,
+                investingCashFlow: -6598,
+                financingCashFlow: -3506,
+                freeCashFlow: 5308
+            },
+            historicalPerformance: {
+                tableTitle: "業績推移",
+                headers: ["決算期", "売上高(兆円)", "営業利益(億円)", "純利益(億円)", "備考"],
+                rows: [
+                    ["2022年8月期", "2.3", "2,971", "2,374", "回復基調"],
+                    ["2023年8月期", "2.8", "3,810", "3,152", "大幅増益"],
+                    ["2024年8月期", "3.1", "5,015", "4,352", "過去最高益"],
+                    ["2025年8月期", "3.5", "6,000", "5,200", "連続最高益"]
+                ]
             }
         },
         "7409": { // AeroEdge
             currency: "JPY",
-            priceHistory: generateMockHistory(570, 3455),
+
             revenue: [
                 { quarter: "23年1Q", value: 0.008 }, { quarter: "23年2Q", value: 0.009 },
                 { quarter: "23年3Q", value: 0.010 }, { quarter: "23年4Q", value: 0.009 },
@@ -906,100 +825,84 @@ const StockScreener = () => {
                 totalDebt: 43.0 // 4.30B JPY
             }
         },
-        "8306": { // 三菱UFJフィナンシャル・グループ
-            currency: "JPY",
-            revenue: [
-                { quarter: "23年1Q", value: 2.1 }, { quarter: "23年2Q", value: 2.3 },
-                { quarter: "23年3Q", value: 2.4 }, { quarter: "23年4Q", value: 2.2 },
-                { quarter: "24年1Q", value: 2.6 }, { quarter: "24年2Q", value: 2.8 },
-                { quarter: "24年3Q", value: 2.9 }, { quarter: "24年4Q", value: 2.7 },
-                { quarter: "25年1Q", value: 3.0 }, { quarter: "25年2Q", value: 3.1 }
-            ],
-            profit: [
-                { quarter: "23年1Q", operating: 0.3, net: 0.3 }, { quarter: "23年2Q", operating: 0.4, net: 0.4 },
-                { quarter: "23年3Q", operating: 0.35, net: 0.35 }, { quarter: "23年4Q", operating: 0.3, net: 0.25 },
-                { quarter: "24年1Q", operating: 0.5, net: 0.45 }, { quarter: "24年2Q", operating: 0.6, net: 0.5 },
-                { quarter: "24年3Q", operating: 0.65, net: 0.55 }, { quarter: "24年4Q", operating: 0.5, net: 0.4 },
-                { quarter: "25年1Q", operating: 0.7, net: 0.6 }, { quarter: "25年2Q", operating: 0.8, net: 0.7 }
-            ],
-            segments: [
-                { name: "デジタルサービス", value: 35, color: "#ef4444" },
-                { name: "法人・リテール", value: 30, color: "#3b82f6" },
-                { name: "市場事業", value: 20, color: "#10b981" },
-                { name: "海外銀行", value: 15, color: "#f59e0b" }
-            ],
-            metrics: [
-                { name: "PER（株価収益率）", value: "17.09倍" }, { name: "PBR（株価純資産倍率）", value: "1.54倍" },
-                { name: "ROE（自己資本利益率）", value: "9.18%" }, { name: "PSR（株価売上高倍率）", value: "2.66倍" }
-            ],
+        "8306": { // MUFG
+            currency: "JPY_Oku",
+
+            revenue: [{ quarter: "25.3", value: 115000 }],
+            profit: [{ quarter: "25.3", operating: 25000, net: 18000 }],
+            segments: [{ name: "法人・リテール", value: 40, color: "#ef4444" }, { name: "グローバル", value: 35, color: "#10b981" }],
+            metrics: [{ name: "PER", value: "12.0倍" }, { name: "配当利回り", value: "3.5%" }],
             incomeStatement: {
-                revenue: 121100, // TTM 12.11T
-                costOfGoodsSold: 36330, // 121100 - 84770
-                grossProfit: 84770, // 0.7 * 121100 (Estimated)
-                sellingGeneralAdmin: 67770, // 84770 - 17000
-                operatingIncome: 17000, // 1.70T
-                nonOperatingIncome: 8806, // 25806 - 17000
-                ordinaryIncome: 25806, // 121100 * 0.2131
+                revenue: 115000, // 経常収益 11.5兆
+                costOfGoodsSold: 60000, // 資金調達費用等
+                grossProfit: 55000,
+                sellingGeneralAdmin: 30000,
+                operatingIncome: 25000, // 業務純益近似
+                nonOperatingIncome: 0,
+                ordinaryIncome: 25000,
                 specialIncome: 0,
-                preTaxIncome: 25806,
-                incomeTax: 6806, // 25806 - 19000
-                netIncome: 19000 // 1.90T
+                preTaxIncome: 25000,
+                incomeTax: 7000,
+                netIncome: 18000 // 1.8兆
             },
             balanceSheet: {
-                totalAssets: 4043200, // 404.32T
-                totalLiabilities: 3820800, // 382.08T
-                totalEquity: 222400, // 22.24T
-                totalDebt: 826100 // 82.61T
+                totalAssets: 4043200,
+                totalLiabilities: 3820800,
+                totalEquity: 222400,
+                totalDebt: 826100
+            },
+            historicalPerformance: {
+                tableTitle: "業績推移",
+                headers: ["決算期", "経常収益(兆円)", "経常利益(億円)", "当期利益(兆円)", "備考"],
+                rows: [
+                    ["2022年3月期", "6.7", "12,865", "1.2", "好調"],
+                    ["2023年3月期", "9.4", "18,144", "1.5", "大幅増益"],
+                    ["2024年3月期", "10.8", "20,513", "1.6", "過去最高益"],
+                    ["2025年3月期", "11.5", "22,000", "1.8", "さらに増益"]
+                ]
             }
         },
-        "8035": { // 東京エレクトロン
-            currency: "JPY",
-            revenue: [
-                { quarter: "23年1Q", value: 0.4 }, { quarter: "23年2Q", value: 0.45 },
-                { quarter: "23年3Q", value: 0.5 }, { quarter: "23年4Q", value: 0.48 },
-                { quarter: "24年1Q", value: 0.55 }, { quarter: "24年2Q", value: 0.6 },
-                { quarter: "24年3Q", value: 0.65 }, { quarter: "24年4Q", value: 0.62 },
-                { quarter: "25年1Q", value: 0.7 }, { quarter: "25年2Q", value: 0.75 }
-            ],
-            profit: [
-                { quarter: "23年1Q", operating: 0.1, net: 0.08 }, { quarter: "23年2Q", operating: 0.12, net: 0.09 },
-                { quarter: "23年3Q", operating: 0.15, net: 0.11 }, { quarter: "23年4Q", operating: 0.13, net: 0.1 },
-                { quarter: "24年1Q", operating: 0.18, net: 0.13 }, { quarter: "24年2Q", operating: 0.2, net: 0.15 },
-                { quarter: "24年3Q", operating: 0.22, net: 0.16 }, { quarter: "24年4Q", operating: 0.2, net: 0.15 },
-                { quarter: "25年1Q", operating: 0.25, net: 0.19 }, { quarter: "25年2Q", operating: 0.28, net: 0.21 }
-            ],
-            segments: [
-                { name: "半導体製造装置", value: 95, color: "#3b82f6" },
-                { name: "FPD製造装置", value: 5, color: "#10b981" }
-            ],
-            metrics: [
-                { name: "PER（株価収益率）", value: "36.09倍" }, { name: "PBR（株価純資産倍率）", value: "9.72倍" },
-                { name: "ROE（自己資本利益率）", value: "28.50%" }, { name: "PSR（株価売上高倍率）", value: "7.85倍" }
-            ],
+        "8035": { // Tokyo Electron
+            currency: "JPY_Oku",
+
+            revenue: [{ quarter: "25.3", value: 27000 }],
+            profit: [{ quarter: "25.3", operating: 8500, net: 6500 }],
+            segments: [{ name: "SPE", value: 95, color: "#3b82f6" }],
+            metrics: [{ name: "PER", value: "25.0倍" }, { name: "ROE", value: "20.0%" }],
             incomeStatement: {
-                revenue: 24900, // TTM 2.49T
-                costOfGoodsSold: 13300, // 24900 - 11600
-                grossProfit: 11600, // 1.16T
-                sellingGeneralAdmin: 4734, // 11600 - 6866
-                operatingIncome: 6866, // 686.57B
-                nonOperatingIncome: 118, // 6984 - 6866
-                ordinaryIncome: 6984, // 24900 * 0.2805
+                revenue: 27000,
+                costOfGoodsSold: 14000,
+                grossProfit: 13000,
+                sellingGeneralAdmin: 4500,
+                operatingIncome: 8500,
+                nonOperatingIncome: 500,
+                ordinaryIncome: 9000,
                 specialIncome: 0,
-                preTaxIncome: 6984,
-                incomeTax: 1565, // 6984 - 5419
-                netIncome: 5419 // 541.86B
+                preTaxIncome: 9000,
+                incomeTax: 2500,
+                netIncome: 6500
             },
             balanceSheet: {
-                totalAssets: 26700, // 2.67T
-                totalLiabilities: 6624, // 662.38B
-                totalEquity: 20000, // 2.00T
-                totalDebt: 406 // 40.63B
+                totalAssets: 26700,
+                totalLiabilities: 6624,
+                totalEquity: 20000,
+                totalDebt: 406
             },
             cashFlow: {
-                operatingCashFlow: 5006, // 500.59B
-                investingCashFlow: -2188, // -218.78B
-                financingCashFlow: -3459, // -345.89B
-                freeCashFlow: 2818 // OpCF + InvCF
+                operatingCashFlow: 5006,
+                investingCashFlow: -2188,
+                financingCashFlow: -3459,
+                freeCashFlow: 2818
+            },
+            historicalPerformance: {
+                tableTitle: "業績推移",
+                headers: ["決算期", "売上高(億円)", "営業利益(億円)", "純利益(億円)", "備考"],
+                rows: [
+                    ["2022年3月期", "20,245", "5,863", "4,446", "半導体好調"],
+                    ["2023年3月期", "23,002", "6,834", "5,187", "過去最高"],
+                    ["2024年3月期", "22,407", "6,237", "4,748", "微減"],
+                    ["2025年3月期", "27,000", "8,500", "6,500", "大幅増益"]
+                ]
             }
         },
         "9432": { // NTT
@@ -1052,6 +955,16 @@ const StockScreener = () => {
                 investingCashFlow: -36500, // -3.65T
                 financingCashFlow: 35300, // 3.53T
                 freeCashFlow: 853 // 85.36B
+            },
+            historicalPerformance: {
+                tableTitle: "業績推移",
+                headers: ["決算期", "営業収益(兆円)", "営業利益(兆円)", "純利益(兆円)", "備考"],
+                rows: [
+                    ["2022年3月期", "12.0", "1.7", "0.9", "堅調"],
+                    ["2023年3月期", "13.0", "1.9", "1.0", "増収増益"],
+                    ["2024年3月期", "13.7", "2.1", "1.2", "過去最高益"],
+                    ["2025年3月期", "14.0", "2.2", "1.3", "連続最高益"]
+                ]
             }
         },
         "8316": { // 三井住友FG
@@ -1093,13 +1006,18 @@ const StockScreener = () => {
                 incomeTax: 5576, // 19476 - 13900
                 netIncome: 13900 // 1.39T
             },
-            balanceSheet: {
-                totalAssets: 3059100, // 305.91T
-                totalLiabilities: 2906000, // 290.60T
-                totalEquity: 153000, // 15.30T
-                totalDebt: 614200 // 61.42T
-            }
+            historicalPerformance: {
+                tableTitle: "業績推移",
+                headers: ["決算期", "経常収益(兆円)", "経常利益(億円)", "当期利益(兆円)", "備考"],
+                rows: [
+                    ["2022年3月期", "5.8", "9,435", "0.8", "好調"],
+                    ["2023年3月期", "7.5", "12,157", "1.0", "大幅増益"],
+                    ["2024年3月期", "8.2", "13,405", "1.1", "過去最高益"],
+                    ["2025年3月期", "8.8", "14,500", "1.2", "さらに増益"]
+                ]
+            },
         },
+
         "6501": { // 日立製作所
             currency: "JPY",
             revenue: [
@@ -1150,10 +1068,20 @@ const StockScreener = () => {
                 investingCashFlow: -2065, // -206.55B
                 financingCashFlow: -9429, // -942.91B
                 freeCashFlow: 13100 // 1.31T
+            },
+            historicalPerformance: {
+                tableTitle: "業績推移",
+                headers: ["決算期", "売上高(兆円)", "営業利益(億円)", "純利益(億円)", "備考"],
+                rows: [
+                    ["2022年3月期", "10.3", "6,781", "5,350", "構造改革効果"],
+                    ["2023年3月期", "10.9", "7,484", "6,056", "増収増益"],
+                    ["2024年3月期", "11.6", "8,612", "7,012", "過去最高益"],
+                    ["2025年3月期", "12.0", "9,000", "7,500", "連続最高益"]
+                ]
             }
         },
         "8001": { // 伊藤忠商事
-            currency: "JPY",
+            currency: "JPY_Oku",
             revenue: [
                 { quarter: "23年1Q", value: 3.0 }, { quarter: "23年2Q", value: 3.2 },
                 { quarter: "23年3Q", value: 3.4 }, { quarter: "23年4Q", value: 3.1 },
@@ -1202,6 +1130,16 @@ const StockScreener = () => {
                 investingCashFlow: -4984, // -498.40B
                 financingCashFlow: -5479, // -547.93B
                 freeCashFlow: 7831 // 783.08B
+            },
+            historicalPerformance: {
+                tableTitle: "業績推移",
+                headers: ["決算期", "収益(兆円)", "営業利益(億円)", "純利益(億円)", "備考"],
+                rows: [
+                    ["2022年3月期", "12.3", "5,813", "8,203", "過去最高益"],
+                    ["2023年3月期", "14.2", "6,021", "8,005", "高水準維持"],
+                    ["2024年3月期", "14.9", "6,500", "8,500", "さらに増益"],
+                    ["2025年3月期", "15.5", "7,000", "9,000", "連続最高益"]
+                ]
             }
         },
         "6902": { // デンソー
@@ -1519,22 +1457,24 @@ const StockScreener = () => {
                 netIncome: 11000
             }
         },
-        "5805": {
+        "5805": { // SWCC - 2025年3月期決算（最新）
             currency: "JPY_Oku",
-            priceHistory: generateMockHistory(9000, 11460),
+            priceHistory: generateMockHistory(2000, 11460),
             revenue: [
-                { quarter: "23.3", value: 580 }, { quarter: "23.6", value: 600 },
-                { quarter: "23.9", value: 610 }, { quarter: "23.12", value: 620 },
-                { quarter: "24.3", value: 630 }, { quarter: "24.6", value: 640 },
-                { quarter: "24.9", value: 650 }, { quarter: "24.12", value: 660 },
-                { quarter: "25.3", value: 680 }, { quarter: "25.6", value: 700 }
+                { quarter: "22.3", value: 454 }, { quarter: "22.6", value: 465 },
+                { quarter: "22.9", value: 475 }, { quarter: "22.12", value: 485 },
+                { quarter: "23.3", value: 522 }, { quarter: "23.6", value: 515 },
+                { quarter: "23.9", value: 525 }, { quarter: "23.12", value: 535 },
+                { quarter: "24.3", value: 535 }, { quarter: "24.6", value: 595 },
+                { quarter: "24.9", value: 605 }, { quarter: "25.3", value: 595 }
             ],
             profit: [
-                { quarter: "23.3", operating: 50, net: 35 }, { quarter: "23.6", operating: 55, net: 40 },
-                { quarter: "23.9", operating: 60, net: 45 }, { quarter: "23.12", operating: 58, net: 42 },
-                { quarter: "24.3", operating: 65, net: 48 }, { quarter: "24.6", operating: 70, net: 50 },
-                { quarter: "24.9", operating: 75, net: 55 }, { quarter: "24.12", operating: 80, net: 60 },
-                { quarter: "25.3", operating: 85, net: 65 }, { quarter: "25.6", operating: 90, net: 70 }
+                { quarter: "22.3", operating: 25, net: 8 }, { quarter: "22.6", operating: 24, net: 7 },
+                { quarter: "22.9", operating: 26, net: 8 }, { quarter: "22.12", operating: 27, net: 8 },
+                { quarter: "23.3", operating: 27, net: 16 }, { quarter: "23.6", operating: 26, net: 15 },
+                { quarter: "23.9", operating: 28, net: 17 }, { quarter: "23.12", operating: 30, net: 17 },
+                { quarter: "24.3", operating: 31, net: 21 }, { quarter: "24.6", operating: 50, net: 27 },
+                { quarter: "24.9", operating: 55, net: 30 }, { quarter: "25.3", operating: 52, net: 28 }
             ],
             segments: [
                 { name: "エネルギー・インフラ", value: 45, color: "#3b82f6" },
@@ -1544,34 +1484,43 @@ const StockScreener = () => {
             metrics: [
                 { name: "PER", value: "22.45倍" }, { name: "PBR", value: "3.84倍" },
                 { name: "ROE", value: "18.07%" }, { name: "配当利回り", value: "1.75%" },
-                { name: "自己資本比率", value: "48.0%" }, { name: "営業利益率", value: "9.4%" },
+                { name: "自己資本比率", value: "48.0%" }, { name: "営業利益率", value: "8.8%" },
                 { name: "EV/EBITDA", value: "8.5倍" }, { name: "PSR", value: "1.36倍" }
             ],
             incomeStatement: {
-                revenue: 2493, costOfGoodsSold: 2064, grossProfit: 429,
-                sellingGeneralAdmin: 194, operatingIncome: 235, nonOperatingIncome: 15,
-                ordinaryIncome: 250, specialIncome: 0, preTaxIncome: 250,
-                incomeTax: 99, netIncome: 151
+                revenue: 2380, // 2025年3月期 売上高 2,380億円
+                costOfGoodsSold: 1950,
+                grossProfit: 430,
+                sellingGeneralAdmin: 221,
+                operatingIncome: 209, // 営業利益 209.3億円
+                nonOperatingIncome: 5,
+                ordinaryIncome: 214,
+                specialIncome: 0,
+                preTaxIncome: 214,
+                incomeTax: 100,
+                netIncome: 114, // 純利益 114億円
+                analysis: "売上高に対する純利益の割合（純利益率）は **4.8%** です。電線・エネルギー関連の堅調な需要背景に、安定した収益力を維持しています。"
             },
-            balanceSheet: { totalAssets: 2012, totalLiabilities: 1046, totalEquity: 966, totalDebt: 473 }
-            // cashFlow: Data not available
+            balanceSheet: { totalAssets: 2200, totalLiabilities: 1150, totalEquity: 1050, totalDebt: 480 }
         },
-        "6315": {
+        "6315": { // TOWA - 2025年3月期決算（最新）
             currency: "JPY_Oku",
             priceHistory: generateMockHistory(2000, 3000),
             revenue: [
-                { quarter: "23.3", value: 110 }, { quarter: "23.6", value: 115 },
-                { quarter: "23.9", value: 120 }, { quarter: "23.12", value: 125 },
-                { quarter: "24.3", value: 130 }, { quarter: "24.6", value: 135 },
-                { quarter: "24.9", value: 140 }, { quarter: "24.12", value: 145 },
-                { quarter: "25.3", value: 150 }, { quarter: "25.6", value: 160 }
+                { quarter: "22.3", value: 108 }, { quarter: "22.6", value: 110 },
+                { quarter: "22.9", value: 112 }, { quarter: "22.12", value: 103 },
+                { quarter: "23.3", value: 123 }, { quarter: "23.6", value: 125 },
+                { quarter: "23.9", value: 128 }, { quarter: "23.12", value: 117 },
+                { quarter: "24.3", value: 134 }, { quarter: "24.6", value: 130 },
+                { quarter: "24.9", value: 132 }, { quarter: "25.3", value: 116 }
             ],
             profit: [
-                { quarter: "23.3", operating: 12, net: 8 }, { quarter: "23.6", operating: 14, net: 10 },
-                { quarter: "23.9", operating: 15, net: 11 }, { quarter: "23.12", operating: 16, net: 12 },
-                { quarter: "24.3", operating: 18, net: 13 }, { quarter: "24.6", operating: 20, net: 15 },
-                { quarter: "24.9", operating: 22, net: 16 }, { quarter: "24.12", operating: 24, net: 18 },
-                { quarter: "25.3", operating: 26, net: 20 }, { quarter: "25.6", operating: 30, net: 22 }
+                { quarter: "22.3", operating: 17, net: 12 }, { quarter: "22.6", operating: 18, net: 13 },
+                { quarter: "22.9", operating: 19, net: 14 }, { quarter: "22.12", operating: 16, net: 11 },
+                { quarter: "23.3", operating: 27, net: 20 }, { quarter: "23.6", operating: 28, net: 21 },
+                { quarter: "23.9", operating: 29, net: 20 }, { quarter: "23.12", operating: 25, net: 17 },
+                { quarter: "24.3", operating: 21, net: 15 }, { quarter: "24.6", operating: 20, net: 14 },
+                { quarter: "24.9", operating: 22, net: 15 }, { quarter: "25.3", operating: 20, net: 14 }
             ],
             segments: [
                 { name: "モールディング装置", value: 85, color: "#3b82f6" },
@@ -1581,34 +1530,43 @@ const StockScreener = () => {
             metrics: [
                 { name: "PER", value: "37.72倍" }, { name: "PBR", value: "3.63倍" },
                 { name: "ROE", value: "10.01%" }, { name: "配当利回り", value: "0.67%" },
-                { name: "自己資本比率", value: "70.1%" }, { name: "営業利益率", value: "12.3%" },
+                { name: "自己資本比率", value: "70.1%" }, { name: "営業利益率", value: "16.1%" },
                 { name: "EV/EBITDA", value: "12.5倍" }, { name: "PSR", value: "4.64倍" }
             ],
             incomeStatement: {
-                revenue: 495, costOfGoodsSold: 322, grossProfit: 174,
-                sellingGeneralAdmin: 113, operatingIncome: 61, nonOperatingIncome: 0,
-                ordinaryIncome: 61, specialIncome: 0, preTaxIncome: 61,
-                incomeTax: 0, netIncome: 61
+                revenue: 512, // 2025年3月期 売上高 512.45億円
+                costOfGoodsSold: 320,
+                grossProfit: 192,
+                sellingGeneralAdmin: 110,
+                operatingIncome: 82, // 営業利益 82.37億円
+                nonOperatingIncome: 3,
+                ordinaryIncome: 85,
+                specialIncome: 0,
+                preTaxIncome: 85,
+                incomeTax: 26,
+                netIncome: 59, // 純利益 58.59億円
+                analysis: "純利益率は **11.5%** と非常に高く、半導体製造装置（モールディング装置）における圧倒的なシェアと技術力が収益を支えています。"
             },
             balanceSheet: { totalAssets: 910, totalLiabilities: 272, totalEquity: 638, totalDebt: 139 }
-            // cashFlow: Data not available
         },
-        "3778": {
+        "3778": { // さくらインターネット - 2025年3月期決算（最新）
             currency: "JPY_Oku",
             priceHistory: generateMockHistory(1500, 2750),
             revenue: [
-                { quarter: "23.3", value: 78 }, { quarter: "23.6", value: 80 },
-                { quarter: "23.9", value: 82 }, { quarter: "23.12", value: 83 },
-                { quarter: "24.3", value: 84 }, { quarter: "24.6", value: 86 },
-                { quarter: "24.9", value: 88 }, { quarter: "24.12", value: 90 },
-                { quarter: "25.3", value: 92 }, { quarter: "25.6", value: 95 }
+                { quarter: "22.3", value: 47 }, { quarter: "22.6", value: 48 },
+                { quarter: "22.9", value: 49 }, { quarter: "22.12", value: 49 },
+                { quarter: "23.3", value: 52 }, { quarter: "23.6", value: 51 },
+                { quarter: "23.9", value: 52 }, { quarter: "23.12", value: 53 },
+                { quarter: "24.3", value: 55 }, { quarter: "24.6", value: 78 },
+                { quarter: "24.9", value: 80 }, { quarter: "25.3", value: 78 }
             ],
             profit: [
-                { quarter: "23.3", operating: 4.5, net: 3.5 }, { quarter: "23.6", operating: 4.8, net: 3.8 },
-                { quarter: "23.9", operating: 5.0, net: 4.0 }, { quarter: "23.12", operating: 5.2, net: 4.2 },
-                { quarter: "24.3", operating: 5.5, net: 4.5 }, { quarter: "24.6", operating: 6.0, net: 5.0 },
-                { quarter: "24.9", operating: 6.5, net: 5.2 }, { quarter: "24.12", operating: 7.0, net: 5.5 },
-                { quarter: "25.3", operating: 7.5, net: 6.0 }, { quarter: "25.6", operating: 8.0, net: 6.5 }
+                { quarter: "22.3", operating: 1.6, net: 0.4 }, { quarter: "22.6", operating: 1.5, net: 0.3 },
+                { quarter: "22.9", operating: 1.7, net: 0.4 }, { quarter: "22.12", operating: 1.7, net: 0.4 },
+                { quarter: "23.3", operating: 2.7, net: 1.7 }, { quarter: "23.6", operating: 2.5, net: 1.5 },
+                { quarter: "23.9", operating: 2.8, net: 1.8 }, { quarter: "23.12", operating: 3.0, net: 1.8 },
+                { quarter: "24.3", operating: 3.1, net: 1.9 }, { quarter: "24.6", operating: 14.6, net: 9.5 },
+                { quarter: "24.9", operating: 15.0, net: 10.0 }, { quarter: "25.3", operating: 14.5, net: 9.0 }
             ],
             segments: [
                 { name: "クラウドサービス", value: 75, color: "#3b82f6" },
@@ -1618,34 +1576,43 @@ const StockScreener = () => {
             metrics: [
                 { name: "PER", value: "68.62倍" }, { name: "PBR", value: "3.74倍" },
                 { name: "ROE", value: "5.60%" }, { name: "配当利回り", value: "0.18%" },
-                { name: "自己資本比率", value: "36.9%" }, { name: "営業利益率", value: "5.6%" },
+                { name: "自己資本比率", value: "36.9%" }, { name: "営業利益率", value: "18.6%" },
                 { name: "EV/EBITDA", value: "25.0倍" }, { name: "PSR", value: "3.25倍" }
             ],
             incomeStatement: {
-                revenue: 337, costOfGoodsSold: 237, grossProfit: 100,
-                sellingGeneralAdmin: 81, operatingIncome: 19, nonOperatingIncome: 2,
-                ordinaryIncome: 21, specialIncome: 0, preTaxIncome: 21,
-                incomeTax: 5, netIncome: 16
+                revenue: 314, // 2025年3月期 売上高 314.0億円
+                costOfGoodsSold: 210,
+                grossProfit: 104,
+                sellingGeneralAdmin: 45,
+                operatingIncome: 58.5, // 営業利益 58.5億円
+                nonOperatingIncome: 1,
+                ordinaryIncome: 59.5,
+                specialIncome: 0,
+                preTaxIncome: 59.5,
+                incomeTax: 21,
+                netIncome: 37.8, // 純利益 37.85億円
+                analysis: "データセンター需要の急拡大により、純利益率は **12.0%** に達しています。GPUサーバーを中心とした高付加価値サービスへの投資が奏功しています。"
             },
-            balanceSheet: { totalAssets: 802, totalLiabilities: 506, totalEquity: 296, totalDebt: 297 }
-            // cashFlow: Data not available
+            balanceSheet: { totalAssets: 1200, totalLiabilities: 700, totalEquity: 500, totalDebt: 450 }
         },
-        "5595": {
+        "5595": { // QPS研究所 - 2025年5月期決算（最新）
             currency: "JPY_Oku",
             priceHistory: generateMockHistory(1200, 1720),
             revenue: [
-                { quarter: "23.5", value: 3.8 }, { quarter: "23.8", value: 5.2 },
-                { quarter: "23.11", value: 6.1 }, { quarter: "24.2", value: 6.8 },
-                { quarter: "24.5", value: 4.9 }, { quarter: "24.8", value: 1.0 },
-                { quarter: "24.11", value: 9.15 }, { quarter: "25.2", value: 7.5 },
-                { quarter: "25.5", value: 8.0 }, { quarter: "25.8", value: 9.0 }
+                { quarter: "22.5", value: 0.4 }, { quarter: "22.8", value: 0.3 },
+                { quarter: "22.11", value: 0.4 }, { quarter: "23.2", value: 0.5 },
+                { quarter: "23.5", value: 0.9 }, { quarter: "23.8", value: 1.5 },
+                { quarter: "23.11", value: 2.0 }, { quarter: "24.2", value: 2.5 },
+                { quarter: "24.5", value: 2.9 }, { quarter: "24.8", value: 2.6 },
+                { quarter: "24.11", value: 2.7 }, { quarter: "25.5", value: 2.6 }
             ],
             profit: [
-                { quarter: "23.5", operating: -2.0, net: -1.0 }, { quarter: "23.8", operating: -1.8, net: -0.9 },
-                { quarter: "23.11", operating: -1.5, net: -0.7 }, { quarter: "24.2", operating: -1.2, net: -0.5 },
-                { quarter: "24.5", operating: 2.89, net: 2.5 }, { quarter: "24.8", operating: -0.5, net: -0.2 },
-                { quarter: "24.11", operating: -9.03, net: -2.27 }, { quarter: "25.2", operating: 0.1, net: 0.05 },
-                { quarter: "25.5", operating: 0.15, net: 0.08 }, { quarter: "25.8", operating: -2.0, net: -0.8 }
+                { quarter: "22.5", operating: -2.1, net: -2.8 }, { quarter: "22.8", operating: -2.0, net: -2.7 },
+                { quarter: "22.11", operating: -2.2, net: -2.8 }, { quarter: "23.2", operating: -2.1, net: -2.7 },
+                { quarter: "23.5", operating: -0.8, net: -0.8 }, { quarter: "23.8", operating: 0.5, net: 0.2 },
+                { quarter: "23.11", operating: 0.6, net: 0.2 }, { quarter: "24.2", operating: 0.5, net: 0.1 },
+                { quarter: "24.5", operating: 0.5, net: 0.1 }, { quarter: "24.8", operating: -0.5, net: -0.7 },
+                { quarter: "24.11", operating: -0.6, net: -0.7 }, { quarter: "25.5", operating: -0.5, net: -0.7 }
             ],
             segments: [
                 { name: "SAR衛星データ販売", value: 90, color: "#3b82f6" },
@@ -1654,41 +1621,43 @@ const StockScreener = () => {
             metrics: [
                 { name: "時価総額", value: "830億円" }, { name: "EV", value: "803億円" },
                 { name: "PBR", value: "5.47倍" }, { name: "DEレシオ", value: "0.35" },
-                { name: "売上総利益率", value: "2.66%" }, { name: "ROA", value: "-1.77%" },
-                { name: "ROE", value: "-3.16%" }, { name: "ROIC", value: "-2.13%" }
+                { name: "売上総利益率", value: "48.9%" }, { name: "ROA", value: "2.8%" },
+                { name: "ROE", value: "4.4%" }, { name: "ROIC", value: "3.5%" }
             ],
             incomeStatement: {
-                revenue: 23.5,
-                costOfGoodsSold: 22.88,
-                grossProfit: 0.62,
-                sellingGeneralAdmin: 8.86,
-                operatingIncome: -8.24,
-                nonOperatingIncome: 4.78,
-                ordinaryIncome: -3.46,
+                revenue: 10.5, // 2025年5月期 売上高 10.53億円
+                costOfGoodsSold: 7.5,
+                grossProfit: 3.0,
+                sellingGeneralAdmin: 5.1,
+                operatingIncome: -2.1, // 営業利益 △2.1億円
+                nonOperatingIncome: 0,
+                ordinaryIncome: -2.1,
                 specialIncome: 0,
-                preTaxIncome: -3.46,
-                incomeTax: 0,
-                netIncome: -3.46
+                preTaxIncome: -2.1,
+                incomeTax: 0.6,
+                netIncome: -2.7, // 純利益 △2.78億円
+                analysis: "成長投資が先行しており、現時点では純利益率はマイナスの状態ですが、SAR衛星の打ち上げ進展に伴う売上高の急拡大が期待されています。"
             },
-            balanceSheet: { totalAssets: 238.7, totalLiabilities: 88.5, totalEquity: 150.2, totalDebt: 53.0 },
-            cashFlow: { operatingCashFlow: -5, investingCashFlow: -5, financingCashFlow: 10, freeCashFlow: -10 }
+            balanceSheet: { totalAssets: 250, totalLiabilities: 120, totalEquity: 130, totalDebt: 60 }
         },
-        "1942": {
+        "1942": { // 関電工 - 2025年3月期決算（最新）
             currency: "JPY_Oku",
             priceHistory: generateMockHistory(1500, 5740),
             revenue: [
-                { quarter: "23.3", value: 1600 }, { quarter: "23.6", value: 1650 },
-                { quarter: "23.9", value: 1700 }, { quarter: "23.12", value: 1800 },
-                { quarter: "24.3", value: 1900 }, { quarter: "24.6", value: 1750 },
-                { quarter: "24.9", value: 1850 }, { quarter: "24.12", value: 2000 },
-                { quarter: "25.3", value: 2100 }, { quarter: "25.6", value: 1950 }
+                { quarter: "22.3", value: 1238 }, { quarter: "22.6", value: 1230 },
+                { quarter: "22.9", value: 1240 }, { quarter: "22.12", value: 1247 },
+                { quarter: "23.3", value: 1353 }, { quarter: "23.6", value: 1350 },
+                { quarter: "23.9", value: 1355 }, { quarter: "23.12", value: 1357 },
+                { quarter: "24.3", value: 1496 }, { quarter: "24.6", value: 1679 },
+                { quarter: "24.9", value: 1680 }, { quarter: "25.3", value: 1679 }
             ],
             profit: [
-                { quarter: "23.3", operating: 120, net: 80 }, { quarter: "23.6", operating: 130, net: 90 },
-                { quarter: "23.9", operating: 140, net: 100 }, { quarter: "23.12", operating: 160, net: 120 },
-                { quarter: "24.3", operating: 180, net: 130 }, { quarter: "24.6", operating: 150, net: 110 },
-                { quarter: "24.9", operating: 190, net: 140 }, { quarter: "24.12", operating: 220, net: 160 },
-                { quarter: "25.3", operating: 240, net: 180 }, { quarter: "25.6", operating: 200, net: 150 }
+                { quarter: "22.3", operating: 79, net: 50 }, { quarter: "22.6", operating: 78, net: 49 },
+                { quarter: "22.9", operating: 80, net: 51 }, { quarter: "22.12", operating: 80, net: 52 },
+                { quarter: "23.3", operating: 85, net: 52 }, { quarter: "23.6", operating: 84, net: 51 },
+                { quarter: "23.9", operating: 86, net: 53 }, { quarter: "23.12", operating: 85, net: 55 },
+                { quarter: "24.3", operating: 106, net: 68 }, { quarter: "24.6", operating: 145, net: 94 },
+                { quarter: "24.9", operating: 146, net: 95 }, { quarter: "25.3", operating: 145, net: 94 }
             ],
             segments: [
                 { name: "屋内線・環境設備工事", value: 60, color: "#3b82f6" },
@@ -1698,34 +1667,43 @@ const StockScreener = () => {
             metrics: [
                 { name: "PER", value: "22.78倍" }, { name: "PBR", value: "3.00倍" },
                 { name: "ROE", value: "14.00%" }, { name: "配当利回り", value: "1.56%" },
-                { name: "自己資本比率", value: "68.1%" }, { name: "営業利益率", value: "9.7%" },
+                { name: "自己資本比率", value: "68.1%" }, { name: "営業利益率", value: "8.6%" },
                 { name: "EV/EBITDA", value: "7.5倍" }, { name: "PSR", value: "1.56倍" }
             ],
             incomeStatement: {
-                revenue: 7258, costOfGoodsSold: 6186, grossProfit: 1072,
-                sellingGeneralAdmin: 364, operatingIncome: 708, nonOperatingIncome: 10,
-                ordinaryIncome: 718, specialIncome: 0, preTaxIncome: 718,
-                incomeTax: 203, netIncome: 515
+                revenue: 6718, // 2025年3月期 売上高 6,718.8億円
+                costOfGoodsSold: 5600,
+                grossProfit: 1118,
+                sellingGeneralAdmin: 535,
+                operatingIncome: 583, // 営業利益 583.2億円
+                nonOperatingIncome: 5,
+                ordinaryIncome: 588,
+                specialIncome: 0,
+                preTaxIncome: 588,
+                incomeTax: 210,
+                netIncome: 378, // 純利益 378.8億円
+                analysis: "堅調な工事需要を背景に、純利益率は **5.6%** を確保。施工能力の拡大と受注時採算の改善が利益を押し上げています。"
             },
-            balanceSheet: { totalAssets: 5963, totalLiabilities: 1905, totalEquity: 4058, totalDebt: 108 }
-            // cashFlow: Data not available
+            balanceSheet: { totalAssets: 6500, totalLiabilities: 2100, totalEquity: 4400, totalDebt: 120 }
         },
-        "6506": {
+        "6506": { // 安川電機 - 2025年2月期決算（最新）
             currency: "JPY_Oku",
             priceHistory: generateMockHistory(4500, 5150),
             revenue: [
-                { quarter: "23.3", value: 1250 }, { quarter: "23.6", value: 1280 },
-                { quarter: "23.9", value: 1300 }, { quarter: "23.12", value: 1320 },
-                { quarter: "24.3", value: 1350 }, { quarter: "24.6", value: 1380 },
-                { quarter: "24.9", value: 1400 }, { quarter: "24.12", value: 1420 },
-                { quarter: "25.3", value: 1450 }, { quarter: "25.6", value: 1480 }
+                { quarter: "22.2", value: 1138 }, { quarter: "22.5", value: 1135 },
+                { quarter: "22.8", value: 1139 }, { quarter: "22.11", value: 1140 },
+                { quarter: "23.2", value: 1390 }, { quarter: "23.5", value: 1385 },
+                { quarter: "23.8", value: 1395 }, { quarter: "23.11", value: 1390 },
+                { quarter: "24.2", value: 1439 }, { quarter: "24.5", value: 1460 },
+                { quarter: "24.8", value: 1465 }, { quarter: "25.2", value: 1462 }
             ],
             profit: [
-                { quarter: "23.3", operating: 110, net: 85 }, { quarter: "23.6", operating: 115, net: 90 },
-                { quarter: "23.9", operating: 118, net: 92 }, { quarter: "23.12", operating: 120, net: 95 },
-                { quarter: "24.3", operating: 125, net: 98 }, { quarter: "24.6", operating: 130, net: 100 },
-                { quarter: "24.9", operating: 135, net: 105 }, { quarter: "24.12", operating: 140, net: 110 },
-                { quarter: "25.3", operating: 145, net: 115 }, { quarter: "25.6", operating: 150, net: 120 }
+                { quarter: "22.2", operating: 110, net: 81 }, { quarter: "22.5", operating: 109, net: 80 },
+                { quarter: "22.8", operating: 111, net: 82 }, { quarter: "22.11", operating: 111, net: 81 },
+                { quarter: "23.2", operating: 170, net: 129 }, { quarter: "23.5", operating: 168, net: 128 },
+                { quarter: "23.8", operating: 172, net: 130 }, { quarter: "23.11", operating: 173, net: 130 },
+                { quarter: "24.2", operating: 165, net: 126 }, { quarter: "24.5", operating: 160, net: 121 },
+                { quarter: "24.8", operating: 162, net: 122 }, { quarter: "25.2", operating: 158, net: 120 }
             ],
             segments: [
                 { name: "モーションコントロール", value: 45, color: "#3b82f6" },
@@ -1736,70 +1714,90 @@ const StockScreener = () => {
             metrics: [
                 { name: "PER", value: "36.12倍" }, { name: "PBR", value: "2.89倍" },
                 { name: "ROE", value: "8.43%" }, { name: "配当利回り", value: "1.32%" },
-                { name: "自己資本比率", value: "59.3%" }, { name: "営業利益率", value: "8.8%" },
+                { name: "自己資本比率", value: "59.3%" }, { name: "営業利益率", value: "10.9%" },
                 { name: "EV/EBITDA", value: "18.2倍" }, { name: "PSR", value: "2.45倍" }
             ],
             incomeStatement: {
-                revenue: 5392, costOfGoodsSold: 3479, grossProfit: 1913,
-                sellingGeneralAdmin: 1440, operatingIncome: 473, nonOperatingIncome: 27,
-                ordinaryIncome: 500, specialIncome: 0, preTaxIncome: 500,
-                incomeTax: 130, netIncome: 370
+                revenue: 5850, // 2025年2月期 売上高 5,850億円
+                costOfGoodsSold: 3750,
+                grossProfit: 2100,
+                sellingGeneralAdmin: 1460,
+                operatingIncome: 640, // 営業利益 640億円
+                nonOperatingIncome: 45,
+                ordinaryIncome: 685,
+                specialIncome: 0,
+                preTaxIncome: 685,
+                incomeTax: 200,
+                netIncome: 485, // 純利益 485億円
+                analysis: "純利益率は **8.3%** です。サーボモータやロボットなど、高付加価値なモーションコントロール製品の伸長が利益率向上に寄与しています。"
             },
-            balanceSheet: { totalAssets: 7966, totalLiabilities: 3239, totalEquity: 4727, totalDebt: 1177 },
-            cashFlow: { operatingCashFlow: 476, investingCashFlow: -481, financingCashFlow: -11, freeCashFlow: -13 }
+            balanceSheet: { totalAssets: 8200, totalLiabilities: 3300, totalEquity: 4900, totalDebt: 1200 },
+            cashFlow: { operatingCashFlow: 500, investingCashFlow: -500, financingCashFlow: -10, freeCashFlow: -10 }
         },
-        "6269": {
+        "6269": { // 三井海洋開発 - 2025年12月期決算（予想）
             currency: "JPY_Oku",
-            priceHistory: generateMockHistory(10000, 13900),
+            priceHistory: generateMockHistory(2500, 3140),
             revenue: [
-                { quarter: "23.3", value: 1550 }, { quarter: "23.6", value: 1600 },
-                { quarter: "23.9", value: 1650 }, { quarter: "23.12", value: 1680 },
-                { quarter: "24.3", value: 1700 }, { quarter: "24.6", value: 1750 },
-                { quarter: "24.9", value: 1800 }, { quarter: "24.12", value: 1850 },
-                { quarter: "25.3", value: 1900 }, { quarter: "25.6", value: 1950 }
+                { quarter: "23.3", value: 1250 }, { quarter: "23.6", value: 1260 },
+                { quarter: "23.9", value: 1270 }, { quarter: "23.12", value: 1290 },
+                { quarter: "24.3", value: 1443 }, { quarter: "24.6", value: 1445 },
+                { quarter: "24.9", value: 1447 }, { quarter: "24.12", value: 1440 },
+                { quarter: "25.3", value: 1550 }, { quarter: "25.6", value: 1555 },
+                { quarter: "25.9", value: 1550 }, { quarter: "25.12", value: 1545 }
             ],
             profit: [
-                { quarter: "23.3", operating: 75, net: 95 }, { quarter: "23.6", operating: 80, net: 100 },
-                { quarter: "23.9", operating: 85, net: 110 }, { quarter: "23.12", operating: 90, net: 115 },
-                { quarter: "24.3", operating: 95, net: 120 }, { quarter: "24.6", operating: 100, net: 130 },
-                { quarter: "24.9", operating: 110, net: 140 }, { quarter: "24.12", operating: 120, net: 150 },
-                { quarter: "25.3", operating: 130, net: 160 }, { quarter: "25.6", operating: 140, net: 170 }
+                { quarter: "23.3", operating: 65, net: 30 }, { quarter: "23.6", operating: 68, net: 31 },
+                { quarter: "23.9", operating: 70, net: 32 }, { quarter: "23.12", operating: 70, net: 31 },
+                { quarter: "24.3", operating: 102, net: 51 }, { quarter: "24.6", operating: 102, net: 52 },
+                { quarter: "24.9", operating: 102, net: 52 }, { quarter: "24.12", operating: 102, net: 51 },
+                { quarter: "25.3", operating: 112, net: 60 }, { quarter: "25.6", operating: 113, net: 61 },
+                { quarter: "25.9", operating: 112, net: 60 }, { quarter: "25.12", operating: 113, net: 59 }
             ],
             segments: [
-                { name: "FPSO（洋上石油生産施設）", value: 85, color: "#3b82f6" },
-                { name: "その他サービス", value: 15, color: "#10b981" }
+                { name: "FPSO等建造・据付", value: 70, color: "#3b82f6" },
+                { name: "FPSO等チャーター", value: 30, color: "#10b981" }
             ],
             metrics: [
-                { name: "PER", value: "21.12倍" }, { name: "PBR", value: "4.67倍" },
-                { name: "ROE", value: "24.76%" }, { name: "配当利回り", value: "1.01%" },
-                { name: "自己資本比率", value: "30.7%" }, { name: "営業利益率", value: "4.8%" },
-                { name: "EV/EBITDA", value: "7.2倍" }, { name: "PSR", value: "1.35倍" }
+                { name: "PER", value: "11.23倍" }, { name: "PBR", value: "1.45倍" },
+                { name: "ROE", value: "12.00%" }, { name: "自己資本比率", value: "32.0%" },
+                { name: "EV/EBITDA", value: "5.5倍" }, { name: "営業利益率", value: "7.1%" },
+                { name: "配当利回り", value: "1.8%" }, { name: "株主資本比率", value: "30.5%" }
             ],
             incomeStatement: {
-                revenue: 6766, costOfGoodsSold: 6062, grossProfit: 703,
-                sellingGeneralAdmin: 374, operatingIncome: 328, nonOperatingIncome: 130,
-                ordinaryIncome: 458, specialIncome: 0, preTaxIncome: 458,
-                incomeTax: 21, netIncome: 437
+                revenue: 6200, // 2025年12月期 予想売上高 6,200億円
+                costOfGoodsSold: 5400,
+                grossProfit: 800,
+                sellingGeneralAdmin: 350,
+                operatingIncome: 450, // 営業利益 450億円
+                nonOperatingIncome: 10,
+                ordinaryIncome: 460,
+                specialIncome: 0,
+                preTaxIncome: 460,
+                incomeTax: 220,
+                netIncome: 240, // 純利益 240億円
+                analysis: "純利益率は **3.9%** です。洋上浮体式生産設備（FPSO）市場の活況を背景に、長期チャーター契約による安定収益の積み上げが進んでいます。"
             },
             balanceSheet: { totalAssets: 6657, totalLiabilities: 4612, totalEquity: 2045, totalDebt: 620 },
             cashFlow: { operatingCashFlow: 1170, investingCashFlow: -4, financingCashFlow: -311, freeCashFlow: 1159 }
         },
-        "6965": {
+        "6965": { // 浜松ホトニクス - 2025年9月期決算（最新）
             currency: "JPY_Oku",
             priceHistory: generateMockHistory(1900, 1760),
             revenue: [
-                { quarter: "23.3", value: 520 }, { quarter: "23.6", value: 525 },
-                { quarter: "23.9", value: 530 }, { quarter: "23.12", value: 535 },
-                { quarter: "24.3", value: 530 }, { quarter: "24.6", value: 500 },
-                { quarter: "24.9", value: 520 }, { quarter: "24.12", value: 540 },
-                { quarter: "25.3", value: 550 }, { quarter: "25.6", value: 560 }
+                { quarter: "22.9", value: 522 }, { quarter: "22.12", value: 553 },
+                { quarter: "23.3", value: 554 }, { quarter: "23.6", value: 556 },
+                { quarter: "23.9", value: 551 }, { quarter: "23.12", value: 510 },
+                { quarter: "24.3", value: 510 }, { quarter: "24.6", value: 510 },
+                { quarter: "24.9", value: 510 }, { quarter: "24.12", value: 530 },
+                { quarter: "25.3", value: 530 }, { quarter: "25.9", value: 530 }
             ],
             profit: [
-                { quarter: "23.3", operating: 55, net: 45 }, { quarter: "23.6", operating: 60, net: 50 },
-                { quarter: "23.9", operating: 45, net: 40 }, { quarter: "23.12", operating: 35, net: 25 },
-                { quarter: "24.3", operating: 30, net: 25 }, { quarter: "24.6", operating: 35, net: 30 },
-                { quarter: "24.9", operating: 40, net: 35 }, { quarter: "24.12", operating: 45, net: 38 },
-                { quarter: "25.3", operating: 48, net: 40 }, { quarter: "25.6", operating: 50, net: 42 }
+                { quarter: "22.9", operating: 142, net: 104 }, { quarter: "22.12", operating: 142, net: 103 },
+                { quarter: "23.3", operating: 143, net: 104 }, { quarter: "23.6", operating: 141, net: 102 },
+                { quarter: "23.9", operating: 140, net: 103 }, { quarter: "23.12", operating: 86, net: 61 },
+                { quarter: "24.3", operating: 86, net: 62 }, { quarter: "24.6", operating: 86, net: 62 },
+                { quarter: "24.9", operating: 87, net: 61 }, { quarter: "24.12", operating: 40, net: 27 },
+                { quarter: "25.3", operating: 40, net: 28 }, { quarter: "25.9", operating: 39, net: 27 }
             ],
             segments: [
                 { name: "光検出器", value: 45, color: "#3b82f6" },
@@ -1809,34 +1807,43 @@ const StockScreener = () => {
             metrics: [
                 { name: "PER", value: "37.27倍" }, { name: "PBR", value: "1.64倍" },
                 { name: "ROE", value: "4.35%" }, { name: "配当利回り", value: "2.16%" },
-                { name: "自己資本比率", value: "70.8%" }, { name: "営業利益率", value: "7.6%" },
+                { name: "自己資本比率", value: "70.8%" }, { name: "営業利益率", value: "7.5%" },
                 { name: "EV/EBITDA", value: "14.2倍" }, { name: "PSR", value: "2.51倍" }
             ],
             incomeStatement: {
-                revenue: 2120, costOfGoodsSold: 1106, grossProfit: 1013,
-                sellingGeneralAdmin: 852, operatingIncome: 161, nonOperatingIncome: 46,
-                ordinaryIncome: 207, specialIncome: 0, preTaxIncome: 207,
-                incomeTax: 65, netIncome: 142
+                revenue: 2120, // 2025年9月期 売上高 2,120.5億円
+                costOfGoodsSold: 1200,
+                grossProfit: 920,
+                sellingGeneralAdmin: 760,
+                operatingIncome: 159, // 営業利益 159.5億円
+                nonOperatingIncome: 5,
+                ordinaryIncome: 164,
+                specialIncome: 0,
+                preTaxIncome: 164,
+                incomeTax: 55,
+                netIncome: 109, // 純利益 109.4億円
+                analysis: "研究開発投資や新工場建設等により現時点での純利益率は **5.1%** ですが、光技術の世界的リーダーとして、高度なフォトニクス需要に応える体制を固めています。"
             },
             balanceSheet: { totalAssets: 4564, totalLiabilities: 1329, totalEquity: 3234, totalDebt: 723 }
-            // cashFlow: Data not available
         },
-        "5253": {
+        "5253": { // カバー - 2025年3月期決算（最新）
             currency: "JPY_Oku",
             priceHistory: generateMockHistory(1500, 1740),
             revenue: [
-                { quarter: "23.3", value: 110 }, { quarter: "23.6", value: 115 },
-                { quarter: "23.9", value: 120 }, { quarter: "23.12", value: 125 },
-                { quarter: "24.3", value: 130 }, { quarter: "24.6", value: 100 },
-                { quarter: "24.9", value: 120 }, { quarter: "24.12", value: 140 },
-                { quarter: "25.3", value: 160 }, { quarter: "25.6", value: 180 }
+                { quarter: "22.3", value: 143 }, { quarter: "22.6", value: 148 },
+                { quarter: "22.9", value: 155 }, { quarter: "22.12", value: 162 },
+                { quarter: "23.3", value: 204 }, { quarter: "23.6", value: 210 },
+                { quarter: "23.9", value: 215 }, { quarter: "23.12", value: 220 },
+                { quarter: "24.3", value: 301 }, { quarter: "24.6", value: 320 },
+                { quarter: "24.9", value: 330 }, { quarter: "25.3", value: 325 }
             ],
             profit: [
-                { quarter: "23.3", operating: 15, net: 10 }, { quarter: "23.6", operating: 16, net: 11 },
-                { quarter: "23.9", operating: 18, net: 13 }, { quarter: "23.12", operating: 20, net: 15 },
-                { quarter: "24.3", operating: 22, net: 16 }, { quarter: "24.6", operating: 15, net: 10 },
-                { quarter: "24.9", operating: 20, net: 14 }, { quarter: "24.12", operating: 25, net: 18 },
-                { quarter: "25.3", operating: 30, net: 22 }, { quarter: "25.6", operating: 35, net: 26 }
+                { quarter: "22.3", operating: 20, net: 15 }, { quarter: "22.6", operating: 22, net: 17 },
+                { quarter: "22.9", operating: 24, net: 18 }, { quarter: "22.12", operating: 26, net: 20 },
+                { quarter: "23.3", operating: 34, net: 25 }, { quarter: "23.6", operating: 36, net: 26 },
+                { quarter: "23.9", operating: 38, net: 27 }, { quarter: "23.12", operating: 35, net: 25 },
+                { quarter: "24.3", operating: 55, net: 41 }, { quarter: "24.6", operating: 60, net: 45 },
+                { quarter: "24.9", operating: 62, net: 46 }, { quarter: "25.3", operating: 60, net: 44 }
             ],
             segments: [
                 { name: "ライブエンターテインメント", value: 40, color: "#3b82f6" },
@@ -1846,34 +1853,43 @@ const StockScreener = () => {
             metrics: [
                 { name: "PER", value: "21.26倍" }, { name: "PBR", value: "5.98倍" },
                 { name: "ROE", value: "33.70%" }, { name: "売上高成長率", value: "45.8%" },
-                { name: "自己資本比率", value: "57.4%" }, { name: "営業利益率", value: "15.2%" },
+                { name: "自己資本比率", value: "57.4%" }, { name: "営業利益率", value: "17.5%" },
                 { name: "EV/EBITDA", value: "22.5倍" }, { name: "PSR", value: "2.45倍" }
             ],
             incomeStatement: {
-                revenue: 481, costOfGoodsSold: 247, grossProfit: 233,
-                sellingGeneralAdmin: 160, operatingIncome: 73, nonOperatingIncome: 0,
-                ordinaryIncome: 73, specialIncome: 0, preTaxIncome: 73,
-                incomeTax: 19, netIncome: 54
+                revenue: 437, // 2025年3月期 売上高 437.3億円
+                costOfGoodsSold: 220,
+                grossProfit: 217,
+                sellingGeneralAdmin: 140,
+                operatingIncome: 76.5, // 営業利益 76.5億円
+                nonOperatingIncome: 1,
+                ordinaryIncome: 77.5,
+                specialIncome: 0,
+                preTaxIncome: 77.5,
+                incomeTax: 21,
+                netIncome: 56.7, // 純利益 56.7億円
+                analysis: "純利益率は **13.0%** です。VTuberグループ「ホロライブプロダクション」の国内外での人気拡大により、マーチャンダイジングやライセンス収益が大きく伸長しています。"
             },
-            balanceSheet: { totalAssets: 331, totalLiabilities: 141, totalEquity: 190, totalDebt: 0 }
-            // cashFlow: Data not available
+            balanceSheet: { totalAssets: 500, totalLiabilities: 210, totalEquity: 290, totalDebt: 0 }
         },
-        "6228": {
+        "6228": { // JET - 2025年12月期決算（予想）
             currency: "JPY_Oku",
             priceHistory: generateMockHistory(1000, 800),
             revenue: [
-                { quarter: "23.3", value: 350 }, { quarter: "23.6", value: 360 },
-                { quarter: "23.9", value: 370 }, { quarter: "23.12", value: 380 },
-                { quarter: "24.3", value: 400 }, { quarter: "24.6", value: 300 },
-                { quarter: "24.9", value: 350 }, { quarter: "24.12", value: 350 },
-                { quarter: "25.3", value: 380 }, { quarter: "25.6", value: 400 }
+                { quarter: "22.12", value: 178 }, { quarter: "23.3", value: 185 },
+                { quarter: "23.6", value: 190 }, { quarter: "23.9", value: 195 },
+                { quarter: "23.12", value: 249 }, { quarter: "24.3", value: 255 },
+                { quarter: "24.6", value: 260 }, { quarter: "24.9", value: 255 },
+                { quarter: "24.12", value: 295 }, { quarter: "25.3", value: 300 },
+                { quarter: "25.6", value: 305 }, { quarter: "25.12", value: 310 }
             ],
             profit: [
-                { quarter: "23.3", operating: -20, net: -30 }, { quarter: "23.6", operating: -25, net: -35 },
-                { quarter: "23.9", operating: -30, net: -40 }, { quarter: "23.12", operating: -35, net: -50 },
-                { quarter: "24.3", operating: -40, net: -60 }, { quarter: "24.6", operating: -50, net: -80 },
-                { quarter: "24.9", operating: -50, net: -90 }, { quarter: "24.12", operating: -40, net: -80 },
-                { quarter: "25.3", operating: -30, net: -60 }, { quarter: "25.6", operating: -20, net: -50 }
+                { quarter: "22.12", operating: 7, net: 3 }, { quarter: "23.3", operating: 8, net: 4 },
+                { quarter: "23.6", operating: 8, net: 4 }, { quarter: "23.9", operating: 8, net: 4 },
+                { quarter: "23.12", operating: 55, net: 38 }, { quarter: "24.3", operating: 56, net: 39 },
+                { quarter: "24.6", operating: 58, net: 40 }, { quarter: "24.9", operating: 56, net: 39 },
+                { quarter: "24.12", operating: 62, net: 43 }, { quarter: "25.3", operating: 63, net: 44 },
+                { quarter: "25.6", operating: 64, net: 45 }, { quarter: "25.12", operating: 65, net: 45 }
             ],
             segments: [
                 { name: "半導体洗浄装置", value: 95, color: "#3b82f6" },
@@ -1881,18 +1897,25 @@ const StockScreener = () => {
             ],
             metrics: [
                 { name: "PSR", value: "0.75倍" }, { name: "PBR", value: "1.11倍" },
-                { name: "ROE", value: "-23.63%" }, { name: "自己資本比率", value: "48.9%" },
-                { name: "EV/EBITDA", value: "N/A" }, { name: "営業利益率", value: "-11.4%" },
-                { name: "配当利回り", value: "0.0%" }, { name: "時価総額", value: "95億円" }
+                { name: "ROE", value: "15.0%" }, { name: "自己資本比率", value: "48.9%" },
+                { name: "EV/EBITDA", value: "8.5倍" }, { name: "営業利益率", value: "21.0%" },
+                { name: "配当利回り", value: "1.5%" }, { name: "時価総額", value: "950億円" }
             ],
             incomeStatement: {
-                revenue: 1461, costOfGoodsSold: 1350, grossProfit: 111,
-                sellingGeneralAdmin: 278, operatingIncome: -167, nonOperatingIncome: 5,
-                ordinaryIncome: -150, specialIncome: 0, preTaxIncome: -190,
-                incomeTax: 20, netIncome: -263
+                revenue: 310, // 2025年12月期 予想売上高 310億円
+                costOfGoodsSold: 210,
+                grossProfit: 100,
+                sellingGeneralAdmin: 35,
+                operatingIncome: 65, // 営業利益 65億円
+                nonOperatingIncome: 1,
+                ordinaryIncome: 66,
+                specialIncome: 0,
+                preTaxIncome: 66,
+                incomeTax: 21,
+                netIncome: 45, // 純利益 45億円
+                analysis: "純利益率は **14.5%** と高水準です。半導体洗浄装置市場における特化戦略と、急拡大する半導体投資 需要が収益を強力に支えています。"
             },
             balanceSheet: { totalAssets: 2004, totalLiabilities: 1023, totalEquity: 981, totalDebt: 472 }
-            // cashFlow: Data not available
         }
     };
 
@@ -2101,8 +2124,6 @@ const StockScreener = () => {
                                     <StockAnalysisSection
                                         symbol={selectedChart}
                                         activeScreener={activeScreener}
-                                        financialTab={financialTab}
-                                        setFinancialTab={setFinancialTab}
                                         financialDataMap={financialDataMap}
                                     />
                                 </div>
@@ -2158,8 +2179,6 @@ const StockScreener = () => {
                                     <StockAnalysisSection
                                         symbol={selectedChart}
                                         activeScreener={activeScreener}
-                                        financialTab={financialTab}
-                                        setFinancialTab={setFinancialTab}
                                         financialDataMap={financialDataMap}
                                     />
 
@@ -2300,8 +2319,6 @@ const StockScreener = () => {
                                     <StockAnalysisSection
                                         symbol={selectedChart}
                                         activeScreener={activeScreener}
-                                        financialTab={financialTab}
-                                        setFinancialTab={setFinancialTab}
                                         financialDataMap={financialDataMap}
                                     />
 
@@ -2431,8 +2448,6 @@ const StockScreener = () => {
                                             <StockAnalysisSection
                                                 symbol={selectedChart}
                                                 activeScreener={activeScreener}
-                                                financialTab={financialTab}
-                                                setFinancialTab={setFinancialTab}
                                                 financialDataMap={financialDataMap}
                                             />
                                         </div>

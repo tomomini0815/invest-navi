@@ -11,6 +11,7 @@ interface VisualIncomeStatementV2Props {
     currency?: string;
     unit?: string;
     exchangeRate?: number;
+    analysis?: string;
     className?: string;
 }
 
@@ -40,6 +41,7 @@ export const VisualIncomeStatementV2: React.FC<VisualIncomeStatementV2Props> = (
     period,
     currency = "¥",
     unit = "億円",
+    analysis,
     className = ""
 }) => {
     const [animated, setAnimated] = useState(false);
@@ -110,8 +112,7 @@ export const VisualIncomeStatementV2: React.FC<VisualIncomeStatementV2Props> = (
                     <div>
                         <div className="text-sm font-bold text-amber-900">収益性の分析</div>
                         <p className="text-xs text-amber-700 leading-relaxed mt-1">
-                            売上高に対する純利益の割合（純利益率）は **{((data.netIncome / data.revenue) * 100).toFixed(1)}%** です。
-                            製造業としては非常に高い収益力を維持しています。
+                            {analysis || `売上高に対する純利益の割合（純利益率）は **${((data.netIncome / data.revenue) * 100).toFixed(1)}%** です。`}
                         </p>
                     </div>
                 </div>
