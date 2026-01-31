@@ -73,12 +73,11 @@ import RakutenWalletDetailed from "./pages/RakutenWalletDetailed";
 import LineBitmaxDetailed from "./pages/LineBitmaxDetailed";
 // Bitget詳細ページのインポート
 import BitgetDetailed from "./pages/BitgetDetailed";
-// ローツェ株式分析デモページのインポート
-import RorzeStockDemo from "./pages/RorzeStockDemo";
 // 銘柄スクリーナーページのインポート
 import StockScreener from "./pages/StockScreener";
 // チャート詳細ページのインポート
 import ChartDetail from "./pages/ChartDetail";
+
 
 const queryClient = new QueryClient();
 
@@ -170,8 +169,7 @@ const App = () => (
           <Route path="/company" element={<Company />} />
           <Route path="/sitemap" element={<Sitemap />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          {/* ローツェ株式分析デモ */}
-          <Route path="/demo/rorze-stock" element={<RorzeStockDemo />} />
+          <Route path="/analysis/ml-stock" element={<MLStockPrediction />} />
           {/* 銘柄スクリーナー */}
           <Route path="/screener" element={<StockScreener />} />
           {/* チャート詳細ページ */}

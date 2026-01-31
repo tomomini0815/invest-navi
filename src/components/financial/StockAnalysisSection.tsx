@@ -2,11 +2,36 @@ import { VisualIncomeStatement, IncomeStatementData } from "@/components/financi
 import { sp500Stocks, nikkei225Stocks } from "@/data/stockLists";
 import { TradingViewWidgetIframe } from "@/components/common/TradingViewWidgetIframe";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FileText, Building, LineChart, TrendingUp, Globe, BarChart2, Activity, BookOpen, Sparkles, PieChart as LucidePieChart } from "lucide-react";
+import {
+    FileText,
+    Building,
+    LineChart,
+    TrendingUp,
+    BarChart2,
+    Shield,
+    Globe,
+    Award,
+    Activity,
+    Wallet,
+    PieChart as LucidePieChart,
+    Sparkles,
+    BookOpen,
+    Trash2,
+    ChevronDown,
+    Search,
+    Filter,
+    ArrowUpRight,
+    ArrowDownRight,
+    Info,
+    AlertCircle
+} from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend, LineChart as RechartsLine, Line } from "recharts";
 import { VisualBalanceSheet } from "./VisualBalanceSheet";
 import { VisualCashFlow } from "./VisualCashFlow";
 import { StockPriceChart } from "./StockPriceChart";
+import { StockAnalysisVisualizer } from "./StockAnalysisVisualizer";
+import { japanStockDetailData } from "../../data/japanStockDetailData";
+import { promisingStocks2026 } from "../../data/stockLists";
 
 interface StockAnalysisSectionProps {
     symbol: string | null;
@@ -222,7 +247,7 @@ const HistoricalPerformanceTable = ({ performance }: { performance: { tableTitle
                             {performance.headers.map((header, i) => (
                                 <th
                                     key={i}
-                                    className={`px-2 md:px-4 py-2 md:py-3 font-bold 
+                                    className={`px-2 md:px-4 py-2 md:py-3 font-bold
                                         ${i > 0 && i < performance.headers.length - 1 ? "text-right" : ""}
                                         ${i === 0 ? "min-w-[85px]" : ""}
                                         ${i > 0 && i < performance.headers.length - 1 ? "min-w-[70px]" : ""}
@@ -240,7 +265,7 @@ const HistoricalPerformanceTable = ({ performance }: { performance: { tableTitle
                                 {row.map((cell, j) => (
                                     <td
                                         key={j}
-                                        className={`px-2 md:px-4 py-2 md:py-3 
+                                        className={`px-2 md:px-4 py-2 md:py-3
                                             ${j === 0 ? "font-medium text-slate-900 whitespace-nowrap" :
                                                 (j === row.length - 1 ? "text-slate-600 text-[10px] md:text-xs leading-relaxed" : "text-right font-mono whitespace-nowrap")}`}
                                     >
@@ -568,227 +593,171 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialDataMap 
                     )}
                 </section>
 
-                {/* --- 2. 会社概要・プロフィール領域 --- */}
                 {!isIndex && (() => {
+                    const normalized = normalizeSymbol(symbol || "");
+                    const hasDetailedData = !!japanStockDetailData[normalized];
                     const finData = getFinancialData();
-                    return (
-                        <section className="border-t pt-8">
-                            <h3 className="font-bold text-lg text-slate-800 border-b pb-2 mb-4 flex items-center gap-2">
-                                <Building className="w-5 h-5 text-amber-600" />
-                                企業情報・プロフィール
-                            </h3>
-                            <div className="flex flex-col gap-6">
-                                {/* 上段: プロフィール + セグメント構成 */}
-                                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                                    {/* プロフィール (Expanded to 2/3) */}
-                                    <div className="lg:col-span-2 h-[410px]">
-                                        <TradingViewWidgetIframe
-                                            key={`profile-${symbol}`}
-                                            title="Symbol Profile"
-                                            scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js"
-                                            config={{
-                                                symbol: getCorporateSymbol(symbol),
-                                                width: "100%",
-                                                height: "100%",
-                                                colorTheme: "light",
-                                                isTransparent: false,
-                                                locale: "ja"
-                                            }}
-                                        />
-                                    </div>
 
-                                    {/* セグメント構成 (Right side) */}
-                                    <div className="lg:col-span-1">
-                                        {finData?.segments && (
-                                            <div className="bg-white p-6 rounded-2xl border border-blue-50 shadow-sm overflow-hidden flex flex-col h-full">
-                                                <h4 className="font-bold text-slate-800 mb-6 flex items-center gap-2">
-                                                    <LucidePieChart className="w-5 h-5 text-indigo-600" />
-                                                    セグメント構成
-                                                </h4>
-                                                <div className="flex-grow flex items-center justify-center">
-                                                    <div className="w-full h-[220px]">
-                                                        <ResponsiveContainer width="100%" height="100%">
-                                                            <PieChart>
-                                                                <Pie
-                                                                    data={finData.segments}
-                                                                    cx="50%"
-                                                                    cy="50%"
-                                                                    innerRadius={50}
-                                                                    outerRadius={70}
-                                                                    paddingAngle={5}
-                                                                    dataKey="value"
-                                                                    label={({ name, value }) => `${name}: ${value}%`}
-                                                                    labelLine={false}
-                                                                >
-                                                                    {finData.segments.map((entry: any, index: number) => (
-                                                                        <Cell key={`cell-${index}`} fill={entry.color} />
-                                                                    ))}
-                                                                </Pie>
-                                                                <Tooltip />
-                                                                <Legend verticalAlign="bottom" height={36} wrapperStyle={{ fontSize: '11px' }} />
-                                                            </PieChart>
-                                                        </ResponsiveContainer>
+                    return (
+                        <>
+                            {/* Standard Profile Section */}
+                            <section className="border-t pt-8">
+                                <h3 className="font-bold text-lg text-slate-800 border-b pb-2 mb-4 flex items-center gap-2">
+                                    <Building className="w-5 h-5 text-amber-600" />
+                                    企業情報・プロフィール
+                                </h3>
+                                <div className="flex flex-col gap-6">
+                                    {/* 上段: プロフィール + セグメント構成 */}
+                                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                        <div className="lg:col-span-2">
+                                            {(() => {
+                                                const stockDetail = japanStockDetailData[normalized];
+                                                const promising = promisingStocks2026.find(s => s.symbol === normalized);
+
+                                                return (
+                                                    <div className="bg-white p-4 sm:p-6 rounded-2xl border border-blue-100 shadow-sm h-full flex flex-col">
+                                                        <div className="flex items-center justify-between mb-4 sm:mb-6">
+                                                            <div className="flex items-center gap-2 sm:gap-3">
+                                                                <div className="bg-slate-100 p-2 sm:p-2.5 rounded-xl border border-slate-200">
+                                                                    <div className="w-4 h-4 sm:w-5 h-5 bg-blue-600 rounded-sm" />
+                                                                </div>
+                                                                <div>
+                                                                    <h4 className="text-lg sm:text-xl font-bold text-slate-900 border-none pb-0 mb-0">
+                                                                        {stockDetail?.name || normalized} のプロフィール
+                                                                    </h4>
+                                                                    <div className="flex items-center gap-2 mt-2">
+                                                                        <span className="text-xs font-bold bg-slate-100 text-slate-600 px-2.5 py-1 rounded uppercase tracking-wider border border-slate-200">
+                                                                            コード: {normalized}
+                                                                        </span>
+                                                                        {stockDetail?.market && (
+                                                                            <span className="text-xs font-bold bg-blue-50 text-blue-600 px-2.5 py-1 rounded uppercase tracking-wider border border-blue-100">
+                                                                                市場: {stockDetail.market}
+                                                                            </span>
+                                                                        )}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="space-y-6 sm:space-y-8">
+                                                            {(stockDetail?.businessProfile || promising?.description || promising?.theme) && (
+                                                                <div className="bg-slate-50/80 p-4 sm:p-5 rounded-2xl border border-blue-100 relative overflow-hidden shadow-sm">
+                                                                    <div className="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+                                                                    <div className="text-[10px] sm:text-xs font-black text-blue-600 mb-1.5 sm:mb-2 flex items-center gap-2 uppercase tracking-[0.15em]">
+                                                                        企業プロフィール
+                                                                    </div>
+                                                                    <p className="text-sm sm:text-[15px] text-slate-800 leading-relaxed font-semibold">
+                                                                        {stockDetail?.businessProfile || promising?.description}
+                                                                        {promising?.theme && (
+                                                                            <span className="block mt-2 text-xs sm:text-sm text-slate-500 font-medium bg-white/50 py-0.5 sm:py-1 px-2 sm:px-3 rounded-lg border border-slate-100 inline-block">
+                                                                                関連テーマ: {promising.theme}
+                                                                            </span>
+                                                                        )}
+                                                                    </p>
+                                                                </div>
+                                                            )}
+
+
+                                                            {!promising && !stockDetail && (
+                                                                <div className="flex flex-col items-center justify-center p-8 bg-slate-50 rounded-xl border border-dashed border-slate-200">
+                                                                    <div className="p-3 bg-white rounded-full shadow-sm mb-3">
+                                                                        <BookOpen className="w-6 h-6 text-slate-400" />
+                                                                    </div>
+                                                                    <p className="text-sm text-slate-500 font-medium">基本情報を準備中です</p>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })()}
+                                        </div>
+                                        <div className="lg:col-span-1">
+                                            {finData?.segments && (
+                                                <div className="bg-white p-6 rounded-2xl border border-blue-50 shadow-sm overflow-hidden flex flex-col h-full">
+                                                    <h4 className="font-bold text-slate-800 mb-6 flex items-center gap-2">
+                                                        <LucidePieChart className="w-5 h-5 text-indigo-600" />
+                                                        セグメント構成
+                                                    </h4>
+                                                    <div className="flex-grow flex items-center justify-center">
+                                                        <div className="w-full h-[220px]">
+                                                            <ResponsiveContainer width="100%" height="100%">
+                                                                <PieChart>
+                                                                    <Pie
+                                                                        data={finData.segments}
+                                                                        cx="50%"
+                                                                        cy="50%"
+                                                                        innerRadius={50}
+                                                                        outerRadius={70}
+                                                                        paddingAngle={5}
+                                                                        dataKey="value"
+                                                                        label={({ name, value }) => `${name}: ${value}%`}
+                                                                        labelLine={false}
+                                                                    >
+                                                                        {finData.segments.map((entry: any, index: number) => (
+                                                                            <Cell key={`cell-${index}`} fill={entry.color} />
+                                                                        ))}
+                                                                    </Pie>
+                                                                    <Tooltip />
+                                                                    <Legend verticalAlign="bottom" height={36} wrapperStyle={{ fontSize: '11px' }} />
+                                                                </PieChart>
+                                                            </ResponsiveContainer>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-
-                                {/* 下段: 主要指標 (Key Metrics - Slim horizontal row) */}
-                                <div className="bg-gradient-to-br from-white to-slate-50 p-4 rounded-2xl border border-blue-100 shadow-sm">
-                                    <h4 className="font-bold text-slate-800 mb-4 flex items-center gap-2 text-sm">
-                                        <Activity className="w-4 h-4 text-blue-600" />
-                                        主要指標 (Key Metrics)
-                                    </h4>
-                                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-                                        {finData.metrics?.map((metric: any, idx: number) => (
-                                            <div key={idx} className="bg-white px-3 py-2 rounded-xl text-center border border-slate-200/50 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center">
-                                                <div className="text-[10px] font-bold text-slate-500 mb-0.5 uppercase tracking-tight">{metric.name}</div>
-                                                <div className="text-lg font-black text-slate-900">{metric.value}</div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    );
-                })()}
-
-                {/* --- 3. 財務パフォーマンス・決算書領域 --- */}
-                {!isIndex && (
-                    <section className="border-t pt-8">
-                        <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-                            <BookOpen className="w-6 h-6 text-emerald-600" />
-                            財務パフォーマンス・決算詳細
-                        </h3>
-
-                        {(() => {
-                            const normalized = normalizeSymbol(symbol || "");
-                            const finData = financialDataMap[symbol || ""] || financialDataMap[normalized];
-                            if (!finData) return null;
-
-                            return (
-                                <div className="space-y-8">
-                                    {/* 過去の業績データテーブル */}
-                                    {(() => {
-                                        const lookupData = financialDataMap[symbol || ""] || financialDataMap[normalized];
-                                        if (lookupData?.historicalPerformance) {
-                                            return <HistoricalPerformanceTable performance={lookupData.historicalPerformance} />;
-                                        }
-                                        const code = normalized.replace("TSE:", "");
-                                        const hData = HISTORICAL_FIN_DATA[code];
-                                        return hData ? <HistoricalDataTable data={hData} symbol={normalized} /> : null;
-                                    })()}
-
-                                    {/* 業績推移チャート (Revenue & Profit) */}
-                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                                        <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm transition-all hover:shadow-md">
-                                            <h4 className="font-semibold text-slate-700 mb-4 flex items-center gap-2">
-                                                <TrendingUp className="w-4 h-4 text-blue-500" />
-                                                売上高推移 (億円)
-                                            </h4>
-                                            <div className="h-[250px]">
-                                                <ResponsiveContainer width="100%" height="100%">
-                                                    <BarChart data={getFinancialData().revenue}>
-                                                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                                                        <XAxis dataKey="quarter" axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: '#94a3b8' }} />
-                                                        <YAxis hide />
-                                                        <Tooltip
-                                                            contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
-                                                        />
-                                                        <Bar dataKey="value" fill="#3b82f6" radius={[4, 4, 0, 0]} barSize={24} />
-                                                    </BarChart>
-                                                </ResponsiveContainer>
-                                            </div>
-                                        </div>
-                                        <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm transition-all hover:shadow-md">
-                                            <h4 className="font-semibold text-slate-700 mb-4 flex items-center gap-2">
-                                                <Activity className="w-4 h-4 text-emerald-500" />
-                                                利益推移 (億円)
-                                            </h4>
-                                            <div className="h-[250px]">
-                                                <ResponsiveContainer width="100%" height="100%">
-                                                    <RechartsLine data={getFinancialData().profit}>
-                                                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                                                        <XAxis dataKey="quarter" axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: '#94a3b8' }} />
-                                                        <YAxis hide />
-                                                        <Tooltip
-                                                            contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
-                                                        />
-                                                        <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px' }} />
-                                                        <Line type="monotone" dataKey="operating" stroke="#10b981" strokeWidth={3} dot={{ r: 4, fill: '#10b981' }} activeDot={{ r: 6 }} name="営業利益" />
-                                                        <Line type="monotone" dataKey="net" stroke="#3b82f6" strokeWidth={3} dot={{ r: 4, fill: '#3b82f6' }} activeDot={{ r: 6 }} name="純利益" />
-                                                    </RechartsLine>
-                                                </ResponsiveContainer>
-                                            </div>
+                                            )}
                                         </div>
                                     </div>
+                                </div>
+                            </section>
 
-                                    {/* 損益計算書 (TTM) - ウォーターフォール */}
-                                    {finData?.incomeStatement && (
-                                        <VisualIncomeStatement
-                                            data={finData.incomeStatement}
+                            {hasDetailedData && (
+                                <div className="border-t pt-8 space-y-8">
+                                    <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                                        <Sparkles className="w-6 h-6 text-blue-600" />
+                                        詳細財務・バリュエーション分析
+                                    </h3>
+                                    <StockAnalysisVisualizer code={normalized} isInline={true} />
+                                </div>
+                            )}
+
+                            {finData?.incomeStatement && (
+                                <VisualIncomeStatement
+                                    data={finData.incomeStatement}
+                                    symbol={symbol}
+                                    period="直近12ヶ月 (TTM)"
+                                    currency={finData.currency === "JPY" || finData.currency === "JPY_Oku" ? "¥" : "$"}
+                                    unit={finData.currency === "JPY" || finData.currency === "JPY_Oku" ? "億円" : "百万"}
+                                    exchangeRate={finData.currency === "JPY" || finData.currency === "JPY_Oku" ? undefined : 155}
+                                    analysis={finData.incomeStatement.analysis}
+                                />
+                            )}
+                            <div className="grid grid-cols-1 gap-8">
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                    {finData?.balanceSheet && (
+                                        <VisualBalanceSheet
+                                            data={finData.balanceSheet}
+                                            symbol={symbol}
+                                            period="直近四半期"
+                                            currency={finData.currency === "JPY" || finData.currency === "JPY_Oku" ? "¥" : "$"}
+                                            unit={finData.currency === "JPY" || finData.currency === "JPY_Oku" ? "億円" : "百万"}
+                                            exchangeRate={finData.currency === "JPY" || finData.currency === "JPY_Oku" ? undefined : 155}
+                                        />
+                                    )}
+                                    {finData?.cashFlow && (
+                                        <VisualCashFlow
+                                            data={finData.cashFlow}
                                             symbol={symbol}
                                             period="直近12ヶ月 (TTM)"
                                             currency={finData.currency === "JPY" || finData.currency === "JPY_Oku" ? "¥" : "$"}
                                             unit={finData.currency === "JPY" || finData.currency === "JPY_Oku" ? "億円" : "百万"}
                                             exchangeRate={finData.currency === "JPY" || finData.currency === "JPY_Oku" ? undefined : 155}
-                                            analysis={finData.incomeStatement.analysis}
                                         />
                                     )}
-
-                                    {/* B/S C/F */}
-                                    <div className="grid grid-cols-1 gap-8">
-                                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                            {finData?.balanceSheet && (
-                                                <VisualBalanceSheet
-                                                    data={finData.balanceSheet}
-                                                    symbol={symbol}
-                                                    period="直近四半期"
-                                                    currency={finData.currency === "JPY" || finData.currency === "JPY_Oku" ? "¥" : "$"}
-                                                    unit={finData.currency === "JPY" || finData.currency === "JPY_Oku" ? "億円" : "百万"}
-                                                    exchangeRate={finData.currency === "JPY" || finData.currency === "JPY_Oku" ? undefined : 155}
-                                                />
-                                            )}
-                                            {finData?.cashFlow && (
-                                                <VisualCashFlow
-                                                    data={finData.cashFlow}
-                                                    symbol={symbol}
-                                                    period="直近12ヶ月 (TTM)"
-                                                    currency={finData.currency === "JPY" || finData.currency === "JPY_Oku" ? "¥" : "$"}
-                                                    unit={finData.currency === "JPY" || finData.currency === "JPY_Oku" ? "億円" : "百万"}
-                                                    exchangeRate={finData.currency === "JPY" || finData.currency === "JPY_Oku" ? undefined : 155}
-                                                />
-                                            )}
-                                        </div>
-                                    </div>
-
-                                    {/* 財務概要 (TV) */}
-                                    <div className="bg-white p-4 rounded-xl border border-blue-50 shadow-sm h-[850px] overflow-hidden">
-                                        <h4 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
-                                            <TrendingUp className="w-5 h-5 text-blue-600" />
-                                            財務概要 (TradingView)
-                                        </h4>
-                                        <TradingViewWidgetIframe
-                                            key={`fin-details-${symbol}`}
-                                            title="Detailed Financials"
-                                            scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-financials.js"
-                                            config={{
-                                                symbol: getCorporateSymbol(symbol),
-                                                width: "100%",
-                                                height: "100%",
-                                                colorTheme: "light",
-                                                displayMode: "regular",
-                                                locale: "ja"
-                                            }}
-                                        />
-                                    </div>
                                 </div>
-                            );
-                        })()}
-                    </section>
-                )}
+                            </div>
+                        </>
+                    );
+                })()}
 
                 {/* --- 4. 採用銘柄一覧 (指数のみ) --- */}
                 {isIndex && (
@@ -845,6 +814,6 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialDataMap 
                     </section>
                 )}
             </CardContent>
-        </Card>
+        </Card >
     );
 };
