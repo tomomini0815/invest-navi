@@ -51,11 +51,6 @@ export const ComparisonPageTemplate = <T extends Company>({
             <Header />
             <TickerTape />
 
-            {/* AD Disclaimer */}
-            <div className="bg-gray-50 text-[10px] text-gray-400 text-right px-2 py-1 container mx-auto max-w-7xl">
-                この記事には広告・プロモーションが含まれています
-            </div>
-
             {heroSection}
 
             <main className="flex-grow">
@@ -63,6 +58,10 @@ export const ComparisonPageTemplate = <T extends Company>({
                 {/* Survey Diagnosis Section */}
                 <section className="py-12 -mt-10 mb-12 relative z-10 px-4">
                     <SurveyDiagnostic data={rankingList} onSearch={handleSurveySearch} type={surveyType} />
+                    {/* AD Disclaimer */}
+                    <div className="text-[10px] text-gray-400 text-right mt-2 max-w-4xl mx-auto">
+                        この記事には広告・プロモーションが含まれています
+                    </div>
                 </section>
 
                 {/* Detailed Ranking Section */}
