@@ -71,7 +71,7 @@ export const ComparisonPageTemplate = <T extends Company>({
                                 <span className="text-orange-500">厳選</span> <span>{categoryName}一覧</span>
                             </h2>
                             <p className="text-gray-500">
-                                初心者でも安心して使える、失敗しない{categoryName}をプロが厳選しました。
+                                初めての方でも安心して使える、失敗しない{categoryName}をプロが厳選しました。
                             </p>
                         </div>
                     ) : (
