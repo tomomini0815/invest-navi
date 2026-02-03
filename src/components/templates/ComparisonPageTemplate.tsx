@@ -72,7 +72,7 @@ export const ComparisonPageTemplate = <T extends Company>({
                         /* Default Header */
                         <div className="text-center mb-8 sm:mb-12 overflow-hidden">
                             <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold mb-4 text-gray-800 whitespace-nowrap">
-                                <span className="text-orange-500">厳選</span> <span>{categoryName}一覧</span>
+                                <span className="text-emerald-500">厳選</span> <span>{categoryName}一覧</span>
                             </h2>
                             <p className="text-gray-500">
                                 口座開設から取引までがスムーズな、おすすめの{categoryName}をプロが厳選しました。
@@ -82,10 +82,10 @@ export const ComparisonPageTemplate = <T extends Company>({
                         /* Search Results Header */
                         <div className="mb-12 mt-4 pt-10 border-t border-gray-100">
                             <div className="text-center">
-                                <div className="inline-flex items-center justify-center gap-2 bg-orange-50 text-orange-700 font-bold px-4 py-1.5 rounded-full text-sm mb-4 border border-orange-100">
+                                <div className="inline-flex items-center justify-center gap-2 bg-emerald-50 text-emerald-700 font-bold px-4 py-1.5 rounded-full text-sm mb-4 border border-emerald-100">
                                     <span className="flex h-2.5 w-2.5 relative">
-                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-orange-500"></span>
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                                     </span>
                                     診断結果
                                 </div>
@@ -94,9 +94,9 @@ export const ComparisonPageTemplate = <T extends Company>({
                                     <span className="inline-block relative z-10">
                                         あなたの条件に
                                     </span>
-                                    <span className="text-orange-600 inline-block relative z-10 ml-2">
+                                    <span className="text-emerald-600 inline-block relative z-10 ml-2">
                                         マッチした{categoryName}
-                                        <span className="absolute bottom-1 left-0 w-full h-3 bg-orange-100 -z-10 rounded-sm"></span>
+                                        <span className="absolute bottom-1 left-0 w-full h-3 bg-emerald-100 -z-10 rounded-sm"></span>
                                     </span>
                                 </h2>
                                 <p className="text-gray-500 text-sm sm:text-base max-w-2xl mx-auto">
