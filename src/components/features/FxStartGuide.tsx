@@ -64,9 +64,9 @@ export const FxStartGuide = ({
     return (
         <section className="w-full max-w-4xl mx-auto mb-8 px-4">
             <div className="text-center mb-10">
-                <span className="inline-block py-1 px-4 rounded-full bg-emerald-100 text-emerald-700 font-bold text-sm mb-3">
+                {/* <span className="inline-block py-1 px-4 rounded-full bg-emerald-100 text-emerald-700 font-bold text-sm mb-3">
                     初心者でも簡単！
-                </span>
+                </span> */}
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
                     {guideTitle ? (
                         guideTitle.includes("3STEP") ? (
@@ -115,7 +115,7 @@ export const FxStartGuide = ({
             <div className="mt-10 p-6 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl border border-emerald-100 flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="text-center md:text-left">
                     <p className="font-bold text-emerald-800 text-lg md:text-xl">
-                        {guideDescription || "初心者にも使いやすく、コストも安いので安心です。"}
+                        {guideDescription || "初めての方にも使いやすく、コストも安いので安心です。"}
                     </p>
                 </div>
                 {customAffiliateButton ? (

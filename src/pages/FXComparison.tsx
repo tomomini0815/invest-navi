@@ -339,14 +339,14 @@ const FXComparison = () => {
         },
         {
           title: "証拠金の入金",
-          description: <>「即時入金サービス」なら24時間手数料無料。<br /><span className="text-emerald-600 font-bold">5,000円程度</span>から始められます。</>
+          description: <>「即時入金サービス」なら24時間手数料無料。</>
         },
         {
           title: "取引スタート",
           description: <>アプリ「GMOクリック FXneo」をDL。<br />チャートを見ながらワンタップで注文完了！</>
         }
       ],
-      guideTitle: "GMOクリック証券の始め方 3STEP",
+      guideTitle: "GMOクリック証券 FXネオの始め方 3STEP",
       guideDescription: "高性能なツールと低コストな環境で、プロへの第一歩を。",
       campaign: "特典あり",
       spreadUsdJpy: 0.2, spreadUsdJpyText: "0.2銭",
