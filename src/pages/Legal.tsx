@@ -5,7 +5,7 @@ const Legal = () => {
   // アイコンとラベルのマッピング
   const infoItems = [
     { icon: Building, label: "事業者名", value: "株式会社ユーザーバリュー" },
-    { icon: MapPin, label: "所在地", value: "神奈川県秦野市渋沢" },
+    { icon: MapPin, label: "所在地", value: "神奈川県秦野市渋沢768-9" },
     { icon: Phone, label: "電話番号", value: "044-400-2258", desc: "受付時間：平日 10:00～18:00" },
     { icon: Mail, label: "メールアドレス", value: "uservalue2021@gmail.com" },
   ];
@@ -62,8 +62,8 @@ const Legal = () => {
       {/* ヘッダー */}
       <div className="bg-gradient-to-r from-muted/50 to-muted/30 py-4 border-b">
         <div className="container mx-auto px-4">
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors group"
           >
             <ChevronLeft className="h-4 w-4 mr-1 group-hover:-translate-x-1 transition-transform" />
@@ -84,7 +84,7 @@ const Legal = () => {
                 当サイトのサービスに関する特定商取引法に基づく表記です
               </p>
             </div>
-            
+
             <div className="bg-card rounded-xl shadow-lg p-6 md:p-8 space-y-10">
               {/* 事業者情報セクション */}
               <section>
@@ -92,7 +92,7 @@ const Legal = () => {
                   <Building className="h-6 w-6 text-primary" />
                   <h2 className="text-2xl font-bold text-primary">事業者情報</h2>
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   {infoItems.map((item, index) => (
                     <div key={index} className="flex items-start p-5 bg-accent/5 rounded-lg border border-accent/10 hover:shadow-sm transition-shadow">
@@ -117,7 +117,7 @@ const Legal = () => {
                   <FileText className="h-6 w-6 text-primary" />
                   <h2 className="text-2xl font-bold text-primary">サービス内容</h2>
                 </div>
-                
+
                 <div className="space-y-5">
                   {serviceItems.map((item, index) => (
                     <div key={index} className="flex items-start p-5 bg-accent/5 rounded-lg border border-accent/10 hover:shadow-sm transition-shadow">
@@ -140,7 +140,7 @@ const Legal = () => {
                     <section.icon className="h-6 w-6 text-primary" />
                     <h2 className="text-2xl font-bold text-primary">{section.title}</h2>
                   </div>
-                  
+
                   <div className="p-6 bg-accent/5 rounded-lg border border-accent/10">
                     {section.content.map((paragraph, pIndex) => (
                       <p key={pIndex} className="text-muted-foreground mb-4 last:mb-0">

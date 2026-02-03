@@ -42,7 +42,7 @@ const Company = () => {
 
                   <div className="p-4 bg-accent/10 rounded-lg">
                     <h3 className="font-bold mb-2">所在地</h3>
-                    <p>神奈川県秦野市渋沢</p>
+                    <p>神奈川県秦野市渋沢768-9</p>
                   </div>
 
                   <div className="p-4 bg-accent/10 rounded-lg">
@@ -52,7 +52,7 @@ const Company = () => {
 
                   <div className="p-4 bg-accent/10 rounded-lg">
                     <h3 className="font-bold mb-2">事業内容</h3>
-                    <p>投資情報提供サービス</p>
+                    <p>アプリ制作、インターネットによる広告業</p>
                   </div>
                 </div>
               </div>

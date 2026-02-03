@@ -175,7 +175,7 @@ const Contact = () => {
                       </div>
                       <div>
                         <h3 className="font-semibold mb-1">所在地</h3>
-                        <p className="text-muted-foreground">神奈川県秦野市渋沢</p>
+                        <p className="text-muted-foreground">神奈川県秦野市渋沢768-9</p>
                       </div>
                     </div>
                   </div>
