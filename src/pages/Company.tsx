@@ -50,10 +50,7 @@ const Company = () => {
                     <p>500万円</p>
                   </div>
 
-                  <div className="p-4 bg-accent/10 rounded-lg">
-                    <h3 className="font-bold mb-2">事業内容</h3>
-                    <p>アプリ制作、インターネットによる広告業</p>
-                  </div>
+
                 </div>
               </div>
 
