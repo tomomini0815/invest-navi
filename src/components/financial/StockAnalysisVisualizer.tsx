@@ -2,6 +2,7 @@ import { TrendingUp, BarChart2, Wallet, Shield, Globe, Award, Activity, Sparkles
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useEffect, useRef } from "react";
 import { StockDetailData, japanStockDetailData } from "@/data/japanStockDetailData";
+import { usStockDetailData } from "@/data/usStockDetailData";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, Legend, Cell } from "recharts";
 
 interface StockAnalysisVisualizerProps {
@@ -41,10 +42,10 @@ const TradingViewWidget = ({ symbol }: { symbol: string }) => {
 };
 
 export const StockAnalysisVisualizer = ({ code, className = "", isInline = false }: StockAnalysisVisualizerProps) => {
-    const stockData = japanStockDetailData[code];
+    const stockData = japanStockDetailData[code] || usStockDetailData[code];
 
     if (!stockData) {
-        return <div className="p-8 text-center text-slate-500">データが見つかりませんでした。({code})</div>;
+        return null;
     }
 
     const maxRevenue = Math.max(...stockData.financials.map(f => f.revenue));

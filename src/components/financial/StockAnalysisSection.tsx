@@ -31,6 +31,7 @@ import { VisualCashFlow } from "./VisualCashFlow";
 import { StockPriceChart } from "./StockPriceChart";
 import { StockAnalysisVisualizer } from "./StockAnalysisVisualizer";
 import { japanStockDetailData } from "../../data/japanStockDetailData";
+import { usStockDetailData } from "../../data/usStockDetailData";
 import { promisingStocks2026 } from "../../data/stockLists";
 
 interface StockAnalysisSectionProps {
@@ -287,7 +288,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialDataMap 
 
     const normalizeSymbol = (s: string) => {
         if (!s) return "";
-        let code = s.replace("TSE:", "");
+        let code = s.replace(/^(TSE:|NASDAQ:|NYSE:)\s*/i, "");
         // Map NYSE/OTC ADRs to TSE codes for data lookup
         const adrToTse: Record<string, string> = {
             "NYSE:SONY": "6758",
@@ -595,7 +596,8 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialDataMap 
 
                 {!isIndex && (() => {
                     const normalized = normalizeSymbol(symbol || "");
-                    const hasDetailedData = !!japanStockDetailData[normalized];
+                    const stockDetail = japanStockDetailData[normalized] || usStockDetailData[normalized];
+                    const hasDetailedData = !!stockDetail;
                     const finData = getFinancialData();
 
                     return (
@@ -611,7 +613,6 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialDataMap 
                                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                                         <div className="lg:col-span-2">
                                             {(() => {
-                                                const stockDetail = japanStockDetailData[normalized];
                                                 const promising = promisingStocks2026.find(s => s.symbol === normalized);
 
                                                 return (

@@ -246,7 +246,7 @@ export const japanStockDetailData: Record<string, StockDetailData> = {
         financials: [
             { period: "2023.08", revenue: 27665, ordinaryProfit: 4135, netProfit: 2962, eps: 965.4, dividend: 290, isEstimate: false },
             { period: "2024.08", revenue: 31038, ordinaryProfit: 5053, netProfit: 3719, eps: 1212.0, dividend: 450, isEstimate: false },
-            { period: "2025.08", revenue: 34000, ordinaryProfit: 6000, netProfit: 4300, eps: 1400.0, dividend: 520, isEstimate: true, remark: "過去最高益予想" },
+            { period: "2025.08", revenue: 34000, ordinaryProfit: 6000, netProfit: 4300, eps: 1400.0, dividend: 520, isEstimate: false, remark: "過去最高益予想" },
             { period: "2026.08", revenue: 38000, ordinaryProfit: 6500, netProfit: 4500, eps: 1460.0, dividend: 540, isEstimate: true, remark: "上方修正（最新）" }
         ]
     },
@@ -276,7 +276,7 @@ export const japanStockDetailData: Record<string, StockDetailData> = {
         financials: [
             { period: "2023.03", revenue: 92830, ordinaryProfit: 16143, netProfit: 11162, eps: 89.2, dividend: 32, isEstimate: false },
             { period: "2024.03", revenue: 104243, ordinaryProfit: 20043, netProfit: 14907, eps: 125.4, dividend: 41, isEstimate: false },
-            { period: "2025.03", revenue: 110000, ordinaryProfit: 21500, netProfit: 16000, eps: 135.0, dividend: 50, isEstimate: true },
+            { period: "2025.03", revenue: 110000, ordinaryProfit: 21500, netProfit: 16000, eps: 135.0, dividend: 50, isEstimate: false },
             { period: "2026.03", revenue: 120000, ordinaryProfit: 25000, netProfit: 17500, eps: 154.0, dividend: 64, isEstimate: true, remark: "上方修正・増配" }
         ]
     },
@@ -307,7 +307,7 @@ export const japanStockDetailData: Record<string, StockDetailData> = {
         financials: [
             { period: "2023.03", revenue: 22090, ordinaryProfit: 6253, netProfit: 4715, eps: 335.2, dividend: 285, isEstimate: false, remark: "過去最高" },
             { period: "2024.03", revenue: 18305, ordinaryProfit: 4562, netProfit: 3640, eps: 258.4, dividend: 250, isEstimate: false, remark: "微減" },
-            { period: "2025.03", revenue: 22000, ordinaryProfit: 6000, netProfit: 4500, eps: 320.0, dividend: 450, isEstimate: true },
+            { period: "2025.03", revenue: 22000, ordinaryProfit: 6000, netProfit: 4500, eps: 320.0, dividend: 450, isEstimate: false },
             { period: "2026.03", revenue: 24000, ordinaryProfit: 6500, netProfit: 4800, eps: 345.0, dividend: 520, isEstimate: true, remark: "上方修正" }
         ]
     },
@@ -337,7 +337,7 @@ export const japanStockDetailData: Record<string, StockDetailData> = {
         financials: [
             { period: "2023.03", revenue: 131362, ordinaryProfit: 18290, netProfit: 12131, eps: 14.2, dividend: 4.8, isEstimate: false },
             { period: "2024.03", revenue: 133746, ordinaryProfit: 17621, netProfit: 12487, eps: 14.5, dividend: 5.1, isEstimate: false },
-            { period: "2025.03", revenue: 135000, ordinaryProfit: 18000, netProfit: 12600, eps: 14.8, dividend: 5.2, isEstimate: true },
+            { period: "2025.03", revenue: 135000, ordinaryProfit: 18000, netProfit: 12600, eps: 14.8, dividend: 5.2, isEstimate: false },
             { period: "2026.03", revenue: 137000, ordinaryProfit: 18500, netProfit: 13000, eps: 15.2, dividend: 5.4, isEstimate: true }
         ]
     },
@@ -367,7 +367,7 @@ export const japanStockDetailData: Record<string, StockDetailData> = {
         financials: [
             { period: "2023.03", revenue: 61421, ordinaryProfit: 11843, netProfit: 8058, eps: 215.4, dividend: 80, isEstimate: false },
             { period: "2024.03", revenue: 78563, ordinaryProfit: 13421, netProfit: 9653, eps: 265.2, dividend: 95, isEstimate: false },
-            { period: "2025.03", revenue: 85000, ordinaryProfit: 15000, netProfit: 10600, eps: 310.0, dividend: 110, isEstimate: true },
+            { period: "2025.03", revenue: 85000, ordinaryProfit: 15000, netProfit: 10600, eps: 310.0, dividend: 110, isEstimate: false },
             { period: "2026.03", revenue: 95000, ordinaryProfit: 17000, netProfit: 12000, eps: 350.0, dividend: 135, isEstimate: true, remark: "過去最高益（修正）" }
         ]
     },
@@ -397,7 +397,7 @@ export const japanStockDetailData: Record<string, StockDetailData> = {
         financials: [
             { period: "2023.03", revenue: 108811, ordinaryProfit: 8192, netProfit: 6491, eps: 212.4, dividend: 70, isEstimate: false },
             { period: "2024.03", revenue: 97287, ordinaryProfit: 7123, netProfit: 5899, eps: 195.2, dividend: 80, isEstimate: false },
-            { period: "2025.03", revenue: 102000, ordinaryProfit: 8500, netProfit: 6200, eps: 215.0, dividend: 90, isEstimate: true },
+            { period: "2025.03", revenue: 102000, ordinaryProfit: 8500, netProfit: 6200, eps: 215.0, dividend: 90, isEstimate: false },
             { period: "2026.03", revenue: 110000, ordinaryProfit: 9500, netProfit: 7200, eps: 250.0, dividend: 105, isEstimate: true, remark: "上方修正" }
         ]
     },
@@ -427,7 +427,7 @@ export const japanStockDetailData: Record<string, StockDetailData> = {
         financials: [
             { period: "2023.03", revenue: 139457, ordinaryProfit: 11843, netProfit: 8009, eps: 545.2, dividend: 140, isEstimate: false },
             { period: "2024.03", revenue: 142358, ordinaryProfit: 12421, netProfit: 8017, eps: 555.0, dividend: 160, isEstimate: false },
-            { period: "2025.03", revenue: 150000, ordinaryProfit: 14000, netProfit: 8800, eps: 600.0, dividend: 200, isEstimate: true },
+            { period: "2025.03", revenue: 150000, ordinaryProfit: 14000, netProfit: 8800, eps: 600.0, dividend: 200, isEstimate: false },
             { period: "2026.03", revenue: 160000, ordinaryProfit: 15500, netProfit: 9500, eps: 650.0, dividend: 220, isEstimate: true, remark: "過去最高益予想" }
         ]
     },
@@ -577,7 +577,7 @@ export const japanStockDetailData: Record<string, StockDetailData> = {
         financials: [
             { period: "2023.05", revenue: 9.5, ordinaryProfit: -8.2, netProfit: -8.5, eps: -22.4, dividend: 0, isEstimate: false },
             { period: "2024.05", revenue: 16.5, ordinaryProfit: -3.5, netProfit: -3.2, eps: -8.2, dividend: 0, isEstimate: false },
-            { period: "2025.05", revenue: 40.0, ordinaryProfit: 6.0, netProfit: 5.0, eps: 12.0, dividend: 0, isEstimate: true, remark: "黒字化予想" }
+            { period: "2025.05", revenue: 40.0, ordinaryProfit: 6.0, netProfit: 5.0, eps: 12.0, dividend: 0, isEstimate: false, remark: "黒字化予想" }
         ]
     },
     "6506": {
@@ -665,7 +665,7 @@ export const japanStockDetailData: Record<string, StockDetailData> = {
         financials: [
             { period: "2023.09", revenue: 2214, ordinaryProfit: 569, netProfit: 410, eps: 132.5, dividend: 76, isEstimate: false },
             { period: "2024.09", revenue: 2114, ordinaryProfit: 188, netProfit: 143, eps: 46.1, dividend: 38, isEstimate: false },
-            { period: "2025.09", revenue: 2220, ordinaryProfit: 172, netProfit: 143, eps: 48.7, dividend: 38, isEstimate: true, remark: "回復局面（予想）" }
+            { period: "2025.09", revenue: 2220, ordinaryProfit: 172, netProfit: 143, eps: 48.7, dividend: 38, isEstimate: false, remark: "回復局面（予想）" }
         ]
     },
     "5253": {
@@ -694,7 +694,7 @@ export const japanStockDetailData: Record<string, StockDetailData> = {
         financials: [
             { period: "2023.03", revenue: 204, ordinaryProfit: 34, netProfit: 25, eps: 41.2, dividend: 0, isEstimate: false },
             { period: "2024.03", revenue: 301, ordinaryProfit: 55, netProfit: 41, eps: 67.5, dividend: 0, isEstimate: false },
-            { period: "2025.03", revenue: 360, ordinaryProfit: 73, netProfit: 52, eps: 85.0, dividend: 0, isEstimate: true },
+            { period: "2025.03", revenue: 360, ordinaryProfit: 73, netProfit: 52, eps: 85.0, dividend: 0, isEstimate: false },
             { period: "2026.03", revenue: 525, ordinaryProfit: 82, netProfit: 57, eps: 86.8, dividend: 0, isEstimate: true, remark: "高成長継続予想" }
         ]
     },
