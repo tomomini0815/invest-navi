@@ -51,6 +51,11 @@ export const ComparisonPageTemplate = <T extends Company>({
             <Header />
             <TickerTape />
 
+            {/* AD Disclaimer */}
+            <div className="bg-gray-50 text-[10px] text-gray-400 text-right px-2 py-1 container mx-auto max-w-7xl">
+                この記事には広告・プロモーションが含まれています
+            </div>
+
             {heroSection}
 
             <main className="flex-grow">
