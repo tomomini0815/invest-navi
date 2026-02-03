@@ -51,7 +51,7 @@ export const cryptoRankingList: Company[] = [
       },
       startGuide: {
         title: "GMOコインの始め方 3 STEP",
-        description: "スマホだけで完結する「かんたん本人確認」なら最短10分で口座開設完了！",
+        description: "スマホだけで完結する「スマホで本人確認」なら最短10分で口座開設完了！",
         steps: [
           {
             title: "メールアドレス登録",
