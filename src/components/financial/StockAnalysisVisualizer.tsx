@@ -42,7 +42,10 @@ const TradingViewWidget = ({ symbol }: { symbol: string }) => {
 };
 
 export const StockAnalysisVisualizer = ({ code, className = "", isInline = false }: StockAnalysisVisualizerProps) => {
-    const stockData = japanStockDetailData[code] || usStockDetailData[code];
+    // Safety check: ensure imports are defined before access
+    const japanData = japanStockDetailData ? japanStockDetailData[code] : undefined;
+    const usData = usStockDetailData ? usStockDetailData[code] : undefined;
+    const stockData = japanData || usData;
 
     if (!stockData) {
         return null;

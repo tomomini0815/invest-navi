@@ -123,7 +123,7 @@ export const usStockDetailData: Record<string, StockDetailData> = {
         latestEarningsInfo: "広告収入が底堅く推移し、Youtubeとクラウド事業が成長を牽引。Geminiの統合コストを吸収しつつ、増益を達成。",
         financials: [
             { period: "2023.12", revenue: 307394, ordinaryProfit: 84293, netProfit: 73795, eps: 5.80, dividend: 0, isEstimate: false },
-            { period: "2024.12", revenue: 345000, ordinaryProfit: 100000, netProfit: 88000, eps: 7.10, dividend: 0.80, isEstimate: true, remark: "クラウド黒字拡大" },
+            { period: "2024.12", revenue: 345000, ordinaryProfit: 100000, netProfit: 88000, eps: 7.10, dividend: 0.80, isEstimate: false, remark: "クラウド黒字拡大" },
             { period: "2025.12", revenue: 380000, ordinaryProfit: 115000, netProfit: 100000, eps: 8.20, dividend: 0.90, isEstimate: false, remark: "自社株買い継続" }
         ]
     },
@@ -153,7 +153,7 @@ export const usStockDetailData: Record<string, StockDetailData> = {
         latestEarningsInfo: "北米EC部門の利益率が大幅に改善。AWSも生成AI需要を取り込み再加速。全社的なコスト削減効果が利益を押し上げている。",
         financials: [
             { period: "2023.12", revenue: 574785, ordinaryProfit: 36853, netProfit: 30425, eps: 2.90, dividend: 0, isEstimate: false },
-            { period: "2024.12", revenue: 640000, ordinaryProfit: 60000, netProfit: 52000, eps: 4.95, dividend: 0, isEstimate: true, remark: "利益率改善" },
+            { period: "2024.12", revenue: 640000, ordinaryProfit: 60000, netProfit: 52000, eps: 4.95, dividend: 0, isEstimate: false, remark: "利益率改善" },
             { period: "2025.12", revenue: 710000, ordinaryProfit: 75000, netProfit: 65000, eps: 6.20, dividend: 0, isEstimate: false, remark: "広告高成長" }
         ]
     },
@@ -183,7 +183,7 @@ export const usStockDetailData: Record<string, StockDetailData> = {
         latestEarningsInfo: "広告売上が予想を上回り大幅増収。AI推奨コンテンツによるユーザー滞在時間の増加が寄与。メタバース部門の赤字は続くが織り込み済み。",
         financials: [
             { period: "2023.12", revenue: 134902, ordinaryProfit: 46751, netProfit: 39098, eps: 14.87, dividend: 0, isEstimate: false },
-            { period: "2024.12", revenue: 165000, ordinaryProfit: 65000, netProfit: 55000, eps: 21.50, dividend: 2.00, isEstimate: true, remark: "配当開始" },
+            { period: "2024.12", revenue: 165000, ordinaryProfit: 65000, netProfit: 55000, eps: 21.50, dividend: 2.00, isEstimate: false, remark: "配当開始" },
             { period: "2025.12", revenue: 190000, ordinaryProfit: 78000, netProfit: 66000, eps: 25.80, dividend: 2.50, isEstimate: false, remark: "AI収益貢献" }
         ]
     },
@@ -213,7 +213,7 @@ export const usStockDetailData: Record<string, StockDetailData> = {
         latestEarningsInfo: "EV販売台数の伸びは鈍化しているものの、製造コスト削減により利益率は改善傾向。エネルギー部門（蓄電池）が急成長し、利益の下支えとなっている。",
         financials: [
             { period: "2023.12", revenue: 96773, ordinaryProfit: 8891, netProfit: 14997, eps: 4.30, dividend: 0, isEstimate: false },
-            { period: "2024.12", revenue: 105000, ordinaryProfit: 9500, netProfit: 12000, eps: 3.50, dividend: 0, isEstimate: true, remark: "投資先行" },
+            { period: "2024.12", revenue: 105000, ordinaryProfit: 9500, netProfit: 12000, eps: 3.50, dividend: 0, isEstimate: false, remark: "投資先行" },
             { period: "2025.12", revenue: 125000, ordinaryProfit: 15000, netProfit: 18000, eps: 5.10, dividend: 0, isEstimate: false, remark: "新モデル効果" }
         ]
     }

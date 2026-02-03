@@ -88,7 +88,7 @@ const StockScreener = () => {
     const [activeScreener, setActiveScreener] = useState<ScreenerType>("total");
     const [showList, setShowList] = useState(false);
     const [selectedChart, setSelectedChart] = useState<string>("FOREXCOM:SPXUSD"); // Default to S&P 500
-    const [heatmapSource, setHeatmapSource] = useState<"SPX500" | "Japan">("SPX500");
+    const [heatmapSource, setHeatmapSource] = useState<"SPX500" | "SPX500_List" | "Crypto" | "Forex">("SPX500");
     const chartContainerRef = useRef<HTMLDivElement>(null);
 
     // activeScreenerが変更されたときに選択されたチャートをリセット
@@ -2366,7 +2366,7 @@ const StockScreener = () => {
                         </CardTitle>
                     </CardHeader>
                     <CardContent className="p-0">
-                        <div className="bg-slate-100 p-3 text-sm text-slate-600 border-b flex justify-between items-center">
+                        <div className="bg-slate-100 p-3 text-sm text-slate-600 border-b flex justify-between items-center flex-wrap gap-2">
                             <span>セクター別の値動きを視覚化 - サイズは時価総額、色は変化率を表示</span>
                             <div className="flex gap-2">
                                 <Button
@@ -2377,25 +2377,111 @@ const StockScreener = () => {
                                 >
                                     S&P 500
                                 </Button>
-
+                                <Button
+                                    variant={heatmapSource === "SPX500_List" ? "default" : "outline"}
+                                    size="sm"
+                                    onClick={() => setHeatmapSource("SPX500_List")}
+                                    className={heatmapSource === "SPX500_List" ? "bg-emerald-600 text-white" : "text-emerald-700 border-emerald-200 bg-white"}
+                                >
+                                    S&P 500 一覧
+                                </Button>
+                                <Button
+                                    variant={heatmapSource === "Crypto" ? "default" : "outline"}
+                                    size="sm"
+                                    onClick={() => setHeatmapSource("Crypto")}
+                                    className={heatmapSource === "Crypto" ? "bg-emerald-600 text-white" : "text-emerald-700 border-emerald-200 bg-white"}
+                                >
+                                    暗号資産
+                                </Button>
+                                <Button
+                                    variant={heatmapSource === "Forex" ? "default" : "outline"}
+                                    size="sm"
+                                    onClick={() => setHeatmapSource("Forex")}
+                                    className={heatmapSource === "Forex" ? "bg-emerald-600 text-white" : "text-emerald-700 border-emerald-200 bg-white"}
+                                >
+                                    為替 (Forex)
+                                </Button>
                             </div>
                         </div>
                         <div style={{ height: "600px" }}>
-                            <TradingViewWidgetIframe
-                                key={`heatmap-${heatmapSource}`} // Force re-render on tab change
-                                title="Heatmap"
-                                scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js"
-                                config={{
-                                    dataSource: heatmapSource,
-                                    grouping: "sector",
-                                    blockSize: "market_cap_basic",
-                                    blockColor: "change",
-                                    locale: "ja",
-                                    colorTheme: "light",
-                                    width: "100%",
-                                    height: "100%"
-                                }}
-                            />
+                            {heatmapSource === "SPX500" && (
+                                <TradingViewWidgetIframe
+                                    key="heatmap-spx"
+                                    title="Stock Heatmap"
+                                    scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js"
+                                    config={{
+                                        dataSource: "SPX500",
+                                        grouping: "sector",
+                                        blockSize: "market_cap_basic",
+                                        blockColor: "change",
+                                        locale: "ja",
+                                        colorTheme: "light",
+                                        width: "100%",
+                                        height: "100%"
+                                    }}
+                                />
+                            )}
+                            {heatmapSource === "SPX500_List" && (
+                                <TradingViewWidgetIframe
+                                    key="screener-spx"
+                                    title="S&P 500 List"
+                                    scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-screener.js"
+                                    config={{
+                                        width: "100%",
+                                        height: "100%",
+                                        defaultColumn: "performance",
+                                        defaultScreen: "most_capitalized",
+                                        market: "america",
+                                        showToolbar: true,
+                                        colorTheme: "light",
+                                        locale: "ja"
+                                    }}
+                                />
+                            )}
+                            {heatmapSource === "Crypto" && (
+                                <TradingViewWidgetIframe
+                                    key="heatmap-crypto"
+                                    title="Crypto Heatmap"
+                                    scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-crypto-coins-heatmap.js"
+                                    config={{
+                                        dataSource: "Crypto",
+                                        blockSize: "market_cap_calc",
+                                        blockColor: "change",
+                                        locale: "ja",
+                                        symbolUrl: "",
+                                        colorTheme: "light",
+                                        hasTopBar: false,
+                                        isDataSetEnabled: false,
+                                        isZoomEnabled: true,
+                                        hasSymbolTooltip: true,
+                                        width: "100%",
+                                        height: "100%"
+                                    }}
+                                />
+                            )}
+                            {heatmapSource === "Forex" && (
+                                <TradingViewWidgetIframe
+                                    key="heatmap-forex"
+                                    title="Forex Heatmap"
+                                    scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-forex-heat-map.js"
+                                    config={{
+                                        width: "100%",
+                                        height: "100%",
+                                        currencies: [
+                                            "EUR",
+                                            "USD",
+                                            "JPY",
+                                            "GBP",
+                                            "AUD",
+                                            "CAD",
+                                            "CHF"
+                                        ],
+                                        isTransparent: false,
+                                        colorTheme: "light",
+                                        locale: "ja"
+                                    }}
+                                />
+                            )}
                         </div>
                     </CardContent>
                 </Card>
