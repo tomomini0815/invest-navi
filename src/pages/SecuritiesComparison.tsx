@@ -195,7 +195,26 @@ export const securitiesRankingList: Company[] = [
             { label: "ツール", value: "ProRealTime" }
         ],
         badgeText: "世界No.1のCFD・グローバル投資",
-        affiliateUrl: "https://www.ig.com/jp"
+        affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100q0r000ol0m",
+        promotionBanner: (
+            <a href="https://h.accesstrade.net/sp/cc?rk=0100q0qz00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
+                <img src="https://h.accesstrade.net/sp/rr?rk=0100q0qz00ol0m" alt="IG証券" style={{ border: 0 }} className="w-full sm:!w-[180px] !h-auto !max-w-none sm:!max-h-none" />
+            </a>
+        ),
+        customAffiliateButton: (
+            <div className="relative w-full">
+                <a
+                    href="https://h.accesstrade.net/sp/cc?rk=0100q0r000ol0m"
+                    rel="nofollow"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md"
+                    target="_blank"
+                >
+                    公式サイト <ExternalLink className="ml-2 w-4 h-4" />
+                    <img src="https://h.accesstrade.net/sp/rr?rk=0100q0r000ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
+                </a>
+            </div>
+        )
     },
     {
         id: "moomoo",

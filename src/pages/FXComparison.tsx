@@ -215,9 +215,22 @@ export const fxRankingList = [
       { label: "最小取引単位", value: "1万通貨" },
     ],
     campaignText: "最大50,000円キャッシュバック",
-    affiliateUrl: "https://www.ig.com/jp",
-    detailUrl: "https://www.ig.com/jp",
-    badgeText: "通貨ペア数No.1"
+    affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100q0r000ol0m",
+    detailUrl: "https://h.accesstrade.net/sp/cc?rk=0100q0r000ol0m",
+    badgeText: "通貨ペア数No.1",
+    customAffiliateButton: (
+      <div className="relative w-full">
+        <a href="https://h.accesstrade.net/sp/cc?rk=0100q0r000ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade" className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md" target="_blank">
+          公式サイト <ExternalLink className="ml-2 w-4 h-4" />
+          <img src="https://h.accesstrade.net/sp/rr?rk=0100q0r000ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
+        </a>
+      </div>
+    ),
+    promotionBanner: (
+      <a href="https://h.accesstrade.net/sp/cc?rk=0100q0qz00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
+        <img src="https://h.accesstrade.net/sp/rr?rk=0100q0qz00ol0m" alt="IG証券" style={{ border: 0 }} className="w-full sm:!w-[180px] !h-auto !max-w-none sm:!max-h-none" />
+      </a>
+    )
   },
   {
     id: "minna",
@@ -660,8 +673,21 @@ const FXComparison = () => {
       id: "ig",
       name: "IG証券",
       logoText: "IG証券",
-      detailUrl: "https://www.ig.com/jp",
-      affiliateUrl: "https://www.ig.com/jp",
+      detailUrl: "https://h.accesstrade.net/sp/cc?rk=0100q0r000ol0m",
+      affiliateUrl: "https://h.accesstrade.net/sp/cc?rk=0100q0r000ol0m",
+      promotionBanner: (
+        <a href="https://h.accesstrade.net/sp/cc?rk=0100q0qz00ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade">
+          <img src="https://h.accesstrade.net/sp/rr?rk=0100q0qz00ol0m" alt="IG証券" style={{ border: 0 }} className="w-full sm:!w-[180px] !h-auto !max-w-none sm:!max-h-none" />
+        </a>
+      ),
+      customAffiliateButton: (
+        <div className="relative w-full">
+          <a href="https://h.accesstrade.net/sp/cc?rk=0100q0r000ol0m" rel="nofollow" referrerPolicy="no-referrer-when-downgrade" className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 text-xs xs:text-sm whitespace-nowrap shadow-sm transition-colors flex items-center justify-center rounded-md" target="_blank">
+            公式サイト <ExternalLink className="ml-2 w-4 h-4" />
+            <img src="https://h.accesstrade.net/sp/rr?rk=0100q0r000ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
+          </a>
+        </div>
+      ),
       overallRating: 4,
       overallRatingText: "プロ向け",
       transactionUnit: 10000,
