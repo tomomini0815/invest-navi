@@ -267,7 +267,7 @@ const Index = () => {
             item.customAffiliateButton
           ) : (
             <Button
-              className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-10 shadow-sm" // Color maintained
+              className="w-full bg-green-600 hover:bg-green-700 text-white h-10 shadow-sm" // Color maintained
               onClick={() => window.open(item.affiliateUrl, '_blank')}
             >
               公式サイト <ExternalLink className="ml-2 w-4 h-4" />
@@ -276,7 +276,7 @@ const Index = () => {
 
           <Button
             variant="outline"
-            className="w-full bg-gray-50 hover:bg-gray-100 text-gray-500 font-bold border-gray-200 h-10"
+            className="w-full bg-gray-50 hover:bg-gray-100 text-gray-500 border-gray-200 h-10"
             onClick={() => navigate(`${categoryPath}#${item.id}`)}
           >
             詳細を見る <ChevronDown className="ml-1 w-4 h-4" />
@@ -356,7 +356,7 @@ const Index = () => {
                     </CardHeader>
                     <CardContent className="text-center p-4 pt-0">
                       <p className="text-muted-foreground mb-3 text-xs sm:text-sm leading-relaxed line-clamp-2">{tool.description}</p>
-                      <div className="w-auto inline-flex px-6 bg-orange-100 text-orange-600 group-hover:bg-orange-200 font-bold text-sm h-9 rounded-lg transition-colors items-center justify-center whitespace-nowrap">
+                      <div className="w-auto inline-flex px-6 bg-orange-100 text-orange-600 group-hover:bg-orange-200 text-sm h-9 rounded-lg transition-colors items-center justify-center whitespace-nowrap">
                         ツールを使う
                       </div>
                     </CardContent>
@@ -376,7 +376,7 @@ const Index = () => {
                   <span className="bg-emerald-100 text-emerald-800 text-sm font-bold px-3 py-1 rounded-full whitespace-nowrap">ネット証券</span>
                   おすすめ口座
                 </h2>
-                <Link to="/securities-comparison" className="text-emerald-600 font-bold flex items-center hover:underline whitespace-nowrap shrink-0 text-sm sm:text-base">
+                <Link to="/securities-comparison" className="text-emerald-600 flex items-center hover:underline whitespace-nowrap shrink-0 text-sm sm:text-base">
                   全てを見る <ArrowRight className="ml-1 w-4 h-4" />
                 </Link>
               </div>
@@ -399,7 +399,7 @@ const Index = () => {
                   <span className="bg-blue-100 text-blue-800 text-sm font-bold px-3 py-1 rounded-full whitespace-nowrap">FX</span>
                   おすすめ口座
                 </h2>
-                <Link to="/fx-comparison" className="text-blue-600 font-bold flex items-center hover:underline whitespace-nowrap shrink-0 text-sm sm:text-base">
+                <Link to="/fx-comparison" className="text-blue-600 flex items-center hover:underline whitespace-nowrap shrink-0 text-sm sm:text-base">
                   全てを見る <ArrowRight className="ml-1 w-4 h-4" />
                 </Link>
               </div>
@@ -422,7 +422,7 @@ const Index = () => {
                   <span className="bg-purple-100 text-purple-800 text-sm font-bold px-3 py-1 rounded-full whitespace-nowrap">暗号資産</span>
                   おすすめ取引所
                 </h2>
-                <Link to="/crypto-comparison" className="text-purple-600 font-bold flex items-center hover:underline whitespace-nowrap shrink-0 text-sm sm:text-base">
+                <Link to="/crypto-comparison" className="text-purple-600 flex items-center hover:underline whitespace-nowrap shrink-0 text-sm sm:text-base">
                   全てを見る <ArrowRight className="ml-1 w-4 h-4" />
                 </Link>
               </div>

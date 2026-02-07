@@ -40,7 +40,7 @@ const CategoryCard = ({ icon: Icon, title, description, href, color }: CategoryC
             <h3 className="font-bold text-base mb-1">{title}</h3>
             <p className="text-xs text-muted-foreground">{description}</p>
           </div>
-          <button className={`mt-1 px-4 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${buttonColorClasses[color]}`}>
+          <button className={`mt-1 px-4 py-2 rounded-md text-sm font-normal transition-colors whitespace-nowrap ${buttonColorClasses[color]}`}>
             詳細を見る
           </button>
         </CardContent>

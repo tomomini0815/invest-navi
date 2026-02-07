@@ -131,7 +131,7 @@ export const SecuritiesComparisonTable = ({ data }: SecuritiesComparisonTablePro
                                                     href="https://h.accesstrade.net/sp/cc?rk=0100q1bu00ol0m"
                                                     rel="nofollow"
                                                     referrerPolicy="no-referrer-when-downgrade"
-                                                    className="w-auto inline-flex items-center justify-center px-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs h-9 shadow-sm rounded-md"
+                                                    className="w-auto inline-flex items-center justify-center px-6 bg-emerald-600 hover:bg-emerald-700 text-white text-xs h-9 shadow-sm rounded-md"
                                                 >
                                                     公式サイトへ
                                                     <img src="https://h.accesstrade.net/sp/rr?rk=0100q1bu00ol0m" width="1" height="1" style={{ border: 0, position: 'absolute', width: 1, height: 1, opacity: 0 }} alt="" />
@@ -140,7 +140,7 @@ export const SecuritiesComparisonTable = ({ data }: SecuritiesComparisonTablePro
                                         ) : (
                                             <button
                                                 onClick={() => window.open(company.affiliateUrl || "#", '_blank')}
-                                                className="w-auto inline-block px-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs h-9 shadow-sm rounded-md"
+                                                className="w-auto inline-block px-6 bg-emerald-600 hover:bg-emerald-700 text-white text-xs h-9 shadow-sm rounded-md"
                                             >
                                                 公式サイトへ
                                             </button>

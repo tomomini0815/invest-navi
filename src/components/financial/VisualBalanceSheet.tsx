@@ -94,7 +94,7 @@ export const VisualBalanceSheet: React.FC<VisualBalanceSheetProps> = ({
                     </span>
                 </CardTitle>
             </CardHeader>
-            <CardContent className="p-6">
+            <CardContent className="p-2 md:p-6">
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                     <div className="h-[300px]">
                         <ResponsiveContainer width="100%" height="100%">

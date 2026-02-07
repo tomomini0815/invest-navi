@@ -148,7 +148,7 @@ const Footer = () => {
         {/* 更新日 */}
         <div className="pt-3 border-t border-border mt-3">
           <p className="text-xs text-muted-foreground text-right">
-            最終更新日：2025年11月10日
+            最終更新日：2026年2月7日
           </p>
         </div>
       </div>

@@ -494,7 +494,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialDataMap 
 
     return (
         <Card className="border-2 border-blue-200 shadow-lg">
-            <CardContent className="p-4 space-y-8">
+            <CardContent className="p-2 md:p-4 space-y-8">
                 {/* --- 1. チャート・トレンド領域 (Hero Section) --- */}
                 <section>
                     <h3 className="font-bold text-lg text-slate-800 border-b pb-2 mb-4 flex items-center gap-2">
@@ -712,7 +712,7 @@ export const StockAnalysisSection = ({ symbol, activeScreener, financialDataMap 
                             </section>
 
                             {hasDetailedData && (
-                                <div className="border-t pt-8 space-y-8">
+                                <div className="border-t pt-4 md:pt-8 space-y-4 md:space-y-8">
                                     <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
                                         <Sparkles className="w-6 h-6 text-blue-600" />
                                         詳細財務・バリュエーション分析

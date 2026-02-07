@@ -71,7 +71,7 @@ export const StockAnalysisVisualizer = ({ code, className = "", isInline = false
     };
 
     return (
-        <div className={`w-full space-y-6 ${className}`}>
+        <div className={`w-full space-y-4 md:space-y-6 ${className}`}>
             <Card className={`overflow-hidden ${isInline ? 'border-none shadow-none bg-transparent' : 'border-2 border-slate-300 shadow-xl'}`}>
                 {!isInline && (
                     <CardHeader className="bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 text-white">
@@ -98,15 +98,15 @@ export const StockAnalysisVisualizer = ({ code, className = "", isInline = false
                     </CardHeader>
                 )}
 
-                <CardContent className={`p-6 ${isInline ? 'bg-transparent' : 'bg-slate-50/50'}`}>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <CardContent className={`p-2 md:p-6 ${isInline ? 'bg-transparent' : 'bg-slate-50/50'}`}>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-4 md:mb-8">
                         {[
                             { label: "PER（株価収益率）", value: `${stockData.per}倍`, color: "text-blue-600", desc: "収益性から見た株価水準" },
                             { label: "PBR（株価純資産倍率）", value: `${stockData.pbr}倍`, color: "text-indigo-600", desc: "資産価値から見た株価水準" },
                             { label: "配当利回り", value: `${stockData.dividendYield}%`, color: "text-emerald-600", desc: "直近の配当収益率" },
                             { label: "時価総額", value: `${(stockData.marketCap / 10000).toFixed(1)}兆円`, color: "text-slate-900", desc: "企業の市場価値合計" }
                         ].map((item, i) => (
-                            <div key={i} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 group">
+                            <div key={i} className="bg-white p-2 md:p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 group">
                                 <div className="text-xs font-bold text-slate-500 mb-1 uppercase tracking-wider">{item.label}</div>
                                 <div className={`text-3xl font-bold ${item.color} mb-1`}>{item.value}</div>
                                 <div className="text-[10px] text-slate-400 group-hover:text-slate-500 transition-colors">{item.desc}</div>
@@ -117,12 +117,12 @@ export const StockAnalysisVisualizer = ({ code, className = "", isInline = false
                     {/* 割安・割高判断 & 企業の強み・特徴 */}
                     <div className="grid md:grid-cols-2 gap-6 mb-8">
                         {/* 割安・割高判断 */}
-                        <div className="p-6 bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl border border-amber-200/50 shadow-inner">
-                            <div className="flex flex-col items-center mb-4">
-                                <div className="text-[10px] font-black text-amber-700 mb-2 uppercase tracking-widest">現在の割安・割高判断</div>
-                                <div className="bg-white px-8 py-3 rounded-2xl shadow-sm border-2 border-amber-400 flex flex-col items-center min-w-[160px]">
-                                    <span className="text-2xl font-black text-amber-600 whitespace-nowrap">{stockData.valuation.status}</span>
-                                    <span className="text-[10px] font-bold text-amber-500 mt-0.5 uppercase tracking-tighter">{stockData.valuation.statusEn}</span>
+                        <div className="p-2 md:p-6 bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl border border-amber-200/50 shadow-inner">
+                            <div className="flex flex-col items-center mb-2 md:mb-4">
+                                <div className="text-[10px] font-black text-amber-700 mb-1.5 md:mb-2 uppercase tracking-widest">現在の割安・割高判断</div>
+                                <div className="bg-white px-6 md:px-8 py-2 md:py-3 rounded-2xl shadow-sm border-2 border-amber-400 flex flex-col items-center min-w-[140px] md:min-w-[160px]">
+                                    <span className="text-xl md:text-2xl font-black text-amber-600 whitespace-nowrap">{stockData.valuation.status}</span>
+                                    <span className="text-[9px] md:text-[10px] font-bold text-amber-500 mt-0.5 uppercase tracking-tighter">{stockData.valuation.statusEn}</span>
                                 </div>
                             </div>
                             <div>
@@ -137,14 +137,14 @@ export const StockAnalysisVisualizer = ({ code, className = "", isInline = false
                         </div>
 
                         {/* 企業の強み・特徴 (Relocated here) */}
-                        <div className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl border border-blue-200/50 shadow-inner">
-                            <div className="flex items-center gap-2 mb-3">
+                        <div className="p-2 md:p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl border border-blue-200/50 shadow-inner">
+                            <div className="flex items-center gap-2 mb-2 md:mb-3">
                                 <div className="p-1.5 bg-blue-600 rounded-lg shadow-lg shadow-blue-200">
                                     <Shield className="w-4 h-4 text-white" />
                                 </div>
                                 <h4 className="font-bold text-slate-800">企業の強み・特徴</h4>
                             </div>
-                            <div className="bg-white/80 backdrop-blur-sm p-4 rounded-2xl border border-blue-100 shadow-sm space-y-3 min-h-[140px] flex flex-col justify-center">
+                            <div className="bg-white/80 backdrop-blur-sm p-3 md:p-4 rounded-2xl border border-blue-100 shadow-sm space-y-2 md:space-y-3 flex flex-col justify-center">
                                 {stockData.strengths.map((s, idx) => (
                                     <div key={idx} className="flex items-start gap-3">
                                         <div className={`p-1.5 ${getIconBg(s.icon)} rounded-lg`}>{getIcon(s.icon)}</div>
@@ -159,13 +159,13 @@ export const StockAnalysisVisualizer = ({ code, className = "", isInline = false
                     </div>
 
                     {/* 最新業績ハイライト（億円） - Upgraded with Recharts */}
-                    <div className="mb-8">
-                        <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                    <div className="mb-4 md:mb-8">
+                        <h3 className="text-base md:text-lg font-bold text-slate-800 mb-3 md:mb-4 flex items-center gap-2">
                             <BarChart2 className="w-5 h-5 text-indigo-600" />
                             最新業績ハイライト（億円）
                         </h3>
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm transition-all hover:shadow-md">
+                            <div className="bg-white p-2 md:p-5 rounded-2xl border border-slate-200 shadow-sm transition-all hover:shadow-md">
                                 <h4 className="font-bold text-slate-700 mb-4 flex items-center gap-2 text-sm">
                                     <TrendingUp className="w-4 h-4 text-blue-500" />
                                     売上高推移
@@ -186,7 +186,7 @@ export const StockAnalysisVisualizer = ({ code, className = "", isInline = false
                                     </ResponsiveContainer>
                                 </div>
                             </div>
-                            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm transition-all hover:shadow-md">
+                            <div className="bg-white p-2 md:p-5 rounded-2xl border border-slate-200 shadow-sm transition-all hover:shadow-md">
                                 <h4 className="font-bold text-slate-700 mb-4 flex items-center gap-2 text-sm">
                                     <LucideLineChart className="w-4 h-4 text-emerald-500" />
                                     利益推移
@@ -223,28 +223,28 @@ export const StockAnalysisVisualizer = ({ code, className = "", isInline = false
                         <table className="w-full text-sm">
                             <thead className="bg-slate-50 border-b border-slate-200">
                                 <tr>
-                                    <th className="px-6 py-4 text-left font-bold text-slate-600">決算期</th>
-                                    <th className="px-6 py-4 text-right font-bold text-slate-600">売上高(億)</th>
-                                    <th className="px-6 py-4 text-right font-bold text-slate-600">営業益(億)</th>
-                                    <th className="px-6 py-4 text-right font-bold text-slate-600">最終益(億)</th>
-                                    <th className="px-6 py-4 text-right font-bold text-slate-600">1株益(円)</th>
-                                    <th className="px-6 py-4 text-right font-bold text-slate-600">配当(円)</th>
-                                    <th className="px-6 py-4 text-left font-bold text-slate-600">備考</th>
+                                    <th className="px-2 py-3 md:px-6 md:py-4 text-left font-bold text-slate-600 text-xs md:text-sm">決算期</th>
+                                    <th className="px-2 py-3 md:px-6 md:py-4 text-right font-bold text-slate-600 text-xs md:text-sm">売上高(億)</th>
+                                    <th className="px-2 py-3 md:px-6 md:py-4 text-right font-bold text-slate-600 text-xs md:text-sm">営業益(億)</th>
+                                    <th className="px-2 py-3 md:px-6 md:py-4 text-right font-bold text-slate-600 text-xs md:text-sm">最終益(億)</th>
+                                    <th className="px-2 py-3 md:px-6 md:py-4 text-right font-bold text-slate-600 text-xs md:text-sm">1株益(円)</th>
+                                    <th className="px-2 py-3 md:px-6 md:py-4 text-right font-bold text-slate-600 text-xs md:text-sm">配当(円)</th>
+                                    <th className="px-2 py-3 md:px-6 md:py-4 text-left font-bold text-slate-600 text-xs md:text-sm">備考</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {stockData.financials.map((data, index) => (
                                     <tr key={index} className={`border-b border-slate-100 hover:bg-blue-50/50 transition-colors ${data.isEstimate ? 'bg-indigo-50/30' : ''}`}>
-                                        <td className="px-6 py-4 font-bold text-slate-700">
+                                        <td className="px-2 py-3 md:px-6 md:py-4 font-bold text-slate-700 text-xs md:text-sm">
                                             {data.isEstimate && <span className="text-indigo-500 mr-1">予</span>}
                                             {data.period}
                                         </td>
-                                        <td className="px-6 py-4 text-right font-mono font-medium">{data.revenue.toLocaleString()}</td>
-                                        <td className="px-6 py-4 text-right font-mono font-medium text-blue-600">{data.ordinaryProfit.toLocaleString()}</td>
-                                        <td className="px-6 py-4 text-right font-mono font-bold text-indigo-600">{data.netProfit.toLocaleString()}</td>
-                                        <td className="px-6 py-4 text-right font-mono font-bold">{data.eps.toLocaleString()}</td>
-                                        <td className="px-6 py-4 text-right font-mono font-bold text-emerald-600">{data.dividend}</td>
-                                        <td className="px-6 py-4 text-left font-medium text-slate-600 min-w-[120px]">{data.remark || "-"}</td>
+                                        <td className="px-2 py-3 md:px-6 md:py-4 text-right font-mono font-medium text-xs md:text-sm">{data.revenue.toLocaleString()}</td>
+                                        <td className="px-2 py-3 md:px-6 md:py-4 text-right font-mono font-medium text-blue-600 text-xs md:text-sm">{data.ordinaryProfit.toLocaleString()}</td>
+                                        <td className="px-2 py-3 md:px-6 md:py-4 text-right font-mono font-bold text-indigo-600 text-xs md:text-sm">{data.netProfit.toLocaleString()}</td>
+                                        <td className="px-2 py-3 md:px-6 md:py-4 text-right font-mono font-bold text-xs md:text-sm">{data.eps.toLocaleString()}</td>
+                                        <td className="px-2 py-3 md:px-6 md:py-4 text-right font-mono font-bold text-emerald-600 text-xs md:text-sm">{data.dividend}</td>
+                                        <td className="px-2 py-3 md:px-6 md:py-4 text-left font-medium text-slate-600 min-w-[80px] md:min-w-[120px] text-[10px] md:text-xs">{data.remark || "-"}</td>
                                     </tr>
                                 ))}
                             </tbody>

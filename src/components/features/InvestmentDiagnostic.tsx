@@ -1105,7 +1105,7 @@ const InvestmentDiagnostic = () => {
                   <Button
                     onClick={handleNext}
                     disabled={!answers[step] || answers[step].length === 0}
-                    className="flex-1 h-12 text-base font-medium"
+                    className="flex-1 h-12 text-base"
                   >
                     {step < questions.length - 1 ? "次へ" : "診断結果を見る"}
                   </Button>

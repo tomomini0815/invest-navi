@@ -2399,7 +2399,7 @@ const StockScreener = () => {
                                     onClick={() => setHeatmapSource("Forex")}
                                     className={heatmapSource === "Forex" ? "bg-emerald-600 text-white" : "text-emerald-700 border-emerald-200 bg-white"}
                                 >
-                                    為替 (Forex)
+                                    為替 (FX)
                                 </Button>
                             </div>
                         </div>
